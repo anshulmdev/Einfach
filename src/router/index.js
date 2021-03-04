@@ -55,6 +55,8 @@ const TablesHelpers = () => import("@/views/tables/Helpers.vue")
 const TablesPricing = () => import("@/views/tables/Pricing.vue")
 
 // Backend: Forms
+const FormsCreate = () => import("@/views/forms/create.vue")
+const FormsEmail = () => import("@/views/forms/Email.vue")
 const FormsElements = () => import("@/views/forms/Elements.vue")
 const FormsCustomControls = () => import("@/views/forms/CustomControls.vue")
 const FormsLayouts = () => import("@/views/forms/Layouts.vue")
@@ -62,6 +64,41 @@ const FormsInputGroups = () => import("@/views/forms/InputGroups.vue")
 const FormsPlugins = () => import(/* webpackChunkName: "forms-plugins" */"@/views/forms/Plugins.vue")
 const FormsEditors = () => import(/* webpackChunkName: "forms-editors" */"@/views/forms/Editors.vue")
 const FormsValidation = () => import(/* webpackChunkName: "forms-validation" */"@/views/forms/Validation.vue")
+
+// Backend: Applicants
+const ApplicantsApplied = () => import("@/views/applicants/Applied.vue")
+const ApplicantsInvited = () => import("@/views/applicants/Invited.vue")
+const ApplicantsCompleted = () => import("@/views/applicants/Completed.vue")
+
+// Backend: Library
+const LibraryRegex = () => import("@/views/library/Regex.vue")
+const LibraryMultipleChoice = () => import("@/views/library/MultipleChoice.vue")
+const LibraryRESTAPI = () => import("@/views/library/Rest.vue")
+
+// Backend: Coding
+const CodingJavaScript = () => import("@/views/coding/javascript.vue")
+const CodingPython = () => import("@/views/coding/python.vue")
+
+// Backend: Commits
+const CommitsPnP = () => import("@/views/commit/pnp.vue")
+const CommitsLive = () => import("@/views/commit/live.vue")
+
+// Backend: Company
+const CompanyProfile = () => import("@/views/company/Profile.vue")
+const CompanyStatistics = () => import("@/views/company/Statistics.vue")
+
+// Backend: Subscription
+const SubscriptionActive = () => import("@/views/subscription/Active.vue")
+const SubscriptionPayment = () => import("@/views/subscription/Payment.vue")
+
+// Backend: Inbox
+const InboxShortlisted = () => import("@/views/inbox/Shortlisted.vue")
+const InboxRejected = () => import("@/views/inbox/Rejected.vue")
+const InboxInvited = () => import("@/views/inbox/Invited.vue")
+
+// Backend: Support
+const SupportTicket = () => import("@/views/support/Ticket.vue")
+const SupportBug = () => import("@/views/support/Bug.vue")
 
 // Backend: Plugins
 const PluginsAppear = () => import("@/views/plugins/Appear.vue")
@@ -102,7 +139,6 @@ const PagesGenericSearch = () => import("@/views/pages/generic/Search.vue")
 const PagesGenericProfile = () => import("@/views/pages/generic/Profile.vue")
 const PagesGenericInvoice = () => import("@/views/pages/generic/Invoice.vue")
 const PagesGenericFaq = () => import("@/views/pages/generic/Faq.vue")
-const PagesGenericInbox = () => import("@/views/pages/generic/Inbox.vue")
 
 // Pages: Various
 const PagesVariousMaintenance = () => import("@/views/pages/various/Maintenance.vue")
@@ -118,16 +154,12 @@ const PagesErrorsAll = () => import("@/views/pages/errors/All.vue")
 // Pages: Auth
 const AuthSignIn = () => import(/* webpackChunkName: "auth-signin" */"@/views/pages/auth/SignIn.vue")
 const AuthSignIn2 = () => import(/* webpackChunkName: "auth-signin2" */"@/views/pages/auth/SignIn2.vue")
-const AuthSignIn3 = () => import(/* webpackChunkName: "auth-signin3" */"@/views/pages/auth/SignIn3.vue")
 const AuthSignUp = () => import(/* webpackChunkName: "auth-signup" */"@/views/pages/auth/SignUp.vue")
 const AuthSignUp2 = () => import(/* webpackChunkName: "auth-signup2" */"@/views/pages/auth/SignUp2.vue")
-const AuthSignUp3 = () => import(/* webpackChunkName: "auth-signup3" */"@/views/pages/auth/SignUp3.vue")
 const AuthLock = () => import(/* webpackChunkName: "auth-lock" */"@/views/pages/auth/Lock.vue")
-const AuthLock2 = () => import(/* webpackChunkName: "auth-lock2" */"@/views/pages/auth/Lock2.vue")
-const AuthLock3 = () => import(/* webpackChunkName: "auth-lock3" */"@/views/pages/auth/Lock3.vue")
+const AuthApplications = () => import(/* webpackChunkName: "auth-Applications" */"@/views/pages/auth/Applications.vue")
 const AuthReminder = () => import(/* webpackChunkName: "auth-reminder" */"@/views/pages/auth/Reminder.vue")
 const AuthReminder2 = () => import(/* webpackChunkName: "auth-reminder2" */"@/views/pages/auth/Reminder2.vue")
-const AuthReminder3 = () => import(/* webpackChunkName: "auth-reminder3" */"@/views/pages/auth/Reminder3.vue")
 
 // Pages: Errors
 const Errors400 = () => import("@/views/pages/errors/400.vue")
@@ -194,11 +226,6 @@ export default new Router({
           component: AuthSignIn2
         },
         {
-          path: 'signin3',
-          name: 'Sign In 3',
-          component: AuthSignIn3
-        },
-        {
           path: 'signup',
           name: 'Sign Up',
           component: AuthSignUp
@@ -209,24 +236,15 @@ export default new Router({
           component: AuthSignUp2
         },
         {
-          path: 'signup3',
-          name: 'Sign Up 3',
-          component: AuthSignUp3
-        },
-        {
           path: 'lock',
           name: 'Auth Lock',
           component: AuthLock
         },
         {
-          path: 'lock2',
-          name: 'Auth Lock 2',
-          component: AuthLock2
-        },
-        {
-          path: 'lock3',
-          name: 'Auth Lock 3',
-          component: AuthLock3
+          path: 'Applications/:id',
+          name: 'Applications',
+          props: true,
+          component: AuthApplications
         },
         {
           path: 'reminder',
@@ -237,11 +255,6 @@ export default new Router({
           path: 'reminder2',
           name: 'Auth Reminder 2',
           component: AuthReminder2
-        },
-        {
-          path: 'reminder3',
-          name: 'Auth Reminder 3',
-          component: AuthReminder3
         }
       ]
     },
@@ -496,12 +509,70 @@ export default new Router({
           ]
         },
         {
+          path: 'applicants',
+          redirect: '/applicants/applied',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'applied',
+              name: 'Applicants Applied',
+              component: ApplicantsApplied
+            },
+            {
+              path: 'invited',
+              name: 'Applicants Invited',
+              component: ApplicantsInvited
+            },
+            {
+              path: 'Completed',
+              name: 'Applicants Completed',
+              component: ApplicantsCompleted
+            },
+          ]
+        },
+        {
+          path: 'inbox',
+          redirect: '/inbox/shortlisted',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'shortlisted',
+              name: 'Inbox Shortlisted',
+              component: InboxShortlisted
+            },
+            {
+              path: 'rejected',
+              name: 'Inbox Rejected',
+              component: InboxRejected
+            },
+            {
+              path: 'Invited',
+              name: 'Inbox Invited',
+              component: InboxInvited
+            },
+          ]
+        },
+        {
           path: 'forms',
           redirect: '/forms/elements',
           component: {
             render (c) { return c('router-view') }
           },
           children: [
+            {
+              path: 'create',
+              name: 'Form Create',
+              component: FormsCreate
+            },
+            {
+              path: 'email',
+              name: 'Form Email',
+              component: FormsEmail
+            },
             {
               path: 'elements',
               name: 'Form Elements',
@@ -536,6 +607,125 @@ export default new Router({
               path: 'validation',
               name: 'Form Validation',
               component: FormsValidation
+            }
+          ]
+        },
+        {
+          path: 'library',
+          redirect: '/library/mcq',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'regex',
+              name: 'Library Regex',
+              component: LibraryRegex
+            },
+            {
+              path: 'mcq',
+              name: 'Library MultipleChoice',
+              component: LibraryMultipleChoice
+            },
+            {
+              path: 'rest',
+              name: 'Library RESTAPI',
+              component: LibraryRESTAPI
+            }
+          ]
+        },
+        {
+          path: 'Company',
+          redirect: '/company/profile',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'profile',
+              name: 'Company Profile',
+              component: CompanyProfile
+            },
+            {
+              path: 'statistics',
+              name: 'Company Statistics',
+              component: CompanyStatistics
+            }
+          ]
+        },
+        {
+          path: 'Subscription',
+          redirect: '/subscription/active',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'active',
+              name: 'Subscription Active',
+              component: SubscriptionActive
+            },
+            {
+              path: 'payment',
+              name: 'Subscription Payment',
+              component: SubscriptionPayment
+            }
+          ]
+        },
+        {
+          path: 'support',
+          redirect: '/support/ticket',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'ticket',
+              name: 'Support Ticket',
+              component: SupportTicket
+            },
+            {
+              path: 'bug',
+              name: 'Support Bug',
+              component: SupportBug
+            }
+          ]
+        },
+        {
+          path: 'coding',
+          redirect: '/coding/javascript',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'javascript',
+              name: 'Coding JavaScript',
+              component: CodingJavaScript
+            },
+            {
+              path: 'python',
+              name: 'Coding Python',
+              component: CodingPython
+            }
+          ]
+        },
+        {
+          path: 'commit',
+          redirect: '/commit/pnp',
+          component: {
+            render (c) { return c('router-view') }
+          },
+          children: [
+            {
+              path: 'pnp',
+              name: 'Commits PnP',
+              component: CommitsPnP
+            },
+            {
+              path: 'live',
+              name: 'Commits Live',
+              component: CommitsLive
             }
           ]
         },
@@ -733,11 +923,6 @@ export default new Router({
               path: 'faq',
               name: 'Pages Generic Faq',
               component: PagesGenericFaq
-            },
-            {
-              path: 'inbox',
-              name: 'Pages Generic Inbox',
-              component: PagesGenericInbox
             }
           ]
         },

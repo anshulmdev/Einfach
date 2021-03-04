@@ -4,6 +4,7 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
+import firebase from "../firebase";
 
 // Register Vuex
 Vue.use(Vuex)
@@ -21,9 +22,11 @@ const helpers = {
 // Vuex Store
 export default new Vuex.Store({
   state: {
+    authUid: '2jfmeB9gjKcy7cMA4sthOKDvOOB2',
+    firestoreData: null,
     // App vital details
     app: {
-      name: 'OneUI Vue Edition',
+      name: 'Einfach Tech',
       version: process.env.PACKAGE_VERSION,
       copyright: helpers.getCurrentYear()
     },
@@ -41,7 +44,7 @@ export default new Vuex.Store({
     settings: {
       colorTheme: '', // 'amethyst', 'city', 'flat', 'modern', 'smooth'
       sidebarLeft: true,
-      sidebarMini: false,
+      sidebarMini: true,
       sidebarDark: true,
       sidebarVisibleDesktop: true,
       sidebarVisibleMobile: false,
@@ -76,7 +79,24 @@ export default new Vuex.Store({
       return state.settings.colorTheme
     }
   },
+  actions: {
+    getFirestoreData () {
+        const query = firebase.firestore().collection('accounts').where('uid', '==', this.state.authUid)
+        const observer = query.onSnapshot(querySnapshot => {
+          querySnapshot.docChanges().forEach(change => {
+            this.state.firestoreData = change.doc.data()
+          })}, err => {
+          console.log(`Encountered error: ${err}`);
+        });
+        console.log(observer)}
+  },
   mutations: {
+
+    //auth
+    async setAuth (state,payload){
+      state.authUid = payload
+      this.dispatch('getFirestoreData')
+    },
     // Sets the layout, useful for setting different layouts (under layouts/variations/) 
     setLayout (state, payload) {
       state.layout.header = payload.header

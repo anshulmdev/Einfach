@@ -173,7 +173,7 @@
       <h2 class="content-heading">Router Link Blocks</h2>
       <b-row>
         <b-col md="6" xl="3">
-          <router-link to="/backend/dashboard" custom v-slot="{ href, navigate }" >
+          <router-link to="/backend/dashboard" v-slot="{ href, navigate }" >
             <base-block title="Dashboard" tag="a" :href="href" @click="navigate">
               <p>
                 Go to Dashboard
@@ -182,7 +182,7 @@
           </router-link>
         </b-col>
         <b-col md="6" xl="3">
-          <router-link to="/" custom v-slot="{ href, navigate }" >
+          <router-link to="/" v-slot="{ href, navigate }" >
             <base-block title="Landing" tag="a" :href="href" @click="navigate">
               <p>
                 Go to Landing
@@ -191,7 +191,7 @@
           </router-link>
         </b-col>
         <b-col md="6" xl="3">
-          <router-link to="/auth/signin" custom v-slot="{ href, navigate }" >
+          <router-link to="/auth/signin" v-slot="{ href, navigate }" >
             <base-block title="Sign In" subtitle="Auth" tag="a" :href="href" @click="navigate">
               <p>
                 Go to Sign In Page
@@ -200,7 +200,7 @@
           </router-link>
         </b-col>
         <b-col md="6" xl="3">
-          <router-link to="/auth/signup" custom v-slot="{ href, navigate }" >
+          <router-link to="/auth/signup" v-slot="{ href, navigate }" >
             <base-block title="Sign Up" subtitle="Auth" tag="a" :href="href" @click="navigate">
               <p>
                 Go to Sign Up Page

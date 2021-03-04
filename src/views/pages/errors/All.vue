@@ -16,7 +16,7 @@
       <div class="row">
         <div class="col-md-4">
           <!-- 400 -->
-          <router-link to="/errors/400" custom v-slot="{ href, navigate }" >
+          <router-link to="/errors/400" v-slot="{ href, navigate }" >
             <base-block tag="a" content-class="text-center" rounded link-shadow :href="href" @click="navigate">
               <div class="py-5">
                 <p class="font-size-h1 text-default font-w600 mb-0">400</p>
@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-4">
           <!-- 401 -->
-          <router-link to="/errors/401" custom v-slot="{ href, navigate }" >
+          <router-link to="/errors/401" v-slot="{ href, navigate }" >
             <base-block tag="a" content-class="text-center" rounded link-shadow :href="href" @click="navigate">
               <div class="py-5">
                 <p class="font-size-h1 text-amethyst font-w600 mb-0">401</p>
@@ -40,7 +40,7 @@
         </div>
         <div class="col-md-4">
           <!-- 403 -->
-          <router-link to="/errors/403" custom v-slot="{ href, navigate }" >
+          <router-link to="/errors/403" v-slot="{ href, navigate }" >
             <base-block tag="a" content-class="text-center" rounded link-shadow :href="href" @click="navigate">
               <div class="py-5">
                 <p class="font-size-h1 text-flat font-w600 mb-0">403</p>
@@ -52,7 +52,7 @@
         </div>
         <div class="col-md-4">
           <!-- 404 -->
-          <router-link to="/errors/404" custom v-slot="{ href, navigate }" >
+          <router-link to="/errors/404" v-slot="{ href, navigate }" >
             <base-block tag="a" content-class="text-center" rounded link-shadow :href="href" @click="navigate">
               <div class="py-5">
                 <p class="font-size-h1 text-city font-w600 mb-0">404</p>
@@ -64,7 +64,7 @@
         </div>
         <div class="col-md-4">
           <!-- 500 -->
-          <router-link to="/errors/500" custom v-slot="{ href, navigate }" >
+          <router-link to="/errors/500" v-slot="{ href, navigate }" >
             <base-block tag="a" content-class="text-center" rounded link-shadow :href="href" @click="navigate">
               <div class="py-5">
                 <p class="font-size-h1 text-modern font-w600 mb-0">500</p>
@@ -76,7 +76,7 @@
         </div>
         <div class="col-md-4">
           <!-- 503 -->
-          <router-link to="/errors/503" custom v-slot="{ href, navigate }" >
+          <router-link to="/errors/503" v-slot="{ href, navigate }" >
             <base-block tag="a" content-class="text-center" rounded link-shadow :href="href" @click="navigate">
               <div class="py-5">
                 <p class="font-size-h1 text-smooth font-w600 mb-0">503</p>

@@ -29,6 +29,7 @@
     "bootstrap-vue": "^2.21.2",
     "chart.js": "^2.9.4",
     "core-js": "^3.8.3",
+    "firebase": "^8.2.9",
     "simplebar-vue": "^1.6.0",
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",

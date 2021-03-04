@@ -13,7 +13,7 @@
               </router-link>
             </template>
             <div class="p-sm-3 px-lg-4 py-lg-5">
-              <h1 class="h2 mb-1">OneUI</h1>
+              <h1 class="h2 mb-1">Einfach Tech</h1>
               <p class="text-muted">
                 Welcome, please login.
               </p>
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import firebase from "../../../firebase";
 // Vuelidate, for more info and examples you can check out https://github.com/vuelidate/vuelidate
 import { validationMixin } from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
@@ -93,7 +94,15 @@ export default {
       if (this.$v.form.$anyError) {
         return
       }
-
+firebase.auth().signInWithEmailAndPassword(this.form.username, this.form.password)
+  .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    this.$store.commit('setAuth',user.uid)
+    // ...
+  })
+  .catch(() => {
+  });
       // Form submit logic
       this.$router.push('/backend')
     }

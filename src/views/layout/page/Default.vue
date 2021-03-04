@@ -29,7 +29,7 @@ export default {
   created () {
     // Set example settings
     this.$store.commit('sidebarPosition', { mode: 'left' })
-    this.$store.commit('sidebar', { mode: 'open' })
+    this.$store.commit('sidebar', { mode: 'close' })
     this.$store.commit('sideOverlay', { mode: 'close' })
     this.$store.commit('header', { mode: 'fixed' })
   }

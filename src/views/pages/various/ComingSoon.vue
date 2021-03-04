@@ -62,11 +62,9 @@
               <!-- END Subscribe Form -->
 
               <!-- Back to Dashboard -->
-              <router-link to="/backend/pages/generic/blank" custom v-slot="{ href, navigate }">
-                <a class="btn btn-lg btn-alt-primary" :href="href" @click="navigate">
-                  <i class="fa fa-arrow-left mr-1"></i> Go Back to Dashboard
-                </a>
-              </router-link>
+              <b-button variant="alt-primary" to="/backend/pages/generic/blank">
+                <i class="fa fa-arrow-left mr-1"></i> Go Back to Dashboard
+              </b-button>
               <!-- END Back to Dashboard -->
             </b-col>
           </b-row>

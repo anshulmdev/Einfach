@@ -16,14 +16,12 @@
                 <p class="font-size-lg font-w500 text-muted mb-4">
                   Build all your projects with one super flexible UI framework. Now rebuilt from scratch with Vue.js. Based on <a href="https://1.envato.market/AVD6j">OneUI Remastered</a> design!
                 </p>
-                <a class="btn btn-success text-uppercase font-size-sm px-3 py-2 mr-2 mt-2" href="https://1.envato.market/5Noyb" v-click-ripple>
+                <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" href="https://1.envato.market/5Noyb" v-click-ripple>
                   <i class="fa fa-fw fa-shopping-cart font-size-base opacity-50 mr-1"></i> Purchase
-                </a>
-                <router-link to="/backend/dashboard" custom v-slot="{ href, navigate }">
-                  <a class="btn btn-primary text-uppercase font-size-sm px-3 py-2 mr-2 mt-2" :href="href" @click="navigate" v-click-ripple>
-                    <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Live Preview
-                  </a>
-                </router-link>
+                </b-button>
+                <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" to="/backend/dashboard" v-click-ripple>
+                  <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Live Preview
+                </b-button>
               </div>
             </b-col>
             <b-col lg="6" class="d-none d-lg-block py-6">
@@ -357,16 +355,14 @@
               Crafted with <i class="fa fa-fw fa-heart text-city"></i> by <a class="link-fx" href="https://1.envato.market/ydb">pixelcave</a>
           </h2>
           <p class="font-size-lg font-w500 text-muted mb-4">
-              Passionate web design and development with over 14.000 customers worldwide.
+              Passionate web design and development with over 13.000 customers worldwide.
           </p>
-          <a class="btn btn-success text-uppercase font-size-sm px-3 py-2 m-1" href="https://1.envato.market/5Noyb" v-click-ripple>
+          <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://1.envato.market/5Noyb" v-click-ripple>
             <i class="fa fa-fw fa-shopping-cart font-size-base opacity-50 mr-1"></i> Purchase
-          </a>
-          <router-link to="/backend/dashboard" custom v-slot="{ href, navigate }">
-            <a class="btn btn-primary text-uppercase font-size-sm px-3 py-2 m-1" :href="href" @click="navigate" v-click-ripple>
-              <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Live Preview
-            </a>
-          </router-link>
+          </b-button>
+          <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 m-1" to="/backend/dashboard" v-click-ripple>
+            <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Live Preview
+          </b-button>
         </div>
       </div>
     </div>

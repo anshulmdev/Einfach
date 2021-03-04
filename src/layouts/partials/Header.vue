@@ -1,6 +1,6 @@
 <template>
   <!-- Header -->
-  <header id="page-header">
+  <header v-if="$store.state.firestoreData" id="page-header">
     <slot>
       <!-- Header Content -->
       <div class="content-header">
@@ -110,25 +110,25 @@
           <b-dropdown size="sm" variant="dual" class="d-inline-block ml-2" menu-class="p-0 border-0 dropdown-menu-md" right no-caret ref="oneDropdownDefaultUser">
             <template #button-content>
               <div class="d-flex align-items-center">
-                <img class="rounded-circle" src="img/avatars/avatar10.jpg" alt="Header Avatar" style="width: 21px;">
-                <span class="d-none d-sm-inline-block ml-2">Adam</span>
+                <img class="rounded-circle" :src="$store.state.firestoreData.user.logo" alt="Header Avatar" style="width: 21px;">
+                <span class="d-none d-sm-inline-block ml-2">{{$store.state.firestoreData.user.name.split(' ')[0]}}</span>
                 <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block ml-1 mt-1"></i>
               </div>
             </template>
             <li @click="$refs.oneDropdownDefaultUser.hide(true)">
               <div class="p-3 text-center bg-primary-dark rounded-top">
-                <img class="img-avatar img-avatar48 img-avatar-thumb" src="img/avatars/avatar10.jpg" alt="Avatar">
-                <p class="mt-2 mb-0 text-white font-w500">Adam Smith</p>
-                <p class="mb-0 text-white-50 font-size-sm">Web Developer</p>
+                <img class="img-avatar img-avatar48 img-avatar-thumb" :src="$store.state.firestoreData.user.logo" alt="Avatar">
+                <p class="mt-2 mb-0 text-white font-w500">{{$store.state.firestoreData.user.name}}</p>
+                <p class="mb-0 text-white-50 font-size-sm">{{$store.state.firestoreData.user.email}}</p>
               </div>
               <div class="p-2">
                 <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                   <span class="font-size-sm font-w500">Inbox</span>
-                  <span class="badge badge-pill badge-primary ml-2">3</span>
+                  <span class="badge badge-pill badge-primary ml-2">{{$store.state.firestoreData.inbox.invited.length}}</span>
                 </a>
                 <router-link class="dropdown-item d-flex align-items-center justify-content-between" to="/backend/pages/generic/profile">
                   <span class="font-size-sm font-w500">Profile</span>
-                  <span class="badge badge-pill badge-primary ml-2">1</span>
+                  <span class="badge badge-pill badge-primary ml-2">{{$store.state.firestoreData.notifications.length}}</span>
                 </router-link>
                 <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
                   <span class="font-size-sm font-w500">Settings</span>
@@ -149,25 +149,25 @@
           <b-dropdown size="sm" variant="dual" class="d-inline-block ml-2" menu-class="dropdown-menu-lg p-0 border-0 font-size-sm" right no-caret>
             <template #button-content>
               <i class="fa fa-fw fa-bell"></i>
-              <span v-if="notifications.length" class="text-primary">•</span>
+              <span v-if="$store.state.firestoreData.notifications.length" class="text-primary">•</span>
             </template>
             <li>
               <div class="p-2 bg-primary-dark text-center rounded-top">
                   <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
               </div>
               <ul class="nav-items mb-0">
-                <li v-for="(notification, index) in notifications" :key="`notification-${index}`">
+                <li v-for="(notification, index) in $store.state.firestoreData.notifications" :key="`notification-${index}`">
                   <a class="text-dark media py-2" :href="`${notification.href}`">
                     <div class="mr-2 ml-3">
                       <i :class="`${notification.icon}`"></i>
                     </div>
                     <div class="media-body pr-2">
                       <div class="font-w600">{{ notification.title }}</div>
-                      <span class="font-w500 text-muted">{{ notification.time }}</span>
+                      <span class="font-w500 text-muted">{{ Date(notification.time).toString().slice(0,10) }}</span>
                     </div>
                   </a>
                 </li>
-                <li v-if="!notifications.length" class="p-2">
+                <li v-if="!$store.state.firestoreData.notifications.length" class="p-2">
                   <b-alert variant="warning" class="text-center m-0" show>
                     <p class="mb-0">
                       No new notifications!
@@ -175,7 +175,7 @@
                   </b-alert>
                 </li>
               </ul>
-              <div v-if="notifications.length" class="p-2 border-top">
+              <div v-if="$store.state.firestoreData.notifications" class="p-2 border-top">
                 <b-button size="sm" variant="light" class="text-center" block href="javascript:void(0)">
                   <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
                 </b-button>
@@ -233,45 +233,7 @@ export default {
   },
   data () {
     return {
-      baseSearchTerm: '',
-      notifications: [
-        {
-          href: 'javascript:void(0)',
-          icon: 'fa fa-fw fa-check-circle text-success',
-          title: 'You have a new follower',
-          time: '15 min ago'
-        },
-        {
-          href: 'javascript:void(0)',
-          icon: 'fa fa-fw fa-plus-circle text-primary',
-          title: '1 new sale, keep it up',
-          time: '22 min ago'
-        },
-        {
-          href: 'javascript:void(0)',
-          icon: 'fa fa-fw fa-times-circle text-danger',
-          title: 'Update failed, restart server',
-          time: '26 min ago'
-        },
-        {
-          href: 'javascript:void(0)',
-          icon: 'fa fa-fw fa-plus-circle text-primary',
-          title: '2 new sales, keep it up',
-          time: '33 min ago'
-        },
-        {
-          href: 'javascript:void(0)',
-          icon: 'fa fa-fw fa-user-plus text-success',
-          title: 'You have a new subscriber',
-          time: '41 min ago'
-        },
-        {
-          href: 'javascript:void(0)',
-          icon: 'fa fa-fw fa-check-circle text-success',
-          title: 'You have a new follower',
-          time: '42 min ago'
-        }
-      ]
+      baseSearchTerm: ''
     }
   },
   methods: {

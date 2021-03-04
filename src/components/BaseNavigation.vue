@@ -9,16 +9,15 @@
         'open': node.sub && node.subActivePaths ? subIsActive(node.subActivePaths) : false
       }"
     >
-      <!-- Heading -->
       {{ node.heading ? node.name : '' }}
-
-      <!-- Normal Link -->
       <router-link
-        v-if="!node.heading && !node.sub"
+        v-if="!node.heading"
         :to="node.to || '#'"
         class="nav-main-link"
+        :class="node.sub ? 'nav-main-link-submenu' : ''"
         :active-class="(node.to && node.to !== '#') ? 'active' : ''"
-        @click.native="linkClicked($event)"
+        :event="node.sub ? '' : 'click'"
+        @click.native="linkClicked($event, node.sub)"
       >
         <i v-if="node.icon" :class="`nav-main-link-icon ${node.icon}`"></i>
         <span v-if="node.name" class="nav-main-link-name">{{ node.name }}</span>
@@ -26,23 +25,6 @@
             :class="node['badge-variant'] ? `badge-${node['badge-variant']}` : 'badge-primary' "
         >{{ node.badge }}</span>
       </router-link>
-      <!-- END Normal Link -->
-
-      <!-- Submenu Link -->
-      <a
-        v-else-if="!node.heading && node.sub"
-        href="#"
-        class="nav-main-link nav-main-link-submenu"
-        @click.prevent="linkClicked($event, true)"
-      >
-        <i v-if="node.icon" :class="`nav-main-link-icon ${node.icon}`"></i>
-        <span v-if="node.name" class="nav-main-link-name">{{ node.name }}</span>
-        <span v-if="node.badge" class="nav-main-link-badge badge badge-pill badge-primary"
-            :class="node['badge-variant'] ? `badge-${node['badge-variant']}` : 'badge-primary' "
-        >{{ node.badge }}</span>
-      </a>
-      <!-- END Submenu Link -->
-
       <base-navigation v-if="node.sub" :nodes="node.sub" sub-menu></base-navigation>
     </li>
   </ul>

@@ -23,14 +23,12 @@
 
               <!-- Services -->
               <div class="d-flex justify-content-between">
-                <router-link to="/backend/pages/generic/blank" custom v-slot="{ href, navigate }">
-                  <a class="btn btn-lg btn-alt-secondary" :href="href" @click="navigate">
-                    <i class="fa fa-arrow-left mr-1"></i> Dashboard
-                  </a>
-                </router-link>
-                <a class="btn btn-lg btn-alt-success" href="javascript:void(0)">
+                <b-button size="lg" variant="alt-secondary" to="/backend/pages/generic/blank">
+                  <i class="fa fa-arrow-left mr-1"></i> Dashboard
+                </b-button>
+                <b-button size="lg" variant="alt-success" href="javascript:void(0)">
                   <i class="fa fa-rss"></i> <span class="d-none d-sm-inline-block ml-1">Subscribe</span>
-                </a>
+                </b-button>
               </div>
               <hr>
               <b-alert variant="warning" show>
