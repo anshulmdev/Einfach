@@ -1,0 +1,97 @@
+{
+  "name": "oneui-vue-edition",
+  "version": "1.4.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint",
+    "build-modern": "vue-cli-service build --modern",
+    "lint-fix": "vue-cli-service lint --fix"
+  },
+  "dependencies": {
+    "@chenfengyuan/vue-countdown": "^1.1.5",
+    "@ckeditor/ckeditor5-build-balloon": "^25.0.0",
+    "@ckeditor/ckeditor5-build-balloon-block": "^25.0.0",
+    "@ckeditor/ckeditor5-build-classic": "^25.0.0",
+    "@ckeditor/ckeditor5-build-decoupled-document": "^25.0.0",
+    "@ckeditor/ckeditor5-build-inline": "^25.0.0",
+    "@ckeditor/ckeditor5-vue2": "^1.0.5",
+    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@fullcalendar/bootstrap": "^5.5.0",
+    "@fullcalendar/core": "^5.5.1",
+    "@fullcalendar/daygrid": "^5.5.0",
+    "@fullcalendar/interaction": "^5.5.0",
+    "@fullcalendar/list": "^5.5.0",
+    "@fullcalendar/timegrid": "^5.5.1",
+    "@fullcalendar/vue": "^5.5.0",
+    "bootstrap": "^4.6.0",
+    "bootstrap-vue": "^2.21.2",
+    "chart.js": "^2.9.4",
+    "core-js": "^3.8.3",
+    "simplebar-vue": "^1.6.0",
+    "vue": "^2.6.12",
+    "vue-chartjs": "^3.5.1",
+    "vue-color": "^2.8.1",
+    "vue-cropperjs": "^4.2.0",
+    "vue-easy-pie-chart": "^1.0.3",
+    "vue-flatpickr-component": "^8.1.6",
+    "vue-gallery": "^2.0.1",
+    "vue-highlightjs": "^1.3.3",
+    "vue-masked-input": "^0.5.2",
+    "vue-router": "^3.5.1",
+    "vue-select": "^3.11.2",
+    "vue-simplemde": "^2.0.0",
+    "vue-slider-component": "^3.2.11",
+    "vue-star-rating": "^1.7.0",
+    "vue-sweetalert2": "^4.2.0",
+    "vue2-dropzone": "^3.6.0",
+    "vuelidate": "^0.7.6",
+    "vuex": "^3.6.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.5.11",
+    "@vue/cli-plugin-eslint": "^4.5.11",
+    "@vue/cli-plugin-router": "^4.5.11",
+    "@vue/cli-plugin-vuex": "^4.5.11",
+    "@vue/cli-service": "^4.5.11",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.19.0",
+    "eslint-plugin-vue": "^7.5.0",
+    "fibers": "^5.0.0",
+    "sass": "^1.32.6",
+    "sass-loader": "^10.1.1",
+    "vue-template-compiler": "^2.6.12"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    ">= 1%",
+    "last 1 major version",
+    "not dead",
+    "Chrome >= 45",
+    "Firefox >= 38",
+    "Edge >= 12",
+    "iOS >= 9",
+    "Safari >= 9",
+    "Android >= 4.4",
+    "Opera >= 30"
+  ]
+}
