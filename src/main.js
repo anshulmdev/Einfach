@@ -10,6 +10,8 @@ import router from './router'
 import App from './App.vue'
 import store from './store'
 
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 // Bootstrap Vue
 import BootstrapVue from 'bootstrap-vue'
 
@@ -26,7 +28,7 @@ import toggleClass from '@/directives/toggleClass'
 
 // Register global plugins
 Vue.use(BootstrapVue)
-
+Vue.use(VueAxios, axios)
 // Register global components
 Vue.component(BaseLayoutModifier.name, BaseLayoutModifier)
 Vue.component(BaseBlock.name, BaseBlock)

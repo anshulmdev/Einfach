@@ -266,6 +266,7 @@ export default {
       const list = DB.ref(`forms/${this.dataApps}`);
       const snapshot = await list.once("value");
       this.formDetails = snapshot.val();
+      console.log(this.formDetails)
     },
     onSubmit() {
       this.$v.form.$touch();

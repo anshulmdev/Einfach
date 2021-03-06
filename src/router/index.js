@@ -154,12 +154,16 @@ const PagesErrorsAll = () => import("@/views/pages/errors/All.vue")
 // Pages: Auth
 const AuthSignIn = () => import(/* webpackChunkName: "auth-signin" */"@/views/pages/auth/SignIn.vue")
 const AuthSignIn2 = () => import(/* webpackChunkName: "auth-signin2" */"@/views/pages/auth/SignIn2.vue")
+const AuthSignIn3 = () => import(/* webpackChunkName: "auth-signin3" */"@/views/pages/auth/SignIn3.vue")
 const AuthSignUp = () => import(/* webpackChunkName: "auth-signup" */"@/views/pages/auth/SignUp.vue")
 const AuthSignUp2 = () => import(/* webpackChunkName: "auth-signup2" */"@/views/pages/auth/SignUp2.vue")
+const AuthSignUp3 = () => import(/* webpackChunkName: "auth-signup3" */"@/views/pages/auth/SignUp3.vue")
 const AuthLock = () => import(/* webpackChunkName: "auth-lock" */"@/views/pages/auth/Lock.vue")
-const AuthApplications = () => import(/* webpackChunkName: "auth-Applications" */"@/views/pages/auth/Applications.vue")
+const AuthLock2 = () => import(/* webpackChunkName: "auth-lock2" */"@/views/pages/auth/Lock2.vue")
+const AuthLock3 = () => import(/* webpackChunkName: "auth-lock3" */"@/views/pages/auth/Lock3.vue")
 const AuthReminder = () => import(/* webpackChunkName: "auth-reminder" */"@/views/pages/auth/Reminder.vue")
 const AuthReminder2 = () => import(/* webpackChunkName: "auth-reminder2" */"@/views/pages/auth/Reminder2.vue")
+const AuthReminder3 = () => import(/* webpackChunkName: "auth-reminder3" */"@/views/pages/auth/Reminder3.vue")
 
 // Pages: Errors
 const Errors400 = () => import("@/views/pages/errors/400.vue")
@@ -226,6 +230,11 @@ export default new Router({
           component: AuthSignIn2
         },
         {
+          path: 'signin3',
+          name: 'Sign In 3',
+          component: AuthSignIn3
+        },
+        {
           path: 'signup',
           name: 'Sign Up',
           component: AuthSignUp
@@ -236,15 +245,24 @@ export default new Router({
           component: AuthSignUp2
         },
         {
+          path: 'signup3',
+          name: 'Sign Up 3',
+          component: AuthSignUp3
+        },
+        {
           path: 'lock',
           name: 'Auth Lock',
           component: AuthLock
         },
         {
-          path: 'Applications/:id',
-          name: 'Applications',
-          props: true,
-          component: AuthApplications
+          path: 'lock2',
+          name: 'Auth Lock 2',
+          component: AuthLock2
+        },
+        {
+          path: 'lock3',
+          name: 'Auth Lock 3',
+          component: AuthLock3
         },
         {
           path: 'reminder',
@@ -255,6 +273,11 @@ export default new Router({
           path: 'reminder2',
           name: 'Auth Reminder 2',
           component: AuthReminder2
+        },
+        {
+          path: 'reminder3',
+          name: 'Auth Reminder 3',
+          component: AuthReminder3
         }
       ]
     },

@@ -20,6 +20,7 @@ const firebaseConfig = {
 let app = null
 if (!firebase.apps.length) {
   app = firebase.initializeApp(firebaseConfig)
+  console.log(app)
 }
 
 export const DB = firebase.database()
