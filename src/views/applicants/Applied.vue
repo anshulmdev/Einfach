@@ -20,9 +20,12 @@
       <!-- Full Table -->
       <base-block rounded title="Assignment: JavaScript">
         <template #options>
-          <button type="button" class="btn-block-option">
-            <i class="si si-settings"></i>
-          </button>
+            <b-dropdown id="dropdown-default-outline-primary btn-sm" variant="outline-primary btn-sm" text="Show Entries">
+              <b-dropdown-item @click="perPage = 5" class="font-size-sm">5 per page</b-dropdown-item>
+              <b-dropdown-item @click="perPage = 10" class="font-size-sm">10 per page</b-dropdown-item>
+              <b-dropdown-item @click="perPage = 15" class="font-size-sm">15 per page</b-dropdown-item>
+              <b-dropdown-item @click="perPage = 20" class="font-size-sm">20 per page</b-dropdown-item>
+            </b-dropdown>
         </template>
         <b-table-simple responsive bordered striped table-class="table-vcenter">
           <b-thead>
@@ -39,8 +42,7 @@
           </b-thead>
           <b-tbody>
             <b-tr
-              v-for="(user, index) in $store.state.firestoreData.candidates
-                .applied"
+              v-for="(user, index) in filteredArray"
               :key="index"
             >
               <b-td class="text-center">
@@ -70,6 +72,7 @@
               <b-td class="text-center">
                 <b-btn-group>
                   <b-button
+                  disabled
                   v-if="loading.includes(index)"
                     v-b-tooltip.hover.nofade.left="'Send Invitation'"
                     @click="invite(user.name, user.email, index)"
@@ -88,6 +91,7 @@
                     <i class="fa fa-fw fa-paper-plane"></i>
                   </b-button>
                   <b-button
+                  @click="deleteEntry(user.name, user.email, index)"
                     v-b-tooltip.hover.nofade.left="'Reject'"
                     size="sm"
                     variant="danger"
@@ -153,21 +157,66 @@
   </div>
 </template>
 
+<style lang="scss">
+// SweetAlert2
+@import '~sweetalert2/dist/sweetalert2.min.css';
+</style>
+
 <script>
+// Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+const options = {
+  buttonsStyling: false,
+  customClass: {
+    confirmButton: 'btn btn-success m-1',
+    cancelButton: 'btn btn-danger m-1',
+    input: 'form-control'
+  }
+}
+
+// Register Vue SweetAlert2 with custom options
+Vue.use(VueSweetalert2, options)
 import firebase from "../../firebase";
 export default {
   data() {
     return {
       loading: [],
       rows: this.$store.state.firestoreData.candidates.applied.length,
-      perPage: 10,
+      perPage: 5,
       currentPage: 1,
       url: "https://static.thenounproject.com/png/543772-200.png",
     };
   },
+  computed:{
+    filteredArray (){
+      return this.$store.state.firestoreData.candidates.applied.slice(((this.currentPage-1)*this.perPage),((this.currentPage)*this.perPage));
+    }
+  },
   methods: {
     // eslint-disable-next-line no-unused-vars
-    async invite(name, email, index) {
+    async deleteEntry(name, email, index){
+      const confirmation = await this.$swal({
+        title: 'Are you sure?',
+        text: 'You will not be able to recover this applicant',
+        icon: 'warning',
+        showCancelButton: true,
+        customClass: {
+          confirmButton: 'btn btn-danger m-1',
+          cancelButton: 'btn btn-secondary m-1'
+        },
+        confirmButtonText: 'Yes, delete it!',
+        html: false,
+        preConfirm: () => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve()
+            }, 50)
+          })
+        }
+      })
+      if(confirmation.isConfirmed){
       this.loading.push(index)
       const details = this.$store.state.firestoreData.candidates.applied[index];
       const entry = await firebase
@@ -176,14 +225,17 @@ export default {
         .doc("Anshul Mishra");
       // eslint-disable-next-line no-unused-vars
       const addInvite = await entry.update({
-        "candidates.invited": firebase.firestore.FieldValue.arrayUnion(details),
-      });
-      // eslint-disable-next-line no-unused-vars
-      const removeApplied = await entry.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayRemove(details),
       });
-      const emailTemplate = this.$store.state.firestoreData.emailTemplates
-        .invite;
+      this.loading = []
+        
+      }
+
+    },
+    // eslint-disable-next-line no-unused-vars
+    async invite(name, email, index) {
+      this.loading.push(index)
+      const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite;
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch(
         "https://anshul9760.api.stdlib.com/EinfachTech@dev/Emails/inviteApplicant/",
@@ -201,6 +253,19 @@ export default {
           body: JSON.stringify({ name, email, emailTemplate }),
         }
       );
+      const details = this.$store.state.firestoreData.candidates.applied[index];
+      const entry = await firebase
+        .firestore()
+        .collection("accounts")
+        .doc("Anshul Mishra");
+      // eslint-disable-next-line no-unused-vars
+      const addInvite = await entry.update({
+        "candidates.invited": firebase.firestore.FieldValue.arrayUnion(details),
+      });
+      // eslint-disable-next-line no-unused-vars
+      const removeApplied = await entry.update({
+        "candidates.applied": firebase.firestore.FieldValue.arrayRemove(details),
+      });
       this.loading = []
     },
   },

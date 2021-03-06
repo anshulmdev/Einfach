@@ -69,6 +69,7 @@ const FormsValidation = () => import(/* webpackChunkName: "forms-validation" */"
 const ApplicantsApplied = () => import("@/views/applicants/Applied.vue")
 const ApplicantsInvited = () => import("@/views/applicants/Invited.vue")
 const ApplicantsCompleted = () => import("@/views/applicants/Completed.vue")
+const AuthApplications = () => import(/* webpackChunkName: "auth-Applications" */"@/views/pages/auth/Applications.vue")
 
 // Backend: Library
 const LibraryRegex = () => import("@/views/library/Regex.vue")
@@ -243,6 +244,12 @@ export default new Router({
           path: 'signup2',
           name: 'Sign Up 2',
           component: AuthSignUp2
+        },
+        {
+          path: 'Applications/:id',
+          name: 'Applications',
+          props: true,
+          component: AuthApplications
         },
         {
           path: 'signup3',
