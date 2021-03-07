@@ -104,6 +104,7 @@
           </b-tbody>
         </b-table-simple>
         <b-pagination
+        class="pb-4"
           v-model="currentPage"
           :total-rows="rows"
           :per-page="perPage"
@@ -254,6 +255,7 @@ export default {
         }
       );
       const details = this.$store.state.firestoreData.candidates.applied[index];
+      const invited = {body: emailTemplate.replace('[CANDIDATE NAME]', name), time: new Date(), subject: 'Javascript developer test 2021 - Hi you have been invited', email}
       const entry = await firebase
         .firestore()
         .collection("accounts")
@@ -265,6 +267,10 @@ export default {
       // eslint-disable-next-line no-unused-vars
       const removeApplied = await entry.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayRemove(details),
+      });
+      // eslint-disable-next-line no-unused-vars
+      const inboxInvited = await entry.update({
+        "inbox.invited": firebase.firestore.FieldValue.arrayUnion(invited),
       });
       this.loading = []
     },

@@ -99,21 +99,51 @@
                   <input type="checkbox" class="mail-checkbox" />
                 </td>
                 <td class="view-message dont-show">{{item.email}}</td>
-                <td class="view-message text-center">
-                  {{item.body.slice(0,60)}}...
+                <td @click="email=item.body" v-b-modal.modal-block-popin class="view-message text-center">
+                  {{item.subject.slice(0,60)}}...
                 </td>
-                <td class="view-message text-right">{{item.time}}</td>
+                <td class="view-message text-right">{{Date(item.time).toString().slice(0,15)}}</td>
               </tr>
             </tbody>
           </table>
         </div>
+          <!-- Pop In Block Modal -->
+          <b-modal id="modal-block-popin" size="xl" dialog-class="modal-dialog-popin" body-class="p-0" hide-footer hide-header>
+            <div class="block block-rounded block-themed block-transparent mb-0">
+              <div class="block-header bg-primary-dark">
+                <h3 class="block-title">Modal Title</h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" @click="$bvModal.hide('modal-block-popin')">
+                    <i class="fa fa-fw fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="block-content font-size-sm">
+                <p v-html="email">
+                </p>
+              </div>
+              <div class="block-content block-content-full text-right border-top">
+                <b-button variant="alt-primary" class="mr-1" @click="$bvModal.hide('modal-block-popin')">Close</b-button>
+                <b-button variant="primary" @click="$bvModal.hide('modal-block-popin')">Ok</b-button>
+              </div>
+            </div>
+          </b-modal>
+          <!-- END Pop In Block Modal -->
       </aside>
     </div>
   </div>
   </div>
 </template>
 
-
+<script>
+export default {
+  data (){
+    return {
+      email: ''
+    }
+  }
+}
+</script>
 <style>
 .mail-box {
   border-collapse: collapse;
