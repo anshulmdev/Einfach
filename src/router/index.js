@@ -86,18 +86,14 @@ const CommitsLive = () => import("@/views/commit/live.vue")
 
 // Backend: Company
 const CompanyProfile = () => import("@/views/company/Profile.vue")
-const CompanyStatistics = () => import("@/views/company/Statistics.vue")
+const CompanyTimeline = () => import("@/views/company/Timeline.vue")
 
 // Backend: Subscription
 const SubscriptionActive = () => import("@/views/subscription/Active.vue")
 const SubscriptionPayment = () => import("@/views/subscription/Payment.vue")
 
-// Backend: Inbox
-const InboxShortlisted = () => import("@/views/inbox/Shortlisted.vue")
-const InboxRejected = () => import("@/views/inbox/Rejected.vue")
-const InboxInvited = () => import("@/views/inbox/Invited.vue")
-
 // Backend: Support
+const Documentation = () => import("@/views/support/Documentation.vue")
 const SupportTicket = () => import("@/views/support/Ticket.vue")
 const SupportBug = () => import("@/views/support/Bug.vue")
 
@@ -148,6 +144,7 @@ const PagesVariousComingSoon = () => import(/* webpackChunkName: "various-coming
 
 // Backend: Auth Pages
 const PagesAuthAll = () => import("@/views/pages/auth/All.vue")
+const Inbox = () => import("@/views/Inbox.vue")
 
 // Backend: Error Pages
 const PagesErrorsAll = () => import("@/views/pages/errors/All.vue")
@@ -372,6 +369,11 @@ export default new Router({
           component: Dashboard
         },
         {
+          path: 'inbox',
+          name: 'Inbox',
+          component: Inbox
+        },
+        {
           path: 'blocks',
           redirect: '/blocks/styles',
           component: {
@@ -563,30 +565,6 @@ export default new Router({
           ]
         },
         {
-          path: 'inbox',
-          redirect: '/inbox/shortlisted',
-          component: {
-            render (c) { return c('router-view') }
-          },
-          children: [
-            {
-              path: 'shortlisted',
-              name: 'Inbox Shortlisted',
-              component: InboxShortlisted
-            },
-            {
-              path: 'rejected',
-              name: 'Inbox Rejected',
-              component: InboxRejected
-            },
-            {
-              path: 'Invited',
-              name: 'Inbox Invited',
-              component: InboxInvited
-            },
-          ]
-        },
-        {
           path: 'forms',
           redirect: '/forms/elements',
           component: {
@@ -677,9 +655,9 @@ export default new Router({
               component: CompanyProfile
             },
             {
-              path: 'statistics',
-              name: 'Company Statistics',
-              component: CompanyStatistics
+              path: 'timeline',
+              name: 'Company Timeline',
+              component: CompanyTimeline
             }
           ]
         },
@@ -709,6 +687,11 @@ export default new Router({
             render (c) { return c('router-view') }
           },
           children: [
+            {
+              path: 'doc',
+              name: 'Documentation',
+              component: Documentation
+            },
             {
               path: 'ticket',
               name: 'Support Ticket',

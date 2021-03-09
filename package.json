@@ -36,6 +36,7 @@
     "vue-axios": "^3.2.4",
     "vue-chartjs": "^3.5.1",
     "vue-color": "^2.8.1",
+    "vue-cookies": "^1.7.4",
     "vue-cropperjs": "^4.2.0",
     "vue-easy-pie-chart": "^1.0.3",
     "vue-flatpickr-component": "^8.1.6",

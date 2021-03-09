@@ -10,6 +10,11 @@ export default {
       icon: 'si si-speedometer'
     },
     {
+      name: 'Mailbox',
+      to: '/backend/inbox',
+      icon: 'fa fa-inbox'
+    },
+    {
       name: 'Assignments',
       heading: true
     },
@@ -113,28 +118,6 @@ export default {
       ]
     },
     {
-      name: 'Inbox',
-      icon: 'si si-envelope',
-      subActivePaths: '/backend/inbox',
-      sub: [
-        {
-          name: 'Invited',
-          icon: 'si si-clock',
-          to: '/backend/inbox/invited'
-        },
-        {
-          name: 'Shortlisted',
-          icon: 'si si-check',
-          to: '/backend/inbox/shortlisted'
-        },
-        {
-          name: 'Rejected',
-          icon: 'si si-close',
-          to: '/backend/inbox/rejected'
-        },
-      ]
-    },
-    {
       name: 'Settings',
       heading: true
     },
@@ -149,9 +132,9 @@ export default {
           to: '/backend/company/profile'
         },
         {
-          name: 'Statistics',
-          icon: 'si si-wrench',
-          to: '/backend/company/statistics'
+          name: 'Timeline',
+          icon: 'si si-calendar',
+          to: '/backend/company/timeline'
         },
       ]
     },
@@ -177,6 +160,11 @@ export default {
       icon: 'si si-support',
       subActivePaths: '/backend/support',
       sub: [
+        {
+          name: 'Documentation',
+          icon: 'si si-docs',
+          to: '/backend/support/doc'
+        },
         {
           name: 'Raise Ticket',
           icon: 'si si-note',
