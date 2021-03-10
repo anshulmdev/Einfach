@@ -11,7 +11,6 @@
           </b-button>
         </div>
         <!-- END Toggle Inbox Side Navigation -->
-
         <!-- Inbox Side Navigation -->
         <div id="one-inbox-side-nav" class="d-none d-md-block push">
           <!-- New Message Modal -->
@@ -203,11 +202,11 @@
       </b-col>
       <b-col md="7" xl="9">
         <!-- View Message Modal -->
-        <b-modal id="one-inbox-message" body-class="p-0" hide-footer hide-header>
-          <div v-if="showMessage" class="block block-rounded block-themed block-transparent mb-0">
+        <b-modal id="one-inbox-message" size="xl" body-class="p-0" hide-footer hide-header>
+          <div class="block block-rounded block-themed block-transparent mb-0">
             <div class="block-header bg-primary-dark">
               <h3 class="block-title">
-                {{ messages.find(x => x.id === showMessage).title }}
+                Email
               </h3>
               <div class="block-options">
                 <button type="button" class="btn-block-option" @click="$bvModal.hide('one-inbox-message')">
@@ -217,25 +216,14 @@
             </div>
             <div class="block-content block-content-full font-size-sm d-flex justify-content-between align-items-center bg-body-light">
                 <div>
-                  <a class="font-w600" href="javascript:void(0)">{{ messages.find(x => x.id === showMessage).user }}</a><br>
-                  <a href="javascript:void(0)">{{ messages.find(x => x.id === showMessage).email }}</a>
+                  <a class="font-w600" href="javascript:void(0)">
+                {{$store.state.firestoreData.inbox[showMessage].email}}</a><br>
+                  <a href="javascript:void(0)">{{$store.state.firestoreData.inbox[showMessage].title}}</a>
                 </div>
-                <span class="text-muted"><em>{{ messages.find(x => x.id === showMessage).received }}</em></span>
+                <span class="text-muted"><em>{{Date($store.state.firestoreData.inbox[showMessage].received).toString().slice(0,10)}}</em></span>
             </div>
             <div class="block-content font-size-sm">
-              <p>Dear Admin,</p>
-              <p>Dolor posuere proin blandit accumsan senectus netus nullam curae, ornare laoreet adipiscing luctus mauris adipiscing pretium eget fermentum, tristique lobortis est ut metus lobortis tortor tincidunt himenaeos habitant quis dictumst proin odio sagittis purus mi, nec taciti vestibulum quis in sit varius lorem sit metus mi.</p>
-              <p>Best Regards</p>
-            </div>
-            <div v-if="messages.find(x => x.id === showMessage).files.length" class="block-content bg-body-light">
-              <div class="row gutters-tiny items-push font-size-sm">
-                <div v-for="file in messages.find(x => x.id === showMessage).files" :key="file" class="col-md-4 text-center py-2">
-                  <div class="mb-2">
-                    <i class="fa fa-file fa-2x text-muted opacity-50"></i>
-                  </div>
-                  <div class="text-muted">{{ file }}</div>
-                </div>
-              </div>
+              <p v-html="$store.state.firestoreData.inbox[showMessage].body" />
             </div>
           </div>
         </b-modal>
@@ -282,38 +270,33 @@
           </div>
           <!-- END Messages Options -->
 
-          <!-- Messages -->
+        <!-- Messages -->
           <div class="pull-x">
             <b-table-simple hover table-class="table-vcenter font-size-sm">
               <b-tbody>
-                <b-tr v-for="message in messages" :key="message.id">
+                <b-tr v-for="(message,index) in $store.state.firestoreData.inbox" :key="index">
                   <b-td class="text-center" style="width: 60px;">
                     <b-form-checkbox
-                      :id="`checkbox-${message.id}`"
-                      :value="message.id"
+                      :id="`checkbox-${index}`"
+                      :value="index"
                     ></b-form-checkbox>
                   </b-td>
                   <b-td class="d-none d-sm-table-cell font-w600" style="width: 140px;">
                     {{ message.user }}
                   </b-td>
                   <b-td>
-                    <a class="font-w600" href="javascript:void(0)" v-b-modal.one-inbox-message @click="showMessage = message.id">
-                      {{ message.title }}
+                    <a class="font-w600" href="javascript:void(0)" v-b-modal.one-inbox-message @click="showMessage = index">
+                      {{ message.email }}
                     </a>
                     <div class="text-muted mt-1">
-                      {{ message.contentPreview }}
+                      {{ message.title }}
                     </div>
-                  </b-td>
-                  <b-td class="d-none d-xl-table-cell text-muted" style="width: 80px;">
-                    <span v-if="message.files.length > 0">
-                      <i class="fa fa-paperclip mr-1"></i> ({{ message.files.length }})
-                    </span>
                   </b-td>
                   <b-td
                     class="d-none d-xl-table-cell text-muted"
                     style="width: 120px;"
                   >
-                    <em>{{ message.received }}</em>
+                    <em>{{ Date(message.received).toString().slice(0,10) }}</em>
                   </b-td>
                 </b-tr>
               </b-tbody>
