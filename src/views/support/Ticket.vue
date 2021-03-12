@@ -1,10 +1,12 @@
 <template>
   <div>
     <!-- Hero -->
-    <base-page-heading title="Ticket" subtitle="Submit any ongoing queries">
+    <base-page-heading title="Ticket" subtitle="Submit your queries">
       <template #extra>
         <b-breadcrumb class="breadcrumb-alt">
-          <b-breadcrumb-item href="javascript:void(0)">Support</b-breadcrumb-item>
+          <b-breadcrumb-item href="javascript:void(0)"
+            >Support</b-breadcrumb-item
+          >
           <b-breadcrumb-item active>Ticket</b-breadcrumb-item>
         </b-breadcrumb>
       </template>
@@ -18,35 +20,60 @@
         <b-form>
           <b-row class="push">
             <b-col lg="4">
-              <p class="font-size-sm text-muted">
-                Select category
-              </p>
+              <p class="font-size-sm text-muted">Select category</p>
             </b-col>
             <b-col lg="8" xl="5">
-              <b-form-group label="Select" label-for="example-select">
-                <b-form-select id="example-select" v-model="selected" :options="options" plain></b-form-select>
+              <b-form-group label="Select Category" label-for="example-select">
+                <b-form-select
+                  id="example-select"
+                  v-model="selected"
+                  :options="options"
+                  plain
+                ></b-form-select>
               </b-form-group>
             </b-col>
           </b-row>
           <b-row class="push">
             <b-col lg="4">
-              <p class="font-size-sm text-muted">
-                Write query in detail
-              </p>
+              <p class="font-size-sm text-muted">Write query in detail</p>
             </b-col>
             <b-col lg="8" xl="5">
-                <b-form-textarea id="example-textarea-input" rows="4" placeholder="Write in detail.."></b-form-textarea>
+              <b-form-textarea
+                v-model="query"
+                id="example-textarea-input"
+                rows="4"
+                placeholder="Write in detail.."
+              ></b-form-textarea>
             </b-col>
           </b-row>
           <b-row class="push">
             <b-col lg="8">
-              <p class="font-size-sm text-muted">
-                
-              </p>
+              <p class="font-size-sm text-muted"></p>
             </b-col>
             <b-col lg="4" class="mt-5">
               <b-form-group>
-                <b-button type="submit" variant="primary">Raise Ticket</b-button>
+                <b-button
+                  v-if="!loading"
+                  type="submit"
+                  variant="alt-primary"
+                  @click="send()"
+                >
+                  <i class="fa fa-fw fa-envelope opacity-50"></i> Send Mail
+                </b-button>
+                <b-button
+                  v-else
+                  type="submit"
+                  variant="alt-primary"
+                  @click="send()"
+                >
+                  <b-spinner
+                    small
+                    variant="primary"
+                    label="Loading..."
+                    class="mr-3"
+                  ></b-spinner>
+                  Loading
+                </b-button>
               </b-form-group>
             </b-col>
           </b-row>
@@ -58,21 +85,63 @@
   </div>
 </template>
 
+
+<style lang="scss">
+// SweetAlert2
+@import '~sweetalert2/dist/sweetalert2.min.css';
+</style>
+
 <script>
+// Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+const options = {
+  buttonsStyling: false,
+  customClass: {
+    confirmButton: 'btn btn-success m-1',
+    cancelButton: 'btn btn-danger m-1',
+    input: 'form-control'
+  }
+}
+
+// Register Vue SweetAlert2 with custom options
+Vue.use(VueSweetalert2, options)
+import firebase from "../../firebase";
 export default {
-  data () {
+  data() {
     return {
       selected: null,
+      loading: null,
+      query: "",
       options: [
-        { value: null, text: 'Please select' },
-        { value: 1, text: 'Option #1' },
-        { value: 2, text: 'Option #2' },
-        { value: 3, text: 'Option #3' },
-        { value: 4, text: 'Option #4' },
-        { value: 5, text: 'Option #5' },
-        { value: 6, text: 'Option #6' },
-        { value: 7, text: 'Option #7' },
-        { value: 8, text: 'Option #8' },
-        { value: 9, text: 'Option #9' },
-        { value: 10, text: 'Option #10' }
-      ]}}}
+        { value: null, text: "Please select" },
+        { value: 2, text: "Forms" },
+        { value: 3, text: "Emails" },
+        { value: 1, text: "Dashboard" },
+        { value: 7, text: "Report Bug" },
+        { value: 6, text: "Subscription" },
+        { value: 4, text: "Authentication" },
+        { value: 5, text: "Question Library" },
+      ],
+    };
+  },
+  methods: {
+    send() {
+      this.loading = true;
+      // eslint-disable-next-line no-unused-vars
+      const address = firebase
+        .database()
+        .ref("tickets/" + this.$store.state.authUid)
+        .set({
+          category: this.selected,
+          query: this.query,
+        });
+      setTimeout(() => {
+        this.loading = null;
+        this.$swal('Ticket Created', 'Our support team will get back to you!', 'info')
+      }, 2000);
+    },
+  },
+};
+</script>

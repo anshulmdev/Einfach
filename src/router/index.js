@@ -95,7 +95,6 @@ const SubscriptionPayment = () => import("@/views/subscription/Payment.vue")
 // Backend: Support
 const Documentation = () => import("@/views/support/Documentation.vue")
 const SupportTicket = () => import("@/views/support/Ticket.vue")
-const SupportBug = () => import("@/views/support/Bug.vue")
 
 // Backend: Plugins
 const PluginsAppear = () => import("@/views/plugins/Appear.vue")
@@ -696,11 +695,6 @@ export default new Router({
               path: 'ticket',
               name: 'Support Ticket',
               component: SupportTicket
-            },
-            {
-              path: 'bug',
-              name: 'Support Bug',
-              component: SupportBug
             }
           ]
         },

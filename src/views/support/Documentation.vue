@@ -1,11 +1,11 @@
 <template>
   <div>
     <!-- Hero -->
-    <base-page-heading title="FAQ" subtitle="Check out answers to the most common questions.">
+    <base-page-heading title="Documentation">
       <template #extra>
         <b-breadcrumb class="breadcrumb-alt">
-          <b-breadcrumb-item href="javascript:void(0)">Generic</b-breadcrumb-item>
-          <b-breadcrumb-item active>FAQ</b-breadcrumb-item>
+          <b-breadcrumb-item href="javascript:void(0)">Support</b-breadcrumb-item>
+          <b-breadcrumb-item active>Documentation</b-breadcrumb-item>
         </b-breadcrumb>
       </template>
     </base-page-heading>

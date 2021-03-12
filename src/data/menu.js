@@ -161,19 +161,14 @@ export default {
       subActivePaths: '/backend/support',
       sub: [
         {
-          name: 'Documentation',
-          icon: 'si si-docs',
-          to: '/backend/support/doc'
-        },
-        {
           name: 'Raise Ticket',
           icon: 'si si-note',
           to: '/backend/support/ticket'
         },
         {
-          name: 'Report Bug',
-          icon: 'si si-dislike',
-          to: '/backend/support/bug'
+          name: 'Documentation',
+          icon: 'si si-docs',
+          to: '/backend/support/doc'
         },
       ]
     },

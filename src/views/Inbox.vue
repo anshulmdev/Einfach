@@ -70,19 +70,19 @@
               </b-nav-item>
               <b-nav-item href="javascript:void(0)" class="my-1" link-classes="d-flex justify-content-between align-items-center">
                 <span>
-                  <i class="fa fa-fw fa-star mr-1"></i> Starred
-                </span>
-                <b-badge pill variant="secondary">48</b-badge>
-              </b-nav-item>
-              <b-nav-item href="javascript:void(0)" class="my-1" link-classes="d-flex justify-content-between align-items-center">
-                <span>
-                  <i class="fa fa-fw fa-paper-plane mr-1"></i> Sent
+                  <i class="fa fa-fw fa-paper-plane mr-1"></i> Invited
                 </span>
                 <b-badge pill variant="secondary">1480</b-badge>
               </b-nav-item>
               <b-nav-item href="javascript:void(0)" class="my-1" link-classes="d-flex justify-content-between align-items-center">
                 <span>
-                  <i class="fa fa-fw fa-pencil-alt mr-1"></i> Draft
+                  <i class="fa fa-fw fa-star mr-1"></i> Shortlisted
+                </span>
+                <b-badge pill variant="secondary">48</b-badge>
+              </b-nav-item>
+              <b-nav-item href="javascript:void(0)" class="my-1" link-classes="d-flex justify-content-between align-items-center">
+                <span>
+                  <i class="fa fa-fw fa-pencil-alt mr-1"></i> Custom
                 </span>
                 <b-badge pill variant="secondary">2</b-badge>
               </b-nav-item>
@@ -260,7 +260,7 @@
               </b-button>
               <b-button variant="light" size="sm">
                 <i class="fa fa-star text-warning"></i>
-                <span class="d-none d-sm-inline ml-1">Star</span>
+                <span class="d-none d-sm-inline ml-1">Shortlist</span>
               </b-button>
             </div>
             <b-button variant="light" size="sm">
