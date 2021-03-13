@@ -138,7 +138,7 @@
                   <span class="font-size-sm font-w500">Lock Account</span>
                 </router-link>
                 <router-link class="dropdown-item d-flex align-items-center justify-content-between" to="/auth/signin">
-                  <span class="font-size-sm font-w500">Log Out</span>
+                  <span class="font-size-sm font-w500" @click="logout">Log Out</span>
                 </router-link>
               </div>
             </li>
@@ -237,6 +237,9 @@ export default {
     }
   },
   methods: {
+    logout() {
+      this.$cookies.remove('uid')
+    },
     onSubmit () {
       this.$router.push('/backend/pages/generic/search?' + this.baseSearchTerm)
     },

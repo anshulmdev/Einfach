@@ -104,8 +104,10 @@ firebase.auth().signInWithEmailAndPassword(this.form.username, this.form.passwor
   })
   .catch(() => {
   });
-      // Form submit logic
+      setTimeout(() => {
+        // Form submit logic
       this.$router.push('/backend')
+      }, 1000);
     }
   }
 }

@@ -1,10 +1,15 @@
 <template>
   <div>
     <!-- Hero -->
-    <base-page-heading title="Live" subtitle="Get real-time coding environment within Einfach board">
+    <base-page-heading
+      title="Live"
+      subtitle="Get real-time coding environment within Einfach board"
+    >
       <template #extra>
         <b-breadcrumb class="breadcrumb-alt">
-          <b-breadcrumb-item href="javascript:void(0)">Commit</b-breadcrumb-item>
+          <b-breadcrumb-item href="javascript:void(0)"
+            >Commit</b-breadcrumb-item
+          >
           <b-breadcrumb-item active>Live</b-breadcrumb-item>
         </b-breadcrumb>
       </template>
@@ -12,8 +17,23 @@
     <!-- END Hero -->
 
     <!-- Page Content -->
+
+    <!-- Page Content -->
     <div class="content">
-<iframe src="https://codeshare.io/2p3zY9" height="500" width="1300"></iframe>
+      <!-- Your Block -->
+      <base-block rounded title="CodeShare">
+        <template #options>
+          <button type="button" class="btn-block-option">
+            <i class="si si-cog"></i>
+          </button>
+        </template>
+        <div class="col-md-12 m-2 p-4">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe src="https://codeshare.io/2p3zY9"></iframe>
+          </div>
+        </div>
+      </base-block>
+      <!-- END Your Block -->
     </div>
     <!-- END Page Content -->
   </div>

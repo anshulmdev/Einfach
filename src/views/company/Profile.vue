@@ -4,10 +4,10 @@
     <base-background image="img/photos/photo8@2x.jpg" inner-class="bg-black-50">
       <div class="content content-full text-center">
         <div class="my-3">
-            <img class="img-avatar img-avatar-thumb" src="img/avatars/avatar13.jpg" alt="Avatar">
+            <img class="img-avatar img-avatar-thumb" :src="$store.state.firestoreData.user.logo" alt="Avatar">
         </div>
-        <h1 class="h2 text-white mb-0">John Parker</h1>
-        <span class="text-white-75">UI Designer</span>
+        <h1 class="h2 text-white mb-0">{{$store.state.firestoreData.user.companyName}}</h1>
+        <span class="text-white-75">{{$store.state.firestoreData.user.category}}</span>
       </div>
     </base-background>
     <!-- END Hero -->
@@ -17,11 +17,11 @@
       <div class="content content-boxed">
         <b-row class="items-push text-center">
           <b-col cols="6" md="3">
-            <div class="font-size-sm font-w600 text-muted text-uppercase">Sales</div>
+            <div class="font-size-sm font-w600 text-muted text-uppercase">Total Applicants</div>
             <a class="link-fx font-size-h3" href="javascript:void(0)">17980</a>
           </b-col>
           <b-col cols="6" md="3">
-            <div class="font-size-sm font-w600 text-muted text-uppercase">Products</div>
+            <div class="font-size-sm font-w600 text-muted text-uppercase">Tests Conducted</div>
             <a class="link-fx font-size-h3" href="javascript:void(0)">27</a>
           </b-col>
           <b-col cols="6" md="3">

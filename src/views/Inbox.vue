@@ -102,80 +102,8 @@
           </base-block>
           <!-- END Inbox Menu -->
 
-          <!-- Friends -->
-          <base-block title="Friends" header-class="block-header-default" rounded>
-            <template #options>
-              <button type="button" class="btn-block-option">
-                <i class="si si-settings"></i>
-              </button>
-            </template>
-            <ul class="nav-items font-size-sm">
-              <li>
-                <a class="media py-2" href="javascript:void(0)">
-                  <div class="mr-3 ml-2 overlay-container overlay-bottom">
-                    <img class="img-avatar img-avatar48" src="img/avatars/avatar7.jpg" alt="Avatar">
-                    <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-success"></span>
-                  </div>
-                  <div class="media-body">
-                    <div class="font-w600">Judy Ford</div>
-                    <div class="font-w400 text-muted">Web Designer</div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a class="media py-2" href="javascript:void(0)">
-                  <div class="mr-3 ml-2 overlay-container overlay-bottom">
-                    <img class="img-avatar img-avatar48" src="img/avatars/avatar16.jpg" alt="Avatar">
-                    <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-success"></span>
-                  </div>
-                  <div class="media-body">
-                    <div class="font-w600">Adam McCoy</div>
-                    <div class="font-w400 text-muted">Graphic Designer</div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a class="media py-2" href="javascript:void(0)">
-                  <div class="mr-3 ml-2 overlay-container overlay-bottom">
-                    <img class="img-avatar img-avatar48" src="img/avatars/avatar4.jpg" alt="Avatar">
-                    <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-warning"></span>
-                  </div>
-                  <div class="media-body">
-                    <div class="font-w600">Helen Jacobs</div>
-                    <div class="font-w400 text-muted">Photographer</div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a class="media py-2" href="javascript:void(0)">
-                  <div class="mr-3 ml-2 overlay-container overlay-bottom">
-                    <img class="img-avatar img-avatar48" src="img/avatars/avatar15.jpg" alt="Avatar">
-                    <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-warning"></span>
-                  </div>
-                  <div class="media-body">
-                    <div class="font-w600">Jack Greene</div>
-                    <div class="font-w400 text-muted">Copywriter</div>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a class="media py-2" href="javascript:void(0)">
-                  <div class="mr-3 ml-2 overlay-container overlay-bottom">
-                    <img class="img-avatar img-avatar48" src="img/avatars/avatar13.jpg" alt="Avatar">
-                    <span class="overlay-item item item-tiny item-circle border border-2x border-white bg-danger"></span>
-                  </div>
-                  <div class="media-body">
-                    <div class="font-w600">Scott Young</div>
-                    <div class="font-w400 text-muted">UI designer</div>
-                  </div>
-                </a>
-              </li>
-            </ul>
-          </base-block>
-          <!-- END Friends -->
-
           <!-- Account -->
-          <base-block title="Account" header-class="block-header-default" rounded>
+          <base-block title="Mailbox Usage" header-class="block-header-default" rounded>
             <template #options>
               <button type="button" class="btn-block-option">
                 <i class="si si-settings"></i>
@@ -183,14 +111,14 @@
             </template>
             <!-- Vue Easy Pie Chart Container -->
             <vue-easy-pie-chart :percent="35" :line-width="3" :size="100" bar-color="#abe37d" track-color="#eeeeee" scale-color="#dddddd" class="push">
-              <img class="img-avatar" :src="`img/avatars/avatar1.jpg`" alt="Avatar">
+              <img class="img-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmcfkeiQFNQJd9qlaENd1yN60RHp_PtO16rQ&usqp=CAU" alt="Avatar">
             </vue-easy-pie-chart>
             <base-block tag="a" href="javascript:void(0)" rounded bordered link-shadow content-full content-class="text-center">
               <div class="push">
                   <i class="si si-like fa-2x text-success"></i>
                 </div>
                 <div class="font-size-h2 font-w700">
-                  <span class="text-muted">+</span> 2.5TB
+                  <span class="text-muted">+</span> 30k Emails
                 </div>
                 <div class="font-size-sm text-muted text-uppercase">
                   Upgrade Now
@@ -331,184 +259,7 @@ export default {
         subject: '',
         message: '',
       },
-      showMessage: 0,
-      messages: [
-        {
-          id: 1,
-          user: 'Amanda Powell',
-          email: 'amanda.powell@example.com',
-          title: 'Welcome to our service',
-          contentPreview: "It's a pleasure to have you on our service..",
-          files: [
-            'file1.zip',
-            'file2.zip',
-            'file3.zip',
-          ],
-          received: '2 min ago',
-        },
-        {
-          id: 2,
-          user: 'Betty Kelley',
-          email: 'betty.kelley@example.com',
-          title: 'Your subscription was updated',
-          contentPreview: "We are glad you decided to go with a vip..",
-          files: [
-            'file1.zip',
-            'file2.zip',
-          ],
-          received: '10 min ago',
-        },
-        {
-          id: 3,
-          user: 'Thomas Riley',
-          email: 'thomas.riley@example.com',
-          title: 'Update is available',
-          contentPreview: "An update is under way for your app..",
-          files: [],
-          received: '25 min ago',
-        },
-        {
-          id: 4,
-          user: 'Megan Fuller',
-          email: 'megan.fuller@example.com',
-          title: 'New Sale!',
-          contentPreview: "You had a new sale and earned..",
-          files: [
-            'file1.zip',
-          ],
-          received: '30 min ago',
-        },
-        {
-          id: 5,
-          user: 'Jack Greene',
-          email: 'jack.greene@example.com',
-          title: 'Action Required for your account!',
-          contentPreview: "Your account is inactive for a long time and..",
-          files: [],
-          received: '1 hour ago',
-        },
-        {
-          id: 6,
-          user: 'Barbara Scott',
-          email: 'barbara.scott@example.com',
-          title: 'New Photo Pack!',
-          contentPreview: "Our new photo pack is available now! You..",
-          files: [],
-          received: '2 hrs ago',
-        },
-        {
-          id: 7,
-          user: 'Marie Duncan',
-          email: 'marie.duncan@example.com',
-          title: 'Product is released!',
-          contentPreview: "This is a notification about our new product..",
-          files: [
-            'file1.zip',
-          ],
-          received: '1 day ago',
-        },
-        {
-          id: 8,
-          user: 'Jose Mills',
-          email: 'jose.mills@example.com',
-          title: 'Now on Sale!',
-          contentPreview: "Our Book is out! You can buy a copy and..",
-          files: [
-            'file1.zip',
-            'file2.zip',
-            'file3.zip',
-            'file4.zip',
-            'file5.zip',
-            'file6.zip',
-            'file7.zip',
-            'file8.zip',
-            'file9.zip',
-          ],
-          received: '1 day ago',
-        },
-        {
-          id: 9,
-          user: 'Lori Grant',
-          email: 'lori.grant@example.com',
-          title: 'Monthly Report',
-          contentPreview: "The monthly report you requested for..",
-          files: [
-            'file1.zip',
-            'file2.zip',
-            'file3.zip',
-            'file4.zip',
-            'file5.zip',
-            'file6.zip',
-          ],
-          received: '3 days ago',
-        },
-        {
-          id: 10,
-          user: 'Megan Fuller',
-          email: 'megan.fuller@example.com',
-          title: 'Trial Started!',
-          contentPreview: "You 30-day trial has now started and..",
-          files: [],
-          received: '3 days ago',
-        },
-        {
-          id: 11,
-          user: 'Jack Greene',
-          email: 'jack.greene@example.com',
-          title: 'Invoice #INV001645',
-          contentPreview: "This is the invoice for the project we..",
-          files: [],
-          received: '5 days ago',
-        },
-        {
-          id: 12,
-          user: 'Lori Moore',
-          email: 'lori.moore@example.com',
-          title: 'Friend Request!',
-          contentPreview: "You have a new friend request. Click the..",
-          files: [
-            'file1.zip',
-            'file2.zip',
-            'file3.zip',
-            'file4.zip',
-            'file5.zip',
-          ],
-          received: '1 week ago',
-        },
-        {
-          id: 13,
-          user: 'Jose Wagner',
-          email: 'jose.wagner@example.com',
-          title: 'Enjoy life!',
-          contentPreview: "Thank you for helping us with our cause...",
-          files: [
-            'file1.zip',
-            'file2.zip',
-            'file3.zip',
-          ],
-          received: '1 week ago',
-        },
-        {
-          id: 14,
-          user: 'Laura Carr',
-          email: 'laura.carr@example.com',
-          title: 'New Twitter follower!',
-          contentPreview: "You have a new follower, congratulations..",
-          files: [
-            'file1.zip',
-          ],
-          received: '2 weeks ago',
-        },
-        {
-          id: 15,
-          user: 'Amanda Powell',
-          email: 'amanda.powell@example.com',
-          title: 'Huge Discount available!',
-          contentPreview: "Due to the fact that you are a great..",
-          files: [],
-          received: '3 weeks ago',
-        },
-      ]
+      showMessage: 0
     }
   },
   mounted () {
