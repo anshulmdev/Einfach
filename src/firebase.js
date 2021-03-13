@@ -19,8 +19,8 @@ const firebaseConfig = {
 // eslint-disable-next-line no-unused-vars
 let app = null
 if (!firebase.apps.length) {
+  // eslint-disable-next-line no-unused-vars
   app = firebase.initializeApp(firebaseConfig)
-  console.log(app)
 }
 
 export const DB = firebase.database()

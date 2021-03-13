@@ -51,7 +51,7 @@
         <b-row>
           <b-col lg="4">
             <p class="font-size-sm text-muted mb-2">
-              Email field is added by default<br>
+              You can see default fields in preview<br>
               
             <section v-for="field in form.fields" :key="field.name">
                 <section v-if="field.name !='Field Name'">{{field.name}} added</section>
@@ -120,35 +120,135 @@
       <!-- END Basic -->
             </b-tab>
              <b-tab title="Preview">
-               <base-background class="my-4" image="https://www.pixelstalk.net/wp-content/uploads/2016/06/Free-HD-Light-Blue-Wallpaper-Images.jpg" inner-class="bg-black-30">
-      <div   v-if="options[selected]" class="content content-full text-center">
-        <div v-if="imagesUrl" class="my-3">
-            <img class="img-avatar img-avatar128" :src="imagesUrl" alt="Avatar">
-        </div>
-        <h1 class="h2 mb-0">{{title}}</h1>
-        <span class="text-75">{{options[selected].text}}</span>
-        <span class="text-55">{{desc}}</span>
-      </div>
-    </base-background>
+  <div>
+    <!-- Hero -->
+    <base-page-heading :title="title" :subtitle="desc">
+      <template #extra>
+        <img
+          class="img-avatar img-avatar96"
+          src="https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/07/door-company-logo.jpg"
+          alt="Avatar"
+        />
+      </template>
+    </base-page-heading>
+    <!-- END Hero -->
+    <div class="content">
+      <!-- Alternative Style -->
+      <base-block
+        rounded
+        title="Please fill out the required details"
+        content-full
+      >
+        <b-form>
           <b-row class="push">
             <b-col lg="4">
               <p class="font-size-sm text-muted">
-                Please fill out the required details
+                You can enable an alternative style with background color
               </p>
             </b-col>
             <b-col lg="8" xl="5">
-              <b-form-group label="Email Address" label-for="example-text-input">
-                <b-form-input id="example-text-input" placeholder="Email"></b-form-input>
+              <b-form-group label-for="email">
+                <template #label>
+                  Email <span class="text-danger">*</span>
+                </template>
+                <b-form-input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Your valid email.."
+                  v-model="$v.form.email.$model"
+                  :state="$v.form.email.$dirty ? !$v.form.email.$error : null"
+                  aria-describedby="email-feedback"
+                ></b-form-input>
+                <b-form-invalid-feedback id="username-feedback">
+                  Please enter a valid email address
+                </b-form-invalid-feedback>
               </b-form-group>
-              <section v-for="field in form.fields" :key="field.name">
-                <section v-if="field.name !='Field Name'">
-              <b-form-group :label="field.name" label-for="example-text-input">
-                <b-form-input id="example-text-input" placeholder="Text Input"></b-form-input>
+              <b-form-group label="Select" label-for="skill">
+                <template #label>
+                  Best Skill <span class="text-danger">*</span>
+                </template>
+                <b-form-select
+                  id="skill"
+                  name="skill"
+                  :options="options2"
+                  v-model="$v.form.skill.$model"
+                  :state="$v.form.skill.$dirty ? !$v.form.skill.$error : null"
+                  aria-describedby="skill-feedback"
+                ></b-form-select>
+                <b-form-invalid-feedback id="skill-feedback">
+                  Please select a skill!
+                </b-form-invalid-feedback>
               </b-form-group>
-                </section>
-            </section>
+              <b-form-group>
+                <label>Experience in Years</label>
+                <div class="py-4">
+                  <vue-slider
+                    v-model="sliderValueNormal"
+                    :dotSize="15"
+                    :marks="[0, 20]"
+                    :max="20"
+                  ></vue-slider>
+                </div>
+              </b-form-group>
             </b-col>
           </b-row>
+        </b-form>
+      </base-block>
+      <!-- Alternative Style -->
+      <base-block rounded content-full>
+        <b-form>
+          <b-row class="push">
+            <b-col lg="4">
+              <p class="font-size-sm text-muted">
+                You can enable an alternative style with background color
+              </p>
+            </b-col>
+            <b-col lg="8" xl="5">
+              <b-form-group label-for="username">
+                <template #label>
+                  Full Name <span class="text-danger">*</span>
+                </template>
+                <b-form-input
+                  id="username"
+                  name="username"
+                  placeholder="Enter your name"
+                  v-model="$v.form.username.$model"
+                  :state="
+                    $v.form.username.$dirty ? !$v.form.username.$error : null
+                  "
+                  aria-describedby="username-feedback"
+                ></b-form-input>
+                <b-form-invalid-feedback id="username-feedback">
+                  Your username must consist of at least 3 characters
+                </b-form-invalid-feedback>
+              </b-form-group>
+              <b-form-group label-for="digits">
+                <template #label>
+                  Phone Number <span class="text-danger">*</span>
+                </template>
+                <b-form-input
+                  id="digits"
+                  name="digits"
+                  placeholder="5"
+                  v-model="$v.form.digits.$model"
+                  :state="$v.form.digits.$dirty ? !$v.form.digits.$error : null"
+                  aria-describedby="digits-feedback"
+                ></b-form-input>
+                <b-form-invalid-feedback id="digits-feedback">
+                  Please enter only digits!
+                </b-form-invalid-feedback>
+              </b-form-group>
+              <b-form-group
+                label="Upload your Resume"
+                label-for="example-file-input-custom"
+              >
+                <b-form-file id="example-file-input-custom"></b-form-file>
+              </b-form-group>
+            </b-col>
+          </b-row>
+        </b-form>
+      </base-block>
             <base-block v-if="formUrl == null" rounded title="Submit final form" header-bg>
               <template #options>
                 <b-button type="submit" class="px-4" size="md" variant="primary" @click="submitForm">
@@ -165,6 +265,8 @@
               </template>
 
               </base-block>
+    </div>
+  </div>
              </b-tab>
           </b-tabs>
     </div>
@@ -177,20 +279,61 @@
 // Vue2 Dropzone + Custom overrides
 @import '~vue2-dropzone/dist/vue2Dropzone.min.css';
 @import './src/assets/scss/vendor/dropzone';
+@import "~vue-slider-component/theme/default.css";
+@import "./src/assets/scss/vendor/vue-slider";
 </style>
 
 <script>
 import firebase from "../../firebase";
 import vue2Dropzone from 'vue2-dropzone'
+import { validationMixin } from "vuelidate";
+import { required, minLength, email, integer } from "vuelidate/lib/validators";
+// Vue Slider, for more info and examples you can check out https://github.com/NightCatSama/vue-slider-component
+import VueSlider from "vue-slider-component";
 
 export default {
+  mixins: [validationMixin],
   components: {
-    'vueDropzone': vue2Dropzone
+    'vueDropzone': vue2Dropzone,
+    VueSlider: VueSlider,
   },
   data () {
     return {
-      title: '',
-      desc:'',
+      sliderValueNormal: 2,
+      tags: {
+        css: { danger: "CSS" },
+        javascript: { warning: "JavaScript" },
+        angular: { danger: "Angular" },
+        React: { info: "React" },
+        vuejs: { success: "Vue.js" },
+        php: { info: "PHP" },
+        ruby: { danger: "Ruby" },
+        asp: { primary: "ASP.NET" },
+        python: { success: "Python" },
+        mysql: { info: "MySQL" },
+      },
+      options2: [
+        { value: null, text: "Please select" },
+        { value: "css", text: "CSS" },
+        {
+          value: "javascript",
+          text: "JavaScript",
+        },
+        { value: "angular", text: "Angular" },
+        { value: "react", text: "React" },
+        { value: "vuejs", text: "Vue.js" },
+        { value: "ruby", text: "Ruby" },
+        { value: "php", text: "PHP" },
+        { value: "asp", text: "ASP.NET" },
+        { value: "python", text: "Python" },
+        { value: "mysql", text: "MySQL" },
+      ],
+      formDetails: null,
+      form2: {
+        email: null,
+      },
+      title: 'Javascript Test 2021',
+      desc:'Please fill form to apply',
       selected: null,
       formUrl: null,
       options: [
@@ -216,6 +359,25 @@ export default {
       imagesUrl: ''
     };
   },
+  validations: {
+    form: {
+      username: {
+        required,
+        minLength: minLength(3),
+      },
+      email: {
+        required,
+        email,
+      },
+      skill: {
+        required,
+      },
+      digits: {
+        required,
+        integer,
+      },
+    },
+  },
   methods: {
     submitForm (){
        firebase.database().ref('forms/' + this.$store.state.authUid).set({
@@ -224,9 +386,9 @@ export default {
     test: this.options[this.selected],
     fields: this.form.fields,
     logo: this.imagesUrl
+  // eslint-disable-next-line no-unused-vars
   }).then((e) => {
     this.formUrl = `http://localhost:8080/#/auth/applications/${this.$store.state.authUid}`
-    console.log(e)
   });
     },
     addField (name,type){

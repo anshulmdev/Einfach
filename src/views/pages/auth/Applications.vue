@@ -122,7 +122,7 @@
                 label="Upload your Resume"
                 label-for="example-file-input-custom"
               >
-                <b-form-file id="example-file-input-custom"></b-form-file>
+                <b-form-file v-model="resume" id="example-file-input-custom"></b-form-file>
               </b-form-group>
             </b-col>
           </b-row>
@@ -140,7 +140,6 @@
                 $v.form.email.$model,
                 sliderValueNormal,
                 $v.form.username.$model,
-                'xx',
                 $v.form.digits.$model,
                 tags[$v.form.skill.$model]
               )
@@ -179,6 +178,7 @@ export default {
   },
   data() {
     return {
+      resume: '',
       sliderValueNormal: 2,
       tags: {
         css: { danger: "CSS" },
@@ -242,8 +242,13 @@ export default {
     this.fetch();
   },
   methods: {
-    async submitForm(email, experience, name, resume, phone, tags) {
-      const details = { email, experience, name, resume, phone, tags };
+    async submitForm(email, experience, name, phone, tags) {
+      var storageRef = firebase.storage().ref();
+      var imageRef = storageRef.child(`${this.$store.state.authUid}/resume/${email}`);
+      // eslint-disable-next-line no-unused-vars
+      const url = await imageRef.put(this.resume);
+      var resume = await imageRef.getDownloadURL();
+      const details = { email, experience, name, phone, tags, resume };
       const path = await firebase
         .firestore()
         .collection("accounts")
@@ -257,16 +262,15 @@ export default {
         .firestore()
         .collection("accounts")
         .doc(docId);
+      // eslint-disable-next-line no-unused-vars
       const res = await actualPath.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayUnion(details),
       });
-      console.log(res);
     },
     async fetch() {
       const list = DB.ref(`forms/${this.dataApps}`);
       const snapshot = await list.once("value");
       this.formDetails = snapshot.val();
-      console.log(this.formDetails)
     },
     onSubmit() {
       this.$v.form.$touch();

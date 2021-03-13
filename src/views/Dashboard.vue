@@ -43,7 +43,7 @@
             rounded
             link-pop
             content-class="d-flex py-4"
-            href="javascript:void(0)"
+            href="/#/backend/applicants/Applied"
           >
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">
@@ -300,12 +300,12 @@
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
                     <a class="link-fx font-w600" href="javascript:void(0)">{{
-                      completed.score
+                      completed.score ? completed.score: 0
                     }}</a>
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
                     <a class="link-fx font-w600" href="javascript:void(0)">{{
-                      completed.time
+                      new Date(completed.timestamp.seconds*1000).toString().slice(0,10)
                     }}</a>
                   </b-td>
                   <b-td class="text-center">

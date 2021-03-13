@@ -219,7 +219,7 @@ export default {
       })
       if(confirmation.isConfirmed){
       this.loading.push(index)
-      const details = this.$store.state.firestoreData.candidates.applied[index];
+      let details = this.$store.state.firestoreData.candidates.applied[index];
       const entry = await firebase
         .firestore()
         .collection("accounts")
@@ -235,11 +235,13 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     async invite(name, email, index) {
+      const details = this.$store.state.firestoreData.candidates.applied[index];
+      const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite.replace('[CANDIDATE NAME]', name);
+      const invited = {user:name, label:"invited", body: emailTemplate, received: new Date(), title: 'Javascript developer test 2021 - Hi you have been invited', email}
       this.loading.push(index)
-      const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite;
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch(
-        "https://anshul9760.api.stdlib.com/EinfachTech@dev/Emails/inviteApplicant/",
+        "https://hook.integromat.com/suo7mmt1h3qfyez1dek7u8xzkbhhesq7",
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           mode: "cors", // no-cors, *cors, same-origin
@@ -254,19 +256,19 @@ export default {
           body: JSON.stringify({ name, email, emailTemplate }),
         }
       );
-      const details = this.$store.state.firestoreData.candidates.applied[index];
-      const invited = {user:name, label:"invited", body: emailTemplate.replace('[CANDIDATE NAME]', name), received: new Date(), title: 'Javascript developer test 2021 - Hi you have been invited', email}
       const entry = await firebase
         .firestore()
         .collection("accounts")
         .doc("Anshul Mishra");
       // eslint-disable-next-line no-unused-vars
-      const addInvite = await entry.update({
-        "candidates.invited": firebase.firestore.FieldValue.arrayUnion(details),
-      });
-      // eslint-disable-next-line no-unused-vars
       const removeApplied = await entry.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayRemove(details),
+      });
+      details.timestamp = new Date()
+      details.score = 100
+      // eslint-disable-next-line no-unused-vars
+      const addInvite = await entry.update({
+        "candidates.invited": firebase.firestore.FieldValue.arrayUnion(details),
       });
       // eslint-disable-next-line no-unused-vars
       const inboxInvited = await entry.update({

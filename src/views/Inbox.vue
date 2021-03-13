@@ -202,7 +202,7 @@
           <div class="pull-x">
             <b-table-simple hover table-class="table-vcenter font-size-sm">
               <b-tbody>
-                <b-tr v-for="(message,index) in $store.state.firestoreData.inbox" :key="index">
+                <b-tr v-for="(message,index) in inbox" :key="index">
                   <b-td class="text-center" style="width: 60px;">
                     <b-form-checkbox
                       :id="`checkbox-${index}`"
@@ -224,7 +224,7 @@
                     class="d-none d-xl-table-cell text-muted"
                     style="width: 120px;"
                   >
-                    <em>{{ Date(message.received).toString().slice(0,10) }}</em>
+                    <em>{{ new Date(message.received.seconds*1000).toString().slice(0,10) }}</em>
                   </b-td>
                 </b-tr>
               </b-tbody>
@@ -260,6 +260,12 @@ export default {
         message: '',
       },
       showMessage: 0
+    }
+  },
+  computed: {
+    inbox (){
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        return this.$store.state.firestoreData.inbox.sort((a, b) => b.received - a.received)
     }
   },
   mounted () {
