@@ -428,11 +428,10 @@
             <template #content>
               <div class="block-content p-0">
                 <div class="pt-3">
-                  <chartjs-line
-                    :chart-data="chartjsSalesData"
-                    :options="chartjsSalesOptions"
-                    :styles="chartjsStyles"
-                  ></chartjs-line>
+              <chartjs-bar 
+                    :chart-data="chartjsEarningsData"
+                    :options="chartjsEarningsOptions"
+                    :styles="chartjsStyles"></chartjs-bar>
                 </div>
               </div>
               <div class="block-content">
@@ -479,10 +478,12 @@ import Chart from "chart.js";
 
 // Line Chart component using Vue Chart.js, for more info and examples you can check out https://github.com/apertureless/vue-chartjs
 import ChartjsLine from "@/components/Chartjs/Line";
+import ChartjsBar from '@/components/Chartjs/Bar'
 
 export default {
   components: {
     ChartjsLine,
+    ChartjsBar
   },
   data() {
     return {

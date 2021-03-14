@@ -237,7 +237,7 @@ export default {
     async invite(name, email, index) {
       const details = this.$store.state.firestoreData.candidates.applied[index];
       const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite.replace('[CANDIDATE NAME]', name);
-      const invited = {user:name, label:"invited", body: emailTemplate, received: new Date(), title: 'Javascript developer test 2021 - Hi you have been invited', email}
+      const invited = {user:name, body: emailTemplate, received: new Date(), title: 'Javascript developer test 2021 - Hi you have been invited', email}
       this.loading.push(index)
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch(
@@ -272,7 +272,7 @@ export default {
       });
       // eslint-disable-next-line no-unused-vars
       const inboxInvited = await entry.update({
-        "inbox": firebase.firestore.FieldValue.arrayUnion(invited),
+        "inbox.invited": firebase.firestore.FieldValue.arrayUnion(invited),
       });
       this.loading = []
     },
