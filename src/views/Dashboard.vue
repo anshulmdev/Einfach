@@ -17,16 +17,14 @@
             </h2>
           </div>
           <div class="mt-3 mt-sm-0 ml-sm-3">
-            <router-link to="/backend/main/assignment">
               <b-button
                 variant="alt-primary"
                 class="mr-1"
-                href="javascript:void(0)"
                 v-click-ripple
+                @click="$store.state.newAssignment.active = true"
               >
                 <i class="fa fa-plus-square mr-1"></i> New Assignment
               </b-button>
-            </router-link>
           </div>
         </div>
       </div>

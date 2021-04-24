@@ -22,10 +22,6 @@
             <i class="si si-settings"></i>
           </button>
         </template>
-        <p>
-          <b-button size="sm" variant="light" @click="selectAllRows">Select all</b-button>
-          <b-button size="sm" variant="light" @click="clearSelected">Clear selected</b-button>
-        </p>
         <b-table
           ref="selectableTable"
           selectable
@@ -51,10 +47,16 @@
             </template>
           </template>
         </b-table>
-        <p class="font-size-sm text-muted">
-          Marks: <strong>{{ parseInt(selected.length)*10 }}</strong>
-        </p>
-              <p>...</p>
+            <base-block rounded title="Add Selected Questions" header-bg class="mt-4">
+              <template #options>
+                <b-button type="submit" class="px-4" size="md" variant="primary" @click="addQuestions()">
+                  Submit
+                </b-button>
+                <b-button type="reset" class="px-4" size="md" variant="alt-primary" @click="clearSelected">
+                  Reset
+                </b-button>
+              </template>
+              </base-block>
             </b-tab>
             <b-tab title="Custom">
           <b-form @submit="onSubmit" @reset="onReset">
@@ -155,6 +157,13 @@ export default {
       }},
   
   methods: {
+    addQuestions (){
+      if(this.selected.length){
+      this.$store.state.newAssignment.active = true;
+        this.selected.forEach((e)=>{
+      this.$store.commit('addQuestions', {time: 5,
+       marks: 10, questions: 1, tag: 'regex', value: e.id})})
+    }},
     onSubmit (evt) {
       evt.preventDefault()
 

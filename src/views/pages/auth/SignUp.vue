@@ -377,9 +377,12 @@ export default {
     },
     createAccount (uid){
       const data = this.form
-      const logo = this.imagesUrl
+      const user = {name: data.companyName, email: data.email, logo: this.imagesUrl, website: data.companyWebsite}
+      const emailTemplates = {invite: '', rejected: '', shortlisted: ''}
+      const candidates = {applied: [], invited: [], ongoing: [], shortlisted: [], completed: []}
+      const inbox = {invited: [{body: 'Welcome',email: 'am@einfach.tech',received: new Date(), title: 'New Account',user: "admin@einfach.tech"}]}
       firebase.firestore().collection("accounts").doc(data.email)
-          .set({uid, name: data.companyName, website: data.companyWebsite, email: data.email, logo, applications: {inbox: 0, invite: 0, notification: 0, shortlist:0, test:0, total:0},
+          .set({uid, user, emailTemplates, inbox, candidates, 
           notifications: [
         {
           icon: 'fa fa-fw fa-check-circle text-success',

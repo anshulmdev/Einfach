@@ -23,6 +23,7 @@ export default new Vuex.Store({
   state: {
     authUid: '2jfmeB9gjKcy7cMA4sthOKDvOOB2',
     firestoreData: null,
+    newAssignment: {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}},
     // App vital details
     app: {
       name: 'Einfach Tech',
@@ -102,6 +103,16 @@ export default new Vuex.Store({
       state.layout.sidebar = payload.sidebar
       state.layout.sideOverlay = payload.sideOverlay
       state.layout.footer = payload.footer
+    },
+    addQuestions (state, payload) {
+      state.newAssignment.time += payload.time
+      state.newAssignment.marks += payload.marks
+      state.newAssignment.questions += payload.questions
+      if (payload.tag in state.newAssignment.tags){
+        state.newAssignment.tags[payload.tag].push(payload.value)
+      } else{
+        state.newAssignment.tags[payload.tag] = [payload.value]
+      }
     },
     // Sets sidebar visibility (open, close, toggle)
     sidebar (state, payload) {

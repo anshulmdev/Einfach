@@ -50,10 +50,10 @@
               <b-tr v-for="(ques, index) in firebaseData" :key="index">
                 <b-td>
                   <h4 class="h5 mt-3 mb-2">
-                    <a href="#">{{ques.heading}}</a>
+                    <a v-b-modal.modal-block-extra-large @click="question = index">{{ques.heading.slice(0,60)}}...</a>
                   </h4>
                   <p class="d-none d-sm-block text-muted">
-                    {{ ques.subHeading }}
+                    {{ String(ques.options).slice(0,30) }}...
                   </p>
                 </b-td>
                 <b-td class="d-none d-lg-table-cell text-center">
@@ -61,9 +61,7 @@
                 </b-td>
                 <b-td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{{ques.marks}}</b-td>
                 <b-td class="px-5">
-                  <b-form-checkbox class="custom-control-success mb-2" value="success">Easy</b-form-checkbox>
-                  <b-form-checkbox class="custom-control-warning mb-2" value="warning">Medium</b-form-checkbox>
-                  <b-form-checkbox class="custom-control-danger mb-2" value="danger">Hard</b-form-checkbox>
+              <b-button :variant="`alt-${ques.type[1]}`" @click="check(index)">Add</b-button>
                   </b-td>
               </b-tr>
             </b-tbody>
@@ -123,6 +121,47 @@
           </b-tabs>
       <!-- END Your Block -->
     </div>
+          <b-modal
+        id="modal-block-extra-large"
+        size="xl"
+        body-class="p-0"
+        hide-footer
+        hide-header
+      >
+        <div v-if="firebaseData" class="block block-rounded block-themed block-transparent mb-0">
+          <div class="block-header" :class="`bg-${firebaseData[question].type[1]}`">
+            <h3 class="block-title">{{firebaseData[question].marks}} Marks Question</h3>
+            <div class="block-options">
+              <button
+                type="button"
+                class="btn-block-option"
+                @click="$bvModal.hide('modal-block-extra-large')"
+              >
+                <i class="fa fa-fw fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="block-content font-size-sm">
+            <h5>{{firebaseData[question].heading}}</h5>
+            <p v-for="(e, index) in firebaseData[question].options" :key="index">
+              {{e}}
+            </p>
+          </div>
+          <div class="block-content block-content-full text-right border-top">
+            <b-button
+              variant="alt-primary"
+              class="mr-1"
+              @click="$bvModal.hide('modal-block-extra-large')"
+              >Close</b-button
+            >
+            <b-button
+              variant="primary"
+              @click="$bvModal.hide('modal-block-extra-large')"
+              >Ok</b-button
+            >
+          </div>
+        </div>
+      </b-modal>
   </div>
 </template>
 
@@ -131,16 +170,27 @@ import { DB } from "../../firebase";
 export default {
   data (){
     return {
+      question: 0,
       currentPage: 1,
       rows: 40,
       perPage: 10,
-      firebaseData: null
+      firebaseData: [{
+  "heading" : "Which type of JavaScript language is ___",
+  "marks" : 30,
+  "options": ["Object-Oriented", "Object-Based", "Assembly-language", "High-level"],
+  "type" : [ "Javascript", "warning" ]
+}]
     }
   },
   mounted(){
     this.fetch()
   },
   methods:{
+    check(value){
+      this.$store.state.newAssignment.active = true;
+      this.$store.commit('addQuestions', {time: 5,
+       marks: this.firebaseData[value].marks, questions: 1, tag: 'mcq', value})
+    },
     async fetch() {
       const list = DB.ref("mcq");
       const snapshot = await list.once("value");

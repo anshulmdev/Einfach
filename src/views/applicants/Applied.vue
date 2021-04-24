@@ -259,13 +259,11 @@ export default {
       const entry = await firebase
         .firestore()
         .collection("accounts")
-        .doc("Anshul Mishra");
+        .doc("am@cloudify.biz");
       // eslint-disable-next-line no-unused-vars
       const removeApplied = await entry.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayRemove(details),
       });
-      details.timestamp = new Date()
-      details.score = 100
       // eslint-disable-next-line no-unused-vars
       const addInvite = await entry.update({
         "candidates.invited": firebase.firestore.FieldValue.arrayUnion(details),
