@@ -49,7 +49,7 @@
               <b-tr v-for="(ques, index) in filteredArray" :key="index">
                 <b-td>
                   <p class="h5 mt-3 mb-2">
-                    <a v-b-modal.modal-block-extra-large @click="question = index">{{ques.heading.slice(0,60)}}...</a>
+                    <a v-b-modal.modal-block-extra-large @click="question = ((perPage)*(currentPage-1) + index)">{{ques.heading.slice(0,60)}}...</a>
                   </p>
                 </b-td>
                 <b-td class="d-none d-lg-table-cell text-center">
@@ -57,7 +57,7 @@
                 </b-td>
                 <b-td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{{ques.marks}}</b-td>
                 <b-td class="px-5">
-              <b-button :variant="`alt-${ques.type[1]}`" @click="check(index)">Add</b-button>
+              <b-button :variant="`alt-${ques.type[1]}`" @click="check((perPage)*(currentPage-1) + index)">Add</b-button>
                   </b-td>
               </b-tr>
             </b-tbody>
@@ -145,7 +145,7 @@
       >
         <div v-if="firebaseData" class="block block-rounded block-themed block-transparent mb-0">
           <div class="block-header" :class="`bg-${firebaseData[question].type[1]}`">
-            <h3 class="block-title">{{firebaseData[question].marks}} Marks Question</h3>
+            <h3 class="block-title">{{firebaseData[question].heading}}</h3>
             <div class="block-options">
               <button
                 type="button"
@@ -157,7 +157,6 @@
             </div>
           </div>
           <div class="block-content font-size-sm">
-            <h5>{{firebaseData[question].heading}}</h5>
           <ckeditor
             :editor="ckeditor"
             v-model="firebaseData[question].description"
@@ -231,8 +230,8 @@ export default {
     },
     check(value){
       this.$store.state.newAssignment.active = true;
-      this.$store.commit('addQuestions', {time: 5,
-       marks: this.firebaseData[value].marks, questions: 1, tag: 'array', value})
+      this.$store.commit('addQuestions', {time: 30,
+       marks: parseInt(this.firebaseData[value].marks), questions: 1, tag: 'array', value})
     },
     async fetch() {
       const list = DB.ref("coding/array");

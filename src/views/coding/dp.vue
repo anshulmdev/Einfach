@@ -1,11 +1,11 @@
 <template>
   <div>
     <!-- Hero -->
-    <base-page-heading title="Python">
+    <base-page-heading title="Dynamic Programming" subtitle="Data Structure and Algorithms">
       <template #extra>
         <b-breadcrumb class="breadcrumb-alt">
-          <b-breadcrumb-item href="javascript:void(0)">Library</b-breadcrumb-item>
-          <b-breadcrumb-item active>PY</b-breadcrumb-item>
+          <b-breadcrumb-item href="javascript:void(0)">Coding</b-breadcrumb-item>
+          <b-breadcrumb-item active>Dynamic Programming</b-breadcrumb-item>
         </b-breadcrumb>
       </template>
     </base-page-heading>
@@ -13,7 +13,6 @@
 
     <!-- Page Content -->
     <div class="content">
-      
           <!-- Block Tabs Default Style -->
           <b-tabs class="block" nav-class="nav-tabs-block" content-class="block-content">
             <b-tab title="Library" active>
@@ -23,7 +22,7 @@
           </button>
         </template>
        <!-- Search -->
-    <div class="content">
+    <div v-if="firebaseData" class="content">
           <!-- Projects -->
           <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light">
       <b-form>
@@ -41,27 +40,24 @@
             <b-thead>
               <b-tr>
                 <b-th style="width: 50%;">Project</b-th>
-                <b-th class="d-none d-lg-table-cell text-center" style="width: 15%;">Status</b-th>
-                <b-th class="d-none d-lg-table-cell text-center" style="width: 15%;">Marks</b-th>
-                <b-th class="text-center" style="width: 20%;">Select</b-th>
+                <b-th class="d-none d-lg-table-cell text-center" style="width: 12%;">Topic</b-th>
+                <b-th class="d-none d-lg-table-cell text-center" style="width: 12%;">Marks</b-th>
+                <b-th class="text-center" style="width: 12%;">Select</b-th>
               </b-tr>
             </b-thead>
             <b-tbody>
-              <b-tr v-for="(ques, index) in data" :key="index">
+              <b-tr v-for="(ques, index) in filteredArray" :key="index">
                 <b-td>
-                  <h4 class="h5 mt-3 mb-2">
-                    <a href="#">{{ques.heading}}</a>
-                  </h4>
-                  <p class="d-none d-sm-block text-muted">
-                    {{ ques.subHeading }}
+                  <p class="h5 mt-3 mb-2">
+                    <a v-b-modal.modal-block-extra-large @click="question = ((perPage)*(currentPage-1) + index)">{{ques.heading.slice(0,60)}}...</a>
                   </p>
                 </b-td>
                 <b-td class="d-none d-lg-table-cell text-center">
                   <b-badge :variant="ques.type[1]">{{ques.type[0]}}</b-badge>
                 </b-td>
                 <b-td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{{ques.marks}}</b-td>
-                <b-td class="h5 text-center">
-                  <b-form-checkbox class="checkbox-xl" v-model="selectedCheckboxes" :options="optionsCheckboxes" plain stacked></b-form-checkbox>
+                <b-td class="px-5">
+              <b-button :variant="`alt-${ques.type[1]}`" @click="check((perPage)*(currentPage-1) + index)">Add</b-button>
                   </b-td>
               </b-tr>
             </b-tbody>
@@ -69,14 +65,67 @@
           <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" size="sm"></b-pagination>
           <!-- END Projects -->
     </div>
+    <div v-else class="m-5">
+            <b-spinner />
+      </div>
     <!-- END Search -->
             </b-tab>
             <b-tab title="Custom">
-          bbbbbbbb
+          <b-form>
+            <base-block rounded title="Create your own Question" header-bg>
+              <template #options>
+                <b-button type="submit" size="sm" variant="primary" @click="addQuestion()">
+                  Submit
+                </b-button>
+                <b-button type="reset" size="sm" variant="alt-primary" @click="this.customQuestion = {heading: 'Question Heading', description: 'Problem Statement', marks: 10, type: 'Hard', testCases: {input: '', output: ''}}">
+                  Reset
+                </b-button>
+              </template>
+              <b-row class="py-sm-1 py-md-1">
+                <b-col>
+      <base-block rounded content-full>
+              <b-form-group label="Heading" label-for="example-textarea-input">
+                <b-form-input v-model="customQuestion.heading" id="example-text-input" placeholder="Question Heading"></b-form-input>
+              </b-form-group>
+              <b-form-group label="Problem Statement" label-for="example-textarea-input">
+          <ckeditor
+            :editor="ckeditor"
+            v-model="customQuestion.description"
+            :config="ckeditorConfig"
+          ></ckeditor>
+              </b-form-group>
+              <b-row>
+                <b-col>
+              <b-form-group label="Marks" label-for="example-textarea-input">
+                <b-form-input v-model="customQuestion.marks" type="number" placeholder="40"></b-form-input>
+              </b-form-group>
+                </b-col>
+                <b-col>
+                  
+              <b-form-group label="Difficulty" label-for="example-select">
+                <b-form-select id="example-select" v-model="customQuestion.type" :options="tags" plain></b-form-select>
+              </b-form-group>
+                </b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+              <b-form-group label="TestCases Input" label-for="example-textarea-input">
+                <b-form-textarea v-model="customQuestion.testCases.input" rows="4" placeholder="Input"></b-form-textarea>
+              </b-form-group>
+                </b-col>
+                <b-col>
+                  
+              <b-form-group label="Output" label-for="example-select">
+                <b-form-textarea v-model="customQuestion.testCases.output" rows="4" placeholder="Output"></b-form-textarea>
+              </b-form-group>
+                </b-col>
+              </b-row>
+      </base-block>
+                </b-col>
+              </b-row>
+            </base-block>
+          </b-form>
             </b-tab>
-            <b-tab title="Preview">
-          <iframe height="800px" width="100%" src="https://repl.it/@AnshulM2/cloudifyTestPython?lite=true" scrolling="no" frameborder="no" allowtransparency="true" allowfullscreen="true" sandbox="allow-forms allow-pointer-lock allow-popups allow-same-origin allow-scripts allow-modals"></iframe>
-          </b-tab>
             <b-tab title-item-class="ml-auto">
               <template #title>
                 <i class="si si-settings"></i>
@@ -87,48 +136,107 @@
           </b-tabs>
       <!-- END Your Block -->
     </div>
+          <b-modal
+        id="modal-block-extra-large"
+        size="xl"
+        body-class="p-0"
+        hide-footer
+        hide-header
+      >
+        <div v-if="firebaseData" class="block block-rounded block-themed block-transparent mb-0">
+          <div class="block-header" :class="`bg-${firebaseData[question].type[1]}`">
+            <h3 class="block-title">{{firebaseData[question].heading}}</h3>
+            <div class="block-options">
+              <button
+                type="button"
+                class="btn-block-option"
+                @click="$bvModal.hide('modal-block-extra-large')"
+              >
+                <i class="fa fa-fw fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="block-content font-size-sm">
+          <ckeditor
+            :editor="ckeditor"
+            v-model="firebaseData[question].description"
+            :config="ckeditorConfig"
+          ></ckeditor>
+          </div>
+          <div class="block-content block-content-full text-right border-top">
+            <b-button
+              variant="alt-primary"
+              class="mr-1"
+              @click="$bvModal.hide('modal-block-extra-large')"
+              >Close</b-button
+            >
+            <b-button
+              variant="primary"
+              @click="update(question)"
+              >Update</b-button
+            >
+          </div>
+        </div>
+      </b-modal>
   </div>
 </template>
 
 <script>
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+import { DB } from "../../firebase";
+import CKEditor from "@ckeditor/ckeditor5-vue2";
 export default {
+  components: {
+    ckeditor: CKEditor.component,
+  },
   data (){
     return {
-      currentPage: 2,
-      rows: 40,
-      perPage: 10,
-      data:{
-        "0":{
-          heading: "Remove Element",
-          subHeading: "Given an array nums and a value val, remove all instances of that value in-place and return the new length.",
-          type: ["Easy","success"],
-          marks:10
-        },
-        "1":{
-          heading: "Permutations",
-          subHeading: "Given an array nums of distinct integers, return all the possible permutations. You can return the answer in any order.",
-          type: ["Medium","warning"],
-          marks:20
-        },
-        "2":{
-          heading: "Jump Game",
-          subHeading: "Given an array of non-negative integers nums, you are initially positioned at the first index of the array.",
-          type: ["Hard","danger"],
-          marks:30
-        },
-        "3":{
-          heading: "Swap Nodes in Pairs",
-          subHeading: "Given a linked list, swap every two adjacent nodes and return its head.",
-          type: ["Medium","warning"],
-          marks:20
-        },
-        "4":{
-          heading: "Divide Two Integers",
-          subHeading: "Given two integers dividend and divisor, divide two integers without using multiplication, division, and mod operator.",
-          type: ["Medium","warning"],
-          marks:20
-        }
-      }
+      customQuestion: {heading: 'Question Heading', description: 'Problem Statement', marks: 10, type: 'Hard', testCases: {input: '', output: ''}},
+      tags: ['Hard', 'Medium', 'Easy'],
+      question: 0,
+      currentPage: 1,
+      rows: 10,
+      perPage: 5,
+      ckeditor: ClassicEditor,
+      ckeditorConfig: {
+        // The configuration of the editor
+      },
+      firebaseData: [{
+  "heading" : "Which type of JavaScript language is ___",
+  "marks" : 30,
+  "options": ["Object-Oriented", "Object-Based", "Assembly-language", "High-level"],
+  "type" : [ "Javascript", "warning" ]
+}]
+    }
+  },
+  mounted(){
+    this.fetch()
+  },
+  computed:{
+    filteredArray (){
+      return this.firebaseData.slice(((this.currentPage-1)*this.perPage),((this.currentPage)*this.perPage));
+    }
+  },
+  methods:{
+    async addQuestion() {
+      const tempQues = this.customQuestion
+      const tags = {'Hard': 'danger', 'Medium': 'warning', 'Easy': 'success'}
+      tempQues.type = [tempQues.type, tags[tempQues.type]]
+      await DB.ref(`coding/dp/${this.firebaseData.length}`).set(tempQues)
+      this.fetch()
+    },
+    async update(value){
+      await DB.ref(`coding/dp/${value}`).set(this.firebaseData[value])
+    },
+    check(value){
+      this.$store.state.newAssignment.active = true;
+      this.$store.commit('addQuestions', {time: 30,
+       marks: parseInt(this.firebaseData[value].marks), questions: 1, tag: 'dp', value})
+    },
+    async fetch() {
+      const list = DB.ref("coding/dp");
+      const snapshot = await list.once("value");
+      this.firebaseData = snapshot.val()
     }
   }
 }

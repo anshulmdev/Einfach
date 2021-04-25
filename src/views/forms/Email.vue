@@ -18,7 +18,7 @@
       <!-- Vue SimpleMDE -->
       <base-block rounded title="Invite for Assignment" header-bg>
         <template #options>
-          <b-button type="submit" size="sm" variant="warning">
+          <b-button type="submit" size="sm" variant="warning" @click="update()">
             Submit
           </b-button>
           <b-button type="reset" size="sm" variant="alt-warning">
@@ -37,7 +37,7 @@
       <!-- Vue SimpleMDE -->
       <base-block rounded title="Shortlisted Candidates" header-bg>
         <template #options>
-          <b-button type="submit" size="sm" variant="primary">
+          <b-button type="submit" size="sm" variant="primary" @click="update()">
             Submit
           </b-button>
           <b-button type="reset" size="sm" variant="alt-primary">
@@ -54,9 +54,9 @@
       </base-block>
       <!-- END Vue SimpleMDE -->
       <!-- Vue SimpleMDE -->
-      <base-block rounded title="Regected Candidates" header-bg>
+      <base-block rounded title="Rejected Candidates" header-bg>
         <template #options>
-          <b-button type="submit" size="sm" variant="danger"> Submit </b-button>
+          <b-button type="submit" size="sm" variant="danger" @click="update()"> Submit </b-button>
           <b-button type="reset" size="sm" variant="alt-danger">
             Reset
           </b-button>
@@ -79,6 +79,7 @@
 <script>
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import CKEditor from "@ckeditor/ckeditor5-vue2";
+import firebase from "../../firebase";
 
 export default {
   components: {
@@ -97,5 +98,16 @@ export default {
       ckeditor: ClassicEditor,
     };
   },
+  methods: {
+    async update(){
+      const email = {'emailTemplates': {
+      'invite':this.$store.state.firestoreData.emailTemplates.invite,
+      'shortlisted':this.$store.state.firestoreData.emailTemplates.shortlisted,
+      'rejected':this.$store.state.firestoreData.emailTemplates.rejected
+      }}
+      await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.user.email).set(email, { merge: true })
+
+    }
+  }
 };
 </script>

@@ -167,7 +167,7 @@ export default {
       this.$store.state.newAssignment.active = true;
         this.selected.forEach((e)=>{
       this.$store.commit('addQuestions', {time: 5,
-       marks: 10, questions: 1, tag: 'regex', value: e.id})})
+       marks: 10, questions: 1, tag: 'rest', value: e.id})})
     }},
     async fetch() {
       const list = DB.ref("api");

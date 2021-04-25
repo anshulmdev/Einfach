@@ -17,6 +17,8 @@
             <i class="far fa-question-circle mr-1"></i> Questions: {{$store.state.newAssignment.questions}}</b-button>
               <b-button variant="alt-danger" @click="$store.state.newAssignment = {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}}" class="mx-2">
             <i class="fa fa-window-close mr-1"></i> Close</b-button>
+              <b-button variant="alt-info" @click="deploy()" class="mx-2">
+            <i class="fab fa-cloudversify mr-1"></i> Deploy</b-button>
         </div>
         <!-- END Left Section -->
 
@@ -363,7 +365,28 @@
   <!-- END Header -->
 </template>
 
+<style lang="scss">
+// SweetAlert2
+@import '~sweetalert2/dist/sweetalert2.min.css';
+</style>
+
 <script>
+import firebase from "../../firebase";
+// Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+const options = {
+  buttonsStyling: false,
+  customClass: {
+    confirmButton: 'btn btn-success m-1',
+    cancelButton: 'btn btn-danger m-1',
+    input: 'form-control'
+  }
+}
+
+// Register Vue SweetAlert2 with custom options
+Vue.use(VueSweetalert2, options)
 export default {
   name: 'BaseHeader',
   props: {
@@ -375,6 +398,35 @@ export default {
     }
   },
   methods: {
+    async deploy() {
+      const data = {'assignment': this.$store.state.newAssignment}
+      await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.user.email).update(data);
+      
+      this.$swal({
+        title: 'Assignment Deployed',
+        text: 'Assingment has been deployed to server successfully',
+        icon: 'success',
+        showCancelButton: true,
+        customClass: {
+          confirmButton: 'btn btn-success m-1',
+          cancelButton: 'btn btn-secondary m-1'
+        },
+        confirmButtonText: 'Get Deployed Link',
+        html: false,
+        preConfirm: () => {
+          return new Promise(resolve => {
+            setTimeout(() => {
+              resolve()
+            }, 50)
+          })
+        }
+      }).then(result => {
+        if (result.value) {
+          this.$swal('Test link for Emails', `https://recruiter.netlify.app/${this.$store.state.authUid}`, 'success')
+          // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
+        }
+      })
+    },
     logout() {
       this.$cookies.remove('uid')
     },

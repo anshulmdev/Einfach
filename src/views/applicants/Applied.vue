@@ -260,16 +260,13 @@ export default {
         .firestore()
         .collection("accounts")
         .doc("am@cloudify.biz");
-      // eslint-disable-next-line no-unused-vars
-      const removeApplied = await entry.update({
+      await entry.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayRemove(details),
       });
-      // eslint-disable-next-line no-unused-vars
-      const addInvite = await entry.update({
+      await entry.update({
         "candidates.invited": firebase.firestore.FieldValue.arrayUnion(details),
       });
-      // eslint-disable-next-line no-unused-vars
-      const inboxInvited = await entry.update({
+      await entry.update({
         "inbox.invited": firebase.firestore.FieldValue.arrayUnion(invited),
       });
       this.loading = []
