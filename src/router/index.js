@@ -77,8 +77,8 @@ const LibraryMultipleChoice = () => import("@/views/library/MultipleChoice.vue")
 const LibraryRESTAPI = () => import("@/views/library/Rest.vue")
 
 // Backend: Coding
-const CodingJavaScript = () => import("@/views/coding/javascript.vue")
-const CodingPython = () => import("@/views/coding/python.vue")
+const Array = () => import("@/views/coding/array.vue")
+const DP = () => import("@/views/coding/dp.vue")
 
 // Backend: Commits
 const CommitsPnP = () => import("@/views/commit/pnp.vue")
@@ -700,20 +700,20 @@ export default new Router({
         },
         {
           path: 'coding',
-          redirect: '/coding/javascript',
+          redirect: '/coding/array',
           component: {
             render (c) { return c('router-view') }
           },
           children: [
             {
-              path: 'javascript',
-              name: 'Coding JavaScript',
-              component: CodingJavaScript
+              path: 'array',
+              name: 'Array',
+              component: Array
             },
             {
-              path: 'python',
-              name: 'Coding Python',
-              component: CodingPython
+              path: 'dynamicProgramming',
+              name: 'Dynamic Programming',
+              component: DP
             }
           ]
         },

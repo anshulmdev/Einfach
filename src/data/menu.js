@@ -46,14 +46,14 @@ export default {
       subActivePaths: '/backend/coding',
       sub: [
         {
-          name: 'JavaScript',
+          name: 'Arrays',
           icon: 'si si-layers',
-          to: '/backend/coding/javascript'
+          to: '/backend/coding/array'
         },
         {
-          name: 'Python',
+          name: 'Dynamic Programming',
           icon: 'si si-layers',
-          to: '/backend/coding/python'
+          to: '/backend/coding/dynamicProgramming'
         }
       ]
     },
