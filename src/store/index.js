@@ -82,13 +82,14 @@ export default new Vuex.Store({
   actions: {
     getFirestoreData () {
         const query = firebase.firestore().collection('accounts').where('uid', '==', this.state.authUid)
+        // eslint-disable-next-line no-unused-vars
         const observer = query.onSnapshot(querySnapshot => {
           querySnapshot.docChanges().forEach(change => {
             this.state.firestoreData = change.doc.data()
+            this.state.firestoreData.docId = change.doc.id
           })}, err => {
           console.log(`Encountered error: ${err}`);
-        });
-        console.log(observer)}
+        });}
   },
   mutations: {
 

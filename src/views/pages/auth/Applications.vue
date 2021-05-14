@@ -233,42 +233,28 @@ export default {
       },
     },
   },
-  computed: {
-    dataApps: function () {
-      return this.$route.params.id;
-    },
-  },
   mounted() {
     this.fetch();
   },
   methods: {
     async submitForm(email, experience, name, phone, tags) {
       var storageRef = firebase.storage().ref();
-      var imageRef = storageRef.child(`${this.$store.state.authUid}/resume/${email}`);
+      var imageRef = storageRef.child(`${this.$store.state.firestoreData.docId}/resume/${email}`);
       // eslint-disable-next-line no-unused-vars
       const url = await imageRef.put(this.resume);
       var resume = await imageRef.getDownloadURL();
       const details = { email, experience, name, phone, tags, resume };
-      const path = await firebase
-        .firestore()
-        .collection("accounts")
-        .where("uid", "==", this.dataApps)
-        .get();
-      let docId = "";
-      path.forEach((doc) => {
-        docId = doc.id;
-      });
       const actualPath = await firebase
         .firestore()
         .collection("accounts")
-        .doc(docId);
+        .doc(this.$route.params.id);
       // eslint-disable-next-line no-unused-vars
       const res = await actualPath.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayUnion(details),
       });
     },
     async fetch() {
-      const list = DB.ref(`forms/${this.dataApps}`);
+      const list = DB.ref(`forms/${this.$route.params.id}`);
       const snapshot = await list.once("value");
       this.formDetails = snapshot.val();
     },

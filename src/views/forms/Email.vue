@@ -105,7 +105,7 @@ export default {
       'shortlisted':this.$store.state.firestoreData.emailTemplates.shortlisted,
       'rejected':this.$store.state.firestoreData.emailTemplates.rejected
       }}
-      await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.user.email).set(email, { merge: true })
+      await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.docId).set(email, { merge: true })
 
     }
   }

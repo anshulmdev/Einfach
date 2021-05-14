@@ -217,7 +217,7 @@ export default {
       const entry = await firebase
         .firestore()
         .collection("accounts")
-        .doc("Anshul Mishra");
+        .doc(this.$store.state.firestoreData.docId);
       // eslint-disable-next-line no-unused-vars
       const addInvite = await entry.update({
         "candidates.invited": firebase.firestore.FieldValue.arrayRemove(details),
@@ -253,7 +253,7 @@ export default {
       const entry = await firebase
         .firestore()
         .collection("accounts")
-        .doc("Anshul Mishra");
+        .doc(this.$store.state.firestoreData.docId);
       // eslint-disable-next-line no-unused-vars
       const removeinvited = await entry.update({
         "candidates.invited": firebase.firestore.FieldValue.arrayRemove(details),

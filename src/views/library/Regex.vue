@@ -162,7 +162,7 @@ export default {
       this.$store.state.newAssignment.active = true;
         this.selected.forEach((e)=>{
       this.$store.commit('addQuestions', {time: 5,
-       marks: 10, questions: 1, tag: 'regex', value: e.id})})
+       marks: 10, questions: 1, tag: 'regex', value: {index: e.id, marks: 10}})})
     }},
     onSubmit (evt) {
       evt.preventDefault()

@@ -126,7 +126,7 @@
       <template #extra>
         <img
           class="img-avatar img-avatar96"
-          src="https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/07/door-company-logo.jpg"
+          :src="imagesUrl"
           alt="Avatar"
         />
       </template>
@@ -356,7 +356,7 @@ export default {
         thumbnailHeight: 150,
         addRemoveLinks: false
       },
-      imagesUrl: ''
+      imagesUrl: 'https://www.onlinelogomaker.com/blog/wp-content/uploads/2017/07/door-company-logo.jpg'
     };
   },
   validations: {
@@ -380,7 +380,7 @@ export default {
   },
   methods: {
     submitForm (){
-       firebase.database().ref('forms/' + this.$store.state.authUid).set({
+       firebase.database().ref('forms/' + this.$store.state.firestoreData.docId).set({
     title: this.title,
     desc: this.desc,
     test: this.options[this.selected],
@@ -388,7 +388,7 @@ export default {
     logo: this.imagesUrl
   // eslint-disable-next-line no-unused-vars
   }).then((e) => {
-    this.formUrl = `http://localhost:8080/#/auth/applications/${this.$store.state.authUid}`
+    this.formUrl = `http://localhost:8080/#/auth/applications/${this.$store.state.firestoreData.docId}`
   });
     },
     addField (name,type){
@@ -413,7 +413,6 @@ export default {
       } catch (error) {
         console.log(error);
       }
-      this.$refs.imgDropZone.removeFile(upload);
     }
   }
 };

@@ -400,7 +400,7 @@ export default {
   methods: {
     async deploy() {
       const data = {'assignment': this.$store.state.newAssignment}
-      await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.user.email).update(data);
+      await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.docId).update(data);
       
       this.$swal({
         title: 'Assignment Deployed',
@@ -422,7 +422,7 @@ export default {
         }
       }).then(result => {
         if (result.value) {
-          this.$swal('Test link for Emails', `https://recruiter.netlify.app/${this.$store.state.authUid}`, 'success')
+          this.$swal('Test link for Emails', `https://recruiter.netlify.app/${this.$store.state.firestoreData.docId}`, 'success')
           // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
         }
       })

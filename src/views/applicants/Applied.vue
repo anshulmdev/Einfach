@@ -223,7 +223,7 @@ export default {
       const entry = await firebase
         .firestore()
         .collection("accounts")
-        .doc("Anshul Mishra");
+        .doc(this.$store.state.firestoreData.docId);
       // eslint-disable-next-line no-unused-vars
       const addInvite = await entry.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayRemove(details),
@@ -237,7 +237,7 @@ export default {
     async invite(name, email, index) {
       const details = this.$store.state.firestoreData.candidates.applied[index];
       const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite.replace('[CANDIDATE NAME]', name);
-      const invited = {user:name, body: emailTemplate, received: new Date(), title: 'Javascript developer test 2021 - Hi you have been invited', email}
+      const invited = {user:name, body: emailTemplate, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}
       this.loading.push(index)
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch(
@@ -259,7 +259,7 @@ export default {
       const entry = await firebase
         .firestore()
         .collection("accounts")
-        .doc("am@cloudify.biz");
+        .doc(this.$store.state.firestoreData.docId);
       await entry.update({
         "candidates.applied": firebase.firestore.FieldValue.arrayRemove(details),
       });

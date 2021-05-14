@@ -138,7 +138,7 @@
                   <i class="fa fa-fw fa-paper-plane mr-1"></i> Invited
                 </span>
                 <b-badge pill variant="secondary">{{
-                  $store.state.firestoreData.inbox.invited.length
+                  $store.state.firestoreData.inbox.invited ? $store.state.firestoreData.inbox.invited.length : 0
                 }}</b-badge>
               </b-nav-item>
               <b-nav-item
@@ -149,7 +149,7 @@
               >
                 <span> <i class="fa fa-fw fa-star mr-1"></i> Shortlisted </span>
                 <b-badge pill variant="secondary">{{
-                  $store.state.firestoreData.inbox.shortlisted.length
+                  $store.state.firestoreData.inbox.shortlisted ? $store.state.firestoreData.inbox.shortlisted.length : 0
                 }}</b-badge>
               </b-nav-item>
               <b-nav-item
@@ -354,19 +354,19 @@
             <b-table-simple hover table-class="table-vcenter font-size-sm">
               <b-tbody>
                 <b-tr v-for="(message, index) in inbox" :key="index">
-                  <b-td class="text-center" style="width: 60px">
+                  <b-td v-if="message" class="text-center" style="width: 60px">
                     <b-form-checkbox
                       :id="`checkbox-${index}`"
                       :value="index"
                     ></b-form-checkbox>
                   </b-td>
-                  <b-td
+                  <b-td v-if="message"
                     class="d-none d-sm-table-cell font-w600"
                     style="width: 140px"
                   >
                     {{ message.user }}
                   </b-td>
-                  <b-td>
+                  <b-td v-if="message">
                     <a
                       class="font-w600"
                       href="javascript:void(0)"
@@ -379,7 +379,7 @@
                       {{ message.title }}
                     </div>
                   </b-td>
-                  <b-td
+                  <b-td v-if="message"
                     class="d-none d-xl-table-cell text-muted"
                     style="width: 120px"
                   >
@@ -492,7 +492,7 @@ export default {
       const entry = await firebase
         .firestore()
         .collection("accounts")
-        .doc("Anshul Mishra");
+        .doc(this.$store.state.firestoreData.docId);
       // eslint-disable-next-line no-unused-vars
       const inboxInvited = await entry.update({
         "inbox.custom": firebase.firestore.FieldValue.arrayUnion(details),

@@ -360,20 +360,19 @@ export default {
       this.isLoading = true;
       try {
         //save image
-        if(this.form.username){
         let file = upload;
         var metadata = {
           contentType: "image/png"
         };
-        var storageRef = firebase.storage().ref();
-        var imageRef = storageRef.child(`companyLogos/${this.form.username}.png`);
+        var storageRef = await firebase.storage().ref();
+        var imageRef = await storageRef.child(`companyLogos/${this.form.username}.png`);
         await imageRef.put(file, metadata);
         var downloadURL = await imageRef.getDownloadURL();
-        this.imagesUrl= downloadURL;}
+        this.imagesUrl= downloadURL;
+        console.log(downloadURL)
       } catch (error) {
         console.log(error);
       }
-      this.$refs.imgDropZone.removeFile(upload);
     },
     createAccount (uid){
       const data = this.form
@@ -381,7 +380,7 @@ export default {
       const emailTemplates = {invite: '', rejected: '', shortlisted: ''}
       const candidates = {applied: [], invited: [], ongoing: [], shortlisted: [], completed: []}
       const inbox = {invited: [{body: 'Welcome',email: 'am@einfach.tech',received: new Date(), title: 'New Account',user: "admin@einfach.tech"}]}
-      firebase.firestore().collection("accounts").doc(data.email)
+      firebase.firestore().collection("accounts").doc()
           .set({uid, user, emailTemplates, inbox, candidates, 
           notifications: [
         {

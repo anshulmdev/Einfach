@@ -231,7 +231,7 @@ export default {
     check(value){
       this.$store.state.newAssignment.active = true;
       this.$store.commit('addQuestions', {time: 30,
-       marks: parseInt(this.firebaseData[value].marks), questions: 1, tag: 'array', value})
+       marks: parseInt(this.firebaseData[value].marks), questions: 1, tag: 'array', value: {index: value, marks: this.firebaseData[value].marks}})
     },
     async fetch() {
       const list = DB.ref("coding/array");

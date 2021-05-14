@@ -23,6 +23,7 @@ import BaseNavigation from '@/components/BaseNavigation'
 // Custom directives
 import clickRipple from '@/directives/clickRipple'
 import toggleClass from '@/directives/toggleClass'
+import UUID from "vue-uuid";
 
 // Register global plugins
 Vue.use(BootstrapVue)
@@ -37,7 +38,8 @@ Vue.component(BaseNavigation.name, BaseNavigation)
 // Register global directives
 Vue.directive('click-ripple', clickRipple)
 Vue.directive('toggle-class', toggleClass)
-
+ 
+Vue.use(UUID);
 // Disable tip shown in dev console when in development mode
 Vue.config.productionTip = false
 

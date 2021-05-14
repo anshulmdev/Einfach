@@ -132,7 +132,7 @@ export default {
       // eslint-disable-next-line no-unused-vars
       const address = firebase
         .database()
-        .ref("tickets/" + this.$store.state.authUid)
+        .ref("tickets/" + this.$store.state.firestoreData.docId)
         .set({
           category: this.selected,
           query: this.query,
