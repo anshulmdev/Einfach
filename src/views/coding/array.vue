@@ -95,31 +95,78 @@
           ></ckeditor>
               </b-form-group>
               <b-row>
+              </b-row>
+              <b-row  v-for="(item, index) in customQuestion.testCases.input" :key="index">
                 <b-col>
-              <b-form-group label="Marks" label-for="example-textarea-input">
-                <b-form-input v-model="customQuestion.marks" type="number" placeholder="40"></b-form-input>
+              <b-form-group :label="`TestCases Input ${index + 1}`" label-for="example-textarea-input">
+                <b-form-textarea v-model="customQuestion.testCases.input[index]" rows="4" placeholder="Input"></b-form-textarea>
               </b-form-group>
                 </b-col>
                 <b-col>
                   
-              <b-form-group label="Difficulty" label-for="example-select">
-                <b-form-select id="example-select" v-model="customQuestion.type" :options="tags" plain></b-form-select>
+              <b-form-group :label="`Output ${index + 1}`" label-for="example-select">
+                <b-form-textarea v-model="customQuestion.testCases.output[index]" rows="4" placeholder="Output"></b-form-textarea>
               </b-form-group>
                 </b-col>
               </b-row>
-              <b-row>
-                <b-col>
-              <b-form-group label="TestCases Input" label-for="example-textarea-input">
-                <b-form-textarea v-model="customQuestion.testCases.input" rows="4" placeholder="Input"></b-form-textarea>
-              </b-form-group>
-                </b-col>
-                <b-col>
-                  
-              <b-form-group label="Output" label-for="example-select">
-                <b-form-textarea v-model="customQuestion.testCases.output" rows="4" placeholder="Output"></b-form-textarea>
-              </b-form-group>
-                </b-col>
-              </b-row>
+              
+                      <base-block rounded title="Parameters" header-bg>
+                        <template #options>
+                          <b-row
+                            ><b-col>
+                              <b-form-select
+                                id="example-select"
+                                v-model="customQuestion.type"
+                                :options="tags"
+                                plain
+                              ></b-form-select> </b-col
+                            ><b-col>
+                              <b-form-input
+                                type="number"
+                                v-model="customQuestion.marks"
+                                placeholder="Marks"
+                              ></b-form-input
+                            ></b-col>
+
+                            <b-col>
+                              <b-button
+                                block
+                                @click="addOption('add')"
+                                type="submit"
+                                expanded
+                                variant="success"
+                              >
+                                Add
+                              </b-button> </b-col
+                            ><b-col>
+                              <b-button
+                                block
+                                @click="addOption('remove')"
+                                type="submit"
+                                variant="danger"
+                              >
+                                Remove
+                              </b-button> </b-col
+                            ><b-col>
+                              <b-button
+                                block
+                                @click="submitQuestion"
+                                variant="primary"
+                              >
+                                Submit
+                              </b-button></b-col
+                            ><b-col>
+                              <b-button
+                                block
+                                @click="reset"
+                                variant="alt-primary"
+                              >
+                                Reset
+                              </b-button></b-col
+                            >
+                          </b-row></template
+                        ></base-block
+                      >
       </base-block>
                 </b-col>
               </b-row>
@@ -185,13 +232,27 @@
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { DB } from "../../firebase";
 import CKEditor from "@ckeditor/ckeditor5-vue2";
+// Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
+import Vue from "vue";
+import VueSweetalert2 from "vue-sweetalert2";
+
+const options = {
+  buttonsStyling: false,
+  customClass: {
+    confirmButton: "btn btn-success m-1",
+    cancelButton: "btn btn-danger m-1",
+    input: "form-control",
+  },
+};
+// Register Vue SweetAlert2 with custom options
+Vue.use(VueSweetalert2, options);
 export default {
   components: {
     ckeditor: CKEditor.component,
   },
   data (){
     return {
-      customQuestion: {heading: 'Question Heading', description: 'Problem Statement', marks: 10, type: 'Hard', testCases: {input: '', output: ''}},
+      customQuestion: {heading: 'Question Heading', description: 'Problem Statement', marks: 10, type: 'Hard', testCases: {input: [], output: []}},
       tags: ['Hard', 'Medium', 'Easy'],
       question: 0,
       currentPage: 1,
@@ -218,12 +279,32 @@ export default {
     }
   },
   methods:{
-    async addQuestion() {
+    addOption(value) {
+      if(value === 'add') {
+        this.customQuestion.testCases.input.push('Add with line breaks')
+        this.customQuestion.testCases.output.push('Add with line breaks')
+        }
+      if(value === 'remove') {
+        this.customQuestion.testCases.input.pop()
+        this.customQuestion.testCases.output.pop()
+      }
+    },
+    async submitQuestion() {
+      try{
       const tempQues = this.customQuestion
       const tags = {'Hard': 'danger', 'Medium': 'warning', 'Easy': 'success'}
-      tempQues.type = [tempQues.type, tags[tempQues.type]]
-      await DB.ref(`coding/array/${this.firebaseData.length}`).set(tempQues)
-      this.fetch()
+      const finalSubmission = {heading: tempQues.heading, marks: tempQues.marks, description: tempQues.description, type: [tempQues.type, tags[tempQues.type]]}
+      const answers = {answers: tempQues.testCases.output, testCases: tempQues.testCases.input}
+      console.log(answers)
+      const index = this.firebaseData ? this.firebaseData.length : 0;
+      await DB.ref(`coding/array/${index}`).set(finalSubmission)
+      await DB.ref(`coding/arrayAnswers/${finalSubmission.heading}`).set(answers)
+      this.$swal("Successfully Added").then(() => {
+            this.fetch();
+          });
+      this.fetch()}catch (err) {
+          this.$swal(err.message);
+        }
     },
     async update(value){
       await DB.ref(`coding/array/${value}`).set(this.firebaseData[value])
@@ -237,7 +318,16 @@ export default {
       const list = DB.ref("coding/array");
       const snapshot = await list.once("value");
       this.firebaseData = snapshot.val()
+    },
+    reset () {
+      this.customQuestion = {heading: 'Question Heading', description: 'Problem Statement', marks: 10, type: 'Hard', testCases: {input: [], output: []}}
     }
   }
 }
 </script>
+
+
+<style lang="scss">
+// SweetAlert2
+@import "~sweetalert2/dist/sweetalert2.min.css";
+</style>
