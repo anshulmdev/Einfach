@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero -->
-    <base-page-heading title="Regex" subtitle="Test your applicants with Javascript regular expressions.">
+    <base-page-heading title="Regex" subtitle="Choose Regex questions to add">
       <template #extra>
         <b-breadcrumb class="breadcrumb-alt">
           <b-breadcrumb-item href="javascript:void(0)">Library</b-breadcrumb-item>
@@ -13,7 +13,6 @@
 
     <!-- Page Content -->
     <div class="content">
-      
           <!-- Block Tabs Default Style -->
           <b-tabs class="block" nav-class="nav-tabs-block" content-class="block-content">
             <b-tab title="Library" active>
@@ -22,65 +21,83 @@
             <i class="si si-settings"></i>
           </button>
         </template>
-        <b-table
-          ref="selectableTable"
-          selectable
-          select-variant="active"
-          :items="users"
-          :fields="fields2"
-          @row-selected="onRowSelected"
-          responsive
-          table-class="table-vcenter"
-        >
-          <template v-slot:cell(selected)="{ rowSelected }">
-            <template v-if="rowSelected">
-              <span aria-hidden="true">
-                <i class="fa fa-check-circle text-primary"></i>
-              </span>
-              <span class="sr-only">Selected</span>
-            </template>
-            <template v-else>
-              <span aria-hidden="true">
-                <i class="fa fa-times-circle text-muted"></i>
-              </span>
-              <span class="sr-only">Not selected</span>
-            </template>
+       <!-- Search -->
+    <div v-if="firebaseData" class="content">
+          <!-- Projects -->
+          <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light">
+      <b-form>
+        <b-input-group>
+          <b-form-input class="form-control" placeholder="Search.."></b-form-input>
+          <template #append>
+            <b-input-group-text>
+              <i class="fa fa-fw fa-search"></i>
+            </b-input-group-text>
           </template>
-        </b-table>
-            <base-block rounded title="Add Selected Questions" header-bg class="mt-4">
-              <template #options>
-                <b-button type="submit" class="px-4" size="md" variant="primary" @click="addQuestions()">
-                  Submit
-                </b-button>
-                <b-button type="reset" class="px-4" size="md" variant="alt-primary" @click="clearSelected">
-                  Reset
-                </b-button>
-              </template>
-              </base-block>
+        </b-input-group>
+      </b-form>
+          </div>
+          <b-table-simple striped table-class="table-vcenter">
+            <b-thead>
+              <b-tr>
+                <b-th style="width: 50%;">Project</b-th>
+                <b-th class="d-none d-lg-table-cell text-center" style="width: 12%;">Marks</b-th>
+                <b-th class="text-center" style="width: 12%;">Select</b-th>
+              </b-tr>
+            </b-thead>
+            <b-tbody>
+              <b-tr v-for="(ques, index) in filteredArray" :key="index">
+                <b-td>
+                  <h4 class="h5 mt-3 mb-2">
+                    <a v-b-modal.modal-block-extra-large @click="question = ((perPage)*(currentPage-1) + index)">{{ques.question.slice(0,200)}}</a>
+                  </h4>
+                  <p class="d-none d-sm-block text-muted">
+                    {{ ques.sentence.slice(0,50) }}
+                  </p>
+                </b-td>
+                <b-td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{{ques.marks}}</b-td>
+                <b-td class="px-5">
+              <b-button block variant="alt-primary" @click="check((perPage)*(currentPage-1) + index)">Add</b-button>
+                  </b-td>
+              </b-tr>
+            </b-tbody>
+          </b-table-simple>
+          <b-pagination v-model="currentPage" :total-rows="rows" :per-page="perPage" size="sm"></b-pagination>
+          <!-- END Projects -->
+    </div>
+    <div v-else class="m-5">
+            <b-spinner />
+      </div>
+    <!-- END Search -->
             </b-tab>
             <b-tab title="Custom">
-          <b-form @submit="onSubmit" @reset="onReset">
+          <b-form>
             <base-block rounded title="Create your own Question" header-bg>
-              <template #options>
-                <b-button type="submit" size="sm" variant="primary">
-                  Submit
-                </b-button>
-                <b-button type="reset" size="sm" variant="alt-primary">
-                  Reset
-                </b-button>
-              </template>
               <b-row class="py-sm-1 py-md-1">
                 <b-col>
       <base-block rounded content-full>
-              <b-form-group label="Question" label-for="example-textarea-input">
-                <b-form-textarea id="example-textarea-input" rows="4" placeholder="Write Question.."></b-form-textarea>
+              <b-form-group label="Question" label-for="block-form1-password">
+                <b-form-textarea v-model="customQuestion.question" rows="4"></b-form-textarea>
               </b-form-group>
-        
-        <b-form-group label="Extract" label-for="block-form1-password">
-        <b-form-input id="extract" class="form-control-alt" type="text" placeholder="Enter extracted word"></b-form-input>
-        </b-form-group>
-        <b-form-group label="Pattern" label-for="block-form1-password">
-        <b-form-input id="pattern" class="form-control-alt" type="text" placeholder="Enter pattern"></b-form-input>
+              <b-form-group label="Statement">
+                <b-form-input v-model="customQuestion.sentence"></b-form-input>
+              </b-form-group>
+              <b-form-group label="Write value to be extracted">
+                <b-form-input v-model="customQuestion.answer"></b-form-input>
+              </b-form-group>
+        <b-form-group>
+            <base-block rounded title="Parameters" header-bg>
+            <template #options>
+      <b-row><b-col>
+                </b-col><b-col>
+                  <b-form-input type="number" v-model="customQuestion.marks" placeholder="Marks"></b-form-input></b-col>
+          <b-col>
+                <b-button block @click="submitQuestion" variant="primary">
+                  Submit
+                </b-button></b-col><b-col>
+                <b-button block @click="reset" variant="alt-primary">
+                  Reset
+                </b-button></b-col>
+      </b-row></template></base-block>
         </b-form-group>
       </base-block>
                 </b-col>
@@ -98,94 +115,136 @@
           </b-tabs>
       <!-- END Your Block -->
     </div>
-    <!-- END Page Content -->
+          <b-modal
+        id="modal-block-extra-large"
+        size="xl"
+        body-class="p-0"
+        hide-footer
+        hide-header
+      >
+        <div v-if="firebaseData" class="block block-rounded block-themed block-transparent mb-0">
+          <div class="block-header">
+            <h3 class="block-title">{{firebaseData[question].marks}} Marks Question</h3>
+            <div class="block-options">
+              <button
+                type="button"
+                class="btn-block-option"
+                @click="$bvModal.hide('modal-block-extra-large')"
+              >
+                <i class="fa fa-fw fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="block-content font-size-sm">
+            <p>{{firebaseData[question].question}}</p>
+            <b> Statement </b>
+            <p> {{firebaseData[question].sentence}} </p>
+          </div>
+          <div class="block-content block-content-full text-right border-top">
+            <b-button
+              variant="alt-primary"
+              class="mr-1"
+              @click="$bvModal.hide('modal-block-extra-large')"
+              >Close</b-button
+            >
+            <b-button
+              variant="primary"
+              @click="$bvModal.hide('modal-block-extra-large')"
+              >Ok</b-button
+            >
+          </div>
+        </div>
+      </b-modal>
   </div>
 </template>
 
+<style lang="scss">
+// SweetAlert2
+@import '~sweetalert2/dist/sweetalert2.min.css';
+</style>
+
 <script>
+// Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+const options = {
+  buttonsStyling: false,
+  customClass: {
+    confirmButton: 'btn btn-success m-1',
+    cancelButton: 'btn btn-danger m-1',
+    input: 'form-control'
+  }
+}
+// Register Vue SweetAlert2 with custom options
+Vue.use(VueSweetalert2, options)
+import { DB } from "../../firebase";
 export default {
-  data () {
+  data (){
     return {
-      form: {
-        username: '',
-        password: '',
-        rememberMe: false
+      customQuestion: {
+        question: 'Write your question',
+        marks: 10,
+        sentence: null,
+        answer: null
       },
-      sortBy: 'id',
-      sortDesc: false,
-      selectMode: 'multi',
-      selected: [],
-      fields2: [
-        { key: 'selected', thStyle: 'width: 150px;', thClass: 'text-center', tdClass: 'text-center' },
-        { key: 'id', thStyle: 'width: 75px;', thClass: 'text-center', tdClass: 'text-center' },
-        { key: 'question' },
-        { key: 'extract' },
-        { key: 'pattern' }
-      ],
-      users: [
-        {
-          id: 0,
-          question: 'Extract only numbers',
-          extract: '304958',
-          pattern: '^[0-9]*$'
-        },
-        {
-          id: 1,
-          question: 'HTML Tags',
-          extract: '<a href="/life">life</a>',
-          pattern: `<\\s*a[^>]*>(.*?)<\\s*/\\s*a>`
-        },
-        {
-          id: 2,
-          question: 'Search Params',
-          extract: 'title:((A OR "B")',
-          pattern: '\\w+:\\([^)]+\\)'
-        },
-        {
-          id: 3,
-          question: 'MD5 Hash',
-          extract: '00236a2ae558018ed13b5222ef1bd977',
-          pattern: '/^[a-f0-9]{32}$/gm'
-        },
-        {
-          id: 4,
-          question: 'Phone Numbers',
-          extract: '7986576783',
-          pattern: '^[6-9]\\d{9}$'
-        }
-      ]
-      }},
-  
-  methods: {
-    addQuestions (){
-      if(this.selected.length){
+      question: 0,
+      currentPage: 1,
+      rows: 10,
+      perPage: 5,
+      firebaseData: [{
+  "heading" : "Which type of JavaScript language is ___",
+  "marks" : 30,
+  "options": ["Object-Oriented", "Object-Based", "Assembly-language", "High-level"],
+  "type" : [ "GET", "warning" ]
+}]
+    }
+  },
+  mounted(){
+    this.fetch()
+  },
+  computed:{
+    filteredArray (){
+      return this.firebaseData.slice(((this.currentPage-1)*this.perPage),((this.currentPage)*this.perPage));
+    }
+  },
+  methods:{
+    check(value){
       this.$store.state.newAssignment.active = true;
-        this.selected.forEach((e)=>{
       this.$store.commit('addQuestions', {time: 5,
-       marks: 10, questions: 1, tag: 'regex', value: {index: e.id, marks: 10}})})
-    }},
-    onSubmit (evt) {
-      evt.preventDefault()
+       marks: this.firebaseData[value].marks, questions: 1, tag: 'regex', value: {index: value, marks: this.firebaseData[value].marks}})
+    },
+    async fetch() {
+      const list = DB.ref("regex");
+      const snapshot = await list.once("value");
+      this.firebaseData = snapshot.val()
+      console.log(this.firebaseData)
+    },
+    async submitQuestion() {
+      if (this.customQuestion.question != 'Write your question' && this.customQuestion.sentence){
+        try{
+      const data = this.customQuestion
+      const index = this.firebaseData ? this.firebaseData.length : 0
+      const details = {question: data.question, marks: data.marks, sentence: data.sentence}
+      await DB.ref(`regex/${index}`).set(details)
+      await DB.ref(`regexAnswers/${index}`).set(data.answer)
+      this.$swal('Successfully Added').then(() => {
+        this.fetch()
+      })
+      } catch (err){
+        this.$swal(err.message)
+      }} else{
+        this.$swal('Missing Information')
+      }
 
-      // Alert with form input values
-      alert(JSON.stringify(this.form))
     },
-    onReset (evt) {
-      evt.preventDefault()
-
-      // Reset our form values
-      this.form.username = ''
-      this.form.password = ''
-      this.form.rememberMe = false
-    },
-    onRowSelected (items) {
-      this.selected = items
-    },
-    selectAllRows () {
-      this.$refs.selectableTable.selectAllRows()
-    },
-    clearSelected () {
-      this.$refs.selectableTable.clearSelected()
+    reset () {
+      this.customQuestion = {
+        question: 'Write your question',
+        marks: 10,
+        sentence: null,
+        answer: null
+      }
     }
   }
 }

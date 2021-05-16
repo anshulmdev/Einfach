@@ -107,7 +107,7 @@ export default new Vuex.Store({
     },
     addQuestions (state, payload) {
       state.newAssignment.time += payload.time
-      state.newAssignment.marks += payload.marks
+      state.newAssignment.marks += parseInt(payload.marks)
       state.newAssignment.questions += payload.questions
       if (payload.tag in state.newAssignment.tags){
         state.newAssignment.tags[payload.tag].push(payload.value)

@@ -13,7 +13,6 @@
 
     <!-- Page Content -->
     <div class="content">
-      
           <!-- Block Tabs Default Style -->
           <b-tabs class="block" nav-class="nav-tabs-block" content-class="block-content">
             <b-tab title="Library" active>
@@ -47,10 +46,10 @@
               </b-tr>
             </b-thead>
             <b-tbody>
-              <b-tr v-for="(ques, index) in firebaseData" :key="index">
+              <b-tr v-for="(ques, index) in filteredArray" :key="index">
                 <b-td>
                   <h4 class="h5 mt-3 mb-2">
-                    <a v-b-modal.modal-block-extra-large @click="question = index">{{ques.heading.slice(0,60)}}...</a>
+                    <a v-b-modal.modal-block-extra-large @click="question = ((perPage)*(currentPage-1) + index)">{{ques.heading.slice(0,60)}}...</a>
                   </h4>
                   <p class="d-none d-sm-block text-muted">
                     {{ String(ques.options).slice(0,30) }}...
@@ -61,7 +60,7 @@
                 </b-td>
                 <b-td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{{ques.marks}}</b-td>
                 <b-td class="px-5">
-              <b-button :variant="`alt-${ques.type[1]}`" @click="check(index)">Add</b-button>
+              <b-button :variant="`alt-${ques.type[1]}`" @click="check((perPage)*(currentPage-1) + index)">Add</b-button>
                   </b-td>
               </b-tr>
             </b-tbody>
@@ -77,33 +76,48 @@
             <b-tab title="Custom">
           <b-form>
             <base-block rounded title="Create your own Question" header-bg>
-              <template #options>
-                <b-button type="submit" size="sm" variant="primary">
-                  Submit
-                </b-button>
-                <b-button type="reset" size="sm" variant="alt-primary">
-                  Reset
-                </b-button>
-              </template>
               <b-row class="py-sm-1 py-md-1">
                 <b-col>
       <base-block rounded content-full>
-              <b-form-group label="Question" label-for="example-textarea-input">
-                <b-form-textarea id="example-textarea-input" rows="4" placeholder="Write Question.."></b-form-textarea>
+              <b-form-group label="Question" label-for="block-form1-password">
+                <b-form-textarea v-model="customQuestion.question" rows="4"></b-form-textarea>
               </b-form-group>
-        <b-form-group label="Options" label-for="block-form1-password">
-        <b-row class="">
+        <b-form-group label="Options">
+        <b-row v-for="(item, index) in customQuestion.options" :key="index">
         <b-col cols="9">
           <base-block rounded>
-        <b-form-input id="Option A" class="form-control-alt" type="text" placeholder="Enter option A"></b-form-input>
+        <b-form-input class="form-control-alt" type="text" v-model="customQuestion.options[index].option"></b-form-input>
           </base-block>
         </b-col>
         <b-col cols="3">
           <base-block rounded>
-                  <b-form-checkbox class="custom-control-success mb-2" value="success">Correct Option</b-form-checkbox>
+                  <b-form-checkbox v-model="customQuestion.options[index].answer" class="custom-control-success mb-2" :value="true">Correct Option</b-form-checkbox>
           </base-block>
         </b-col>
       </b-row>
+            <base-block rounded title="Parameters" header-bg>
+            <template #options>
+      <b-row><b-col>
+                <b-form-select id="example-select" v-model="customQuestion.categorySelected" :options="Object.keys(customQuestion.category)" plain></b-form-select>
+                </b-col><b-col>
+                  <b-form-input type="number" v-model="customQuestion.marks" placeholder="Marks"></b-form-input></b-col>
+                  
+        <b-col>
+                <b-button block @click="addOption('add')" type="submit" expanded variant="success">
+                  Add Option
+                </b-button>
+      </b-col><b-col>
+                <b-button block @click="addOption('remove')" type="submit" variant="danger">
+                  Remove Last
+                </b-button>
+                </b-col><b-col>
+                <b-button block @click="submitQuestion" variant="primary">
+                  Submit
+                </b-button></b-col><b-col>
+                <b-button block @click="reset" variant="alt-primary">
+                  Reset
+                </b-button></b-col>
+      </b-row></template></base-block>
         </b-form-group>
       </base-block>
                 </b-col>
@@ -165,15 +179,41 @@
   </div>
 </template>
 
+<style lang="scss">
+// SweetAlert2
+@import '~sweetalert2/dist/sweetalert2.min.css';
+</style>
+
 <script>
+// Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+const options = {
+  buttonsStyling: false,
+  customClass: {
+    confirmButton: 'btn btn-success m-1',
+    cancelButton: 'btn btn-danger m-1',
+    input: 'form-control'
+  }
+}
+// Register Vue SweetAlert2 with custom options
+Vue.use(VueSweetalert2, options)
 import { DB } from "../../firebase";
 export default {
   data (){
     return {
+      customQuestion: {
+        question: 'Write your question',
+        options: [],
+        category: {"Javascript": "warning", "Python": "success", "Web Development": "danger", "React":"info", "VueJS": "success", "Angular": "danger"},
+        categorySelected: "Javascript",
+        marks: 10
+      },
       question: 0,
       currentPage: 1,
-      rows: 40,
-      perPage: 10,
+      rows: 10,
+      perPage: 5,
       firebaseData: [{
   "heading" : "Which type of JavaScript language is ___",
   "marks" : 30,
@@ -185,16 +225,60 @@ export default {
   mounted(){
     this.fetch()
   },
+  computed:{
+    filteredArray (){
+      return this.firebaseData.slice(((this.currentPage-1)*this.perPage),((this.currentPage)*this.perPage));
+    }
+  },
   methods:{
+    addOption (value) {
+      if (value === 'add') this.customQuestion.options.push({option: "Choose Option", answer: false})
+      if (value === 'remove') this.customQuestion.options.pop()
+    },
     check(value){
       this.$store.state.newAssignment.active = true;
-      this.$store.commit('addQuestions', {time: 5,
+      this.$store.commit('addQuestions', {time: 1,
        marks: this.firebaseData[value].marks, questions: 1, tag: 'mcq', value: {index: value, marks: this.firebaseData[value].marks}})
     },
     async fetch() {
       const list = DB.ref("mcq");
       const snapshot = await list.once("value");
       this.firebaseData = snapshot.val()
+    },
+    async submitQuestion() {
+      if (this.customQuestion.question != 'Write your question' && this.customQuestion.options.length){
+        try{
+      const data = this.customQuestion
+      const options = []
+      let correctAnswer = ''
+      data.options.forEach(element => {
+        if (element.answer === true) {
+          correctAnswer = element.option
+        }
+        options.push(element.option)
+      });
+      const index = this.firebaseData ? this.firebaseData.length : 0
+      const details = {heading: data.question, marks: data.marks, options, type: [data.categorySelected, data.category[data.categorySelected]]}
+      await DB.ref(`mcq/${index}`).set(details)
+      await DB.ref(`mcqAnswers/${index}`).set(correctAnswer)
+      this.$swal('Successfully Added').then(() => {
+        this.fetch()
+      })
+      } catch (err){
+        this.$swal(err.message)
+      }} else{
+        this.$swal('Missing Information')
+      }
+
+    },
+    reset () {
+      this.customQuestion = {
+        question: 'Write your question',
+        options: [],
+        category: {"Javascript": "warning", "Python": "success", "Web Development": "danger", "React":"info", "VueJS": "success", "Angular": "danger"},
+        categorySelected: "Javascript",
+        marks: 10
+      }
     }
   }
 }
