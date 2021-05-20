@@ -68,6 +68,8 @@ const FormsValidation = () => import(/* webpackChunkName: "forms-validation" */"
 // Backend: Applicants
 const ApplicantsApplied = () => import("@/views/applicants/Applied.vue")
 const ApplicantsInvited = () => import("@/views/applicants/Invited.vue")
+const ApplicantsRejected = () => import("@/views/applicants/Rejected.vue")
+const ApplicantsShortlisted = () => import("@/views/applicants/Shortlisted.vue")
 const ApplicantsCompleted = () => import("@/views/applicants/Completed.vue")
 const AuthApplications = () => import(/* webpackChunkName: "auth-Applications" */"@/views/pages/auth/Applications.vue")
 
@@ -555,6 +557,16 @@ export default new Router({
               path: 'invited',
               name: 'Applicants Invited',
               component: ApplicantsInvited
+            },
+            {
+              path: 'rejected',
+              name: 'Applicants Rejected',
+              component: ApplicantsRejected
+            },
+            {
+              path: 'shortlisted',
+              name: 'Applicants Shortlisted',
+              component: ApplicantsShortlisted
             },
             {
               path: 'Completed',

@@ -111,6 +111,16 @@ export default {
           to: '/backend/applicants/Invited'
         },
         {
+          name: 'Shortlisted',
+          icon: 'si si-check',
+          to: '/backend/applicants/Shortlisted'
+        },
+        {
+          name: 'Rejected',
+          icon: 'si si-ban',
+          to: '/backend/applicants/Rejected'
+        },
+        {
           name: 'Completed',
           icon: 'si si-feed',
           to: '/backend/applicants/Completed'

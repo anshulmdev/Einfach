@@ -271,7 +271,8 @@
                   <b-th class="font-w700 text-center"></b-th>
                 </b-tr>
               </b-thead>
-              <b-tbody>
+              <b-tbody v-if="$store.state.firestoreData
+                    .candidates.shortlisted">
                 <b-tr
                   v-for="(completed, index) in $store.state.firestoreData
                     .candidates.shortlisted"
@@ -303,7 +304,7 @@
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
                     <a class="link-fx font-w600" href="javascript:void(0)">{{
-                      new Date(completed.timestamp.seconds*1000).toString().slice(0,10)
+                      completed.timeStamp.slice(0,15)
                     }}</a>
                   </b-td>
                   <b-td class="text-center">

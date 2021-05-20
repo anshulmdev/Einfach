@@ -21,7 +21,7 @@
             <i class="fa fa-circle-notch text-primary"></i>
           </span>
           <span class="smini-hide font-size-h5 tracking-wider">
-            OneUI <span class="font-w400">Vue</span>
+            Einfach <span class="font-w400">Tech</span>
           </span>
         </router-link>
         <!-- END Logo -->
