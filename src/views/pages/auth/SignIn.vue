@@ -100,14 +100,14 @@ firebase.auth().signInWithEmailAndPassword(this.form.username, this.form.passwor
     var user = userCredential.user;
     this.$cookies.set('uid',user.uid);
     this.$store.commit('setAuth',user.uid)
-      this.$router.push('/backend')
+      this.$router.push('/backend/dashboard')
     // ...
   })
   .catch(() => {
   });
       setTimeout(() => {
         // Form submit logic
-      this.$router.push('/backend')
+      this.$router.push('/')
       }, 1000);
     }
   }
