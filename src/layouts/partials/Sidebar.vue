@@ -18,7 +18,7 @@
         <!-- Logo -->
         <router-link to="/" class="font-w600 text-dual">
           <span class="smini-visible">
-            <i class="fa fa-circle-notch text-primary"></i>
+            <i class="fab fa-buffer mt-1 text-success" color="primary"></i>
           </span>
           <span class="smini-hide font-size-h5 tracking-wider">
             Einfach <span class="font-w400">Tech</span>

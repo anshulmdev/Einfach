@@ -147,7 +147,7 @@ export default {
       this.$store.commit("setAuth", this.$cookies.get("uid"));
     }
     else{
-      this.$router.push('/auth/signin')}
+      this.$router.push('/')}
   },
 };
 </script>

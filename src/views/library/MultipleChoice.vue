@@ -319,8 +319,8 @@ export default {
       },
       question: 0,
       currentPage: 1,
-      rows: 10,
-      perPage: 5,
+      rows: 100,
+      perPage: 50,
       firebaseData: [
         {
           heading: "Which type of JavaScript language is ___",

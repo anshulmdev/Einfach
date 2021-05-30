@@ -422,16 +422,13 @@ export default {
         }
       }).then(result => {
         if (result.value) {
-          this.$swal('Test link for Emails', `https://recruiter.netlify.app/${this.$store.state.firestoreData.docId}`, 'success')
+          this.$swal('Test link for Emails', `http://app.einfach.tech/auth/login/${this.$store.state.firestoreData.docId}`, 'success')
           // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
         }
       })
     },
     logout() {
       this.$cookies.remove('uid')
-    },
-    onSubmit () {
-      this.$router.push('/backend/pages/generic/search?' + this.baseSearchTerm)
     },
     eventHeaderSearch (event) {
       // When ESCAPE key is hit close the header search section

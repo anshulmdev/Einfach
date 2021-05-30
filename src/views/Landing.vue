@@ -4,23 +4,24 @@
     <div class="hero bg-white overflow-hidden">
       <div class="hero-inner align-self-stretch d-flex flex-column">
         <div class="pt-5 pb-3 text-center">
-          <i class="fa fa-2x fa-circle-notch text-primary"></i>
         </div>
         <div class="content content-full flex-fill d-flex align-items-center px-lg-6 px-xl-8 overflow-hidden">
           <b-row class="w-100">
             <b-col lg="6" class="text-center text-lg-left d-flex align-items-center">
               <div class="w-100">
-                <h1 class="font-w700 mb-2">
-                  OneUI <span class="font-w300">Vue Edition</span>
-                </h1>
+                <div class="d-flex">
+                <i class="fab fa-buffer mt-1 text-success" color="primary" style="font-size: 2.5em;"></i>
+                <h1 class="font-w700 mb-3 ml-3">
+                  <span class="">Einfach</span> <span class="font-w300">Tech</span>
+                </h1></div>
                 <p class="font-size-lg font-w500 text-muted mb-4">
-                  Build all your projects with one super flexible UI framework. Now rebuilt from scratch with Vue.js. Based on <a href="https://1.envato.market/AVD6j">OneUI Remastered</a> design!
+                  Einfach Tech is a complete hiring package that helps you recruit tech teams with ease.<br> Complete <a href="https://1.envato.market/AVD6j">Architecture</a> to deploy and manage tech hiring
                 </p>
-                <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" href="https://1.envato.market/5Noyb" v-click-ripple>
-                  <i class="fa fa-fw fa-shopping-cart font-size-base opacity-50 mr-1"></i> Purchase
+                <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" to="/auth/signin" v-click-ripple>
+                  <i class="fa fa-fw fa-user font-size-base opacity-50 mr-1"></i> Sign In
                 </b-button>
-                <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" to="/backend/dashboard" v-click-ripple>
-                  <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Live Preview
+                <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" to="/auth/signup" v-click-ripple>
+                  <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Sign Up
                 </b-button>
               </div>
             </b-col>
@@ -64,15 +65,15 @@
           <b-row class="mb-5">
             <b-col md="6">
               <h2 class="h1 font-w700 mb-2">
-                With the power of <span class="font-w400">Vue.js</span>
+                Complete <span class="font-w400">Dashboard</span>
               </h2>
               <p class="font-size-lg font-w500 text-muted mb-0">
-                We used the best toolkits, built by passionate people, to recreate OneUI from scratch and craft a Vue based version.
+                Get access to all the features of complete solution even on starter plan. Proceed with hiring on pay as you go basis
               </p>
             </b-col>
             <b-col md="6" class="d-none d-md-flex align-items-md-center justify-content-md-end">
               <p class="h1 font-w700 text-body-bg-dark mb-0">
-                Get Inspired.
+                Completely Automated
               </p>
             </b-col>
           </b-row>
@@ -83,14 +84,14 @@
                   <b-col cols="6" md="12">
                     <base-block rounded fx-shadow content-full>
                       <div class="py-4 py-md-6 text-center">
-                        <svg version="1.1" width="8em" height="8em" viewBox="0 0 261.76 226.69" xmlns="http://www.w3.org/2000/svg"><g transform="matrix(1.3333 0 0 -1.3333 -76.311 313.34)"><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-75.491l98.16-170.02 98.16 170.02z" fill="#41b883"/></g><g transform="translate(178.06 235.01)"><path d="m0 0-22.669-39.264-22.669 39.264h-36.227l58.896-102.01 58.896 102.01z" fill="#34495e"/></g></g></svg>
+                        <svg width="8em" height="8em" id="svg4063" version="1.1" viewBox="0 0 32 32.000001" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs4065"/><g id="layer1" transform="translate(0,-1020.3621)"><g id="g7827"><path d="m 5.5,1027.3621 c -0.831,0 -1.5,0.669 -1.5,1.5 l 0,14 c 0,0.831 0.669,1.5 1.5,1.5 l 1.5,0 0,-13.5 8.5,7 8.50195,-7 0,13.5 1.49805,0 c 0.831,0 1.5,-0.669 1.5,-1.5 l 0,-14 c 0,-0.831 -0.669,-1.5 -1.5,-1.5 l -1.49805,0 -8.50195,7 -8.5,-7 -1.5,0 z" id="path5220" style="opacity:1;fill:#dd5044;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4.0999999;stroke-dasharray:none"/></g></g></svg>
                       </div>
                     </base-block>
                   </b-col>
                   <b-col cols="6" md="12">
                     <base-block rounded fx-shadow content-full>
                       <div class="py-4 py-md-6 text-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="8em" height="8em" viewBox="0 0 2041 2160" clip-rule="evenodd" fill-rule="evenodd"><title data-v-555a030c="">BootstrapVue logo</title> <path data-v-555a030c="" d="m1397 271-370 642-371-642h-592l963 1667 962-1667z" fill="#34495e"></path> <path data-v-555a030c="" d="m44 0h1952l-979 1696z" fill="#563d7c" fill-rule="nonzero"></path> <path data-v-555a030c="" d="m1633 392-612 1061-613-1061h-408l1021 1768 1020-1768z" fill="#41b883"></path> <path data-v-555a030c="" d="m767 196h339c62 0 112 14 150 43 38 28 56 71 56 129 0 36-8 66-25 91s-42 44-74 58v2c43 9 75 29 98 61 22 31 33 71 33 118 0 28-5 53-15 77s-25 44-46 61c-21 18-47 31-80 41-32 11-71 16-116 16h-320zm122 292h199c29 0 54-9 73-25 20-17 29-41 29-72 0-35-8-60-26-75-17-14-43-21-76-21h-199zm0 305h216c37 0 66-10 86-29s31-46 31-81-10-61-31-80-49-28-86-28h-216z" fill="#fff"></path></svg>
+                        <svg width="8em" height="8em" style="enable-background:new 0 0 512 512;" version="1.1" viewBox="0 0 512 512" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="_x31_37-Creativecloud_x2C__creative_cloud_x2C__CC_x2C__adobe"><g><g><g><path d="M315.648,76.565c-53.652,0-101.672,23.802-134.451,61.307c-4.889-0.511-9.662-1.499-14.671-1.499      c-82.346,0-149.129,66.962-149.129,149.532c0,82.568,66.783,149.53,149.129,149.53h149.123      c98.844,0,178.955-80.33,178.955-179.438S414.492,76.565,315.648,76.565L315.648,76.565z M315.648,76.565" style="fill:#F84437;"/><path d="M315.648,106.471c-37.875,0-72.889,14.088-99.764,38.667c9.365,2.959,18.82,7.267,28.242,13.098      c0.479,0.272,0.957,0.572,1.436,0.868l0.088,0.061c19.928-14.593,44.143-22.791,69.998-22.791      c65.795,0,119.301,53.656,119.301,119.625c0,65.973-53.506,119.625-119.301,119.625c-25.766,0-50.344-8.167-71.104-23.687      c-8.41-6.219-15.268-12.772-20.998-20.005c-0.326-0.419-0.656-0.813-1.043-1.201l-44.438-54.305      c-5.25-6.403-14.649-7.355-20.995-2.096c-6.385,5.235-7.308,14.654-2.092,21.057l45.31,55.384      c0.234,0.3,0.502,0.598,0.773,0.866c7.215,8.913,15.658,16.866,25.74,24.315c25.855,19.35,56.576,29.578,88.846,29.578      c82.229,0,149.129-67.078,149.129-149.532C464.777,173.55,397.877,106.471,315.648,106.471L315.648,106.471z M315.648,106.471" style="fill:#FCFCFC;"/><path d="M181.404,374.278c-4.862,0.806-9.841,1.345-14.878,1.345c-49.337,0-89.48-40.255-89.48-89.718      c0-59.359,57.174-106.553,119.484-84.277c5.307,1.501,11.096,4.22,17.207,8.104c0.268,0.184,0.568,0.329,0.865,0.511      l93.145,58.469c7.008,4.362,16.195,2.243,20.549-4.788c4.355-6.997,2.238-16.212-4.709-20.605l-93.83-58.884      c-0.24-0.149-0.512-0.302-0.777-0.447c-8.322-5.207-16.496-8.942-23.383-10.826c-12.588-4.578-25.71-6.883-39.07-6.883      c-65.794,0-119.302,53.654-119.302,119.627c0,65.974,53.508,119.625,119.302,119.625c14.048,0,27.675-2.603,40.498-7.238      C197.359,390.965,188.951,382.979,181.404,374.278L181.404,374.278z M181.404,374.278" style="fill:#FCFCFC;"/></g></g></g></g><g id="Layer_1"/></svg>
                       </div>
                     </base-block>
                   </b-col>
@@ -105,10 +106,10 @@
                   </div>
                   <div class="ml-4">
                     <h4 class="mb-2">
-                      Vue CLI
+                      Realtime Monitoring
                     </h4>
                     <p class="text-muted">
-                      Standard tooling for Vue.js development. Out-of-the-box support for Babel, TypeScript, ESLint, PostCSS, PWA, Unit Testing &amp; End-to-end Testing.
+                      Monitor application in realtime with full security access.
                     </p>
                   </div>
                 </div>
@@ -118,10 +119,10 @@
                   </div>
                   <div class="ml-4">
                     <h4 class="mb-2">
-                      Vuex
+                      Email Automation
                     </h4>
                     <p class="text-muted">
-                      A state management pattern + library for Vue.js applications. It serves as a centralized store for all the components in an application, with rules ensuring that the state can only be mutated in a predictable fashion.
+                      Applicants get reported automatically according to test results
                     </p>
                   </div>
                 </div>
@@ -131,10 +132,10 @@
                   </div>
                   <div class="ml-4">
                     <h4 class="mb-2">
-                      BootstrapVue
+                      Library 1000+
                     </h4>
                     <p class="text-muted">
-                      You can build responsive, mobile-first, and ARIA accessible projects on the web using Vue.js and the world's most popular front-end CSS library — Bootstrap 4.
+                      Get access to thousands of questions and host unlimited assignments
                     </p>
                   </div>
                 </div>
@@ -153,15 +154,15 @@
           <b-row class="mb-5">
             <b-col md="6">
               <h2 class="h1 font-w700 mb-2">
-                Sophisticated <span class="font-w400">Features</span>
+                Get access to <span class="font-w400">100+ Features</span>
               </h2>
               <p class="font-size-lg font-w500 text-muted mb-0">
-                Comes packed with great features and development tools, based on OneUI Remastered design.
+                Maintain all HR activities and Monitoring, all at one place. 
               </p>
             </b-col>
             <b-col md="6" class="d-none d-md-flex align-items-md-center justify-content-md-end">
               <p class="h1 font-w700 text-body-bg-dark mb-0">
-                Fully Loaded.
+                Tested end-to-end
               </p>
             </b-col>
           </b-row>
@@ -169,55 +170,44 @@
             <b-col sm="6" md="4" xl="3">
               <!-- Bootstrap 4 -->
               <div class="item item-rounded bg-amethyst-lighter my-4">
-                <i class="fa fa-2x fa-fire text-amethyst"></i>
+                <i class="fa fa-2x fa-tv text-amethyst"></i>
               </div>
-              <h4 class="mb-2">Bootstrap 4</h4>
+              <h4 class="mb-2">Dashboard 2.0</h4>
               <p class="text-muted">
-                The latest Bootstrap version powers the framework. Flexbox support and tons of new features are ready for you to use.
+                Get access to realtime monitoring of all the live applicants and respective scores
               </p>
               <!-- END Bootstrap 4 -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
               <!-- Sass -->
               <div class="item item-rounded bg-danger-light my-4">
-                <i class="fab fa-2x fa-sass text-danger"></i>
+                <i class="fa fa-2x fa-swatchbook text-danger"></i>
               </div>
-              <h4 class="mb-2">Sass</h4>
+              <h4 class="mb-2">Library</h4>
               <p class="text-muted">
-                Sass is used to override and extent Bootstrap in an intelligent way to ensure a perfect and modular workflow.
+                Create assignments from thousands of both practical and theoretical questions all set on auto assist
               </p>
               <!-- END Sass -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
-              <!-- ES6 -->
-              <div class="item item-rounded bg-warning-light my-4">
-                <span class="font-w700 text-warning">ES6</span>
-              </div>
-              <h4 class="mb-2">ECMAScript 6</h4>
-              <p class="text-muted">
-                ES6, the new major JavaScript release, is used, which enables us writing cleaner and better code.
-              </p>
-              <!-- END ES6 -->
-            </b-col>
-            <b-col sm="6" md="4" xl="3">
               <!-- FontAwesome 5 -->
               <div class="item item-rounded bg-flat-lighter my-4">
-                <i class="fab fa-2x fa-font-awesome text-flat"></i>
+                <i class="fa fa-2x fa-network-wired text-flat"></i>
               </div>
-              <h4 class="mb-2">FontAwesome 5</h4>
+              <h4 class="mb-2">Email Automation</h4>
               <p class="text-muted">
-                The latest Font Awesome version is available, bringing you over 1300 freshly made icons to be used in your projects.
+                Setup HR activities on automation by enabling Email automation advance feature
               </p>
               <!-- END FontAwesome 5 -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
               <!-- webpack -->
               <div class="item item-rounded bg-default-lighter my-4">
-                <i class="fa fa-2x fa-boxes text-default"></i>
+                <i class="fab fa-2x fa-wpforms text-default"></i>
               </div>
-              <h4 class="mb-2">webpack + Babel</h4>
+              <h4 class="mb-2">Dynamic Form</h4>
               <p class="text-muted">
-                Babel makes your JS code compatible with older browsers and webpack bundles your asset files together. Works out-of-the-box with Vue CLI.
+                Host your custom form and host url. Let applicants apply for test directly from your website
               </p>
               <!-- END webpack -->
             </b-col>
@@ -228,73 +218,84 @@
               </div>
               <h4 class="mb-2">User Interface</h4>
               <p class="text-muted">
-                Develop and manage your projects through an accompanying graphical user interface. Perfect for managing your tasks &amp; dependencies.
+                Develop and manage your projects through an accompanying graphical user interface.
               </p>
               <!-- END User Interface -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
+              <!-- ES6 -->
+              <div class="item item-rounded bg-warning-light my-4">
+                <i class="fa fa-2x fa-mail-bulk text-warning"></i>
+              </div>
+              <h4 class="mb-2">Templates</h4>
+              <p class="text-muted">
+                Write and store email templates and set them for Email Automation
+              </p>
+              <!-- END ES6 -->
+            </b-col>
+            <b-col sm="6" md="4" xl="3">
               <!-- Hot Reload -->
               <div class="item item-rounded bg-city-lighter my-4">
-                <i class="fa fa-2x fa-sync-alt text-city"></i>
+                <i class="fab fa-2x fa-cloudsmith text-city"></i>
               </div>
-              <h4 class="mb-2">Hot Reload</h4>
+              <h4 class="mb-2">Deploy Assignments</h4>
               <p class="text-muted">
-                When you edit a .vue file, all instances of that component will be swapped in without reloading the page. It also preserves current state.
+                Create and deploy your custom assignemnts in a minute with easy one-to-one mapping
               </p>
               <!-- END Hot Reload -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
               <!-- Autoprefixer -->
               <div class="item item-rounded bg-smooth-lighter my-4">
-                <i class="fab fa-2x fa-autoprefixer text-smooth"></i>
+                <i class="fa fa-2x fa-user-edit text-smooth"></i>
               </div>
-              <h4 class="mb-2">Autoprefixer</h4>
+              <h4 class="mb-2">Feedback</h4>
               <p class="text-muted">
-                Peace of mind when working with Sass. Use the latest CSS syntax and Autoprefixer will auto add any required prefixes for older browsers.
+                Get notified instantly on any techinical errors reported by applicants from client's end
               </p>
               <!-- END Autoprefixer -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
               <!-- Components -->
               <div class="item item-rounded bg-gray-light my-4">
-                <i class="fa fa-2x fa-truck-loading text-dark"></i>
+                <i class="fab fa-2x fa-git-alt text-dark"></i>
               </div>
-              <h4 class="mb-2">Components</h4>
+              <h4 class="mb-2">Form APIs</h4>
               <p class="text-muted">
-                Custom vital components are available to be used in your Vue.js templates, making it easier to structure your page content.
+                Get unique form url and attach with custom website forms to enable submissions from anywhere
               </p>
               <!-- END Components -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
               <!-- Remastered  Design -->
               <div class="item item-rounded bg-info-light my-4">
-                <i class="fa fa-2x fa-brush text-info"></i>
+                <i class="fa fa-2x fa-pen-fancy text-info"></i>
               </div>
-              <h4 class="mb-2">Remastered Design</h4>
+              <h4 class="mb-2">Custom Question</h4>
               <p class="text-muted">
-                Using the latest styles from OneUI Remastered version, you can be sure that all design elements are available in the Vue Edition as well.
+                All sections have to option to write, test and submit custom question which adds to library automatically
               </p>
               <!-- END Remastered  Design -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
               <!-- Layout Features -->
               <div class="item item-rounded bg-success-light my-4">
-                <i class="fa fa-2x fa-smile-wink text-success"></i>
+                <i class="fa fa-2x fa-envelope-open-text text-success"></i>
               </div>
-              <h4 class="mb-2">Layout Features</h4>
+              <h4 class="mb-2">Custom Mail</h4>
               <p class="text-muted">
-                Dark header, light sidebar, flexbox based layout, page overlay, header search and even more layout features are all available.
+                Access to dedicated dashboard and option to write custom emails directly from admin panel
               </p>
               <!-- END Layout Features -->
             </b-col>
             <b-col sm="6" md="4" xl="3">
               <!-- APIs -->
               <div class="item item-rounded bg-warning-light my-4">
-                <i class="fa fa-2x fa-wrench text-warning"></i>
+                <i class="fab fa-2x fa-connectdevelop text-warning"></i>
               </div>
-              <h4 class="mb-2">APIs</h4>
+              <h4 class="mb-2">Live Code</h4>
               <p class="text-muted">
-                Easily manipulate blocks and layout features on the fly from any component in your application. Either with buttons or JS code.
+                Easy interview sessions with Live coding environment synced with applicant and admin panel
               </p>
               <!-- END APIs -->
             </b-col>
@@ -313,7 +314,7 @@
               Trusted by over 4.000 developers and teams
             </h2>
             <p class="font-size-lg text-white-50 mb-6 mx-sm-6 mx-lg-9">
-              <a class="text-primary-light" href="https://1.envato.market/AVD6j">OneUI</a> is one of the Best Seller and Best Rated admin templates on Themeforest. Its success made possible the development of Vue Edition.
+              <a class="text-primary-light" href="https://1.envato.market/AVD6j">Einfach</a> is one of the top developer hiring environments which has 100+ features bundled in single package
             </p>
             <b-row no-gutters class="mx-lg-8">
               <b-col sm="4" class="p-3">
@@ -334,10 +335,10 @@
               </b-col>
               <b-col sm="4" class="p-3">
                 <p class="font-size-h1 font-w700 text-white-75 mb-0">
-                  21
+                  50+
                 </p>
                 <p class="font-size-lg text-white-50 mb-0">
-                  Free Updates
+                  Components
                 </p>
               </b-col>
             </b-row>
@@ -352,16 +353,16 @@
       <div class="content content-full content-boxed">
         <div class="py-5 py-md-8 text-center">
           <h2 class="font-w700 mb-2">
-              Crafted with <i class="fa fa-fw fa-heart text-city"></i> by <a class="link-fx" href="https://1.envato.market/ydb">pixelcave</a>
+              Starting with a <span class="text-success">Free Trial</span>
           </h2>
           <p class="font-size-lg font-w500 text-muted mb-4">
-              Passionate web design and development with over 13.000 customers worldwide.
+              100+ features bundled in single package accessible from $99 onwards
           </p>
-          <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://1.envato.market/5Noyb" v-click-ripple>
+          <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="#" v-click-ripple>
             <i class="fa fa-fw fa-shopping-cart font-size-base opacity-50 mr-1"></i> Purchase
           </b-button>
-          <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 m-1" to="/backend/dashboard" v-click-ripple>
-            <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Live Preview
+          <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 m-1" to="/auth/signup" v-click-ripple>
+            <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Sign Up
           </b-button>
         </div>
       </div>
@@ -373,10 +374,10 @@
       <div class="content content-boxed py-5">
         <b-row class="font-size-sm font-w500">
           <b-col sm="6" order-sm="2" class="py-1 text-center text-sm-right">
-            Crafted with <i class="fa fa-heart text-danger"></i> by <a class="font-w600" href="https://1.envato.market/5Noyb">pixelcave</a>
+            <a class="ml-2 font-w600" href="#">support@einfach.tech</a>
           </b-col>
           <b-col sm="6" order-sm="1" class="py-1 text-center text-sm-left">
-            <a class="font-w600" href="https://1.envato.market/5Noyb">{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</a> &copy; {{ $store.getters.appCopyright }}
+            <a class="font-w600" href="#">{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</a> &copy; {{ $store.getters.appCopyright }}
           </b-col>
         </b-row>
       </div>

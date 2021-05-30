@@ -25,6 +25,16 @@
             Reset
           </b-button>
         </template>
+        
+        <b-form-input
+        class="mb-2"
+          id="sub1"
+          name="sub1"
+          v-model="subject.sub1"
+          placeholder="Email subject"
+          aria-describedby="sub1-feedback"
+        ></b-form-input>
+
         <div class="pb-4">
           <ckeditor
             :editor="ckeditor"
@@ -44,6 +54,15 @@
             Reset
           </b-button>
         </template>
+        
+        <b-form-input
+        class="mb-2"
+          id="sub2"
+          name="sub2"
+          v-model="subject.sub2"
+          placeholder="Email subject"
+          aria-describedby="sub2-feedback"
+        ></b-form-input>
         <div class="pb-4">
           <ckeditor
             :editor="ckeditor"
@@ -61,6 +80,15 @@
             Reset
           </b-button>
         </template>
+        
+        <b-form-input
+        class="mb-2"
+          id="sub3"
+          v-model="subject.sub3"
+          name="sub3"
+          placeholder="Email subject"
+          aria-describedby="sub3-feedback"
+        ></b-form-input>
         <div class="pb-4">
           <ckeditor
             :editor="ckeditor"
@@ -77,6 +105,20 @@
 
 
 <script>
+// Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
+import Vue from "vue";
+import VueSweetalert2 from "vue-sweetalert2";
+
+const options = {
+  buttonsStyling: false,
+  customClass: {
+    confirmButton: "btn btn-success m-1",
+    cancelButton: "btn btn-danger m-1",
+    input: "form-control",
+  },
+};
+// Register Vue SweetAlert2 with custom options
+Vue.use(VueSweetalert2, options);
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import CKEditor from "@ckeditor/ckeditor5-vue2";
 import firebase from "../../firebase";
@@ -90,6 +132,11 @@ export default {
       ckeditorData1: "<p>Hello CKEditor5!</p>",
       ckeditorData2: "<p>Hello CKEditor2!</p>",
       ckeditorData3: "<p>Hello CKEditor35!</p>",
+      subject: {
+        sub1: null,
+        sub2: null,
+        sub3: null
+      },
       ckeditorConfig: {
         // The configuration of the editor
       },
@@ -103,9 +150,15 @@ export default {
       const email = {'emailTemplates': {
       'invite':this.$store.state.firestoreData.emailTemplates.invite,
       'shortlisted':this.$store.state.firestoreData.emailTemplates.shortlisted,
-      'rejected':this.$store.state.firestoreData.emailTemplates.rejected
+      'rejected':this.$store.state.firestoreData.emailTemplates.rejected,
+      'subjects': {
+      'invite':this.subject.sub1,
+      'shortlisted':this.subject.sub2,
+      'rejected':this.subject.sub3
+      }
       }}
       await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.docId).set(email, { merge: true })
+      await this.$swal("Successfully Added")
 
     }
   }
