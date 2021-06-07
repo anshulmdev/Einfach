@@ -301,32 +301,19 @@ export default {
     return {
       sliderValueNormal: 2,
       tags: {
-        css: { danger: "CSS" },
-        javascript: { warning: "JavaScript" },
-        angular: { danger: "Angular" },
+        nodejs: { success: "Node Js" },
         React: { info: "React" },
         vuejs: { success: "Vue.js" },
-        php: { info: "PHP" },
-        ruby: { danger: "Ruby" },
-        asp: { primary: "ASP.NET" },
         python: { success: "Python" },
-        mysql: { info: "MySQL" },
+        mysql: { info: "NoSQL" },
       },
       options2: [
         { value: null, text: "Please select" },
-        { value: "css", text: "CSS" },
-        {
-          value: "javascript",
-          text: "JavaScript",
-        },
-        { value: "angular", text: "Angular" },
+        { value: "nodejs", text: "Node Js" },
         { value: "react", text: "React" },
         { value: "vuejs", text: "Vue.js" },
-        { value: "ruby", text: "Ruby" },
-        { value: "php", text: "PHP" },
-        { value: "asp", text: "ASP.NET" },
         { value: "python", text: "Python" },
-        { value: "mysql", text: "MySQL" },
+        { value: "nosql", text: "NoSQL" },
       ],
       formDetails: null,
       form2: {
@@ -339,7 +326,7 @@ export default {
       options: [
         { value: null, text: 'Please select' },
         { value: 1, text: 'JavaScript' },
-        { value: 2, text: 'Python' },
+        { value: 2, text: 'Node Js' },
         { value: 2, text: 'Frontend' },
         { value: 2, text: 'Backend' }
       ],
@@ -388,7 +375,7 @@ export default {
     logo: this.imagesUrl
   // eslint-disable-next-line no-unused-vars
   }).then((e) => {
-    this.formUrl = `http://localhost:8080/#/auth/applications/${this.$store.state.firestoreData.docId}`
+    this.formUrl = `http://app.einfach.tech/apply/${this.$store.state.firestoreData.docId}`
   });
     },
     addField (name,type){

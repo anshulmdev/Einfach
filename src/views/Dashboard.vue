@@ -9,7 +9,7 @@
           <div class="flex-sm-fill">
             <h1 class="h3 font-w700 mb-2">Main Dashboard</h1>
             <h2 class="h6 font-w500 text-muted mb-0">
-              Welcome
+              Welcome {{$store.state.scoreData}} {{ this.$cookies.get("setDocId")}}
               <a class="font-w600" href="javascript:void(0)">{{
                 $store.state.firestoreData.user.name.split(" ")[0]
               }}</a
@@ -62,7 +62,7 @@
             rounded
             link-pop
             content-class="d-flex py-4"
-            href="javascript:void(0)"
+            href="/#/backend/applicants/Invited"
           >
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">
@@ -83,7 +83,7 @@
             rounded
             link-pop
             content-class="d-flex py-4"
-            href="javascript:void(0)"
+            href="/#/backend/applicants/Completed"
           >
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">
@@ -212,7 +212,7 @@
         >
           <div class="block block-rounded block-themed block-transparent mb-0">
             <div class="block-header bg-primary-dark">
-              <h3 class="block-title">Modal Title</h3>
+              <h3 class="block-title">Candidate Resume</h3>
               <div class="block-options">
                 <button
                   type="button"
@@ -338,7 +338,7 @@
               <button
                 type="button"
                 class="btn-block-option"
-                @click="$bvModal.hide('modal-block-extra-large')"
+                @click="$bvModal.hide('modal-block-extra-large2')"
               >
                 <i class="fa fa-fw fa-times"></i>
               </button>
@@ -351,12 +351,12 @@
             <b-button
               variant="alt-success"
               class="mr-1"
-              @click="$bvModal.hide('modal-block-extra-large')"
+              @click="$bvModal.hide('modal-block-extra-large2')"
               >Close</b-button
             >
             <b-button
               variant="success"
-              @click="$bvModal.hide('modal-block-extra-large')"
+              @click="$bvModal.hide('modal-block-extra-large2')"
               >Ok</b-button
             >
           </div>
@@ -486,6 +486,8 @@ export default {
   },
   data() {
     return {
+      ongoing: [],
+      shortlisted: [],
       url: "https://static.thenounproject.com/png/543772-200.png",
       chartjsStyles: {
         position: "relative",

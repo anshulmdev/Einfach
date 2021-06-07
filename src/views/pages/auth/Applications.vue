@@ -43,9 +43,9 @@
                   Please enter a valid email address
                 </b-form-invalid-feedback>
               </b-form-group>
-              <b-form-group label="Select" label-for="skill">
+              <b-form-group label="Select" label-for="Language">
                 <template #label>
-                  Best Skill <span class="text-danger">*</span>
+                  Experience <span class="text-danger">*</span>
                 </template>
                 <b-form-select
                   id="skill"
@@ -181,32 +181,19 @@ export default {
       resume: '',
       sliderValueNormal: 2,
       tags: {
-        css: { danger: "CSS" },
-        javascript: { warning: "JavaScript" },
-        angular: { danger: "Angular" },
+        nodejs: { success: "Node Js" },
         React: { info: "React" },
         vuejs: { success: "Vue.js" },
-        php: { info: "PHP" },
-        ruby: { danger: "Ruby" },
-        asp: { primary: "ASP.NET" },
         python: { success: "Python" },
-        mysql: { info: "MySQL" },
+        mysql: { info: "NoSQL" },
       },
       options: [
         { value: null, text: "Please select" },
-        { value: "css", text: "CSS" },
-        {
-          value: "javascript",
-          text: "JavaScript",
-        },
-        { value: "angular", text: "Angular" },
+        { value: "nodejs", text: "Node Js" },
         { value: "react", text: "React" },
         { value: "vuejs", text: "Vue.js" },
-        { value: "ruby", text: "Ruby" },
-        { value: "php", text: "PHP" },
-        { value: "asp", text: "ASP.NET" },
         { value: "python", text: "Python" },
-        { value: "mysql", text: "MySQL" },
+        { value: "nosql", text: "NoSQL" },
       ],
       formDetails: null,
       form: {

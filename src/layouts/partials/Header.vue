@@ -15,8 +15,10 @@
             <i class="far fa-clock mr-1"></i> Time: {{$store.state.newAssignment.time}} mins</b-button>
               <b-button variant="alt-success" class="mx-2">
             <i class="far fa-question-circle mr-1"></i> Questions: {{$store.state.newAssignment.questions}}</b-button>
-              <b-button variant="alt-danger" @click="$store.state.newAssignment = {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}}" class="mx-2">
+              <b-button variant="alt-danger" @click="$store.state.newAssignment = {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}, name: 'Assignment Name', cutoff: 100}" class="mx-2">
             <i class="fa fa-window-close mr-1"></i> Close</b-button>
+            <b-button variant="alt-primary" v-b-modal.openTime class="mx-2">
+            <i class="fa fa-window-close mr-1"></i> Edit</b-button>
               <b-button variant="alt-info" @click="deploy()" class="mx-2">
             <i class="fab fa-cloudversify mr-1"></i> Deploy</b-button>
         </div>
@@ -361,7 +363,35 @@
       </div>
       <!-- END Header Loader -->
     </slot>
-  </header></div>
+  </header>
+            <b-modal id="openTime" size="lg" body-class="p-0" hide-footer hide-header>
+            <div class="block block-rounded block-themed block-transparent mb-0">
+              <div class="block-header bg-primary-dark">
+                <h3 class="block-title">Change Time Limit</h3>
+                <div class="block-options">
+                  <button type="button" class="btn-block-option" @click="$bvModal.hide('openTime')">
+                    <i class="fa fa-fw fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="block-content font-size-sm mb-4">
+                <b-form-group label="Name for Assignment" label-for="example-text-input">
+                <b-form-input v-model="$store.state.newAssignment.name" id="example-text-input" placeholder="Name of Assignment"></b-form-input>
+                </b-form-group>
+                <b-form-group label="Cutoff for Assignment" label-for="example-text-input" type="number">
+                <b-form-input v-model="$store.state.newAssignment.cutoff" id="example-text-input" placeholder="Assignment cutoff"></b-form-input>
+                </b-form-group>
+                <b-form-group label="Time limit for Assignment" label-for="example-text-input" type="number">
+                <b-form-input v-model="$store.state.newAssignment.time" id="example-text-input" placeholder="Time in Minutes"></b-form-input>
+                </b-form-group>
+              </div>
+              <div class="block-content block-content-full text-right border-top">
+                <b-button variant="alt-primary" class="mr-1" @click="$bvModal.hide('openTime')">Close</b-button>
+                <b-button variant="primary" @click="$bvModal.hide('openTime')">Ok</b-button>
+              </div>
+            </div>
+          </b-modal>
+  </div>
   <!-- END Header -->
 </template>
 
@@ -422,7 +452,7 @@ export default {
         }
       }).then(result => {
         if (result.value) {
-          this.$swal('Test link for Emails', `http://app.einfach.tech/auth/login/${this.$store.state.firestoreData.docId}`, 'success')
+          this.$swal('Test link for Emails', `http://app.einfach.in/auth/login/${this.$store.state.firestoreData.docId}`, 'success')
           // result.dismiss can be 'overlay', 'cancel', 'close', 'esc', 'timer'
         }
       })

@@ -80,7 +80,7 @@
           <b-modal id="modal-block-extra-large" size="xl" body-class="p-0" hide-footer hide-header>
             <div class="block block-rounded block-themed block-transparent mb-0">
               <div class="block-header bg-primary-dark">
-                <h3 class="block-title">Modal Title</h3>
+                <h3 class="block-title">Resume</h3>
                 <div class="block-options">
                   <button type="button" class="btn-block-option" @click="$bvModal.hide('modal-block-extra-large')">
                     <i class="fa fa-fw fa-times"></i>

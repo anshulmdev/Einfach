@@ -116,7 +116,7 @@
       >
         <div class="block block-rounded block-themed block-transparent mb-0">
           <div class="block-header bg-primary-dark">
-            <h3 class="block-title">Modal Title</h3>
+            <h3 class="block-title">Resume</h3>
             <div class="block-options">
               <button
                 type="button"
@@ -233,7 +233,7 @@ export default {
       const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite.replace('[CANDIDATE NAME]', name);
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch(
-        "https://hook.integromat.com/suo7mmt1h3qfyez1dek7u8xzkbhhesq7",
+        "https://anshul9760.api.stdlib.com/autoemail@dev/",
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           mode: "cors", // no-cors, *cors, same-origin

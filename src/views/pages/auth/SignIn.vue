@@ -98,6 +98,15 @@ firebase.auth().signInWithEmailAndPassword(this.form.username, this.form.passwor
   .then((userCredential) => {
     // Signed in
     var user = userCredential.user;
+    const query = firebase.firestore().collection('accounts').where('uid', '==', user.uid)
+        // eslint-disable-next-line no-unused-vars
+        const observer = query.onSnapshot(querySnapshot => {
+          querySnapshot.docChanges().forEach(change => {
+            this.$cookies.set('setDocId',change.doc.id);
+            this.$store.commit('setDocId', change.doc.id)
+          })}, err => {
+          console.log(`Encountered error: ${err}`);
+        })
     this.$cookies.set('uid',user.uid);
     this.$store.commit('setAuth',user.uid)
       this.$router.push('/backend/dashboard')

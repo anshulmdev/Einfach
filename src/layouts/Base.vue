@@ -146,6 +146,9 @@ export default {
     if (this.$cookies.get("uid")) {
       this.$store.commit("setAuth", this.$cookies.get("uid"));
     }
+    if (this.$cookies.get("setDocId")) {
+      this.$store.commit('setDocId', this.$cookies.get("setDocId"))
+    }
     else{
       this.$router.push('/')}
   },

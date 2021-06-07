@@ -377,7 +377,7 @@ export default {
     createAccount (uid){
       const data = this.form
       const user = {name: data.companyName, email: data.email, logo: this.imagesUrl, website: data.companyWebsite}
-      const emailTemplates = {invite: '', rejected: '', shortlisted: ''}
+      const emailTemplates = {invite: '', rejected: '', shortlisted: '', subjects: {invite: '', rejected: '', shortlisted: ''}}
       const candidates = {applied: [], invited: [], ongoing: [], shortlisted: [], completed: []}
       const inbox = {invited: [{body: 'Welcome',email: 'am@einfach.tech',received: new Date(), title: 'New Account',user: "admin@einfach.tech"}]}
       firebase.firestore().collection("accounts").doc()

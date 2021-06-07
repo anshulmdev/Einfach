@@ -71,7 +71,6 @@ const ApplicantsInvited = () => import("@/views/applicants/Invited.vue")
 const ApplicantsRejected = () => import("@/views/applicants/Rejected.vue")
 const ApplicantsShortlisted = () => import("@/views/applicants/Shortlisted.vue")
 const ApplicantsCompleted = () => import("@/views/applicants/Completed.vue")
-const AuthApplications = () => import(/* webpackChunkName: "auth-Applications" */"@/views/pages/auth/Applications.vue")
 
 // Backend: Library
 const LibraryRegex = () => import("@/views/library/Regex.vue")
@@ -152,6 +151,7 @@ const PagesErrorsAll = () => import("@/views/pages/errors/All.vue")
 
 // Pages: Auth
 const AuthSignIn = () => import(/* webpackChunkName: "auth-signin" */"@/views/pages/auth/SignIn.vue")
+const AuthApplications = () => import(/* webpackChunkName: "auth-Applications" */"@/views/pages/auth/Applications.vue")
 const AuthSignIn2 = () => import(/* webpackChunkName: "auth-signin2" */"@/views/pages/auth/SignIn2.vue")
 const AuthSignIn3 = () => import(/* webpackChunkName: "auth-signin3" */"@/views/pages/auth/SignIn3.vue")
 const AuthSignUp = () => import(/* webpackChunkName: "auth-signup" */"@/views/pages/auth/SignUp.vue")
@@ -246,7 +246,6 @@ export default new Router({
         {
           path: 'Applications/:id',
           name: 'Applications',
-          props: true,
           component: AuthApplications
         },
         {

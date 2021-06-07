@@ -122,7 +122,7 @@
       >
         <div class="block block-rounded block-themed block-transparent mb-0">
           <div class="block-header bg-primary-dark">
-            <h3 class="block-title">Modal Title</h3>
+            <h3 class="block-title">Resume</h3>
             <div class="block-options">
               <button
                 type="button"
@@ -236,12 +236,12 @@ export default {
     // eslint-disable-next-line no-unused-vars
     async invite(name, email, index) {
       const details = this.$store.state.firestoreData.candidates.applied[index];
-      const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite.replace('[CANDIDATE NAME]', name);
+      const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite.replace('[name]', name);
+      const subject = this.$store.state.firestoreData.emailTemplates.subjects.invite;
       const invited = {user:name, body: emailTemplate, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}
       this.loading.push(index)
-      // eslint-disable-next-line no-unused-vars
-      const sendEmail = await fetch(
-        "https://hook.integromat.com/suo7mmt1h3qfyez1dek7u8xzkbhhesq7",
+      await fetch(
+        "https://anshul9760.api.stdlib.com/autoEmail@dev/",
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           mode: "cors", // no-cors, *cors, same-origin
@@ -253,7 +253,7 @@ export default {
           },
           redirect: "follow", // manual, *follow, error
           referrerPolicy: "no-referrer",
-          body: JSON.stringify({ name, email, emailTemplate }),
+          body: JSON.stringify({ name, email, emailTemplate, subject }),
         }
       );
       const entry = await firebase
@@ -269,6 +269,7 @@ export default {
       await entry.update({
         "inbox.invited": firebase.firestore.FieldValue.arrayUnion(invited),
       });
+      this.$swal('Invited Successfully')
       this.loading = []
     },
   },

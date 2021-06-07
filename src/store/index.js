@@ -23,7 +23,8 @@ export default new Vuex.Store({
   state: {
     authUid: '2jfmeB9gjKcy7cMA4sthOKDvOOB2',
     firestoreData: null,
-    newAssignment: {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}},
+    docId: null,
+    newAssignment: {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}, name: 'Assignment Name', cutoff: 100},
     // App vital details
     app: {
       name: 'Einfach Tech',
@@ -80,22 +81,49 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    getFirestoreData () {
-        const query = firebase.firestore().collection('accounts').where('uid', '==', this.state.authUid)
-        // eslint-disable-next-line no-unused-vars
-        const observer = query.onSnapshot(querySnapshot => {
-          querySnapshot.docChanges().forEach(change => {
-            this.state.firestoreData = change.doc.data()
-            this.state.firestoreData.docId = change.doc.id
-          })}, err => {
-          console.log(`Encountered error: ${err}`);
-        });}
+    async getFirestoreData () {
+        const query = await firebase.firestore().collection('accounts').doc(this.state.docId).get()
+        const data = await query.data()
+        this.state.firestoreData = data
+        this.state.firestoreData.docId = this.state.docId
+        this.dispatch('assignScore')
+      },
+      async assignScore (){
+        const scoreQuery = await firebase.firestore().collection('scores').doc(this.state.docId).get()
+        const ongoing = this.state.firestoreData.candidates.ongoing
+        const shortlist = this.state.firestoreData.candidates.shortlisted
+        const scoreFunction = nums => {
+          let score = 0
+          Object.keys(nums).forEach((e) => {
+            if (e === 'coding') {
+              score += Object.values(nums[e]).reduce((a, b) => a + b, 0)
+            } else{
+              score += nums[e].score
+            }
+          })
+          return score
+        }
+        for (let i=0; i < ongoing.length; i++) {
+          if (scoreQuery.data()[ongoing[i].email]){
+            ongoing[i].score = scoreFunction(scoreQuery.data()[ongoing[i].email])
+          }
+        }
+        for (let i=0; i < shortlist.length; i++) {
+          if (scoreQuery.data()[shortlist[i].email]){
+            shortlist[i].score = scoreFunction(scoreQuery.data()[shortlist[i].email])
+          }
+        }
+
+      }
   },
   mutations: {
 
     //auth
     async setAuth (state,payload){
       state.authUid = payload
+    },
+    setDocId  (state,payload){
+      state.docId = payload
       this.dispatch('getFirestoreData')
     },
     // Sets the layout, useful for setting different layouts (under layouts/variations/) 
