@@ -9,7 +9,7 @@
           <div class="flex-sm-fill">
             <h1 class="h3 font-w700 mb-2">Main Dashboard</h1>
             <h2 class="h6 font-w500 text-muted mb-0">
-              Welcome {{$store.state.scoreData}} {{ this.$cookies.get("setDocId")}}
+              Welcome {{$store.state.scoreData}}
               <a class="font-w600" href="javascript:void(0)">{{
                 $store.state.firestoreData.user.name.split(" ")[0]
               }}</a
