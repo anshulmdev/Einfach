@@ -143,14 +143,15 @@ export default {
     this.$store.commit("setColorTheme", {
       theme: this.$store.getters.appColorTheme,
     });
-    if (this.$cookies.get("uid")) {
+    setTimeout(() => {
+      if (this.$cookies.get("uid") && this.$cookies.get("setDocId")) {
       this.$store.commit("setAuth", this.$cookies.get("uid"));
-    }
-    if (this.$cookies.get("setDocId")) {
       this.$store.commit('setDocId', this.$cookies.get("setDocId"))
     }
     else{
-      this.$router.push('/')}
+      this.$router.push('/')
+      }
+    }, 2000);
   },
 };
 </script>

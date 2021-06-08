@@ -25,7 +25,7 @@
           <div class="row mb-4">
             <!-- Company Info -->
             <div class="col-6 font-size-sm">
-              <p class="h3">Einfach Tech</p>
+              <p class="h3">Einfach</p>
               <address>
                 718 Block A<br>
                 State, City<br>

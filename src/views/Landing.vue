@@ -12,10 +12,10 @@
                 <div class="d-flex">
                 <i class="fab fa-buffer mt-1 text-success" color="primary" style="font-size: 2.5em;"></i>
                 <h1 class="font-w700 mb-3 ml-3">
-                  <span class="">Einfach</span> <span class="font-w300">Tech</span>
+                  <span class="">Einfach</span>
                 </h1></div>
                 <p class="font-size-lg font-w500 text-muted mb-4">
-                  Einfach Tech is a complete hiring package that helps you recruit tech teams with ease.<br> Complete <a href="https://1.envato.market/AVD6j">Architecture</a> to deploy and manage tech hiring
+                  Einfach is a complete hiring package that helps you recruit tech teams with ease.<br> Complete <a href="https://1.envato.market/AVD6j">Architecture</a> to deploy and manage tech hiring
                 </p>
                 <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" to="/auth/signin" v-click-ripple>
                   <i class="fa fa-fw fa-user font-size-base opacity-50 mr-1"></i> Sign In
@@ -374,7 +374,7 @@
       <div class="content content-boxed py-5">
         <b-row class="font-size-sm font-w500">
           <b-col sm="6" order-sm="2" class="py-1 text-center text-sm-right">
-            <a class="ml-2 font-w600" href="#">support@einfach.tech</a>
+            <a class="ml-2 font-w600" href="#">support@einfach.in</a>
           </b-col>
           <b-col sm="6" order-sm="1" class="py-1 text-center text-sm-left">
             <a class="font-w600" href="#">{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</a> &copy; {{ $store.getters.appCopyright }}

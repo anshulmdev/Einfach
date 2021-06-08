@@ -113,7 +113,7 @@
               </router-link>
             </template>
             <div class="p-sm-3 px-lg-4 py-lg-5">
-              <h1 class="h2 mb-1">Einfach Tech</h1>
+              <h1 class="h2 mb-1">Einfach</h1>
               <p class="text-muted mb-2">
                 Please fill the following details to create a new account.
               </p>

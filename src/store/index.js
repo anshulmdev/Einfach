@@ -27,7 +27,7 @@ export default new Vuex.Store({
     newAssignment: {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}, name: 'Assignment Name', cutoff: 100},
     // App vital details
     app: {
-      name: 'Einfach Tech',
+      name: 'Einfach',
       version: process.env.PACKAGE_VERSION,
       copyright: helpers.getCurrentYear()
     },

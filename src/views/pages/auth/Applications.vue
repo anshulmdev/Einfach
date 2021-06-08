@@ -253,7 +253,7 @@ export default {
       }
 
       // Form submit logic
-      this.$router.push("/backend");
+      this.$router.push("/backend/dashboard");
     },
   },
 };

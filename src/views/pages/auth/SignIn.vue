@@ -13,7 +13,7 @@
               </router-link>
             </template>
             <div class="p-sm-3 px-lg-4 py-lg-5">
-              <h1 class="h2 mb-1">Einfach Tech</h1>
+              <h1 class="h2 mb-1">Einfach</h1>
               <p class="text-muted">
                 Welcome, please login.
               </p>
@@ -109,15 +109,11 @@ firebase.auth().signInWithEmailAndPassword(this.form.username, this.form.passwor
         })
     this.$cookies.set('uid',user.uid);
     this.$store.commit('setAuth',user.uid)
-      this.$router.push('/backend/dashboard')
+    this.$router.push('/backend/dashboard')
     // ...
   })
   .catch(() => {
   });
-      setTimeout(() => {
-        // Form submit logic
-      this.$router.push('/')
-      }, 1000);
     }
   }
 }
