@@ -52,7 +52,7 @@
               </div>
             </div>
             <div class="d-flex ml-2">
-              <div class="flex-grow-1 px-1 bg-success-light rounded-lg"></div>
+              <div class="flex-grow-1 px-1 bg-warning-light rounded-lg"></div>
             </div>
           </base-block>
         </b-col>
@@ -73,7 +73,28 @@
               </div>
             </div>
             <div class="d-flex ml-2">
-              <div class="flex-grow-1 px-1 bg-danger-light rounded-lg"></div>
+              <div class="flex-grow-1 px-1 bg-info-light rounded-lg"></div>
+            </div>
+          </base-block>
+        </b-col>
+        <b-col cols="6" md="3" lg="6" xl="3">
+          <base-block
+            tag="a"
+            rounded
+            link-pop
+            content-class="d-flex py-4"
+            href="/#/backend/applicants/Shortlisted"
+          >
+            <div class="flex-grow-1">
+              <div class="font-size-sm font-w600 text-uppercase text-muted">
+                Shortlisted
+              </div>
+              <div class="font-size-h3">
+                {{ $store.state.firestoreData.candidates.shortlisted.length }}
+              </div>
+            </div>
+            <div class="d-flex ml-2">
+              <div class="flex-grow-1 px-1 bg-success-light rounded-lg"></div>
             </div>
           </base-block>
         </b-col>
@@ -91,27 +112,6 @@
               </div>
               <div class="font-size-h3">
                 {{ $store.state.firestoreData.candidates.completed.length }}
-              </div>
-            </div>
-            <div class="d-flex ml-2">
-              <div class="flex-grow-1 px-1 bg-success-light rounded-lg"></div>
-            </div>
-          </base-block>
-        </b-col>
-        <b-col cols="6" md="3" lg="6" xl="3">
-          <base-block
-            tag="a"
-            rounded
-            link-pop
-            content-class="d-flex py-4"
-            href="javascript:void(0)"
-          >
-            <div class="flex-grow-1">
-              <div class="font-size-sm font-w600 text-uppercase text-muted">
-                Shortlisted
-              </div>
-              <div class="font-size-h3">
-                {{ $store.state.firestoreData.candidates.shortlisted.length }}
               </div>
             </div>
             <div class="d-flex ml-2">
@@ -136,9 +136,6 @@
             content-full
           >
             <template #options>
-              <button type="button" class="btn-block-option">
-                <i class="si si-settings"></i>
-              </button>
             </template>
             <b-table-simple
               striped
@@ -193,7 +190,7 @@
                       href="javascript:void(0)"
                       v-b-tooltip.hover.nofade.left="'View Resume'"
                     >
-                      <i class="fa fa-fw fa-clock"></i>
+                      <i class="fab fa-dochub"></i>
                     </a>
                   </b-td>
                 </b-tr>
@@ -245,9 +242,6 @@
         <b-col xl="6">
           <base-block rounded title="Recent Shortlisted" header-bg content-full>
             <template #options>
-              <button type="button" class="btn-block-option">
-                <i class="si si-settings"></i>
-              </button>
             </template>
             <b-table-simple
               striped
@@ -288,7 +282,7 @@
                     >
                       <img
                         class="img-avatar img-avatar32"
-                        src="img/avatars/avatar12.jpg"
+                        src="img/photos/user.png"
                         alt="Avatar"
                     /></a>
                   </b-td>
@@ -309,7 +303,7 @@
                   </b-td>
                   <b-td class="text-center">
                     <a
-                      href="javascript:void(0)"
+                      href="/#/backend/applicants/Invited"
                       v-b-tooltip.hover.nofade.left="'Invite for Interview'"
                     >
                       <i class="fa fa-fw fa-envelope"></i>
@@ -333,7 +327,7 @@
       >
         <div class="block block-rounded block-themed block-transparent mb-0">
           <div class="block-header bg-primary-dark">
-            <h3 class="block-title">Modal Title</h3>
+            <h3 class="block-title">Applicant's Resume</h3>
             <div class="block-options">
               <button
                 type="button"
@@ -368,18 +362,15 @@
       <b-row>
         <b-col lg="6">
           <!-- Earnings Chart -->
-          <base-block rounded title="Language Trend" header-bg>
+          <base-block rounded title="Server Status" header-bg>
             <template #options>
-              <button type="button" class="btn-block-option">
-                <i class="si si-settings"></i>
-              </button>
             </template>
             <template #content>
               <div class="block-content p-0">
                 <div class="pt-3">
                   <chartjs-line
-                    :chart-data="chartjsEarningsData"
-                    :options="chartjsEarningsOptions"
+                    :chart-data="chartjsSalesData"
+                    :options="chartjsSalesOptions"
                     :styles="chartjsStyles"
                   ></chartjs-line>
                 </div>
@@ -418,11 +409,8 @@
         </b-col>
         <b-col lg="6">
           <!-- Sales Chart -->
-          <base-block rounded title="Language Trend" header-bg>
+          <base-block rounded title="Overview" header-bg>
             <template #options>
-              <button type="button" class="btn-block-option">
-                <i class="si si-settings"></i>
-              </button>
             </template>
             <template #content>
               <div class="block-content p-0">
@@ -435,28 +423,40 @@
               </div>
               <div class="block-content">
                 <b-row class="items-push text-center py-3">
-                  <b-col cols="6" xl="3">
+                  <b-col cols="6" xl="2">
+                    <i class="fa fa-user fa-2x opacity-50"></i>
+                    <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
+                      Applied
+                    </p>
+                  </b-col>
+                  <b-col cols="6" xl="2">
+                    <i class="fa fa-user-plus fa-2x opacity-50"></i>
+                    <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
+                      Invited
+                    </p>
+                  </b-col>
+                  <b-col cols="6" xl="2">
+                    <i class="fa fa-user-cog fa-2x opacity-50"></i>
+                    <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
+                      Ongoing
+                    </p>
+                  </b-col>
+                  <b-col cols="6" xl="2">
                     <i class="fa fa-user-check fa-2x opacity-50"></i>
                     <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
                       Shortlisted
                     </p>
                   </b-col>
-                  <b-col cols="6" xl="3">
-                    <i class="fa fa-user-cog fa-2x opacity-50"></i>
-                    <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
-                      Waiting
-                    </p>
-                  </b-col>
-                  <b-col cols="6" xl="3">
-                    <i class="fa fa-users fa-2x opacity-50"></i>
-                    <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
-                      Total
-                    </p>
-                  </b-col>
-                  <b-col cols="6" xl="3">
-                    <i class="fa fa-user-injured fa-2x opacity-50"></i>
+                  <b-col cols="6" xl="2">
+                    <i class="fa fa-user-times fa-2x opacity-50"></i>
                     <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
                       Rejected
+                    </p>
+                  </b-col>
+                  <b-col cols="6" xl="2">
+                    <i class="fa fa-users fa-2x opacity-50"></i>
+                    <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
+                      Completed
                     </p>
                   </b-col>
                 </b-row>
@@ -499,7 +499,7 @@ export default {
           yAxes: [
             {
               ticks: {
-                suggestedMax: 3000,
+                suggestedMax: 100,
               },
             },
           ],
@@ -508,7 +508,7 @@ export default {
           intersect: false,
           callbacks: {
             label: (tooltipItems) => {
-              return " $" + tooltipItems.yLabel;
+              return tooltipItems.yLabel;
             },
           },
         },
@@ -535,22 +535,16 @@ export default {
       },
       chartjsEarningsData: {
         labels: [
-          "JAN",
-          "FEB",
-          "MAR",
-          "APR",
-          "MAY",
-          "JUN",
-          "JUL",
-          "AUG",
-          "SEP",
-          "OCT",
-          "NOV",
-          "DEC",
+          "Applied",
+          "Invited",
+          "Ongoing",
+          "Shortlisted",
+          "Rejected",
+          "Completed",
         ],
         datasets: [
           {
-            label: "This Year",
+            label: `Year - ${String(new Date()).slice(10,15)}`,
             fill: true,
             backgroundColor: "rgba(132, 94, 247, .3)",
             borderColor: "transparent",
@@ -559,44 +553,14 @@ export default {
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(132, 94, 247, 1)",
             data: [
-              2150,
-              1350,
-              1560,
-              980,
-              1260,
-              1720,
-              1115,
-              1690,
-              1870,
-              2420,
-              2100,
-              2730,
+              this.$store.state.firestoreData.candidates.applied.length,
+              this.$store.state.firestoreData.candidates.invited.length,
+              this.$store.state.firestoreData.candidates.ongoing.length,
+              this.$store.state.firestoreData.candidates.shortlisted.length,
+              this.$store.state.firestoreData.candidates.rejected.length,
+              this.$store.state.firestoreData.candidates.completed.length,
             ],
-          },
-          {
-            label: "Last Year",
-            fill: true,
-            backgroundColor: "rgba(233, 236, 239, 1)",
-            borderColor: "transparent",
-            pointBackgroundColor: "rgba(233, 236, 239, 1)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(233, 236, 239, 1)",
-            data: [
-              2200,
-              1700,
-              1100,
-              1900,
-              1680,
-              2560,
-              1340,
-              1450,
-              2000,
-              2500,
-              1550,
-              1880,
-            ],
-          },
+          }
         ],
       },
       chartjsSalesData: {
@@ -636,18 +600,7 @@ export default {
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(233, 236, 239, 1)",
             data: [220, 170, 110, 215, 168, 227, 154, 135, 210, 240, 145, 178],
-          },
-          {
-            label: "Last Year2",
-            fill: true,
-            backgroundColor: "rgba(233, 236, 239, 1)",
-            borderColor: "transparent",
-            pointBackgroundColor: "rgba(233, 236, 239, 1)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(233, 236, 239, 1)",
-            data: [22, 170, 110, 215, 168, 217, 154, 135, 210, 240, 145, 178],
-          },
+          }
         ],
       },
     };

@@ -13,9 +13,6 @@
 
     <!-- Page Content -->
     <div class="content">
-                <!-- Block Tabs Default Style -->
-          <b-tabs class="block" nav-class="nav-tabs-block" content-class="block-content">
-            <b-tab title="Create Form" active>
 
       <base-block rounded title="Assignment Title">
         <b-row class="push">
@@ -117,158 +114,26 @@
           </b-row>
         </b-form>
       </base-block>
-      <!-- END Basic -->
-            </b-tab>
-             <b-tab title="Preview">
-  <div>
-    <!-- Hero -->
-    <base-page-heading :title="title" :subtitle="desc">
-      <template #extra>
-        <img
-          class="img-avatar img-avatar96"
-          :src="imagesUrl"
-          alt="Avatar"
-        />
-      </template>
-    </base-page-heading>
-    <!-- END Hero -->
-    <div class="content">
-      <!-- Alternative Style -->
-      <base-block
-        rounded
-        title="Please fill out the required details"
-        content-full
-      >
-        <b-form>
-          <b-row class="push">
-            <b-col lg="4">
-              <p class="font-size-sm text-muted">
-                You can enable an alternative style with background color
-              </p>
-            </b-col>
-            <b-col lg="8" xl="5">
-              <b-form-group label-for="email">
-                <template #label>
-                  Email <span class="text-danger">*</span>
-                </template>
-                <b-form-input
-                  type="email"
-                  id="email"
-                  name="email"
-                  placeholder="Your valid email.."
-                  v-model="$v.form.email.$model"
-                  :state="$v.form.email.$dirty ? !$v.form.email.$error : null"
-                  aria-describedby="email-feedback"
-                ></b-form-input>
-                <b-form-invalid-feedback id="username-feedback">
-                  Please enter a valid email address
-                </b-form-invalid-feedback>
-              </b-form-group>
-              <b-form-group label="Select" label-for="skill">
-                <template #label>
-                  Best Skill <span class="text-danger">*</span>
-                </template>
-                <b-form-select
-                  id="skill"
-                  name="skill"
-                  :options="options2"
-                  v-model="$v.form.skill.$model"
-                  :state="$v.form.skill.$dirty ? !$v.form.skill.$error : null"
-                  aria-describedby="skill-feedback"
-                ></b-form-select>
-                <b-form-invalid-feedback id="skill-feedback">
-                  Please select a skill!
-                </b-form-invalid-feedback>
-              </b-form-group>
-              <b-form-group>
-                <label>Experience in Years</label>
-                <div class="py-4">
-                  <vue-slider
-                    v-model="sliderValueNormal"
-                    :dotSize="15"
-                    :marks="[0, 20]"
-                    :max="20"
-                  ></vue-slider>
-                </div>
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </b-form>
-      </base-block>
-      <!-- Alternative Style -->
-      <base-block rounded content-full>
-        <b-form>
-          <b-row class="push">
-            <b-col lg="4">
-              <p class="font-size-sm text-muted">
-                You can enable an alternative style with background color
-              </p>
-            </b-col>
-            <b-col lg="8" xl="5">
-              <b-form-group label-for="username">
-                <template #label>
-                  Full Name <span class="text-danger">*</span>
-                </template>
-                <b-form-input
-                  id="username"
-                  name="username"
-                  placeholder="Enter your name"
-                  v-model="$v.form.username.$model"
-                  :state="
-                    $v.form.username.$dirty ? !$v.form.username.$error : null
-                  "
-                  aria-describedby="username-feedback"
-                ></b-form-input>
-                <b-form-invalid-feedback id="username-feedback">
-                  Your username must consist of at least 3 characters
-                </b-form-invalid-feedback>
-              </b-form-group>
-              <b-form-group label-for="digits">
-                <template #label>
-                  Phone Number <span class="text-danger">*</span>
-                </template>
-                <b-form-input
-                  id="digits"
-                  name="digits"
-                  placeholder="5"
-                  v-model="$v.form.digits.$model"
-                  :state="$v.form.digits.$dirty ? !$v.form.digits.$error : null"
-                  aria-describedby="digits-feedback"
-                ></b-form-input>
-                <b-form-invalid-feedback id="digits-feedback">
-                  Please enter only digits!
-                </b-form-invalid-feedback>
-              </b-form-group>
-              <b-form-group
-                label="Upload your Resume"
-                label-for="example-file-input-custom"
-              >
-                <b-form-file id="example-file-input-custom"></b-form-file>
-              </b-form-group>
-            </b-col>
-          </b-row>
-        </b-form>
-      </base-block>
-            <base-block v-if="formUrl == null" rounded title="Submit final form" header-bg>
+
+            <base-block rounded title="Submit final form" header-bg>
               <template #options>
-                <b-button type="submit" class="px-4" size="md" variant="primary" @click="submitForm">
-                  Submit
+                <b-button @click="openLink" type="reset" class="px-4" size="md" variant="warning">
+                  Link
                 </b-button>
-                <b-button type="reset" class="px-4" size="md" variant="alt-primary">
+                <b-button type="reset" @click="formUrl = null" class="px-4" size="md" variant="danger">
                   Reset
+                </b-button>
+                <b-button type="submit" class="px-4" size="md" variant="primary" @click="submitForm">
+                  Deploy
                 </b-button>
               </template>
               </base-block>
             <base-block v-if="formUrl" rounded title="Generated Form Url" header-bg>
             <template #options>
                 <a>{{formUrl}}</a>
-              </template>
+            </template>
 
               </base-block>
-    </div>
-  </div>
-             </b-tab>
-          </b-tabs>
     </div>
     <!-- END Page Content -->
   </div>
@@ -288,14 +153,11 @@ import firebase from "../../firebase";
 import vue2Dropzone from 'vue2-dropzone'
 import { validationMixin } from "vuelidate";
 import { required, minLength, email, integer } from "vuelidate/lib/validators";
-// Vue Slider, for more info and examples you can check out https://github.com/NightCatSama/vue-slider-component
-import VueSlider from "vue-slider-component";
 
 export default {
   mixins: [validationMixin],
   components: {
-    'vueDropzone': vue2Dropzone,
-    VueSlider: VueSlider,
+    'vueDropzone': vue2Dropzone
   },
   data () {
     return {
@@ -377,6 +239,10 @@ export default {
   }).then((e) => {
     this.formUrl = `http://app.einfach.tech/apply/${this.$store.state.firestoreData.docId}`
   });
+    },
+    openLink () {
+      if (this.formUrl) this.formUrl = null
+      else this.formUrl = `http://app.einfach.tech/apply/${this.$store.state.firestoreData.docId}`
     },
     addField (name,type){
       if(name != 'Field Name'){

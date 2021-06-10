@@ -374,7 +374,7 @@
       <div class="content content-boxed py-5">
         <b-row class="font-size-sm font-w500">
           <b-col sm="6" order-sm="2" class="py-1 text-center text-sm-right">
-            <a class="ml-2 font-w600" href="#">support@einfach.in</a>
+            <a class="ml-2 font-w600" href="mailto:support@einfach.in">support@einfach.in</a>
           </b-col>
           <b-col sm="6" order-sm="1" class="py-1 text-center text-sm-left">
             <a class="font-w600" href="#">{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</a> &copy; {{ $store.getters.appCopyright }}
