@@ -4,6 +4,9 @@
 
 module.exports = {
   // Webpack configuration
+  devServer: {
+    disableHostCheck: true
+  },
   chainWebpack: config => {
     // Preserve white spacing in production build
     config.module

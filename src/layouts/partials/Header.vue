@@ -234,7 +234,7 @@
           <!-- Search Form (visible on larger screens) -->
           <b-form @submit.stop.prevent="onSubmit" class="d-none d-sm-inline-block">
             <b-input-group size="sm">
-              <b-form-input placeholder="Search.." v-model="baseSearchTerm" class="form-control-alt"></b-form-input>
+              <b-form-input placeholder="Type email.." v-model="baseSearchTerm" class="form-control-alt"></b-form-input>
               <b-input-group-append>
                 <span class="input-group-text bg-body border-0">
                   <i class="fa fa-fw fa-search"></i>

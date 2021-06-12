@@ -470,7 +470,7 @@ export default {
       };
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch(
-        "https://hook.integromat.com/suo7mmt1h3qfyez1dek7u8xzkbhhesq7",
+        "https://anshul9760.api.stdlib.com/autoEmail@dev/",
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           mode: "cors", // no-cors, *cors, same-origin
@@ -486,6 +486,7 @@ export default {
             subject: this.form.subject,
             email: this.form.email,
             emailTemplate: this.form.message,
+            name: 'Custom Mail'
           }),
         }
       );

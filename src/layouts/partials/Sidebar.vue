@@ -21,7 +21,8 @@
             <i class="fab fa-buffer mt-1 text-success" color="primary"></i>
           </span>
           <span class="smini-hide font-size-h5 tracking-wider">
-            Einfach <span class="font-w400">Tech</span>
+            <i class="fab fa-buffer mt-1 text-success mr-1" color="primary"></i>
+            Einfach
           </span>
         </router-link>
         <!-- END Logo -->
