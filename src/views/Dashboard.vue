@@ -484,6 +484,66 @@ export default {
     ChartjsLine,
     ChartjsBar
   },
+  computed: {
+    chartjsEarningsData () {
+      if (this.$store.state.firestoreData) {
+        return {
+        labels: [
+          "Applied",
+          "Invited",
+          "Ongoing",
+          "Shortlisted",
+          "Rejected",
+          "Completed",
+        ],
+        datasets: [
+          {
+            label: `Year - ${String(new Date()).slice(10,15)}`,
+            fill: true,
+            backgroundColor: "rgba(132, 94, 247, .3)",
+            borderColor: "transparent",
+            pointBackgroundColor: "rgba(132, 94, 247, 1)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgba(132, 94, 247, 1)",
+            data: [
+              this.$store.state.firestoreData.candidates.applied.length,
+              this.$store.state.firestoreData.candidates.invited.length,
+              this.$store.state.firestoreData.candidates.ongoing.length,
+              this.$store.state.firestoreData.candidates.shortlisted.length,
+              this.$store.state.firestoreData.candidates.rejected.length,
+              this.$store.state.firestoreData.candidates.completed.length,
+            ],
+          }
+        ],
+      }
+      } else {
+        return {
+        labels: [
+          "Applied",
+          "Invited",
+          "Ongoing",
+          "Shortlisted",
+          "Rejected",
+          "Completed",
+        ],
+        datasets: [
+          {
+            label: `Year - ${String(new Date()).slice(10,15)}`,
+            fill: true,
+            backgroundColor: "rgba(132, 94, 247, .3)",
+            borderColor: "transparent",
+            pointBackgroundColor: "rgba(132, 94, 247, 1)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgba(132, 94, 247, 1)",
+            data: [100, 50, 30, 20, 50, 40],
+          }
+        ],
+      }
+      }
+    }
+  },
   data() {
     return {
       ongoing: [],
@@ -532,36 +592,6 @@ export default {
             },
           },
         },
-      },
-      chartjsEarningsData: {
-        labels: [
-          "Applied",
-          "Invited",
-          "Ongoing",
-          "Shortlisted",
-          "Rejected",
-          "Completed",
-        ],
-        datasets: [
-          {
-            label: `Year - ${String(new Date()).slice(10,15)}`,
-            fill: true,
-            backgroundColor: "rgba(132, 94, 247, .3)",
-            borderColor: "transparent",
-            pointBackgroundColor: "rgba(132, 94, 247, 1)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(132, 94, 247, 1)",
-            data: [
-              this.$store.state.firestoreData.candidates.applied.length,
-              this.$store.state.firestoreData.candidates.invited.length,
-              this.$store.state.firestoreData.candidates.ongoing.length,
-              this.$store.state.firestoreData.candidates.shortlisted.length,
-              this.$store.state.firestoreData.candidates.rejected.length,
-              this.$store.state.firestoreData.candidates.completed.length,
-            ],
-          }
-        ],
       },
       chartjsSalesData: {
         labels: [

@@ -17,11 +17,11 @@
                 <p class="font-size-lg font-w500 text-muted mb-4">
                   Einfach is a complete hiring package that helps you recruit tech teams with ease.<br> Complete <a href="https://1.envato.market/AVD6j">Architecture</a> to deploy and manage tech hiring
                 </p>
-                <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" to="/auth/signin" v-click-ripple>
-                  <i class="fa fa-fw fa-user font-size-base opacity-50 mr-1"></i> Sign In
+                <b-button size="lg" variant="alt-success" class="btn-rounded px-4 mr-1 mb-3" to="/auth/signin" v-click-ripple>
+                  <i class="far fa-smile-beam font-size-base opacity-50 mr-1"></i> Already a Super User
                 </b-button>
-                <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 mr-2 mt-2" to="/auth/signup" v-click-ripple>
-                  <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Sign Up
+                <b-button size="lg" variant="alt-warning" class="btn-rounded px-4 mr-1 mb-3" to="/auth/signup" v-click-ripple>
+                  <i class="si si-rocket font-size-base opacity-50 mr-1"></i> Sign Up Now
                 </b-button>
               </div>
             </b-col>

@@ -237,12 +237,12 @@ export default {
     logo: this.imagesUrl
   // eslint-disable-next-line no-unused-vars
   }).then((e) => {
-    this.formUrl = `http://app.einfach.tech/apply/${this.$store.state.firestoreData.docId}`
+    this.formUrl = `http://app.einfach.in/apply/${this.$store.state.firestoreData.docId}`
   });
     },
     openLink () {
       if (this.formUrl) this.formUrl = null
-      else this.formUrl = `http://app.einfach.tech/apply/${this.$store.state.firestoreData.docId}`
+      else this.formUrl = `http://app.einfach.in/apply/${this.$store.state.firestoreData.docId}`
     },
     addField (name,type){
       if(name != 'Field Name'){
