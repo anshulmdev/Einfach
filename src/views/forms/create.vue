@@ -146,9 +146,25 @@
 @import './src/assets/scss/vendor/dropzone';
 @import "~vue-slider-component/theme/default.css";
 @import "./src/assets/scss/vendor/vue-slider";
+@import '~sweetalert2/dist/sweetalert2.min.css';
 </style>
 
 <script>
+// Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
+import Vue from 'vue'
+import VueSweetalert2 from 'vue-sweetalert2'
+
+const options = {
+  buttonsStyling: false,
+  customClass: {
+    confirmButton: 'btn btn-success m-1',
+    cancelButton: 'btn btn-danger m-1',
+    input: 'form-control'
+  }
+}
+
+// Register Vue SweetAlert2 with custom options
+Vue.use(VueSweetalert2, options)
 import firebase from "../../firebase";
 import vue2Dropzone from 'vue2-dropzone'
 import { validationMixin } from "vuelidate";
@@ -181,8 +197,8 @@ export default {
       form2: {
         email: null,
       },
-      title: 'Javascript Test 2021',
-      desc:'Please fill form to apply',
+      title: null,
+      desc: null,
       selected: null,
       formUrl: null,
       options: [
@@ -192,6 +208,7 @@ export default {
         { value: 2, text: 'Frontend' },
         { value: 2, text: 'Backend' }
       ],
+      formDeployed: false,
       form:{
         name:'Field Name',
         type:'Field Type',
@@ -228,7 +245,12 @@ export default {
     },
   },
   methods: {
+    async fetchForm () {
+      const form = await firebase.database().ref('forms/' + this.$store.state.firestoreData.docId).get()
+      if(form.val()) this.formDeployed = true
+    },
     submitForm (){
+      if (this.title && this.desc && this.selected){
        firebase.database().ref('forms/' + this.$store.state.firestoreData.docId).set({
     title: this.title,
     desc: this.desc,
@@ -238,11 +260,18 @@ export default {
   // eslint-disable-next-line no-unused-vars
   }).then((e) => {
     this.formUrl = `http://app.einfach.in/apply/${this.$store.state.firestoreData.docId}`
-  });
+    this.$swal({
+        title: 'Form Deployed',
+        text: 'Click on Link button to view'})
+  });} else{
+    this.$swal('Warning', 'Required fields are missing!', 'warning')
+  }
     },
     openLink () {
-      if (this.formUrl) this.formUrl = null
-      else this.formUrl = `http://app.einfach.in/apply/${this.$store.state.firestoreData.docId}`
+      if (!this.formDeployed) this.$swal('Warning', 'Not deployed yet', 'warning')
+      else this.$swal({
+        title: 'Form URL',
+        text: `http://app.einfach.in/apply/${this.$store.state.firestoreData.docId}`})
     },
     addField (name,type){
       if(name != 'Field Name'){
@@ -266,7 +295,10 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    }
+    },
+  },
+  created () {
+    this.fetchForm()
   }
 };
 </script>

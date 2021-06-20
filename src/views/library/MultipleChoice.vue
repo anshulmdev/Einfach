@@ -133,7 +133,7 @@
                         v-for="(item, index) in customQuestion.options"
                         :key="index"
                       >
-                        <b-col cols="9">
+                        <b-col cols="7">
                           <base-block rounded>
                             <b-form-input
                               class="form-control-alt"
@@ -150,6 +150,18 @@
                               :value="true"
                               >Correct Option</b-form-checkbox
                             >
+                          </base-block>
+                        </b-col>
+                        <b-col cols="2">
+                          <base-block rounded>
+                              <b-button
+                                block
+                                @click="addOption(index)"
+                                type="submit"
+                                variant="danger"
+                              >
+                                Remove
+                              </b-button>
                           </base-block>
                         </b-col>
                       </b-row>
@@ -180,15 +192,6 @@
                                 variant="success"
                               >
                                 Add Option
-                              </b-button> </b-col
-                            ><b-col>
-                              <b-button
-                                block
-                                @click="addOption('remove')"
-                                type="submit"
-                                variant="danger"
-                              >
-                                Remove Last
                               </b-button> </b-col
                             ><b-col>
                               <b-button
@@ -304,7 +307,7 @@ export default {
   data() {
     return {
       customQuestion: {
-        question: "Write your question",
+        question: null,
         options: [],
         category: {
           Javascript: "warning",
@@ -349,12 +352,8 @@ export default {
   },
   methods: {
     addOption(value) {
-      if (value === "add")
-        this.customQuestion.options.push({
-          option: "Choose Option",
-          answer: false,
-        });
-      if (value === "remove") this.customQuestion.options.pop();
+      if (value === "add") this.customQuestion.options.push({ option: null, answer: false,});
+      else this.customQuestion.options.splice(value, 1)
     },
     check(value) {
       this.$store.state.newAssignment.active = true;
