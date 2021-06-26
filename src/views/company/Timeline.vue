@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero -->
-    <base-page-heading title="Calendar" subtitle="A solid foundation to build your calendar based web application. Powered by Full Calendar.">
+    <base-page-heading title="Overview" subtitle="Visualise your company activities">
       <template #extra>
         <b-breadcrumb class="breadcrumb-alt">
           <b-breadcrumb-item href="javascript:void(0)">Plugins</b-breadcrumb-item>
@@ -103,41 +103,29 @@ export default {
       calendarNewEvent: '',
       calendarNewEvents: [
         {
-          title: 'Codename X',
+          title: 'Applicant Applied',
           color: 'info'
         },
         {
-          title: 'Weekend Adventure',
+          title: 'Applicant Invited',
+          color: 'info'
+        },
+        {
+          title: 'Applicant Rejected',
+          color: 'info'
+        },
+        {
+          title: 'Applicant Shortlisted',
           color: 'success'
         },
         {
-          title: 'Project Mars',
-          color: 'info'
-        },
-        {
-          title: 'Meeting',
+          title: 'Error Reported',
           color: 'warning'
         },
         {
-          title: 'Walk the dog',
-          color: 'success'
-        },
-        {
-          title: 'Al schedule',
-          color: 'info'
-        },
-        {
-          title: 'Cinema',
-          color: 'success'
-        },
-        {
-          title: 'Project X',
+          title: 'Software Crash',
           color: 'danger'
         },
-        {
-          title: 'Skype Meeting',
-          color: 'warning'
-        }
       ]
     }
   },
@@ -151,74 +139,31 @@ export default {
     // Populate calendar with predefined events
     this.calendarOptions.events = [
       {
-        title: 'Gaming Day',
+        title: '10 Invited',
         start: new Date(y, m, 1),
         allDay: true
       },
       {
-        title: 'Skype Meeting',
-        start: new Date(y, m, 3)
-      },
-      {
-        title: 'Project X',
+        title: 'Software Updates',
         start: new Date(y, m, 9),
         end: new Date(y, m, 12),
         allDay: true,
         color: '#e04f1a'
       },
       {
-        title: 'Work',
+        title: '24 Shortlisted',
         start: new Date(y, m, 17),
         end: new Date(y, m, 19),
         allDay: true,
         color: '#82b54b'
       },
       {
-        id: 999,
-        title: 'Hiking (repeated)',
-        start: new Date(y, m, d - 1, 15, 0)
-      },
-      {
-        id: 999,
-        title: 'Hiking (repeated)',
-        start: new Date(y, m, d + 3, 15, 0)
-      },
-      {
-        title: 'Landing Template',
+        title: '2 Error Reported',
         start: new Date(y, m, d - 3),
         end: new Date(y, m, d - 3),
         allDay: true,
         color: '#ffb119'
       },
-      {
-        title: 'Lunch',
-        start: new Date(y, m, d + 7, 15, 0),
-        color: '#82b54b'
-      },
-      {
-        title: 'Coding',
-        start: new Date(y, m, d, 8, 0),
-        end: new Date(y, m, d, 14, 0),
-      },
-      {
-        title: 'Trip',
-        start: new Date(y, m, 25),
-        end: new Date(y, m, 27),
-        allDay: true,
-        color: '#ffb119'
-      },
-      {
-        title: 'Reading',
-        start: new Date(y, m, d + 8, 20, 0),
-        end: new Date(y, m, d + 8, 22, 0)
-      },
-      {
-        title: 'Follow us on Twitter',
-        start: new Date(y, m, 22),
-        allDay: true,
-        url: 'http://twitter.com/pixelcave',
-        color: '#3c90df'
-      }
     ]
   },
   mounted () {

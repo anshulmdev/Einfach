@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero -->
-    <base-page-heading title="Practical Assignments" subtitle="These assignments automatically sent to shortlisted applicants">
+    <base-page-heading title="Practical Assignments (Not Activated)" subtitle="These assignments automatically sent to shortlisted applicants">
       <template #extra>
         <b-breadcrumb class="breadcrumb-alt">
           <b-breadcrumb-item href="javascript:void(0)">Commit</b-breadcrumb-item>

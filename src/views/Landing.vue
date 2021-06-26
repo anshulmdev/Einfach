@@ -3,19 +3,17 @@
     <!-- Hero -->
     <div class="hero bg-white overflow-hidden">
       <div class="hero-inner align-self-stretch d-flex flex-column">
-        <div class="pt-5 pb-3 text-center">
-        </div>
         <div class="content content-full flex-fill d-flex align-items-center px-lg-6 px-xl-8 overflow-hidden">
           <b-row class="w-100">
             <b-col lg="6" class="text-center text-lg-left d-flex align-items-center">
               <div class="w-100">
                 <div class="d-flex">
-                <i class="fab fa-buffer mt-1 text-success" color="primary" style="font-size: 2.5em;"></i>
+                <i class="fab fa-buffer text-success" color="primary" style="font-size: 2.5em;"></i>
                 <h1 class="font-w700 mb-3 ml-3">
                   <span class="">Einfach</span>
                 </h1></div>
                 <p class="font-size-lg font-w500 text-muted mb-4">
-                  Einfach is a complete hiring package that helps you recruit tech teams with ease.<br> Complete <a href="https://1.envato.market/AVD6j">Architecture</a> to deploy and manage tech hiring
+                  Einfach is a complete hiring package that helps you recruit tech teams with ease<br> Complete <a>architecture</a> to deploy and manage your technical hiring
                 </p>
                 <b-button size="lg" variant="alt-success" class="btn-rounded px-4 mr-1 mb-3" to="/auth/signin" v-click-ripple>
                   <i class="far fa-smile-beam font-size-base opacity-50 mr-1"></i> Already a Super User
@@ -311,7 +309,7 @@
         <div class="content content-full content-boxed">
           <div class="py-5 text-center">
             <h2 class="font-w700 mb-3 text-white">
-              Trusted by over 4.000 developers and teams
+              Trusted by over 4.000 companies and teams
             </h2>
             <p class="font-size-lg text-white-50 mb-6 mx-sm-6 mx-lg-9">
               <a class="text-primary-light" href="https://1.envato.market/AVD6j">Einfach</a> is one of the top developer hiring environments which has 100+ features bundled in single package

@@ -15,7 +15,6 @@
     <div class="content">
       
       <!-- Modern Design -->
-      <h2 class="content-heading">Modern Design <small>Grid Based</small></h2>
       <b-row>
         <b-col md="6" xl="3">
           <!-- Developer Plan -->
@@ -30,13 +29,13 @@
               <div class="block-content">
                 <div class="font-size-sm py-2">
                   <p>
-                    <strong>2</strong> Projects
+                    <strong>1</strong> Assignment Updates
                   </p>
                   <p>
-                    <strong>10GB</strong> Storage
+                    <strong>1K</strong> Emails
                   </p>
                   <p>
-                    <strong>15</strong> Clients
+                    <strong>15</strong> Questions
                   </p>
                   <p>
                     <strong>Email</strong> Support
@@ -63,16 +62,16 @@
               <div class="block-content">
                 <div class="font-size-sm py-2">
                   <p>
-                    <strong>10</strong> Projects
+                    <strong>5</strong> Assignment Updates
                   </p>
                   <p>
-                    <strong>30GB</strong> Storage
+                    <strong>2K</strong> Emails
                   </p>
                   <p>
-                    <strong>100</strong> Clients
+                    <strong>25</strong> Questions
                   </p>
                   <p>
-                    <strong>FULL</strong> Support
+                    <strong>Email</strong> Support
                   </p>
                 </div>
               </div>
@@ -84,13 +83,8 @@
           <!-- END Startup Plan -->
         </b-col>
         <b-col md="6" xl="3">
-          <!-- Business Plan -->
-          <base-block rounded tag="a" class="text-center" href="javascript:void(0)" link-shadow fx-shadow themed>
-            <template #header>
-              <h3 class="block-title">
-                <i class="fa fa-thumbs-up mr-1"></i> Business
-              </h3>
-            </template>
+          <!-- VIP Plan -->
+          <base-block rounded tag="a" title="BUSINESS" class="text-center" href="javascript:void(0)" link-shadow>
             <template #content>
               <div class="block-content bg-body-light">
                 <div class="py-2">
@@ -101,29 +95,34 @@
               <div class="block-content">
                 <div class="font-size-sm py-2">
                   <p>
-                    <strong>50</strong> Projects
+                    <strong>10</strong> Assignment Updates
                   </p>
                   <p>
-                    <strong>100GB</strong> Storage
+                    <strong>5K</strong> Emails
                   </p>
                   <p>
-                    <strong>1000</strong> Clients
+                    <strong>35</strong> Questions
                   </p>
                   <p>
-                    <strong>FULL</strong> Support
+                    <strong>Full</strong> Support
                   </p>
                 </div>
               </div>
               <div class="block-content block-content-full bg-body-light">
-                <span class="btn btn-primary px-4">Sign Up</span>
+                <span class="btn btn-secondary px-4">Sign Up</span>
               </div>
             </template>
           </base-block>
-          <!-- END Business Plan -->
+          <!-- END VIP Plan -->
         </b-col>
         <b-col md="6" xl="3">
-          <!-- VIP Plan -->
-          <base-block rounded tag="a" title="VIP" class="text-center" href="javascript:void(0)" link-shadow>
+          <!-- Business Plan -->
+          <base-block rounded tag="a" class="text-center" href="javascript:void(0)" link-shadow fx-shadow themed>
+            <template #header>
+              <h3 class="block-title">
+                <i class="fa fa-thumbs-up mr-1"></i> VIP
+              </h3>
+            </template>
             <template #content>
               <div class="block-content bg-body-light">
                 <div class="py-2">
@@ -134,25 +133,25 @@
               <div class="block-content">
                 <div class="font-size-sm py-2">
                   <p>
-                    <strong>Unlimited</strong> Projects
+                    <strong>Unlimited</strong> Assignment
                   </p>
                   <p>
-                    <strong>Unlimited</strong> Storage
+                    <strong>Unlimited</strong> Emails
                   </p>
                   <p>
-                    <strong>Unlimited</strong> Clients
+                    <strong>Unlimited</strong> Questions
                   </p>
                   <p>
-                    <strong>FULL</strong> Support
+                    <strong>Full</strong> Support
                   </p>
                 </div>
               </div>
               <div class="block-content block-content-full bg-body-light">
-                <span class="btn btn-secondary px-4">Sign Up</span>
+                <span class="btn btn-primary px-4">Active</span>
               </div>
             </template>
           </base-block>
-          <!-- END VIP Plan -->
+          <!-- END Business Plan -->
         </b-col>
       </b-row>
     </div>
