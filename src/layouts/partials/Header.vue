@@ -11,8 +11,6 @@
               <b-button class="mx-2">Assignment Started</b-button>
               <b-button variant="alt-primary" class="mx-2">
             <i class="fa fa-barcode mr-1"></i> Marks: {{$store.state.newAssignment.marks}}</b-button>
-              <b-button variant="alt-warning" class="mx-2">
-            <i class="far fa-clock mr-1"></i> Time: {{$store.state.newAssignment.time}} mins</b-button>
               <b-button variant="alt-success" class="mx-2">
             <i class="far fa-question-circle mr-1"></i> Questions: {{$store.state.newAssignment.questions}}</b-button>
               <b-button variant="alt-danger" @click="$store.state.newAssignment = {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}, name: 'Assignment Name', cutoff: 100}" class="mx-2">

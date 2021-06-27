@@ -2,7 +2,7 @@
   <div>
     <!-- Hero -->
     <base-page-heading
-      title="Live"
+      title="Share live editor"
       subtitle="Get real-time coding environment within Einfach board"
     >
       <template #extra>
@@ -21,15 +21,15 @@
     <!-- Page Content -->
     <div class="content">
       <!-- Your Block -->
-      <base-block rounded title="CodeShare">
+      <base-block rounded title="JavaScript Common Editor">
         <template #options>
           <button type="button" class="btn-block-option">
             <i class="si si-cog"></i>
           </button>
         </template>
-        <div class="col-md-12 m-2 p-4">
+        <div class="col-md-12 px-4">
           <div class="embed-responsive embed-responsive-16by9">
-            <iframe src="https://codeshare.io/2p3zY9"></iframe>
+            <iframe src="https://einfach.api.stdlib.com/codeshare@dev/"></iframe>
           </div>
         </div>
       </base-block>

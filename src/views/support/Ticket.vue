@@ -107,7 +107,6 @@ const options = {
 
 // Register Vue SweetAlert2 with custom options
 Vue.use(VueSweetalert2, options)
-import firebase from "../../firebase";
 export default {
   data() {
     return {
@@ -127,19 +126,31 @@ export default {
     };
   },
   methods: {
-    send() {
+    async send() {
       this.loading = true;
-      // eslint-disable-next-line no-unused-vars
-      const address = firebase
-        .database()
-        .ref("tickets/" + this.$store.state.firestoreData.docId)
-        .set({
-          category: this.selected,
-          query: this.query,
-        });
+      const name = 'Support Ticket'
+      const email = 'support@einfach.in'
+      const emailTemplate = this.query
+      const subject = `${this.selected} - Ticket Raised`
+      await fetch(
+        "https://anshul9760.api.stdlib.com/autoEmail@dev/",
+        {
+          method: "POST", // *GET, POST, PUT, DELETE, etc.
+          mode: "cors", // no-cors, *cors, same-origin
+          cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+          credentials: "same-origin", // include, *same-origin, omit
+          headers: {
+            "Content-Type": "application/json",
+            // 'Content-Type': 'application/x-www-form-urlencoded',
+          },
+          redirect: "follow", // manual, *follow, error
+          referrerPolicy: "no-referrer",
+          body: JSON.stringify({ name, email, emailTemplate, subject }),
+        }
+      );
       setTimeout(() => {
         this.loading = null;
-        this.$swal('Ticket Created', 'Our support team will get back to you!', 'info')
+        this.$swal('Ticket Created', 'Our support team will get back to you on email!', 'info')
       }, 2000);
     },
   },

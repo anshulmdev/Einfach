@@ -18,7 +18,7 @@
         <b-row class="push">
           <b-col lg="4">
             <p class="font-size-sm text-muted">
-              Write position for applicant
+              Write category or main heading
             </p>
           </b-col>
           <b-col class="mr-5" lg="7">
@@ -43,7 +43,7 @@
       </base-block>
       <!-- END Vue Dropzone -->
 
-      <!-- Inline -->
+      <!-- 
       <base-block rounded title="Add Fields">
         <b-row>
           <b-col lg="4">
@@ -85,10 +85,11 @@
           <b-col lg="6">
               
               <b-button class="ml-6" type="submit" variant="primary" @click="addField(form.name,form.type)">{{form.fields[form.fields.length-1].submit}}</b-button>
-              </b-col></b-row></b-col>
+              </b-col>
+          </b-row></b-col>
         </b-row>
       </base-block>
-      <!-- END Inline -->
+      END Inline -->
       <!-- Basic -->
       <base-block rounded title="Other Fields" content-full>
         <b-form>
