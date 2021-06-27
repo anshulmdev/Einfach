@@ -470,7 +470,7 @@ export default {
       };
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch(
-        "https://anshul9760.api.stdlib.com/autoEmail@dev/",
+        "https://einfach.api.stdlib.com/Application@dev/autoEmails/email/",
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           mode: "cors", // no-cors, *cors, same-origin

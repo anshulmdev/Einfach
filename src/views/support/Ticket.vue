@@ -133,7 +133,7 @@ export default {
       const emailTemplate = this.query
       const subject = `${this.selected} - Ticket Raised`
       await fetch(
-        "https://anshul9760.api.stdlib.com/autoEmail@dev/",
+        "https://einfach.api.stdlib.com/Application@dev/autoEmails/email/",
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
           mode: "cors", // no-cors, *cors, same-origin
