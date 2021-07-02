@@ -82,16 +82,15 @@ export default new Vuex.Store({
   },
   actions: {
     async getFirestoreData () {
-        const query = await firebase.firestore().collection('accounts').doc(this.state.docId).get()
-        const data = await query.data()
-        this.state.firestoreData = data
-        this.state.firestoreData.docId = this.state.docId
-        this.dispatch('assignScore')
+        const query = await firebase.firestore().collection('accounts').doc(this.state.docId)
+        query.onSnapshot(docSnapshot => {
+          const data = docSnapshot.data()
+          this.state.firestoreData = data
+          this.state.firestoreData.docId = this.state.docId
+          this.dispatch('assignScore')
+        })
       },
       async assignScore (){
-        const scoreQuery = await firebase.firestore().collection('scores').doc(this.state.docId).get()
-        const ongoing = this.state.firestoreData.candidates.ongoing
-        const shortlist = this.state.firestoreData.candidates.shortlisted
         const scoreFunction = nums => {
           let score = 0
           Object.keys(nums).forEach((e) => {
@@ -103,16 +102,23 @@ export default new Vuex.Store({
           })
           return score
         }
-        for (let i=0; i < ongoing.length; i++) {
-          if (scoreQuery.data()[ongoing[i].email]){
-            ongoing[i].score = scoreFunction(scoreQuery.data()[ongoing[i].email])
+        const scoreQuery = await firebase.firestore().collection('scores').doc(this.state.docId)
+        scoreQuery.onSnapshot(docSnapshot => {
+          const ongoing = this.state.firestoreData.candidates.ongoing
+          const shortlist = this.state.firestoreData.candidates.shortlisted
+          for (let i=0; i < ongoing.length; i++) {
+            if (docSnapshot.data()[ongoing[i].email]){
+              ongoing[i].score = scoreFunction(docSnapshot.data()[ongoing[i].email])
+            }
           }
-        }
-        for (let i=0; i < shortlist.length; i++) {
-          if (scoreQuery.data()[shortlist[i].email]){
-            shortlist[i].score = scoreFunction(scoreQuery.data()[shortlist[i].email])
+          for (let i=0; i < shortlist.length; i++) {
+            if (docSnapshot.data()[shortlist[i].email]){
+              shortlist[i].score = scoreFunction(docSnapshot.data()[shortlist[i].email])
+            }
           }
-        }
+        }, err => {
+          console.log(`Encountered error: ${err}`);
+        });
 
       }
   },
