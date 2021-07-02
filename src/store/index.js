@@ -22,6 +22,7 @@ const helpers = {
 export default new Vuex.Store({
   state: {
     authUid: '2jfmeB9gjKcy7cMA4sthOKDvOOB2',
+    applicantScores: {},
     firestoreData: null,
     docId: null,
     newAssignment: {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}, name: 'Assignment Name', cutoff: 100},
@@ -95,7 +96,9 @@ export default new Vuex.Store({
           let score = 0
           Object.keys(nums).forEach((e) => {
             if (e === 'coding') {
-              score += Object.values(nums[e]).reduce((a, b) => a + b, 0)
+              Object.values(nums[e]).forEach((e) => {
+                score += e.score
+              })
             } else{
               score += nums[e].score
             }
@@ -104,18 +107,12 @@ export default new Vuex.Store({
         }
         const scoreQuery = await firebase.firestore().collection('scores').doc(this.state.docId)
         scoreQuery.onSnapshot(docSnapshot => {
-          const ongoing = this.state.firestoreData.candidates.ongoing
-          const shortlist = this.state.firestoreData.candidates.shortlisted
-          for (let i=0; i < ongoing.length; i++) {
-            if (docSnapshot.data()[ongoing[i].email]){
-              ongoing[i].score = scoreFunction(docSnapshot.data()[ongoing[i].email])
-            }
-          }
-          for (let i=0; i < shortlist.length; i++) {
-            if (docSnapshot.data()[shortlist[i].email]){
-              shortlist[i].score = scoreFunction(docSnapshot.data()[shortlist[i].email])
-            }
-          }
+          const applicants = docSnapshot.data()
+          const scores = {} 
+          Object.keys(applicants).forEach((e) => {
+            scores[e] = scoreFunction(applicants[e])
+          })
+          this.state.applicantScores = scores
         }, err => {
           console.log(`Encountered error: ${err}`);
         });

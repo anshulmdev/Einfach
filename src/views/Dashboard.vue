@@ -181,7 +181,7 @@
                     </b-row>
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
-                    {{ order.score }}
+                    {{ $store.state.applicantScores[order.email] ? $store.state.applicantScores[order.email] : 0 }}
                   </b-td>
                   <b-td class="text-center">
                     <a
@@ -291,15 +291,13 @@
                       completed.name
                     }}</a>
                   </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">
-                    <a class="link-fx font-w600" href="javascript:void(0)">{{
-                      completed.score ? completed.score: 0
-                    }}</a>
+                  <b-td class="d-none d-sm-table-cell text-center">{{
+                      $store.state.applicantScores[completed.email] ? $store.state.applicantScores[completed.email] : 0
+                    }}
                   </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">
-                    <a class="link-fx font-w600" href="javascript:void(0)">{{
+                  <b-td class="d-none d-sm-table-cell text-center">{{
                       completed.timeStamp.slice(0,15)
-                    }}</a>
+                    }}
                   </b-td>
                   <b-td class="text-center">
                     <a
