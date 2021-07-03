@@ -30,11 +30,13 @@
         <b-table-simple responsive bordered striped table-class="table-vcenter">
           <b-thead>
             <b-tr>
-              <b-th class="text-center" style="width: 10%"> Resume </b-th>
-              <b-th style="width: 20%">Name</b-th>
-              <b-th style="width: 20%">Email</b-th>
-              <b-th style="width: 30%">Tags</b-th>
-              <b-th style="width: 15%">Experience</b-th>
+              <b-th class="text-center" style="width: 8%"> Resume </b-th>
+              <b-th style="width: 12%">Name</b-th>
+              <b-th style="width: 20%;">Email</b-th>
+              <b-th style="width: 10%;">Tags</b-th>
+              <b-th style="width: 18%;">Experience</b-th>
+              <b-th style="width: 12%;">Score</b-th>
+              <b-th style="width: 16%;">Applied Date</b-th>
               <b-th class="text-center" style="min-width: 110px; width: 110px"
                 >Actions</b-th
               >
@@ -69,12 +71,16 @@
                 </b-row>
               </b-td>
               <b-td class="font-size-sm"> {{ user.experience }} Yrs </b-td>
+              <b-td class="font-size-sm">
+                {{ $store.state.applicantScores[user.email] ? $store.state.applicantScores[user.email] : 0}}
+              </b-td>
+              <b-td class="font-size-sm"> {{ user.timeStamp ? user.timeStamp.slice(0,15) : 'Not Added' }} </b-td>
               <b-td class="text-center">
                 <b-btn-group>
                   <b-button
                   disabled
                   v-if="loading.includes(index)"
-                    v-b-tooltip.hover.nofade.left="'Send shortlist email'"
+                    v-b-tooltip.hover.nofade.left="'Send Invitation'"
                     @click="invite(user.name, user.email, index)"
                     size="sm"
                     variant="primary"
@@ -92,7 +98,7 @@
                   </b-button>
                   <b-button
                   @click="deleteEntry(user.name, user.email, index)"
-                    v-b-tooltip.hover.nofade.left="'Reject'"
+                    v-b-tooltip.hover.nofade.left="'Delete Record'"
                     size="sm"
                     variant="danger"
                   >
@@ -219,7 +225,7 @@ export default {
       })
       if(confirmation.isConfirmed){
       this.loading.push(index)
-      let details = this.$store.state.firestoreData.candidates.shortlisted[index];
+      let details = this.$store.state.firestoreData.candidates.shortlisted[index + this.perPage * (this.currentPage - 1)];
       const entry = await firebase
         .firestore()
         .collection("accounts")
@@ -235,13 +241,12 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     async invite(name, email, index) {
-      const details = this.$store.state.firestoreData.candidates.shortlisted[index];
+      const details = this.$store.state.firestoreData.candidates.shortlisted[index + this.perPage * (this.currentPage - 1)];
       const emailTemplate = this.$store.state.firestoreData.emailTemplates.shortlisted.replace('[name]', name);
       const subject = this.$store.state.firestoreData.emailTemplates.subjects.shortlisted;
-      const completed = {user:name, body: emailTemplate, subject, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}
+      const invited = {user:name, body: emailTemplate, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}
       this.loading.push(index)
-      // eslint-disable-next-line no-unused-vars
-      const sendEmail = await fetch(
+      await fetch(
         "https://einfach.api.stdlib.com/Application@dev/autoEmails/email/",
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -254,7 +259,7 @@ export default {
           },
           redirect: "follow", // manual, *follow, error
           referrerPolicy: "no-referrer",
-          body: JSON.stringify({ name, email, emailTemplate }),
+          body: JSON.stringify({ name, email, emailTemplate, subject }),
         }
       );
       const entry = await firebase
@@ -268,9 +273,9 @@ export default {
         "candidates.completed": firebase.firestore.FieldValue.arrayUnion(details),
       });
       await entry.update({
-        "inbox.completed": firebase.firestore.FieldValue.arrayUnion(completed),
+        "inbox.completed": firebase.firestore.FieldValue.arrayUnion(invited),
       });
-      this.$swal('Shortlist email sent')
+      this.$swal('Completed Successfully')
       this.loading = []
     },
   },

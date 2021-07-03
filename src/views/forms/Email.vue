@@ -30,7 +30,7 @@
         class="mb-2"
           id="sub1"
           name="sub1"
-          v-model="this.$store.state.firestoreData.emailTemplates.subjects.invite"
+          v-model="$store.state.firestoreData.emailTemplates.subjects.invite"
           placeholder="Email subject"
           aria-describedby="sub1-feedback"
         ></b-form-input>
@@ -59,7 +59,7 @@
         class="mb-2"
           id="sub2"
           name="sub2"
-          v-model="this.$store.state.firestoreData.emailTemplates.subjects.shortlisted"
+          v-model="$store.state.firestoreData.emailTemplates.subjects.shortlisted"
           placeholder="Email subject"
           aria-describedby="sub2-feedback"
         ></b-form-input>
@@ -84,7 +84,7 @@
         <b-form-input
         class="mb-2"
           id="sub3"
-          v-model="this.$store.state.firestoreData.emailTemplates.subjects.rejected"
+          v-model="$store.state.firestoreData.emailTemplates.subjects.rejected"
           name="sub3"
           placeholder="Email subject"
           aria-describedby="sub3-feedback"
@@ -157,6 +157,7 @@ export default {
       'rejected':this.$store.state.firestoreData.emailTemplates.subjects.rejected
       }
       }}
+
       await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.docId).set(email, { merge: true })
       await this.$swal("Successfully Added")
 

@@ -92,7 +92,7 @@
                   </b-button>
                   <b-button
                   @click="deleteEntry(user.name, user.email, index)"
-                    v-b-tooltip.hover.nofade.left="'Reject'"
+                    v-b-tooltip.hover.nofade.left="'Delete Record'"
                     size="sm"
                     variant="danger"
                   >
@@ -219,7 +219,7 @@ export default {
       })
       if(confirmation.isConfirmed){
       this.loading.push(index)
-      let details = this.$store.state.firestoreData.candidates.applied[index];
+      let details = this.$store.state.firestoreData.candidates.applied[index + this.perPage * (this.currentPage - 1)];
       const entry = await firebase
         .firestore()
         .collection("accounts")
@@ -235,7 +235,7 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     async invite(name, email, index) {
-      const details = this.$store.state.firestoreData.candidates.applied[index];
+      const details = this.$store.state.firestoreData.candidates.applied[index + this.perPage * (this.currentPage - 1)];
       const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite.replace('[name]', name);
       const subject = this.$store.state.firestoreData.emailTemplates.subjects.invite;
       const invited = {user:name, body: emailTemplate, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}

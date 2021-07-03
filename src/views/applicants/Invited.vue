@@ -10,6 +10,7 @@
       </template>
     </base-page-heading>
     <!-- END Hero -->
+    <!-- Page Content -->
     <div class="content">
       <!-- Full Table -->
       <base-block rounded title="Assignment: JavaScript">
@@ -25,10 +26,11 @@
           <b-thead>
             <b-tr>
               <b-th class="text-center" style="width: 10%"> Resume </b-th>
-              <b-th style="width: 20%">Name</b-th>
-              <b-th style="width: 25%">Email</b-th>
-              <b-th style="width: 20%">Tags</b-th>
-              <b-th style="width: 15%">Score</b-th>
+              <b-th style="width: 20%;">Name</b-th>
+              <b-th style="width: 20%;">Email</b-th>
+              <b-th style="width: 10%;">Tags</b-th>
+              <b-th style="width: 15%;">Experience</b-th>
+              <b-th style="width: 15%;">Score</b-th>
               <b-th class="text-center" style="min-width: 110px; width: 110px"
                 >Actions</b-th
               >
@@ -62,33 +64,36 @@
                   >
                 </b-row>
               </b-td>
-              <b-td class="font-size-sm"> {{ user.score ? user.score : 'Not Started' }} </b-td>
+              <b-td class="font-size-sm"> {{ user.experience }} Yrs </b-td>
+              <b-td class="font-size-sm">
+                {{ $store.state.applicantScores[user.email] ? $store.state.applicantScores[user.email] : 'Not Started'}}
+              </b-td>
               <b-td class="text-center">
                 <b-btn-group>
                   <b-button
                   disabled
                   v-if="loading.includes(index)"
-                    v-b-tooltip.hover.nofade.left="'Invite for Interview'"
+                    v-b-tooltip.hover.nofade.left="'Send Invitation'"
                     @click="invite(user.name, user.email, index)"
                     size="sm"
-                    variant="alt-success"
+                    variant="primary"
                   >
                     <i class="fa fa-2x fa-cog fa-spin"></i>
                   </b-button>
                   <b-button
                   v-else
-                    v-b-tooltip.hover.nofade.left="'Invite for Interview'"
+                    v-b-tooltip.hover.nofade.left="'Send shortlist email'"
                     @click="invite(user.name, user.email, index)"
                     size="sm"
-                    variant="alt-success"
+                    variant="primary"
                   >
                     <i class="fa fa-fw fa-paper-plane"></i>
                   </b-button>
                   <b-button
                   @click="deleteEntry(user.name, user.email, index)"
-                    v-b-tooltip.hover.nofade.left="'Move to completed'"
+                    v-b-tooltip.hover.nofade.left="'Delete Record'"
                     size="sm"
-                    variant="alt-danger"
+                    variant="danger"
                   >
                     <i class="fa fa-fw fa-times"></i>
                   </b-button>
@@ -213,7 +218,7 @@ export default {
       })
       if(confirmation.isConfirmed){
       this.loading.push(index)
-      const details = this.$store.state.firestoreData.candidates.invited[index];
+      let details = this.$store.state.firestoreData.candidates.invited[index + this.perPage * (this.currentPage - 1)];
       const entry = await firebase
         .firestore()
         .collection("accounts")
@@ -229,10 +234,12 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     async invite(name, email, index) {
+      const details = this.$store.state.firestoreData.candidates.invited[index + this.perPage * (this.currentPage - 1)];
+      const emailTemplate = this.$store.state.firestoreData.emailTemplates.shortlisted.replace('[name]', name);
+      const subject = this.$store.state.firestoreData.emailTemplates.subjects.shortlisted;
+      const invited = {user:name, body: emailTemplate, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}
       this.loading.push(index)
-      const emailTemplate = this.$store.state.firestoreData.emailTemplates.invite.replace('[CANDIDATE NAME]', name);
-      // eslint-disable-next-line no-unused-vars
-      const sendEmail = await fetch(
+      await fetch(
         "https://einfach.api.stdlib.com/Application@dev/autoEmails/email/",
         {
           method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -245,30 +252,25 @@ export default {
           },
           redirect: "follow", // manual, *follow, error
           referrerPolicy: "no-referrer",
-          body: JSON.stringify({ name, email, emailTemplate }),
+          body: JSON.stringify({ name, email, emailTemplate, subject }),
         }
       );
-      let details = this.$store.state.firestoreData.candidates.invited[index];
-      const invited = {user:name, label:"invited", body: emailTemplate, received: new Date(), title: 'Javascript developer test 2021 - Hi you have been invited', email}
       const entry = await firebase
         .firestore()
         .collection("accounts")
         .doc(this.$store.state.firestoreData.docId);
-      // eslint-disable-next-line no-unused-vars
-      const removeinvited = await entry.update({
+      await entry.update({
         "candidates.invited": firebase.firestore.FieldValue.arrayRemove(details),
       });
-      // eslint-disable-next-line no-unused-vars
-      const addInvite = await entry.update({
-        "candidates.shortlisted": firebase.firestore.FieldValue.arrayUnion(details),
+      await entry.update({
+        "candidates.completed": firebase.firestore.FieldValue.arrayUnion(details),
       });
-      // eslint-disable-next-line no-unused-vars
-      const inboxInvited = await entry.update({
-        "inbox": firebase.firestore.FieldValue.arrayUnion(invited),
+      await entry.update({
+        "inbox.completed": firebase.firestore.FieldValue.arrayUnion(invited),
       });
+      this.$swal('Completed Successfully')
       this.loading = []
     },
   },
 };
 </script>
-

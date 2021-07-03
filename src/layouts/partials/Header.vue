@@ -157,11 +157,6 @@
             <i class="fa fa-fw fa-ellipsis-v"></i>
           </base-layout-modifier>
           <!-- END Toggle Mini Sidebar -->
-
-          <!-- Apps Modal Toggle Button -->
-          <b-button variant="dual" size="sm" class="mr-2" v-b-modal.one-modal-apps>
-            <i class="fa fa-fw fa-cubes"></i>
-          </b-button>
           <!-- END Apps Modal Toggle Button -->
 
           <!-- Apps Modal -->

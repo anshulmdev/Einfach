@@ -296,7 +296,7 @@
                     }}
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">{{
-                      completed.timeStamp.slice(0,15)
+                      completed.timeStamp ? completed.timeStamp.slice(0,15) : 'Not Added'
                     }}
                   </b-td>
                   <b-td class="text-center">
@@ -505,12 +505,12 @@ export default {
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(132, 94, 247, 1)",
             data: [
-              this.$store.state.firestoreData.candidates.applied.length,
-              this.$store.state.firestoreData.candidates.invited.length,
-              this.$store.state.firestoreData.candidates.ongoing.length,
-              this.$store.state.firestoreData.candidates.shortlisted.length,
-              this.$store.state.firestoreData.candidates.rejected.length,
-              this.$store.state.firestoreData.candidates.completed.length,
+              this.$store.state.firestoreData.candidates.applied.length ? this.$store.state.firestoreData.candidates.applied.length : 0,
+              this.$store.state.firestoreData.candidates.invited.length ? this.$store.state.firestoreData.candidates.invited.length : 0,
+              this.$store.state.firestoreData.candidates.ongoing.length ? this.$store.state.firestoreData.candidates.ongoing.length : 0,
+              this.$store.state.firestoreData.candidates.shortlisted.length ? this.$store.state.firestoreData.candidates.shortlisted.length : 0,
+              this.$store.state.firestoreData.candidates.rejected.length ? this.$store.state.firestoreData.candidates.rejected.length : 0,
+              this.$store.state.firestoreData.candidates.completed.length ? this.$store.state.firestoreData.candidates.completed.length : 0,
             ],
           }
         ],
