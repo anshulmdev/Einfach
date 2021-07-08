@@ -1,6 +1,5 @@
 <template>
   <div v-if="$store.state.firestoreData">
-    <!-- Hero -->
     <div class="bg-body-light">
       <div class="content content-full">
         <div
@@ -29,11 +28,8 @@
         </div>
       </div>
     </div>
-    <!-- END Hero -->
-
-    <!-- Page Content -->
     <div class="content">
-      <!-- Stats -->
+<!-- Statistic Cards -->
       <b-row>
         <b-col cols="6" md="3" lg="6" xl="3">
           <base-block
@@ -120,14 +116,10 @@
           </base-block>
         </b-col>
       </b-row>
-      <!-- END Stats -->
-
-      <!-- END Dashboard Charts -->
-
-      <!-- Customers and Latest Orders -->
-      <b-row class="row-deck">
-        <!-- Latest Customers -->
-        <!-- Latest Orders -->
+<!-- Ongoing and Shortlisted -->
+      <b-row class="row-deck" v-if="$store.state.firestoreData.candidates.ongoing.length && $store.state.firestoreData.candidates.shortlisted.length">
+  
+  
         <b-col xl="6">
           <base-block
             rounded
@@ -161,8 +153,7 @@
               </b-thead>
               <b-tbody>
                 <b-tr
-                  v-for="(order, index) in $store.state.firestoreData.candidates
-                    .ongoing"
+                  v-for="(order, index) in $store.state.firestoreData.candidates.ongoing.slice(0,10)"
                   :key="index"
                 >
                   <b-td>
@@ -198,8 +189,8 @@
             </b-table-simple>
           </base-block>
         </b-col>
-        <!-- END Latest Orders -->
-        <!-- Extra Large Block Modal -->
+  
+  
         <b-modal
           id="modal-block-extra-large"
           size="xl"
@@ -238,7 +229,7 @@
             </div>
           </div>
         </b-modal>
-        <!-- END Extra Large Block Modal -->
+  
         <b-col xl="6">
           <base-block rounded title="Recent Shortlisted" header-bg content-full>
             <template #options>
@@ -269,7 +260,7 @@
                     .candidates.shortlisted">
                 <b-tr
                   v-for="(completed, index) in $store.state.firestoreData
-                    .candidates.shortlisted"
+                    .candidates.shortlisted.slice(0,10)"
                   :key="index"
                 >
                   <b-td class="font-w600">
@@ -312,10 +303,10 @@
             </b-table-simple>
           </base-block>
         </b-col>
-        <!-- END Latest Customers -->
+  
       </b-row>
-      <!-- END Customers and Latest Orders -->
-      <!-- Extra Large Block Modal -->
+
+
       <b-modal
         id="modal-block-extra-large2"
         size="xl"
@@ -354,13 +345,13 @@
           </div>
         </div>
       </b-modal>
-      <!-- END Extra Large Block Modal -->
 
-      <!-- Dashboard Charts -->
+<!-- Bar Graphs-->
+
       <b-row>
         <b-col lg="6">
-          <!-- Earnings Chart -->
-          <base-block rounded title="Server Status" header-bg>
+    
+          <base-block rounded title="Company Activities" header-bg>
             <template #options>
             </template>
             <template #content>
@@ -403,11 +394,11 @@
               </div>
             </template>
           </base-block>
-          <!-- END Earnings Chart -->
+    
         </b-col>
         <b-col lg="6">
-          <!-- Sales Chart -->
-          <base-block rounded title="Overview" header-bg>
+    
+          <base-block rounded title="Application Stages" header-bg>
             <template #options>
             </template>
             <template #content>
@@ -461,11 +452,10 @@
               </div>
             </template>
           </base-block>
-          <!-- END Sales Chart -->
+    
         </b-col>
       </b-row>
     </div>
-    <!-- END Page Content -->
   </div>
 </template>
 
@@ -484,7 +474,7 @@ export default {
   },
   computed: {
     chartjsEarningsData () {
-      if (this.$store.state.firestoreData) {
+      if (this.$store.state.firestoreData.candidates.applied.length) {
         return {
         labels: [
           "Applied",
@@ -535,7 +525,7 @@ export default {
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(132, 94, 247, 1)",
-            data: [100, 50, 30, 20, 50, 40],
+            data: [1, 1, 1, 1, 1, 1],
           }
         ],
       }

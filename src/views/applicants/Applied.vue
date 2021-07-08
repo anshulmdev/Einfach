@@ -18,7 +18,7 @@
     <!-- Page Content -->
     <div class="content">
       <!-- Full Table -->
-      <base-block rounded title="Assignment: JavaScript">
+      <base-block rounded title="Received Applications">
         <template #options>
             <b-dropdown id="dropdown-default-outline-primary btn-sm" variant="outline-primary btn-sm" text="Show Entries">
               <b-dropdown-item @click="perPage = 5" class="font-size-sm">5 per page</b-dropdown-item>

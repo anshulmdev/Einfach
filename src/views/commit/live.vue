@@ -2,7 +2,7 @@
   <div>
     <!-- Hero -->
     <base-page-heading
-      title="Share live editor"
+      title="Share live editor (Not Activated)"
       subtitle="Get real-time coding environment within Einfach board"
     >
       <template #extra>
