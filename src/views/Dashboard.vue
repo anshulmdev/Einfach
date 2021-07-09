@@ -351,7 +351,7 @@
       <b-row>
         <b-col lg="6">
     
-          <base-block rounded title="Company Activities" header-bg>
+          <base-block rounded title="Application and Languages" header-bg>
             <template #options>
             </template>
             <template #content>
@@ -373,9 +373,9 @@
                     </p>
                   </b-col>
                   <b-col cols="6" xl="3">
-                    <i class="fab fa-html5 fa-2x opacity-50"></i>
+                    <i class="fab fa-git-alt fa-2x opacity-50"></i>
                     <p class="font-size-sm font-w500 text-muted mt-3 mb-0">
-                      HTML/CSS
+                      Git
                     </p>
                   </b-col>
                   <b-col cols="6" xl="3">
@@ -472,68 +472,9 @@ export default {
     ChartjsLine,
     ChartjsBar
   },
-  computed: {
-    chartjsEarningsData () {
-      if (this.$store.state.firestoreData.candidates.applied.length) {
-        return {
-        labels: [
-          "Applied",
-          "Invited",
-          "Ongoing",
-          "Shortlisted",
-          "Rejected",
-          "Completed",
-        ],
-        datasets: [
-          {
-            label: `Year - ${String(new Date()).slice(10,15)}`,
-            fill: true,
-            backgroundColor: "rgba(132, 94, 247, .3)",
-            borderColor: "transparent",
-            pointBackgroundColor: "rgba(132, 94, 247, 1)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(132, 94, 247, 1)",
-            data: [
-              this.$store.state.firestoreData.candidates.applied.length ? this.$store.state.firestoreData.candidates.applied.length : 0,
-              this.$store.state.firestoreData.candidates.invited.length ? this.$store.state.firestoreData.candidates.invited.length : 0,
-              this.$store.state.firestoreData.candidates.ongoing.length ? this.$store.state.firestoreData.candidates.ongoing.length : 0,
-              this.$store.state.firestoreData.candidates.shortlisted.length ? this.$store.state.firestoreData.candidates.shortlisted.length : 0,
-              this.$store.state.firestoreData.candidates.rejected.length ? this.$store.state.firestoreData.candidates.rejected.length : 0,
-              this.$store.state.firestoreData.candidates.completed.length ? this.$store.state.firestoreData.candidates.completed.length : 0,
-            ],
-          }
-        ],
-      }
-      } else {
-        return {
-        labels: [
-          "Applied",
-          "Invited",
-          "Ongoing",
-          "Shortlisted",
-          "Rejected",
-          "Completed",
-        ],
-        datasets: [
-          {
-            label: `Year - ${String(new Date()).slice(10,15)}`,
-            fill: true,
-            backgroundColor: "rgba(132, 94, 247, .3)",
-            borderColor: "transparent",
-            pointBackgroundColor: "rgba(132, 94, 247, 1)",
-            pointBorderColor: "#fff",
-            pointHoverBackgroundColor: "#fff",
-            pointHoverBorderColor: "rgba(132, 94, 247, 1)",
-            data: [1, 1, 1, 1, 1, 1],
-          }
-        ],
-      }
-      }
-    }
-  },
   data() {
     return {
+      allApplicants: [],
       ongoing: [],
       shortlisted: [],
       url: "https://static.thenounproject.com/png/543772-200.png",
@@ -576,12 +517,62 @@ export default {
           intersect: false,
           callbacks: {
             label: (tooltipItems) => {
-              return " " + tooltipItems.yLabel + " Sales";
+              return " " + tooltipItems.yLabel + " Applications";
             },
           },
         },
       },
-      chartjsSalesData: {
+    };
+  },
+  computed: {
+    chartjsEarningsData () {
+      return {
+        labels: [
+          "Applied",
+          "Invited",
+          "Ongoing",
+          "Shortlisted",
+          "Rejected",
+          "Completed",
+        ],
+        datasets: [
+          {
+            label: `Year - ${String(new Date()).slice(10,15)}`,
+            fill: true,
+            backgroundColor: "rgba(132, 94, 247, .3)",
+            borderColor: "transparent",
+            pointBackgroundColor: "rgba(132, 94, 247, 1)",
+            pointBorderColor: "#fff",
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderColor: "rgba(132, 94, 247, 1)",
+            data: [
+              this.$store.state.firestoreData.candidates.applied.length ? this.$store.state.firestoreData.candidates.applied.length : 0,
+              this.$store.state.firestoreData.candidates.invited.length ? this.$store.state.firestoreData.candidates.invited.length : 0,
+              this.$store.state.firestoreData.candidates.ongoing.length ? this.$store.state.firestoreData.candidates.ongoing.length : 0,
+              this.$store.state.firestoreData.candidates.shortlisted.length ? this.$store.state.firestoreData.candidates.shortlisted.length : 0,
+              this.$store.state.firestoreData.candidates.rejected.length ? this.$store.state.firestoreData.candidates.rejected.length : 0,
+              this.$store.state.firestoreData.candidates.completed.length ? this.$store.state.firestoreData.candidates.completed.length : 0,
+            ],
+          }
+        ],
+      }
+    },
+    chartjsSalesData () {
+      const stats = {lastYear: new Array(12).fill(0), currentYear: new Array(12).fill(0)}
+      const candidateList = []
+      Object.keys(this.$store.state.firestoreData.candidates).forEach((category) => {
+        Object.values(this.$store.state.firestoreData.candidates[category]).forEach((applicant) => {
+          candidateList.push(applicant)
+          if ((new Date()).getYear() === (new Date(applicant.time).getYear())){
+            stats.currentYear[(new Date(applicant.time)).getMonth()] += 1
+          }
+          if ((new Date()).getYear() - 1 === (new Date(applicant.time).getYear())){
+            stats.lastYear[(new Date(applicant.time)).getMonth()] += 1
+          }
+          
+        })
+      })
+      return {
         labels: [
           "JAN",
           "FEB",
@@ -606,7 +597,7 @@ export default {
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(34, 184, 207, 1)",
-            data: [175, 120, 169, 82, 135, 169, 132, 130, 192, 230, 215, 260],
+            data: stats.currentYear,
           },
           {
             label: "Last Year",
@@ -617,11 +608,12 @@ export default {
             pointBorderColor: "#fff",
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(233, 236, 239, 1)",
-            data: [220, 170, 110, 215, 168, 227, 154, 135, 210, 240, 145, 178],
+            data: stats.lastYear,
           }
         ],
-      },
-    };
+      }
+      
+    }
   },
   created() {
     // Set Chart.js configuration

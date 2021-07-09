@@ -12,11 +12,10 @@
       </template>
     </base-page-heading>
     <!-- END Hero -->
-
     <!-- Page Content -->
     <div class="content">
       <!-- Basic -->
-      <base-block rounded title="Basic" content-full>
+      <base-block rounded title="Write query in detail" content-full>
         <b-form>
           <b-row class="push">
             <b-col lg="4">
@@ -131,7 +130,7 @@ export default {
       const name = 'Support Ticket'
       const email = 'support@einfach.in'
       const emailTemplate = this.query
-      const subject = `${this.selected} - Ticket Raised`
+      const subject = `${this.selected} - Ticket Raised - ${this.$store.state.firestoreData.user.email}`
       await fetch(
         "https://einfach.api.stdlib.com/Application@dev/autoEmails/email/",
         {
