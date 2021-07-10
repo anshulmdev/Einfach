@@ -25,6 +25,10 @@ import clickRipple from '@/directives/clickRipple'
 import toggleClass from '@/directives/toggleClass'
 import UUID from "vue-uuid";
 
+//Prism
+import 'prismjs'
+import 'prismjs/themes/prism.css'
+
 // Register global plugins
 Vue.use(BootstrapVue)
 Vue.use(VueCookies)

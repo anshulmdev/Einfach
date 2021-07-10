@@ -71,6 +71,7 @@ const ApplicantsInvited = () => import("@/views/applicants/Invited.vue")
 const ApplicantsRejected = () => import("@/views/applicants/Rejected.vue")
 const ApplicantsShortlisted = () => import("@/views/applicants/Shortlisted.vue")
 const ApplicantsCompleted = () => import("@/views/applicants/Completed.vue")
+const ApplicantDetails = () => import("@/views/applicants/Details.vue")
 
 // Backend: Library
 const LibraryRegex = () => import("@/views/library/Regex.vue")
@@ -572,6 +573,11 @@ export default new Router({
               name: 'Applicants Completed',
               component: ApplicantsCompleted
             },
+            {
+              path: 'details/:id',
+              name: 'Applicant Details',
+              component: ApplicantDetails
+            }
           ]
         },
         {

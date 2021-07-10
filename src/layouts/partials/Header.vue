@@ -424,7 +424,7 @@ export default {
     searchApplicant () {
       if(this.baseSearchTerm) {
         if(this.$store.state.applicantList[this.baseSearchTerm]){
-          this.openApplicant(this.baseSearchTerm)
+          this.$router.push(`/backend/applicants/details/${this.baseSearchTerm}`)
         } else {
           this.$swal('Applicant not Found!')
         }
