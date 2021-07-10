@@ -23,6 +23,7 @@ export default new Vuex.Store({
   state: {
     authUid: '2jfmeB9gjKcy7cMA4sthOKDvOOB2',
     applicantScores: {},
+    applicantList: {},
     firestoreData: null,
     docId: null,
     newAssignment: {active: false, marks: 0, time: 0, sections: 0, questions: 0, tags: {}, name: 'Assignment Name', cutoff: 100},
@@ -120,14 +121,13 @@ export default new Vuex.Store({
         this.dispatch('applicantList')
       },
       async applicantList () {
-        const allApplicants = []
+        const allApplicants = {}
         Object.keys(this.state.firestoreData.candidates).forEach((category) => {
           Object.values(this.state.firestoreData.candidates[category]).forEach((applicant) => {
-            console.log(this.state.applicantScores[applicant.email])
-            allApplicants.push(applicant)
+            allApplicants[applicant.email] = applicant
           })
         })
-        console.log(allApplicants)
+        this.state.applicantList = allApplicants
       }
   },
   mutations: {

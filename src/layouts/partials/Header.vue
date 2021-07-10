@@ -225,11 +225,11 @@
           <!-- END Open Search Section -->
 
           <!-- Search Form (visible on larger screens) -->
-          <b-form @submit.stop.prevent="onSubmit" class="d-none d-sm-inline-block">
+          <b-form class="d-none d-sm-inline-block">
             <b-input-group size="sm">
               <b-form-input placeholder="Type email.." v-model="baseSearchTerm" class="form-control-alt"></b-form-input>
               <b-input-group-append>
-                <span class="input-group-text bg-body border-0">
+                <span @click="searchApplicant" class="input-group-text bg-body border-0" style="cursor: pointer">
                   <i class="fa fa-fw fa-search"></i>
                 </span>
               </b-input-group-append>
@@ -417,10 +417,19 @@ export default {
   },
   data () {
     return {
-      baseSearchTerm: ''
+      baseSearchTerm: null
     }
   },
   methods: {
+    searchApplicant () {
+      if(this.baseSearchTerm) {
+        if(this.$store.state.applicantList[this.baseSearchTerm]){
+          this.openApplicant(this.baseSearchTerm)
+        } else {
+          this.$swal('Applicant not Found!')
+        }
+      }
+    },
     async deploy() {
       const data = {'assignment': this.$store.state.newAssignment}
       await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.docId).update(data);
