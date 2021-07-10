@@ -109,14 +109,25 @@ export default new Vuex.Store({
         scoreQuery.onSnapshot(docSnapshot => {
           const applicants = docSnapshot.data()
           const scores = {} 
+          if(applicants) {
           Object.keys(applicants).forEach((e) => {
             scores[e] = scoreFunction(applicants[e])
-          })
+          })}
           this.state.applicantScores = scores
         }, err => {
           console.log(`Encountered error: ${err}`);
         });
-
+        this.dispatch('applicantList')
+      },
+      async applicantList () {
+        const allApplicants = []
+        Object.keys(this.state.firestoreData.candidates).forEach((category) => {
+          Object.values(this.state.firestoreData.candidates[category]).forEach((applicant) => {
+            console.log(this.state.applicantScores[applicant.email])
+            allApplicants.push(applicant)
+          })
+        })
+        console.log(allApplicants)
       }
   },
   mutations: {

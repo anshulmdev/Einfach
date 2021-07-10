@@ -474,7 +474,6 @@ export default {
   },
   data() {
     return {
-      allApplicants: [],
       ongoing: [],
       shortlisted: [],
       url: "https://static.thenounproject.com/png/543772-200.png",
