@@ -280,7 +280,6 @@ export default {
       this.form.fields.push({name:'Field Name',type:'Field Type',submit:'Add More'})}
     },
     async afterComplete(upload) {
-      console.log('running')
       this.isLoading = true;
       try {
         //save image

@@ -50,7 +50,7 @@
                 /></a>
               </b-td>
               <b-td class="font-w600 font-size-sm">
-                <a :href="`${user.href}`">
+                <a :href="`/#/backend/applicants/details/${user.email}`">
                   {{ user.name }}
                 </a>
               </b-td>
@@ -234,9 +234,12 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     async invite(name, email, index) {
+      const testLink = `http://app.einfach.in/auth/login/${this.$cookies.get("setDocId")}`
+      const company = this.$store.state.firestoreData.user.name
+      const companyEmail = this.$store.state.firestoreData.user.email
       const details = this.$store.state.firestoreData.candidates.invited[index + this.perPage * (this.currentPage - 1)];
-      const emailTemplate = this.$store.state.firestoreData.emailTemplates.shortlisted.replace('[name]', name);
-      const subject = this.$store.state.firestoreData.emailTemplates.subjects.shortlisted;
+      const emailTemplate = this.$store.state.firestoreData.emailTemplates.shortlisted.replace('[name]', name).replace('[company]', company).replace('[companyEmail]', companyEmail).replace('[testLink]', testLink);
+      const subject = this.$store.state.firestoreData.emailTemplates.subjects.shortlisted.replace('[name]', name).replace('[company]', company).replace('[companyEmail]', companyEmail);
       const invited = {user:name, body: emailTemplate, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}
       this.loading.push(index)
       await fetch(

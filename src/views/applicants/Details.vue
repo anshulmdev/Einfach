@@ -14,7 +14,6 @@
     <!-- END Hero -->
     <!-- Page Content -->
     <div v-if="data" class="content">
-
           <b-tabs class="block" nav-class="nav-tabs-block" content-class="block-content overflow-hidden">
             <b-tab title="Submitted Form" active class="fade-left">
             <b-row>
@@ -50,7 +49,7 @@
             <template #options>
             </template>
             <p>
-              {{data.timeStamp ? data.timeStamp.slice(0, 15) : ''}}
+              {{data.time ? data.time.slice(0, 15) : ''}}
             </p>
           </base-block>
         </b-col>
@@ -103,14 +102,14 @@
             </b-tab>
             <b-tab title-item-class="ml-auto">
               <template #title>
-                Score: {{score}} Marks
+                Score: {{score ? score : 0}} Marks
               </template>
               <h4 class="font-w400">Settings Content</h4>
               <p>Content fades in..</p>
             </b-tab>
           </b-tabs>
       <!-- Basic -->
-      <base-block rounded title="Programming Questions" content-full>
+      <base-block v-if="data.coding" rounded title="Programming Questions" content-full>
       <div v-for="answer in Object.keys(data.coding)" :key="answer.score">
           <base-block :title="answer" themed rounded header-class="bg-amethyst-light">
             <template #options>
@@ -163,7 +162,7 @@ export default {
     async fetchData (){
       const info = this.$store.state.applicantList[this.$route.params.id]
       const scoreQuery = await firebase.firestore().collection('scores').doc(this.$cookies.get("setDocId")).get()
-      const score = scoreQuery.data()[this.$route.params.id]
+      const score = scoreQuery.data() ? scoreQuery.data()[this.$route.params.id] : 0
       const allData = {...info, ...score}
       this.data = allData
     }

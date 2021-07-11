@@ -461,6 +461,7 @@ export default {
     },
     logout() {
       this.$cookies.remove('uid')
+      this.$cookies.remove('setDocId')
     },
     eventHeaderSearch (event) {
       // When ESCAPE key is hit close the header search section
