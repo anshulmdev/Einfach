@@ -74,7 +74,7 @@
               <b-td class="font-size-sm">
                 {{ $store.state.applicantScores[user.email] ? $store.state.applicantScores[user.email] : 0}}
               </b-td>
-              <b-td class="font-size-sm"> {{ user.timeStamp ? user.timeStamp.slice(0,15) : 'Not Added' }} </b-td>
+              <b-td class="font-size-sm"> {{ user.time ? user.time.slice(0,15) : 'Not Added' }} </b-td>
               <b-td class="text-center">
                 <b-btn-group>
                   <b-button

@@ -212,7 +212,9 @@ export default {
   },
   computed:{
     filteredArray (){
-      return this.firebaseData.slice(((this.currentPage-1)*this.perPage),((this.currentPage)*this.perPage));
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      this.rows = this.firebaseData.length
+			return this.firebaseData.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage);
     }
   },
   methods:{

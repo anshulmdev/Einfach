@@ -287,7 +287,7 @@
                     }}
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">{{
-                      completed.timeStamp ? completed.timeStamp.slice(0,15) : 'Not Added'
+                      completed.time ? completed.time.slice(0,15) : 'Not Added'
                     }}
                   </b-td>
                   <b-td class="text-center">
