@@ -245,7 +245,7 @@ export default {
       const details = this.$store.state.firestoreData.candidates.rejected[index + this.perPage * (this.currentPage - 1)];
       const emailTemplate = this.$store.state.firestoreData.emailTemplates.rejected.replace('[name]', name).replace('[company]', company).replace('[companyEmail]', companyEmail).replace('[testLink]', testLink);
       const subject = this.$store.state.firestoreData.emailTemplates.subjects.rejected.replace('[name]', name).replace('[company]', company).replace('[companyEmail]', companyEmail);
-      const invited = {user:name, body: emailTemplate, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}
+      const rejected = {user:name, body: emailTemplate, received: new Date(), title: 'Candidate Rejection Mail', email}
       this.loading.push(index)
       await fetch(
         "https://einfach.api.stdlib.com/Application@dev/autoEmails/email/",
@@ -274,7 +274,7 @@ export default {
         "candidates.completed": firebase.firestore.FieldValue.arrayUnion(details),
       });
       await entry.update({
-        "inbox.completed": firebase.firestore.FieldValue.arrayUnion(invited),
+        "inbox.completed": firebase.firestore.FieldValue.arrayUnion(rejected),
       });
       this.$swal('Completed Successfully')
       this.loading = []

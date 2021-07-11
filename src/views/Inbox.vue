@@ -6,11 +6,7 @@
         <!-- Toggle Inbox Side Navigation -->
         <div class="d-md-none push">
           <!-- Class Toggle, functionality initialized in Helpers.coreToggleClass() -->
-          <b-button
-            variant="primary"
-            block
-            v-toggle-class="{ targetId: 'one-inbox-side-nav', class: 'd-none' }"
-          >
+          <b-button variant="primary" block v-toggle-class="{ targetId: 'one-inbox-side-nav', class: 'd-none' }">
             Inbox Menu
           </b-button>
         </div>
@@ -18,39 +14,22 @@
         <!-- Inbox Side Navigation -->
         <div id="one-inbox-side-nav" class="d-none d-md-block push">
           <!-- New Message Modal -->
-          <b-modal
-            id="one-inbox-new-message"
-            body-class="p-0"
-            hide-footer
-            hide-header
-          >
+          <b-modal id="one-inbox-new-message" body-class="p-0" hide-footer hide-header>
             <b-form @submit="onSubmit" @reset="onReset">
-              <div
-                class="block block-rounded block-themed block-transparent mb-0"
-              >
+              <div class="block block-rounded block-themed block-transparent mb-0">
                 <div class="block-header bg-primary-dark">
                   <h3 class="block-title">
                     <i class="fa fa-pencil-alt mr-1"></i> New Message
                   </h3>
                   <div class="block-options">
-                    <button
-                      type="button"
-                      class="btn-block-option"
-                      @click="$bvModal.hide('one-inbox-new-message')"
-                    >
+                    <button type="button" class="btn-block-option" @click="$bvModal.hide('one-inbox-new-message')">
                       <i class="fa fa-fw fa-times"></i>
                     </button>
                   </div>
                 </div>
                 <div class="block-content">
                   <b-form-group label="Email" label-for="message-email">
-                    <b-form-input
-                      v-model="form.email"
-                      id="message-email"
-                      class="form-control-alt"
-                      type="email"
-                      required
-                    ></b-form-input>
+                    <b-form-input v-model="form.email" id="message-email" class="form-control-alt" type="email" required />
                   </b-form-group>
                   <b-form-group label="Subject" label-for="message-subject">
                     <b-form-input
@@ -120,40 +99,41 @@
             </template>
             <b-nav class="font-size-sm push" pills vertical>
               <b-nav-item
-                @click="labelChange()"
+                @click="label = null; currentPage = 1;"
                 class="my-1"
                 link-classes="d-flex justify-content-between align-items-center"
                 :active="this.label == null"
               >
                 <span> <i class="fa fa-fw fa-inbox mr-1"></i> Inbox </span>
-                <b-badge pill variant="secondary">3</b-badge>
+                <b-badge pill variant="secondary">{{
+                  totalMails
+                }}</b-badge>
               </b-nav-item>
-              <b-nav-item
-                @click="labelChange('invited')"
-                class="my-1"
-                link-classes="d-flex justify-content-between align-items-center"
-                :active="this.label == 'invited'"
-              >
+              <b-nav-item @click="label = 'invited'; currentPage = 1;" class="my-1" link-classes="d-flex justify-content-between align-items-center" :active="this.label == 'invited'">
                 <span>
                   <i class="fa fa-fw fa-paper-plane mr-1"></i> Invited
                 </span>
                 <b-badge pill variant="secondary">{{
-                  $store.state.firestoreData.inbox.invited ? $store.state.firestoreData.inbox.invited.length : 0
+                  $store.state.firestoreData.inbox.invited
+                    ? $store.state.firestoreData.inbox.invited.length
+                    : 0
                 }}</b-badge>
               </b-nav-item>
               <b-nav-item
-                @click="labelChange('shortlisted')"
+                @click="label = 'completed'; currentPage = 1;"
                 class="my-1"
                 link-classes="d-flex justify-content-between align-items-center"
-                :active="this.label == 'shortlisted'"
+                :active="this.label == 'completed'"
               >
-                <span> <i class="fa fa-fw fa-star mr-1"></i> Shortlisted </span>
+                <span> <i class="fa fa-fw fa-star mr-1"></i> Completed </span>
                 <b-badge pill variant="secondary">{{
-                  $store.state.firestoreData.inbox.shortlisted ? $store.state.firestoreData.inbox.shortlisted.length : 0
+                  $store.state.firestoreData.inbox.completed
+                    ? $store.state.firestoreData.inbox.completed.length
+                    : 0
                 }}</b-badge>
               </b-nav-item>
               <b-nav-item
-                @click="labelChange('custom')"
+                @click="label = 'custom'; currentPage = 1;"
                 class="my-1"
                 link-classes="d-flex justify-content-between align-items-center"
                 :active="this.label == 'custom'"
@@ -164,32 +144,6 @@
                 <b-badge pill variant="secondary">{{
                   $store.state.firestoreData.inbox.custom
                     ? $store.state.firestoreData.inbox.custom.length
-                    : 0
-                }}</b-badge>
-              </b-nav-item>
-              <b-nav-item
-                @click="labelChange('archive')"
-                class="my-1"
-                link-classes="d-flex justify-content-between align-items-center"
-                :active="this.label == 'archive'"
-              >
-                <span> <i class="fa fa-fw fa-folder mr-1"></i> Archive </span>
-                <b-badge pill variant="secondary">{{
-                  $store.state.firestoreData.inbox.archive
-                    ? $store.state.firestoreData.inbox.archive.length
-                    : 0
-                }}</b-badge>
-              </b-nav-item>
-              <b-nav-item
-                @click="labelChange('trash')"
-                class="my-1"
-                link-classes="d-flex justify-content-between align-items-center"
-                :active="this.label == 'trash'"
-              >
-                <span> <i class="fa fa-fw fa-trash-alt mr-1"></i> Trash </span>
-                <b-badge pill variant="secondary">{{
-                  $store.state.firestoreData.inbox.trash
-                    ? $store.state.firestoreData.inbox.trash.length
                     : 0
                 }}</b-badge>
               </b-nav-item>
@@ -226,7 +180,7 @@
             </vue-easy-pie-chart>
             <base-block
               tag="a"
-              href="javascript:void(0)"
+              href="/#/backend/subscription/active"
               rounded
               bordered
               link-shadow
@@ -274,29 +228,16 @@
             >
               <div>
                 <a class="font-w600" href="javascript:void(0)">
-                  {{
-                    $store.state.firestoreData.inbox.invited[showMessage].email
-                  }}</a
-                ><br />
-                <a href="javascript:void(0)">{{
-                  $store.state.firestoreData.inbox.invited[showMessage].title
-                }}</a>
+                  {{inbox[showMessage].email}}</a><br />
+                <a href="javascript:void(0)">{{inbox[showMessage].title}}</a>
               </div>
               <span class="text-muted"
-                ><em>{{
-                  Date(
-                    $store.state.firestoreData.inbox.invited[showMessage]
-                      .received
-                  )
-                    .toString()
-                    .slice(0, 10)
-                }}</em></span
-              >
+                ><em>{{Date(inbox[showMessage].received).toString().slice(0, 10)}}</em></span>
             </div>
             <div class="block-content font-size-sm">
               <p
                 v-html="
-                  $store.state.firestoreData.inbox.invited[showMessage].body
+                  inbox[showMessage].body
                 "
               />
             </div>
@@ -311,21 +252,13 @@
           header-class="block-header-default"
         >
           <template #title>
-            15-30 <span class="font-w400 text-lowercase">from</span> 700
+            Page {{currentPage}} out of {{parseInt(currentMails.length / (perPage)) + 1}}
           </template>
           <template #options>
-            <button
-              type="button"
-              class="btn-block-option"
-              v-b-tooltip.hover.nofade.left="'Previous 15 Messages'"
-            >
+            <button type="button" @click="pagination('decrease')" class="btn-block-option">
               <i class="si si-arrow-left"></i>
             </button>
-            <button
-              type="button"
-              class="btn-block-option"
-              v-b-tooltip.hover.nofade.left="'Next 15 Messages'"
-            >
+            <button @click="pagination('increase')" type="button" class="btn-block-option">
               <i class="si si-arrow-right"></i>
             </button>
           </template>
@@ -333,19 +266,17 @@
           <!-- Messages Options -->
           <div class="d-flex justify-content-between push">
             <div class="btn-group">
-              <b-button variant="light" size="sm">
-                <i class="fa fa-archive text-primary"></i>
-                <span class="d-none d-sm-inline ml-1">Archive</span>
-              </b-button>
-              <b-button variant="light" size="sm">
-                <i class="fa fa-star text-warning"></i>
-                <span class="d-none d-sm-inline ml-1">Shortlist</span>
+              <b-button variant="light" size="sm" @click="$router.push('/backend/dashboard')">
+                <i class="si si-speedometer text-primary"></i>
+                <span class="d-none d-sm-inline ml-1">Dashboard</span>
               </b-button>
             </div>
-            <b-button variant="light" size="sm">
-              <i class="fa fa-times text-danger"></i>
-              <span class="d-none d-sm-inline ml-1">Delete</span>
-            </b-button>
+            <b-dropdown id="dropdown-default-outline-primary btn-sm" variant="outline-primary btn-sm" text="Show Entries">
+              <b-dropdown-item @click="perPage = 5" class="font-size-sm">5 per page</b-dropdown-item>
+              <b-dropdown-item @click="perPage = 10" class="font-size-sm">10 per page</b-dropdown-item>
+              <b-dropdown-item @click="perPage = 15" class="font-size-sm">15 per page</b-dropdown-item>
+              <b-dropdown-item @click="perPage = 20" class="font-size-sm">20 per page</b-dropdown-item>
+            </b-dropdown>
           </div>
           <!-- END Messages Options -->
 
@@ -355,39 +286,21 @@
               <b-tbody>
                 <b-tr v-for="(message, index) in inbox" :key="index">
                   <b-td v-if="message" class="text-center" style="width: 60px">
-                    <b-form-checkbox
-                      :id="`checkbox-${index}`"
-                      :value="index"
-                    ></b-form-checkbox>
+                    <b-form-checkbox :id="`checkbox-${index}`" :value="index" />
                   </b-td>
-                  <b-td v-if="message"
-                    class="d-none d-sm-table-cell font-w600"
-                    style="width: 140px"
-                  >
+                  <b-td v-if="message" class="d-none d-sm-table-cell font-w600" style="width: 140px">
                     {{ message.user }}
                   </b-td>
                   <b-td v-if="message">
-                    <a
-                      class="font-w600"
-                      href="javascript:void(0)"
-                      v-b-modal.one-inbox-message
-                      @click="showMessage = index"
-                    >
+                    <a class="font-w600" v-b-modal.one-inbox-message @click="showMessage = index">
                       {{ message.email }}
                     </a>
                     <div class="text-muted mt-1">
                       {{ message.title }}
                     </div>
                   </b-td>
-                  <b-td v-if="message"
-                    class="d-none d-xl-table-cell text-muted"
-                    style="width: 120px"
-                  >
-                    <em>{{
-                      new Date(message.received.seconds * 1000)
-                        .toString()
-                        .slice(0, 10)
-                    }}</em>
+                  <b-td v-if="message" class="d-none d-xl-table-cell text-muted" style="width: 120px">
+                    <em>{{ new Date(message.received.seconds * 1000).toString().slice(0, 10)}}</em>
                   </b-td>
                 </b-tr>
               </b-tbody>
@@ -414,35 +327,44 @@ import firebase from "../firebase";
 
 export default {
   components: {
-    VueEasyPieChart,
+    VueEasyPieChart
   },
   data() {
     return {
       label: null,
       loading: false,
+      currentMails: [],
+      totalMails: 0,
+      perPage: 8,
+      currentPage: 1,
       form: {
         email: "",
         subject: "",
-        message: "",
+        message: ""
       },
-      showMessage: 0,
+      showMessage: 0
     };
   },
   computed: {
     // eslint-disable-next-line vue/return-in-computed-property
     inbox() {
+      const sliceValue = [(this.currentPage - 1) * this.perPage, this.currentPage * this.perPage]
       if (!this.label) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        return this.$store.state.firestoreData.inbox.invited
-          .concat(this.$store.state.firestoreData.inbox.shortlisted)
+        this.currentMails = this.$store.state.firestoreData.inbox.invited
+          .concat(this.$store.state.firestoreData.inbox.completed)
           .sort((a, b) => b.received - a.received);
+        // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+        this.totalMails = this.currentMails.length
+        return this.currentMails.slice(sliceValue[0], sliceValue[1]);
       } else {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        return this.$store.state.firestoreData.inbox[this.label].sort(
+        this.currentMails = this.$store.state.firestoreData.inbox[this.label].sort(
           (a, b) => b.received - a.received
         );
+        return this.currentMails.slice(sliceValue[0], sliceValue[1]);
       }
-    },
+    }
   },
   mounted() {
     this.$root.$on("bv::modal::hidden", (bvEvent, modalId) => {
@@ -452,13 +374,6 @@ export default {
     });
   },
   methods: {
-    labelChange(value) {
-      if (value) {
-        this.label = value;
-      } else {
-        this.label = null;
-      }
-    },
     async onSubmit() {
       this.loading = true;
       const details = {
@@ -466,7 +381,7 @@ export default {
         email: this.form.email,
         received: new Date(),
         title: this.form.subject,
-        user: "Custom Mail",
+        user: "Custom Mail"
       };
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch(
@@ -477,7 +392,7 @@ export default {
           cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
           credentials: "same-origin", // include, *same-origin, omit
           headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
             // 'Content-Type': 'application/x-www-form-urlencoded',
           },
           redirect: "follow", // manual, *follow, error
@@ -486,8 +401,8 @@ export default {
             subject: this.form.subject,
             email: this.form.email,
             emailTemplate: this.form.message,
-            name: 'Custom Mail'
-          }),
+            name: "Custom Mail"
+          })
         }
       );
       const entry = await firebase
@@ -496,11 +411,17 @@ export default {
         .doc(this.$store.state.firestoreData.docId);
       // eslint-disable-next-line no-unused-vars
       const inboxInvited = await entry.update({
-        "inbox.custom": firebase.firestore.FieldValue.arrayUnion(details),
+        "inbox.custom": firebase.firestore.FieldValue.arrayUnion(details)
       });
       setTimeout(() => {
         this.loading = "done";
       }, 2000);
+    },
+    pagination(value) {
+      if(value === 'increase') {
+        if (this.currentPage < parseInt(this.currentMails.length / this.perPage) + 1) this.currentPage += 1
+      } 
+      if(value === 'decrease' && this.currentPage > 1) this.currentPage -= 1
     },
     onReset(evt) {
       evt.preventDefault();
@@ -509,7 +430,7 @@ export default {
       this.form.email = "";
       this.form.subject = "";
       this.form.message = "";
-    },
-  },
+    }
+  }
 };
 </script>

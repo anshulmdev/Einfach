@@ -240,7 +240,7 @@ export default {
       const details = this.$store.state.firestoreData.candidates.invited[index + this.perPage * (this.currentPage - 1)];
       const emailTemplate = this.$store.state.firestoreData.emailTemplates.shortlisted.replace('[name]', name).replace('[company]', company).replace('[companyEmail]', companyEmail).replace('[testLink]', testLink);
       const subject = this.$store.state.firestoreData.emailTemplates.subjects.shortlisted.replace('[name]', name).replace('[company]', company).replace('[companyEmail]', companyEmail);
-      const invited = {user:name, body: emailTemplate, received: new Date(), title: `{${this.$store.state.firestoreData.user.name} Assignment Invitation}`, email}
+      const invited = {user:name, body: emailTemplate, received: new Date(), title: 'Candidate Shortlist Mail', email}
       this.loading.push(index)
       await fetch(
         "https://einfach.api.stdlib.com/Application@dev/autoEmails/email/",
