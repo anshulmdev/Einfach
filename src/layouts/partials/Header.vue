@@ -460,8 +460,7 @@ export default {
       })
     },
     logout() {
-      this.$cookies.remove('uid')
-      this.$cookies.remove('setDocId')
+      firebase.auth().signOut()
     },
     eventHeaderSearch (event) {
       // When ESCAPE key is hit close the header search section
