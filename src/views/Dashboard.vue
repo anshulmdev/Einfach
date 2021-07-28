@@ -117,7 +117,7 @@
         </b-col>
       </b-row>
 <!-- Ongoing and Shortlisted -->
-      <b-row class="row-deck" v-if="$store.state.firestoreData.candidates.ongoing.length && $store.state.firestoreData.candidates.shortlisted.length">
+      <b-row class="row-deck">
   
   
         <b-col xl="6">
