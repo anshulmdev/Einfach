@@ -117,9 +117,8 @@
         </b-col>
       </b-row>
 <!-- Ongoing and Shortlisted -->
-      <b-row class="row-deck" v-if="$store.state.firestoreData.candidates.ongoing.length && $store.state.firestoreData.candidates.shortlisted.length">
-  
-  
+      <b-row class="row-deck">
+
         <b-col xl="6">
           <base-block
             rounded
@@ -189,8 +188,8 @@
             </b-table-simple>
           </base-block>
         </b-col>
-  
-  
+
+
         <b-modal
           id="modal-block-extra-large"
           size="xl"
@@ -229,7 +228,7 @@
             </div>
           </div>
         </b-modal>
-  
+
         <b-col xl="6">
           <base-block rounded title="Recent Shortlisted" header-bg content-full>
             <template #options>
@@ -303,7 +302,7 @@
             </b-table-simple>
           </base-block>
         </b-col>
-  
+
       </b-row>
 
 
@@ -350,7 +349,7 @@
 
       <b-row>
         <b-col lg="6">
-    
+
           <base-block rounded title="Application and Languages" header-bg>
             <template #options>
             </template>
@@ -394,17 +393,17 @@
               </div>
             </template>
           </base-block>
-    
+
         </b-col>
         <b-col lg="6">
-    
+
           <base-block rounded title="Application Stages" header-bg>
             <template #options>
             </template>
             <template #content>
               <div class="block-content p-0">
                 <div class="pt-3">
-              <chartjs-bar 
+              <chartjs-bar
                     :chart-data="chartjsEarningsData"
                     :options="chartjsEarningsOptions"
                     :styles="chartjsStyles"></chartjs-bar>
@@ -452,7 +451,7 @@
               </div>
             </template>
           </base-block>
-    
+
         </b-col>
       </b-row>
     </div>
@@ -568,7 +567,7 @@ export default {
           if ((new Date()).getYear() - 1 === (new Date(applicant.time).getYear())){
             stats.lastYear[(new Date(applicant.time)).getMonth()] += 1
           }
-          
+
         })
       })
       return {
@@ -611,7 +610,7 @@ export default {
           }
         ],
       }
-      
+
     }
   },
   created() {
