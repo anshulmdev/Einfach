@@ -360,8 +360,8 @@
           <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="#" v-click-ripple>
             <i class="fa fa-fw fa-shopping-cart font-size-base opacity-50 mr-1"></i> Purchase
           </b-button>
-          <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 m-1" to="/auth/signup" v-click-ripple>
-            <i class="fa fa-fw fa-rocket font-size-base opacity-50 mr-1"></i> Sign Up
+          <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://einfach.hubspotpagebuilder.eu/einfach-meeting" v-click-ripple>
+            <i class="far fa-calendar-alt font-size-base opacity-50 mr-1"></i> Book a Meeting
           </b-button>
         </div>
       </div>
