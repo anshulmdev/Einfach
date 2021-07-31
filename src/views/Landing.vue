@@ -13,7 +13,7 @@
                   <span class="">Einfach</span>
                 </h1></div>
                 <p class="font-size-lg font-w400 text-muted mb-4 mt-2 pb-2">
-                  Build a easy hiring solution with <a>Einfach</a><br>
+                  Build an easy hiring solution with <a>Einfach</a><br>
                   We help fast-growing companies  in technical recruiting by structuring, automating, and scaling technical hiring 
                 </p>
                 <b-button size="lg" variant="alt-success" class="btn-rounded px-4 mr-1 mb-3" to="/auth/signin" v-click-ripple>
