@@ -12,8 +12,9 @@
                 <h1 class="font-w700 mb-3 ml-3">
                   <span class="">Einfach</span>
                 </h1></div>
-                <p class="font-size-lg font-w500 text-muted mb-4">
-                  Einfach is a complete hiring package that helps you recruit tech teams with ease<br> Complete <a>architecture</a> to deploy and manage your technical hiring
+                <p class="font-size-lg font-w400 text-muted mb-4 mt-2 pb-2">
+                  Build a easy hiring solution with <a>Einfach</a><br>
+                  We help fast-growing companies  in technical recruiting by structuring, automating, and scaling technical hiring 
                 </p>
                 <b-button size="lg" variant="alt-success" class="btn-rounded px-4 mr-1 mb-3" to="/auth/signin" v-click-ripple>
                   <i class="far fa-smile-beam font-size-base opacity-50 mr-1"></i> Already a Super User
@@ -309,10 +310,10 @@
         <div class="content content-full content-boxed">
           <div class="py-5 text-center">
             <h2 class="font-w700 mb-3 text-white">
-              Trusted by over 4.000 companies and teams
+              Get rid of insane limit on applications, <br>We provide <a class="text-primary-light">1000+</a> applications in single plan
             </h2>
             <p class="font-size-lg text-white-50 mb-6 mx-sm-6 mx-lg-9">
-              <a class="text-primary-light" href="https://1.envato.market/AVD6j">Einfach</a> is one of the top developer hiring environments which has 100+ features bundled in single package
+              <a class="text-primary-light" href="https://1.envato.market/AVD6j">Einfach</a> is one of the easiest developer hiring environments which has 100+ features bundled in single package
             </p>
             <b-row no-gutters class="mx-lg-8">
               <b-col sm="4" class="p-3">
@@ -354,7 +355,7 @@
               Starting with a <span class="text-success">Free Trial</span>
           </h2>
           <p class="font-size-lg font-w500 text-muted mb-4">
-              100+ features bundled in single package accessible from $99 onwards
+              100+ features bundled in single package accessible from $99 only
           </p>
           <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="#" v-click-ripple>
             <i class="fa fa-fw fa-shopping-cart font-size-base opacity-50 mr-1"></i> Purchase
