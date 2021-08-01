@@ -49,7 +49,7 @@
                 <a v-b-modal.modal-block-extra-large @click="url = user.resume">
                   <img
                     height="50"
-                    src="https://static.thenounproject.com/png/543772-200.png"
+                    src="img/photos/resume.png"
                     alt="Avatar"
                 /></a>
               </b-td>
