@@ -352,12 +352,12 @@
       <div class="content content-full content-boxed">
         <div class="py-5 py-md-8 text-center">
           <h2 class="font-w700 mb-2">
-              Starting with a <span class="text-success">Free Trial</span>
+              Start with a <span class="text-success">Free Trial</span>
           </h2>
           <p class="font-size-lg font-w500 text-muted mb-4">
               100+ features bundled in single package accessible from $99 only
           </p>
-          <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="#" v-click-ripple>
+          <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://einfach.hubspotpagebuilder.eu/einfach-subscription" v-click-ripple>
             <i class="fa fa-fw fa-shopping-cart font-size-base opacity-50 mr-1"></i> Purchase
           </b-button>
           <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://einfach.hubspotpagebuilder.eu/einfach-meeting" v-click-ripple>
