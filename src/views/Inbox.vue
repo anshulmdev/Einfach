@@ -13,7 +13,7 @@
         <div id="one-inbox-side-nav" class="d-none d-md-block push">
           <!-- New Message Modal -->
           <b-modal id="one-inbox-new-message" body-class="p-0" hide-footer hide-header>
-            <b-form @submit="onSubmit" @reset="onReset">
+            <b-form>
               <div class="block block-rounded block-themed block-transparent mb-0">
                 <div class="block-header bg-primary-dark">
                   <h3 class="block-title"><i class="fa fa-pencil-alt mr-1"></i> New Message</h3>
@@ -36,8 +36,8 @@
                 </div>
                 <div class="block-content block-content-full text-right border-top">
                   <b-button variant="alt-primary" class="mr-1" @click="$bvModal.hide('one-inbox-new-message')">Cancel</b-button>
-                  <b-button v-if="loading == false" type="submit" variant="primary"> <i class="fa fa-paper-plane mr-1"></i> Send Message </b-button>
-                  <b-button v-if="loading == 'done'" type="submit" variant="success"> <i class="fa fa-check mr-1"></i> Message Sent </b-button>
+                  <b-button v-if="loading == false" @click="submitMsg" variant="primary"> <i class="fa fa-paper-plane mr-1"></i> Send Message </b-button>
+                  <b-button v-if="loading == 'done'" variant="success"> <i class="fa fa-check mr-1"></i> Message Sent </b-button>
                   <b-button v-if="loading == true" variant="primary">
                     <i class="fa fa-2x fa-cog fa-spin"></i>
                   </b-button>
@@ -275,7 +275,7 @@ export default {
     });
   },
   methods: {
-    async onSubmit() {
+    async submitMsg() {
       this.loading = true;
       const details = {
         body: this.form.message,

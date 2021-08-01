@@ -70,7 +70,7 @@
                       <router-link to="/auth/reminder3" class="text-muted font-size-sm font-w500 d-block d-lg-inline-block mb-1">Forgot Password?</router-link>
                     </div>
                     <div>
-                      <button type="submit" class="btn btn-lg btn-alt-primary">
+                      <button   class="btn btn-lg btn-alt-primary">
                         <i class="fa fa-fw fa-sign-in-alt mr-1 opacity-50"></i> Sign In
                       </button>
                     </div>

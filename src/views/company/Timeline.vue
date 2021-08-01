@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Hero -->
-    <base-page-heading title="Overview" subtitle="Visualise your company activities">
+    <base-page-heading title="Overview (Not Activated)" subtitle="Visualise your company activities">
       <template #extra>
         <b-breadcrumb class="breadcrumb-alt">
           <b-breadcrumb-item href="javascript:void(0)">Plugins</b-breadcrumb-item>

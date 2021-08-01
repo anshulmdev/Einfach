@@ -84,7 +84,7 @@
                 </div>
                 <b-row class="form-group row justify-content-center mb-0">
                   <b-col md="6" xl="5">
-                    <b-button type="submit" variant="success" block>
+                    <b-button   variant="success" block>
                       <i class="fa fa-fw fa-plus mr-1"></i> Sign Up
                     </b-button>
                   </b-col>

@@ -28,7 +28,7 @@
                   </div>
                   <b-row class="form-group justify-content-center">
                     <b-col md="6" xl="5">
-                      <b-button type="submit" variant="alt-primary" block>
+                      <b-button   variant="alt-primary" block>
                         <i class="fa fa-fw fa-lock-open mr-1"></i> Unlock
                       </b-button>
                     </b-col>

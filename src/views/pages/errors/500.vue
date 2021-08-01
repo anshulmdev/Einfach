@@ -17,7 +17,7 @@
                   <b-input-group size="lg">
                     <b-form-input class="form-control-alt" placeholder="Search application.."></b-form-input>
                     <b-input-group-append>
-                      <b-button type="submit" variant="alt-primary">
+                      <b-button   variant="alt-primary">
                         <i class="fa fa-search"></i>
                       </b-button>
                     </b-input-group-append>

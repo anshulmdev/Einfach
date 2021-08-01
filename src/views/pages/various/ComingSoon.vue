@@ -50,7 +50,7 @@
                     <b-input-group class="mb-2">
                       <b-form-input type="email" v-model="form.email" class="border-0" placeholder="Enter your email.." required></b-form-input>
                       <b-input-group-append>
-                        <b-button type="submit" variant="primary">Subscribe</b-button>
+                        <b-button   variant="primary">Subscribe</b-button>
                       </b-input-group-append>
                     </b-input-group>
                     <div class="font-size-sm text-white-50">

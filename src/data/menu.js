@@ -146,23 +146,11 @@ export default {
           icon: 'si si-calendar',
           to: '/backend/company/timeline'
         },
-      ]
-    },
-    {
-      name: 'Subscription',
-      icon: 'si si-basket-loaded',
-      subActivePaths: '/backend/subscription',
-      sub: [
         {
-          name: 'Payment',
+          name: 'Subscription',
           icon: 'si si-wallet',
-          to: '/backend/subscription/payment'
-        },
-        {
-          name: 'Active Plan',
-          icon: 'si si-badge',
           to: '/backend/subscription/active'
-        },
+        }
       ]
     },
     {

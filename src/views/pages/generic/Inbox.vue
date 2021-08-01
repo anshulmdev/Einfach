@@ -41,7 +41,7 @@
                 </div>
                 <div class="block-content block-content-full text-right border-top">
                   <b-button variant="alt-primary" class="mr-1" @click="$bvModal.hide('one-inbox-new-message')">Cancel</b-button>
-                  <b-button type="submit" variant="primary">
+                  <b-button   variant="primary">
                     <i class="fa fa-paper-plane mr-1"></i> Send Message
                   </b-button>
                 </div>

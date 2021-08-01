@@ -67,7 +67,7 @@
                     <b-form-input type="password" size="lg" class="form-control-alt py-4" id="password" name="password" placeholder="Password" v-model="$v.form.password.$model" :state="!$v.form.password.$error && null" aria-describedby="password-feedback"></b-form-input>
                   </div>
                   <div class="form-group text-center mb-0">
-                    <b-button type="submit" size="lg" variant="alt-success">
+                    <b-button   size="lg" variant="alt-success">
                       <i class="fa fa-fw fa-lock-open mr-1 opacity-50"></i> Unlock
                     </b-button>
                   </div>

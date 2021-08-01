@@ -74,7 +74,7 @@
           <b-form>
             <base-block rounded title="Create your own Question" header-bg>
               <template #options>
-                <b-button type="submit" size="sm" variant="primary" @click="addQuestion()">
+                <b-button   size="sm" variant="primary" @click="addQuestion()">
                   Submit
                 </b-button>
                 <b-button type="reset" size="sm" variant="alt-primary" @click="this.customQuestion = {heading: 'Question Heading', description: 'Problem Statement', marks: 10, type: 'Hard', testCases: {input: '', output: ''}}">
@@ -132,7 +132,7 @@
                               <b-button
                                 block
                                 @click="addOption('add')"
-                                type="submit"
+                                 
                                 expanded
                                 variant="success"
                               >
@@ -142,7 +142,7 @@
                               <b-button
                                 block
                                 @click="addOption('remove')"
-                                type="submit"
+                                 
                                 variant="danger"
                               >
                                 Remove

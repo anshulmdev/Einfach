@@ -53,7 +53,6 @@
               <b-form-group>
                 <b-button
                   v-if="!loading"
-                  type="submit"
                   variant="alt-primary"
                   @click="send()"
                 >
@@ -61,7 +60,6 @@
                 </b-button>
                 <b-button
                   v-else
-                  type="submit"
                   variant="alt-primary"
                   @click="send()"
                 >

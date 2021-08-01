@@ -357,10 +357,10 @@
           <p class="font-size-lg font-w500 text-muted mb-4">
               100+ features bundled in single package accessible from $99 only
           </p>
-          <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://einfach.hubspotpagebuilder.eu/einfach-subscription" v-click-ripple>
+          <b-button variant="success" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://buy.stripe.com/4gw8y7erm6lHgNyeUU" target="_blank" v-click-ripple>
             <i class="fa fa-fw fa-shopping-cart font-size-base opacity-50 mr-1"></i> Purchase
           </b-button>
-          <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://einfach.hubspotpagebuilder.eu/einfach-meeting" v-click-ripple>
+          <b-button variant="primary" class="text-uppercase font-size-sm px-4 py-2 m-1" href="https://einfach.hubspotpagebuilder.eu/einfach-meeting" target="_blank" v-click-ripple>
             <i class="far fa-calendar-alt font-size-base opacity-50 mr-1"></i> Book a Meeting
           </b-button>
         </div>

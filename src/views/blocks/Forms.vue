@@ -19,7 +19,7 @@
           <b-form @submit="onSubmit" @reset="onReset">
             <base-block rounded title="Block Form" header-bg>
               <template #options>
-                <b-button type="submit" size="sm" variant="primary">
+                <b-button   size="sm" variant="primary">
                   Submit
                 </b-button>
                 <b-button type="reset" size="sm" variant="alt-primary">
@@ -48,7 +48,7 @@
           <b-form @submit="onSubmit" @reset="onReset">
             <base-block rounded title="Block Form" header-bg header-rtl>
               <template #options>
-                <b-button type="submit" size="sm" variant="primary">
+                <b-button   size="sm" variant="primary">
                   Submit
                 </b-button>
                 <b-button type="reset" size="sm" variant="alt-primary">
@@ -77,7 +77,7 @@
           <b-form @submit="onSubmit" @reset="onReset">
             <base-block rounded title="Block Form" header-bg>
               <template #options>
-                <b-button type="submit" size="sm" variant="outline-primary">
+                <b-button   size="sm" variant="outline-primary">
                   Submit
                 </b-button>
                 <b-button type="reset" size="sm" variant="outline-danger">
@@ -106,7 +106,7 @@
           <b-form @submit="onSubmit" @reset="onReset">
             <base-block rounded title="Block Form" header-bg header-rtl>
               <template #options>
-                <b-button type="submit" size="sm" variant="outline-primary">
+                <b-button   size="sm" variant="outline-primary">
                   Submit
                 </b-button>
                 <b-button type="reset" size="sm" variant="outline-danger">
@@ -135,7 +135,7 @@
           <b-form @submit="onSubmit" @reset="onReset">
             <base-block rounded title="Block Form" header-bg>
               <template #options>
-                <button type="submit" class="btn-block-option">
+                <button   class="btn-block-option">
                   Submit
                 </button>
                 <button type="reset" class="btn-block-option">
@@ -164,7 +164,7 @@
           <b-form @submit="onSubmit" @reset="onReset">
             <base-block rounded title="Block Form" header-bg header-rtl>
               <template #options>
-                <button type="submit" class="btn-block-option">
+                <button   class="btn-block-option">
                   Submit
                 </button>
                 <button type="reset" class="btn-block-option">
@@ -193,7 +193,7 @@
           <b-form @submit="onSubmit" @reset="onReset">
             <base-block rounded title="Block Form" header-bg>
               <template #options>
-                <b-button type="submit" size="sm" variant="alt-primary">
+                <b-button   size="sm" variant="alt-primary">
                   Submit
                 </b-button>
                 <b-button type="reset" size="sm" variant="alt-danger">
@@ -222,7 +222,7 @@
           <b-form @submit="onSubmit" @reset="onReset">
             <base-block rounded title="Block Form" header-bg header-rtl>
               <template #options>
-                <b-button type="submit" size="sm" variant="alt-primary">
+                <b-button   size="sm" variant="alt-primary">
                   Submit
                 </b-button>
                 <b-button type="reset" size="sm" variant="alt-danger">

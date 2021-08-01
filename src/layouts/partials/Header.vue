@@ -246,7 +246,8 @@
             <template #button-content>
               <div class="d-flex align-items-center">
                 <img class="rounded-circle" :src="$store.state.firestoreData.user.logo" alt="Header Avatar" style="width: 21px;">
-                <span class="d-none d-sm-inline-block ml-2">{{$store.state.firestoreData.user.name.split(' ')[0]}}</span>
+                <span v-if="$store.state.firestoreData.user.premium === true" class="d-none d-sm-inline-block ml-2">Einfach Premium</span>
+                <span v-else class="d-none d-sm-inline-block ml-2">Basic Plan</span>
                 <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block ml-1 mt-1"></i>
               </div>
             </template>
@@ -257,20 +258,17 @@
                 <p class="mb-0 text-white-50 font-size-sm">{{$store.state.firestoreData.user.email}}</p>
               </div>
               <div class="p-2">
-                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
+                <router-link class="dropdown-item d-flex align-items-center justify-content-between" to="/backend/inbox">
                   <span class="font-size-sm font-w500">Inbox</span>
                   <span class="badge badge-pill badge-primary ml-2"></span>
-                </a>
-                <router-link class="dropdown-item d-flex align-items-center justify-content-between" to="/backend/pages/generic/profile">
+                </router-link>
+                <router-link class="dropdown-item d-flex align-items-center justify-content-between" to="/backend/company/profile">
                   <span class="font-size-sm font-w500">Profile</span>
                   <span class="badge badge-pill badge-primary ml-2">{{$store.state.firestoreData.notifications.length}}</span>
                 </router-link>
-                <a class="dropdown-item d-flex align-items-center justify-content-between" href="javascript:void(0)">
-                  <span class="font-size-sm font-w500">Settings</span>
-                </a>
                 <div role="separator" class="dropdown-divider"></div>
-                <router-link class="dropdown-item d-flex align-items-center justify-content-between" to="/auth/lock">
-                  <span class="font-size-sm font-w500">Lock Account</span>
+                <router-link class="dropdown-item d-flex align-items-center justify-content-between" to="/backend/subscription/active">
+                  <span class="font-size-sm font-w500">Subscription</span>
                 </router-link>
                 <router-link class="dropdown-item d-flex align-items-center justify-content-between" to="/auth/signin">
                   <span class="font-size-sm font-w500" @click="logout">Log Out</span>
@@ -291,8 +289,8 @@
                   <h5 class="dropdown-header text-uppercase text-white">Notifications</h5>
               </div>
               <ul class="nav-items mb-0">
-                <li v-for="(notification, index) in $store.state.firestoreData.notifications" :key="`notification-${index}`">
-                  <a class="text-dark media py-2" :href="`${notification.href}`">
+                <li v-for="(notification, index) in $store.state.firestoreData.notifications.slice(0,10)" :key="`notification-${index}`">
+                  <router-link class="text-dark media py-2" to="/backend/company/profile">
                     <div class="mr-2 ml-3">
                       <i :class="`${notification.icon}`"></i>
                     </div>
@@ -300,7 +298,7 @@
                       <div class="font-w600">{{ notification.title }}</div>
                       <span class="font-w500 text-muted">{{ Date(notification.time).toString().slice(0,10) }}</span>
                     </div>
-                  </a>
+                  </router-link>
                 </li>
                 <li v-if="!$store.state.firestoreData.notifications.length" class="p-2">
                   <b-alert variant="warning" class="text-center m-0" show>
@@ -310,18 +308,13 @@
                   </b-alert>
                 </li>
               </ul>
-              <div v-if="$store.state.firestoreData.notifications" class="p-2 border-top">
-                <b-button size="sm" variant="light" class="text-center" href="javascript:void(0)">
-                  <i class="fa fa-fw fa-arrow-down mr-1"></i> Load More..
-                </b-button>
-              </div>
             </li>
           </b-dropdown>
           <!-- END Notifications Dropdown -->
 
           <!-- Toggle Side Overlay -->
-          <base-layout-modifier action="sideOverlayToggle" variant="dual" size="sm" class="ml-2">
-            <i class="fa fa-fw fa-list-ul fa-flip-horizontal"></i>
+          <base-layout-modifier variant="dual" size="sm" class="ml-2">
+            <router-link to="/backend/support/doc"><i class="fa fa-fw fa-list-ul fa-flip-horizontal"></i></router-link>
           </base-layout-modifier>
           <!-- END Toggle Side Overlay -->
         </div>

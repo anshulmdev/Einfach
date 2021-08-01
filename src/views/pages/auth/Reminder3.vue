@@ -63,7 +63,7 @@
                     <b-form-input size="lg" class="form-control-alt py-4" id="reminder" name="reminder" placeholder="Username or Email" v-model="$v.form.reminder.$model" :state="!$v.form.reminder.$error && null" aria-describedby="reminder-feedback"></b-form-input>
                   </div>
                   <div class="form-group text-center mb-0">
-                    <b-button type="submit" size="lg" variant="alt-primary">
+                    <b-button   size="lg" variant="alt-primary">
                       <i class="fa fa-fw fa-envelope mr-1 opacity-50"></i> Send Mail
                     </b-button>
                   </div>

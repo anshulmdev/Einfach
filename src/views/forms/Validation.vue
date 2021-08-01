@@ -152,7 +152,7 @@
           <!-- Submit -->
           <b-row class="items-push">
             <b-col lg="7" offset-lg="4">
-              <b-button type="submit" variant="alt-primary">Submit</b-button>
+              <b-button   variant="alt-primary">Submit</b-button>
             </b-col>
           </b-row>
           <!-- END Submit -->

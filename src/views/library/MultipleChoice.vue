@@ -81,7 +81,7 @@
 												</b-col>
 												<b-col cols="2">
 													<base-block rounded>
-														<b-button block @click="addOption(index)" type="submit" variant="danger"> Remove </b-button>
+														<b-button block @click="addOption(index)" variant="danger"> Remove </b-button>
 													</base-block>
 												</b-col>
 											</b-row>
@@ -91,7 +91,7 @@
 														><b-col> <b-form-select id="example-select" v-model="customQuestion.categorySelected" :options="Object.keys(customQuestion.category)" plain></b-form-select> </b-col
 														><b-col> <b-form-input type="number" v-model="customQuestion.marks" placeholder="Marks"></b-form-input></b-col>
 
-														<b-col> <b-button block @click="addOption('add')" type="submit" expanded variant="success"> Add Option </b-button> </b-col
+														<b-col> <b-button block @click="addOption('add')" expanded variant="success"> Add Option </b-button> </b-col
 														><b-col> <b-button block @click="submitQuestion" variant="primary"> Submit </b-button></b-col
 														><b-col> <b-button block @click="reset" variant="alt-primary"> Reset </b-button></b-col>
 													</b-row></template

@@ -27,7 +27,7 @@
                 </div>
                 <b-row class="form-group">
                   <b-col md="6" xl="5">
-                    <b-button type="submit" variant="alt-primary" block>
+                    <b-button   variant="alt-primary" block>
                       <i class="fa fa-fw fa-envelope mr-1"></i> Send Mail
                     </b-button>
                   </b-col>

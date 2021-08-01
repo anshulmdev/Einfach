@@ -117,7 +117,7 @@
                     </div>
                   </div>
                   <div class="form-group text-center mb-0">
-                    <b-button type="submit" size="lg" variant="alt-success">
+                    <b-button   size="lg" variant="alt-success">
                       <i class="fa fa-fw fa-plus mr-1 opacity-50"></i> Sign Up
                     </b-button>
                   </div>

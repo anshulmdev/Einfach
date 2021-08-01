@@ -18,7 +18,7 @@
       <!-- Vue SimpleMDE -->
       <base-block rounded title="Invite for Assignment" header-bg>
         <template #options>
-          <b-button type="submit" size="sm" variant="warning" @click="update()">
+          <b-button   size="sm" variant="warning" @click="update()">
             Submit
           </b-button>
           <b-button type="reset" size="sm" variant="alt-warning">
@@ -47,7 +47,7 @@
       <!-- Vue SimpleMDE -->
       <base-block rounded title="Shortlisted Candidates" header-bg>
         <template #options>
-          <b-button type="submit" size="sm" variant="primary" @click="update()">
+          <b-button   size="sm" variant="primary" @click="update()">
             Submit
           </b-button>
           <b-button type="reset" size="sm" variant="alt-primary">
@@ -75,7 +75,7 @@
       <!-- Vue SimpleMDE -->
       <base-block rounded title="Rejected Candidates" header-bg>
         <template #options>
-          <b-button type="submit" size="sm" variant="danger" @click="update()"> Submit </b-button>
+          <b-button   size="sm" variant="danger" @click="update()"> Submit </b-button>
           <b-button type="reset" size="sm" variant="alt-danger">
             Reset
           </b-button>

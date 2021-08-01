@@ -334,7 +334,7 @@ Except as specifically stated in another agreement we have with You, these Terms
                   <b-col md="6" xl="5">
                     <b-button
                       v-if="loading == false"
-                      type="submit"
+                       
                       variant="alt-success"
                       block
                     >
@@ -342,7 +342,7 @@ Except as specifically stated in another agreement we have with You, these Terms
                     </b-button>
                     <b-button
                       v-if="loading == true"
-                      type="submit"
+                       
                       variant="alt-success"
                       block
                     >

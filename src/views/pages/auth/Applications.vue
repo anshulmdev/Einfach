@@ -131,7 +131,7 @@
       <base-block rounded title="Submit Application" header-bg>
         <template #options>
           <b-button
-            type="submit"
+             
             class="px-4"
             size="md"
             variant="primary"

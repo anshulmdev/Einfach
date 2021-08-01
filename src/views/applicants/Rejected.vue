@@ -229,8 +229,11 @@ export default {
         .collection("accounts")
         .doc(this.$store.state.firestoreData.docId);
       // eslint-disable-next-line no-unused-vars
-      const addInvite = await entry.update({
+      await entry.update({
         "candidates.rejected": firebase.firestore.FieldValue.arrayRemove(details),
+      });
+      await entry.update({
+        "candidates.completed": firebase.firestore.FieldValue.arrayUnion(details),
       });
       this.loading = []
         

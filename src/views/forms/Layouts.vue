@@ -28,7 +28,7 @@
               <b-form-input type="email" class="mb-2 mr-sm-2 mb-sm-0" id="example-if-email" name="example-if-email" placeholder="Email"></b-form-input>
               <label class="sr-only" for="example-if-password">Password</label>
               <b-form-input type="password" class="mb-2 mr-sm-2 mb-sm-0" id="example-if-password" name="example-if-password" placeholder="Password"></b-form-input>
-              <b-button type="submit" variant="primary">Login</b-button>
+              <b-button   variant="primary">Login</b-button>
             </b-form>
             <!-- END Form Inline - Default Style -->
 
@@ -38,7 +38,7 @@
               <b-form-input type="email" class="form-control-alt mb-2 mr-sm-2 mb-sm-0" id="example-if-email2" name="example-if-email2" placeholder="Email"></b-form-input>
               <label class="sr-only" for="example-if-password2">Password</label>
               <b-form-input type="password" class="form-control-alt mb-2 mr-sm-2 mb-sm-0" id="example-if-password2" name="example-if-password2" placeholder="Password"></b-form-input>
-              <b-button type="submit" variant="dark">Login</b-button>
+              <b-button   variant="dark">Login</b-button>
             </b-form>
             <!-- END Form Inline - Alternative Style -->
           </b-col>
@@ -64,7 +64,7 @@
                 <b-form-input id="example-ltf-password" type="password" placeholder="Your Password.."></b-form-input>
               </b-form-group>
               <b-form-group>
-                <b-button type="submit" variant="primary">Login</b-button>
+                <b-button   variant="primary">Login</b-button>
               </b-form-group>
             </b-form>
             <!-- END Form Labels on top - Default Style -->
@@ -78,7 +78,7 @@
                 <b-form-input id="example-ltf-password2" class="form-control-alt" type="password" placeholder="Your Password.."></b-form-input>
               </b-form-group>
               <b-form-group>
-                <b-button type="submit" variant="dark">Login</b-button>
+                <b-button   variant="dark">Login</b-button>
               </b-form-group>
             </b-form>
             <!-- END Form Labels on top - Alternative Style -->
@@ -106,7 +106,7 @@
               </b-form-group>
               <div class="form-group form-row">
                 <b-col sm="8" class="ml-auto">
-                  <b-button type="submit" variant="primary">Login</b-button>
+                  <b-button   variant="primary">Login</b-button>
                 </b-col>
               </div>
             </b-form>
@@ -122,7 +122,7 @@
               </b-form-group>
               <div class="form-group form-row">
                 <b-col sm="8" class="ml-auto">
-                  <b-button type="submit" variant="dark">Login</b-button>
+                  <b-button   variant="dark">Login</b-button>
                 </b-col>
               </div>
             </b-form>

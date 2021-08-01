@@ -84,7 +84,7 @@
           </b-col>
           <b-col lg="6">
               
-              <b-button class="ml-6" type="submit" variant="primary" @click="addField(form.name,form.type)">{{form.fields[form.fields.length-1].submit}}</b-button>
+              <b-button class="ml-6"   variant="primary" @click="addField(form.name,form.type)">{{form.fields[form.fields.length-1].submit}}</b-button>
               </b-col>
           </b-row></b-col>
         </b-row>
@@ -124,7 +124,7 @@
                 <b-button type="reset" @click="formUrl = null" class="px-4" size="md" variant="danger">
                   Reset
                 </b-button>
-                <b-button type="submit" class="px-4" size="md" variant="primary" @click="submitForm">
+                <b-button   class="px-4" size="md" variant="primary" @click="submitForm">
                   Deploy
                 </b-button>
               </template>

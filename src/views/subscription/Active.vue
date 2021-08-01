@@ -120,7 +120,7 @@
           <base-block rounded tag="a" class="text-center" href="javascript:void(0)" link-shadow fx-shadow themed>
             <template #header>
               <h3 class="block-title">
-                <i class="fa fa-thumbs-up mr-1"></i> VIP
+                Einfach Premium
               </h3>
             </template>
             <template #content>
@@ -147,7 +147,7 @@
                 </div>
               </div>
               <div class="block-content block-content-full bg-body-light">
-                <span class="btn btn-primary px-4">Active</span>
+                <a class="btn btn-primary px-4" href="https://buy.stripe.com/4gw8y7erm6lHgNyeUU" target="_blank">Subscribe</a>
               </div>
             </template>
           </base-block>

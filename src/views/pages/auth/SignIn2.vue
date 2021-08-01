@@ -41,7 +41,7 @@
                 </div>
                 <b-row class="form-group row justify-content-center mb-0">
                   <b-col md="6" xl="5">
-                    <b-button type="submit" variant="primary" block>
+                    <b-button   variant="primary" block>
                       <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
                     </b-button>
                   </b-col>
