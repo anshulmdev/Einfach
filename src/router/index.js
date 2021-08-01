@@ -5,6 +5,7 @@
 // Vue and Vue Router
 import Vue from 'vue'
 import Router from 'vue-router'
+import firebase from '../firebase'
 
 // Main layouts
 import LayoutBackend from '@/layouts/variations/Backend.vue'
@@ -182,7 +183,7 @@ const BoxedImage1 = () => import("@/views/pages/boxed/Image1.vue")
 const BoxedImage2 = () => import("@/views/pages/boxed/Image2.vue")
 
 // Router Configuration
-export default new Router({
+const router = new Router({
   linkActiveClass: 'active',
   linkExactActiveClass: '',
   scrollBehavior () {
@@ -330,22 +331,34 @@ export default new Router({
         {
           path: 'dashboard',
           name: 'Boxed Dashboard',
-          component: BoxedDashboard
+          component: BoxedDashboard,
+          meta: {
+            authRequired: true,
+          }
         },
         {
           path: 'search',
           name: 'Boxed Search',
-          component: BoxedSearch
+          component: BoxedSearch,
+          meta: {
+            authRequired: true,
+          }
         },
         {
           path: 'simple1',
           name: 'Boxed Simple1',
-          component: BoxedSimple1
+          component: BoxedSimple1,
+          meta: {
+            authRequired: true,
+          }
         },
         {
           path: 'simple2',
           name: 'Boxed Simple2',
-          component: BoxedSimple2
+          component: BoxedSimple2,
+          meta: {
+            authRequired: true,
+          }
         },
         {
           path: 'image1',
@@ -367,12 +380,18 @@ export default new Router({
         {
           path: 'dashboard',
           name: 'Dashboard',
-          component: Dashboard
+          component: Dashboard,
+          meta: {
+            authRequired: true,
+          }
         },
         {
           path: 'inbox',
           name: 'Inbox',
-          component: Inbox
+          component: Inbox,
+          meta: {
+            authRequired: true,
+          }
         },
         {
           path: 'blocks',
@@ -384,27 +403,42 @@ export default new Router({
             {
               path: 'styles',
               name: 'Block Styles',
-              component: BlockStyles
+              component: BlockStyles,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'options',
               name: 'Block Options',
-              component: BlockOptions
+              component: BlockOptions,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'forms',
               name: 'Block Forms',
-              component: BlockForms
+              component: BlockForms,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'themed',
               name: 'Block Themed',
-              component: BlockThemed
+              component: BlockThemed,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'api',
               name: 'Block API',
-              component: BlockApi
+              component: BlockApi,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -418,97 +452,154 @@ export default new Router({
             {
               path: 'grid',
               name: 'Elements Grid',
-              component: ElementsGrid
+              component: ElementsGrid,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'typography',
               name: 'Elements Typography',
-              component: ElementsTypography
+              component: ElementsTypography,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'icons',
               name: 'Elements Icons',
-              component: ElementsIcons
+              component: ElementsIcons,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'buttons',
               name: 'Elements Buttons',
-              component: ElementsButtons
+              component: ElementsButtons,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'button-groups',
               name: 'Elements Button Groups',
-              component: ElementsButtonGroups
+              component: ElementsButtonGroups,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'dropdowns',
               name: 'Elements Dropdowns',
-              component: ElementsDropdowns
+              component: ElementsDropdowns,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'tabs',
               name: 'Elements Tabs',
-              component: ElementsTabs
+              component: ElementsTabs,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'navigation',
               name: 'Elements Navigation',
-              component: ElementsNavigation
+              component: ElementsNavigation,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'navigation-horizontal',
               name: 'Elements Horizontal Navigation',
-              component: ElementsNavigationHorizontal
+              component: ElementsNavigationHorizontal,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'progress',
               name: 'Elements Progress',
-              component: ElementsProgress
+              component: ElementsProgress,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'alerts',
               name: 'Elements Alerts',
-              component: ElementsAlerts
+              component: ElementsAlerts,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'tooltips',
               name: 'Elements Tooltips',
-              component: ElementsTooltips
+              component: ElementsTooltips,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'popovers',
               name: 'Elements Popovers',
-              component: ElementsPopovers
+              component: ElementsPopovers,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'modals',
               name: 'Elements Modals',
-              component: ElementsModals
+              component: ElementsModals,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'images',
               name: 'Elements Images',
-              component: ElementsImages
+              component: ElementsImages,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'timeline',
               name: 'Elements Timeline',
-              component: ElementsTimeline
+              component: ElementsTimeline,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'ribbons',
               name: 'Elements Ribbons',
-              component: ElementsRibbons
+              component: ElementsRibbons,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'animations',
               name: 'Elements Animations',
-              component: ElementsAnimations
+              component: ElementsAnimations,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'color-themes',
               name: 'Elements Color Themes',
-              component: ElementsColorThemes
+              component: ElementsColorThemes,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -522,22 +613,34 @@ export default new Router({
             {
               path: 'styles',
               name: 'Tables Styles',
-              component: TablesStyles
+              component: TablesStyles,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'responsive',
               name: 'Tables Responsive',
-              component: TablesResponsive
+              component: TablesResponsive,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'helpers',
               name: 'Tables Helpers',
-              component: TablesHelpers
+              component: TablesHelpers,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'pricing',
               name: 'Tables Princing',
-              component: TablesPricing
+              component: TablesPricing,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -551,32 +654,50 @@ export default new Router({
             {
               path: 'applied',
               name: 'Applicants Applied',
-              component: ApplicantsApplied
+              component: ApplicantsApplied,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'invited',
               name: 'Applicants Invited',
-              component: ApplicantsInvited
+              component: ApplicantsInvited,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'rejected',
               name: 'Applicants Rejected',
-              component: ApplicantsRejected
+              component: ApplicantsRejected,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'shortlisted',
               name: 'Applicants Shortlisted',
-              component: ApplicantsShortlisted
+              component: ApplicantsShortlisted,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'Completed',
               name: 'Applicants Completed',
-              component: ApplicantsCompleted
+              component: ApplicantsCompleted,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'details/:id',
               name: 'Applicant Details',
-              component: ApplicantDetails
+              component: ApplicantDetails,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -590,47 +711,74 @@ export default new Router({
             {
               path: 'create',
               name: 'Form Create',
-              component: FormsCreate
+              component: FormsCreate,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'email',
               name: 'Form Email',
-              component: FormsEmail
+              component: FormsEmail,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'elements',
               name: 'Form Elements',
-              component: FormsElements
+              component: FormsElements,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'custom-controls',
               name: 'Custom Form Controls',
-              component: FormsCustomControls
+              component: FormsCustomControls,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'layouts',
               name: 'Form Layouts',
-              component: FormsLayouts
+              component: FormsLayouts,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'input-groups',
               name: 'Form Input Groups',
-              component: FormsInputGroups
+              component: FormsInputGroups,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'plugins',
               name: 'Form Plugins',
-              component: FormsPlugins
+              component: FormsPlugins,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'editors',
               name: 'Form Editors',
-              component: FormsEditors
+              component: FormsEditors,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'validation',
               name: 'Form Validation',
-              component: FormsValidation
+              component: FormsValidation,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -644,17 +792,26 @@ export default new Router({
             {
               path: 'regex',
               name: 'Library Regex',
-              component: LibraryRegex
+              component: LibraryRegex,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'mcq',
               name: 'Library MultipleChoice',
-              component: LibraryMultipleChoice
+              component: LibraryMultipleChoice,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'rest',
               name: 'Library RESTAPI',
-              component: LibraryRESTAPI
+              component: LibraryRESTAPI,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -668,12 +825,18 @@ export default new Router({
             {
               path: 'profile',
               name: 'Company Profile',
-              component: CompanyProfile
+              component: CompanyProfile,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'timeline',
               name: 'Company Timeline',
-              component: CompanyTimeline
+              component: CompanyTimeline,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -687,12 +850,18 @@ export default new Router({
             {
               path: 'active',
               name: 'Subscription Active',
-              component: SubscriptionActive
+              component: SubscriptionActive,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'payment',
               name: 'Subscription Payment',
-              component: SubscriptionPayment
+              component: SubscriptionPayment,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -706,12 +875,18 @@ export default new Router({
             {
               path: 'doc',
               name: 'Documentation',
-              component: Documentation
+              component: Documentation,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'ticket',
               name: 'Support Ticket',
-              component: SupportTicket
+              component: SupportTicket,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -725,12 +900,18 @@ export default new Router({
             {
               path: 'array',
               name: 'Array',
-              component: Array
+              component: Array,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'dynamicProgramming',
               name: 'Dynamic Programming',
-              component: DP
+              component: DP,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -744,12 +925,18 @@ export default new Router({
             {
               path: 'pnp',
               name: 'Commits PnP',
-              component: CommitsPnP
+              component: CommitsPnP,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'live',
               name: 'Commits Live',
-              component: CommitsLive
+              component: CommitsLive,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -763,52 +950,82 @@ export default new Router({
             {
               path: 'appear',
               name: 'Appear',
-              component: PluginsAppear
+              component: PluginsAppear,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'image-cropper',
               name: 'Image Cropper',
-              component: PluginsImageCropper
+              component: PluginsImageCropper,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'charts',
               name: 'Charts',
-              component: PluginsCharts
+              component: PluginsCharts,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'calendar',
               name: 'Calendar',
-              component: PluginsCalendar
+              component: PluginsCalendar,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'carousel',
               name: 'Carousel',
-              component: PluginsCarousel
+              component: PluginsCarousel,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'syntax-highlighting',
               name: 'Syntax Hightlighting',
-              component: PluginsSyntaxHighlighting
+              component: PluginsSyntaxHighlighting,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'rating',
               name: 'Rating',
-              component: PluginsRating
+              component: PluginsRating,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'dialogs',
               name: 'Dialogs',
-              component: PluginsDialogs
+              component: PluginsDialogs,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'notifications',
               name: 'Notifications',
-              component: PluginsNotifications
+              component: PluginsNotifications,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'gallery',
               name: 'Gallery',
-              component: PluginsGallery
+              component: PluginsGallery,
+          meta: {
+            authRequired: true,
+          }
             }
           ]
         },
@@ -822,92 +1039,146 @@ export default new Router({
             {
               path: 'page/default',
               name: 'Layout Page Default',
-              component: LayoutPageDefault
+              component: LayoutPageDefault,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'page/flipped',
               name: 'Layout Page Flipped',
-              component: LayoutPageFlipped
+              component: LayoutPageFlipped,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'main-content/full-width',
               name: 'Layout Main Content Full Width',
-              component: LayoutMainContentFullWidth
+              component: LayoutMainContentFullWidth,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'main-content/narrow',
               name: 'Layout Main Content Narrow',
-              component: LayoutMainContentNarrow
+              component: LayoutMainContentNarrow,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'main-content/boxed',
               name: 'Layout Main Content Boxed',
-              component: LayoutMainContentBoxed
+              component: LayoutMainContentBoxed,
+          meta: {
+            authRequired: true,
+          }
             },
             {
               path: 'header/fixed-light',
               name: 'Layout Header Fixed Light',
-              component: LayoutHeaderFixedLight
+              component: LayoutHeaderFixedLight,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'header/fixed-dark',
               name: 'Layout Header Fixed Dark',
-              component: LayoutHeaderFixedDark
+              component: LayoutHeaderFixedDark,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'header/static-light',
               name: 'Layout Header Static Light',
-              component: LayoutHeaderStaticLight
+              component: LayoutHeaderStaticLight,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'header/static-dark',
               name: 'Layout Header Static Dark',
-              component: LayoutHeaderStaticDark
+              component: LayoutHeaderStaticDark,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'sidebar/mini',
               name: 'Layout Sidebar Mini',
-              component: LayoutSidebarMini
+              component: LayoutSidebarMini,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'sidebar/light',
               name: 'Layout Sidebar Light',
-              component: LayoutSidebarLight
+              component: LayoutSidebarLight,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'sidebar/dark',
               name: 'Layout Sidebar Dark',
-              component: LayoutSidebarDark
+              component: LayoutSidebarDark,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'sidebar/hidden',
               name: 'Layout Sidebar Hidden',
-              component: LayoutSidebarHidden
+              component: LayoutSidebarHidden,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'side-overlay/visible',
               name: 'Layout Side Overlay Visible',
-              component: LayoutSideOverlayVisible
+              component: LayoutSideOverlayVisible,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'side-overlay/hover-mode',
               name: 'Layout Side Overlay Hover Mode',
-              component: LayoutSideOverlayHoverMode
+              component: LayoutSideOverlayHoverMode,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'side-overlay/no-page-overlay',
               name: 'Layout Side Overlay No Page Overlay',
-              component: LayoutSideOverlayNoPageOverlay
+              component: LayoutSideOverlayNoPageOverlay,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'loaders',
               name: 'Loaders',
-              component: LayoutLoaders
+              component: LayoutLoaders,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'api',
               name: 'Layout API',
-              component: LayoutApi
+              component: LayoutApi,
+              meta: {
+                authRequired: true,
+              }
             }
           ]
         },
@@ -921,32 +1192,50 @@ export default new Router({
             {
               path: 'blank',
               name: 'Pages Generic Blank',
-              component: PagesGenericBlank
+              component: PagesGenericBlank,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'blank-block',
               name: 'Pages Generic Blank Block',
-              component: PagesGenericBlankBlock
+              component: PagesGenericBlankBlock,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'search',
               name: 'Pages Generic Search',
-              component: PagesGenericSearch
+              component: PagesGenericSearch,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'profile',
               name: 'Pages Generic Profile',
-              component: PagesGenericProfile
+              component: PagesGenericProfile,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'invoice',
               name: 'Pages Generic Invoice',
-              component: PagesGenericInvoice
+              component: PagesGenericInvoice,
+              meta: {
+                authRequired: true,
+              }
             },
             {
               path: 'faq',
               name: 'Pages Generic Faq',
-              component: PagesGenericFaq
+              component: PagesGenericFaq,
+              meta: {
+                authRequired: true,
+              }
             }
           ]
         },
@@ -982,3 +1271,20 @@ export default new Router({
     }
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  firebase.auth().onAuthStateChanged(() => {
+
+    // get firebase current user
+    const firebaseCurrentUser = firebase.auth().currentUser
+    if (to.meta.authRequired && !(firebaseCurrentUser)) {
+        router.push({ path: '/'})
+    }
+
+    return next()
+
+  })
+
+})
+
+export default router

@@ -62,7 +62,6 @@ import BaseHeader from "@/layouts/partials/Header"
 import BaseSidebar from "@/layouts/partials/Sidebar"
 import BaseSideOverlay from "@/layouts/partials/SideOverlay"
 import BaseFooter from "@/layouts/partials/Footer"
-import firebse from "../firebase"
 
 export default {
   name: "BaseLayout",
@@ -101,12 +100,10 @@ export default {
     this.$store.commit("setColorTheme", {
       theme: this.$store.getters.appColorTheme̦,
     })
-    if (firebse.auth().currentUser) {
+    if(this.$cookies.get("uid") && this.$cookies.get("setDocId")){
       this.$store.commit("setAuth", this.$cookies.get("uid"))
       this.$store.commit("setDocId", this.$cookies.get("setDocId"))
-    } else {
-      this.$router.push("/")
     }
-  },
+  }
 }
 </script>
