@@ -48,11 +48,8 @@
             >
               <b-td class="text-center">
                 <a v-b-modal.modal-block-extra-large @click="url = user.resume">
-                  <img
-                    height="50"
-                    src="img/photos/resumeRejected.png"
-                    alt="Avatar"
-                /></a>
+                  <i class="fa fa-file-pdf text-danger mr-1 align-middle" color="danger" style="font-size: 1.5em;"></i>
+                  </a>
               </b-td>
               <b-td class="font-w600 font-size-sm">
                 <router-link :to="`/backend/applicants/details/${user.email}`">
