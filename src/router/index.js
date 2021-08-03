@@ -184,6 +184,7 @@ const BoxedImage2 = () => import("@/views/pages/boxed/Image2.vue")
 
 // Router Configuration
 const router = new Router({
+	mode: 'history',
   linkActiveClass: 'active',
   linkExactActiveClass: '',
   scrollBehavior () {

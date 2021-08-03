@@ -7,19 +7,18 @@
           <b-row class="w-100">
             <b-col lg="6" class="text-center text-lg-left d-flex align-items-center">
               <div class="w-100">
-                <div class="d-flex">
-                <i class="fab fa-buffer text-success" color="primary" style="font-size: 2.5em;"></i>
-                <h1 class="font-w700 mb-3 ml-3">
-                  <span class="">Einfach</span>
-                </h1></div>
+                <h1 class="font-w700 mb-3">
+                  <i class="fab fa-buffer text-success mr-1 align-middle" color="primary" style="font-size: 1.5em;"></i>
+                  <span class="align-middle">Einfach</span>
+                </h1>
                 <p class="font-size-lg font-w400 text-muted mb-4 mt-2 pb-2">
                   Build an easy hiring solution with <a>Einfach</a><br>
                   We help fast-growing companies  in technical recruiting by structuring, automating, and scaling technical hiring 
                 </p>
-                <b-button size="lg" variant="alt-success" class="btn-rounded px-4 mr-1 mb-3" to="/auth/signin" v-click-ripple>
+                <b-button size="lg" variant="alt-success" class="px-4 mr-1 mb-3" to="/auth/signin" v-click-ripple>
                   <i class="far fa-smile-beam font-size-base opacity-50 mr-1"></i> Already a Super User
                 </b-button>
-                <b-button size="lg" variant="alt-warning" class="btn-rounded px-4 mr-1 mb-3" to="/auth/signup" v-click-ripple>
+                <b-button size="lg" variant="alt-warning" class="px-4 mr-1 mb-3" to="/auth/signup" v-click-ripple>
                   <i class="si si-rocket font-size-base opacity-50 mr-1"></i> Sign Up Now
                 </b-button>
               </div>
@@ -29,18 +28,18 @@
                 <b-row no-gutters>
                   <b-col lg="7">
                     <div>
-                      <img class="promo-image" src="img/various/promo-dashboard.png" alt="OneUI Vue Promo Dashboard Image">
+                      <img class="promo-image" src="img/various/promo-dashboard.png" alt="Einfach Dashboard">
                     </div>
                     <div class="ml-4 mt-4">
-                      <img class="promo-image" src="img/various/promo-search.png" alt="OneUI Vue Promo Search Image">
+                      <img class="promo-image" src="img/various/promo-search.png" alt="Einfach calendar">
                     </div>
                   </b-col>
                   <b-col lg="5">
                     <div class="ml-4 mt-5">
-                      <img class="promo-image" src="img/various/promo-side.png" alt="OneUI Vue Promo Side Image">
+                      <img class="promo-image" src="img/various/promo-side.png" alt="Einfach component">
                     </div>
                     <div class=" ml-5 mt-4">
-                      <img class="promo-image" src="img/various/promo-code-vue.png" alt="OneUI Vue Promo Code Image">
+                      <img class="promo-image" src="img/various/promo-code-vue.png" alt="Einfach component">
                     </div>
                   </b-col>
                 </b-row>
