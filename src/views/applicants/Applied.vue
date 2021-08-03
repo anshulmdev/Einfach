@@ -54,9 +54,9 @@
                 /></a>
               </b-td>
               <b-td class="font-w600 font-size-sm">
-                <a :href="`/#/backend/applicants/details/${user.email}`">
+                <router-link :to="`/backend/applicants/details/${user.email}`">
                   {{ user.name }}
-                </a>
+                </router-link>
               </b-td>
               <b-td class="font-size-sm">
                 {{ user.email }}

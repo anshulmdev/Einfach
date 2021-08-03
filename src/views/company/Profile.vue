@@ -60,9 +60,9 @@
                       {{String(item.time.toDate()).slice(0,15)}}
                     </div>
                 </template>
-                <a :href="`/#/backend/applicants/details/${item.email}`" class="font-w600">
+                <router-link :to="`/backend/applicants/details/${item.email}`" class="font-w600">
                   {{item.email}}
-                </a>
+                </router-link>
                 <p class="mt-1">
                   {{item.desc}}
                 </p>

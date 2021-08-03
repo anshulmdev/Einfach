@@ -116,13 +116,15 @@
             <vue-easy-pie-chart :percent="35" :line-width="3" :size="100" bar-color="#abe37d" track-color="#eeeeee" scale-color="#dddddd" class="push">
               <img class="img-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmcfkeiQFNQJd9qlaENd1yN60RHp_PtO16rQ&usqp=CAU" alt="Avatar" />
             </vue-easy-pie-chart>
-            <base-block tag="a" href="/#/backend/subscription/active" rounded bordered link-shadow content-full content-class="text-center">
+            <router-link to="/backend/subscription/active">
+            <base-block tag="a" rounded bordered link-shadow content-full content-class="text-center">
               <div class="push">
                 <i class="si si-like fa-2x text-success"></i>
               </div>
               <div class="font-size-h2 font-w700"><span class="text-muted">+</span> 30k Emails</div>
               <div class="font-size-sm text-muted text-uppercase">Upgrade Now</div>
             </base-block>
+            </router-link>
           </base-block>
         </div>
         <!-- END Inbox Side Navigation -->

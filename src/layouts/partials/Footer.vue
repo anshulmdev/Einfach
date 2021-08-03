@@ -6,7 +6,7 @@
         <div class="content py-3">
           <b-row class="font-size-sm text-muted font-w500">
           <b-col sm="6" order-sm="2" class="py-1 text-center text-sm-right">
-            <a class="ml-2 font-w600" href="/#/backend/support/ticket">support@einfach.in</a>
+            <router-link class="ml-2 font-w600" to="/backend/support/ticket">support@einfach.in</router-link>
           </b-col>
             <b-col sm="6" order-sm="1" class="py-1 text-center text-sm-left">
               <a class="font-w600" href="https://1.envato.market/5Noyb" target="_blank">{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</a> &copy; {{ $store.getters.appCopyright }}

@@ -21,7 +21,8 @@
       <!-- Statistic Cards -->
       <b-row>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <base-block tag="a" rounded link-pop content-class="d-flex py-4" href="/#/backend/applicants/Applied">
+          <router-link to="/backend/applicants/Applied">
+          <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Applications</div>
               <div class="font-size-h3">
@@ -32,9 +33,11 @@
               <div class="flex-grow-1 px-1 bg-warning-light rounded-lg"></div>
             </div>
           </base-block>
+          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <base-block tag="a" rounded link-pop content-class="d-flex py-4" href="/#/backend/applicants/Invited">
+          <router-link to="/backend/applicants/Invited">
+          <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Invited</div>
               <div class="font-size-h3">
@@ -45,9 +48,11 @@
               <div class="flex-grow-1 px-1 bg-info-light rounded-lg"></div>
             </div>
           </base-block>
+          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <base-block tag="a" rounded link-pop content-class="d-flex py-4" href="/#/backend/applicants/Shortlisted">
+          <router-link to="/backend/applicants/Shortlisted">
+          <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Shortlisted</div>
               <div class="font-size-h3">
@@ -58,9 +63,11 @@
               <div class="flex-grow-1 px-1 bg-success-light rounded-lg"></div>
             </div>
           </base-block>
+          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <base-block tag="a" rounded link-pop content-class="d-flex py-4" href="/#/backend/applicants/Completed">
+          <router-link to="/backend/applicants/Completed">
+          <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Test Conducted</div>
               <div class="font-size-h3">
@@ -71,6 +78,7 @@
               <div class="flex-grow-1 px-1 bg-danger-light rounded-lg"></div>
             </div>
           </base-block>
+          </router-link>
         </b-col>
       </b-row>
       <!-- Ongoing and Shortlisted -->
@@ -187,7 +195,7 @@
                   <b-td class="d-none d-sm-table-cell text-center">{{ $store.state.applicantScores[completed.email] ? $store.state.applicantScores[completed.email] : 0 }} </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">{{ completed.time ? completed.time.slice(0, 15) : "Not Added" }} </b-td>
                   <b-td class="text-center">
-                    <a href="/#/backend/applicants/Invited" v-b-tooltip.hover.nofade.left="'Invite for Interview'">
+                    <a href="/backend/applicants/Invited" v-b-tooltip.hover.nofade.left="'Invite for Interview'">
                       <i class="fa fa-fw fa-envelope"></i>
                     </a>
                   </b-td>
