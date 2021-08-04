@@ -28,10 +28,10 @@
                 <b-row no-gutters>
                   <b-col lg="7">
                     <div>
-                      <img class="promo-image" src="img/various/promo-dashboard.png" alt="Einfach Dashboard">
+                      <img class="promo-image" src="img/various/e1.png" alt="Einfach Dashboard">
                     </div>
                     <div class="ml-4 mt-4">
-                      <img class="promo-image" src="img/various/promo-search.png" alt="Einfach calendar">
+                      <img class="promo-image" src="img/various/e3.png" alt="Einfach calendar">
                     </div>
                   </b-col>
                   <b-col lg="5">
@@ -39,7 +39,7 @@
                       <img class="promo-image" src="img/various/promo-side.png" alt="Einfach component">
                     </div>
                     <div class=" ml-5 mt-4">
-                      <img class="promo-image" src="img/various/promo-code-vue.png" alt="Einfach component">
+                      <img class="promo-image" src="img/various/e2.png" alt="Einfach component">
                     </div>
                   </b-col>
                 </b-row>
