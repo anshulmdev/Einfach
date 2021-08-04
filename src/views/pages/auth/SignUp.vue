@@ -1,50 +1,115 @@
 <template>
-  <!-- Page Content -->
-  <div class="hero-static">
-    <div class="content">
-      <b-row class="justify-content-center">
-        <b-col md="8" lg="6" xl="8">
-          <!-- Sign Up Block -->
-          <base-block
-            rounded
-            themed
-            class="mb-0"
-            header-class="bg-primary-dark"
-            title="Create Account"
-          >
-            <template #options>
-              <!-- Terms Modal -->
-              <button
-                type="button"
-                class="btn-block-option font-size-sm"
-                v-b-modal.one-signup-terms
-              >
-                View Terms
-              </button>
-              <b-modal
-                id="one-signup-terms"
-                size="lg"
-                body-class="p-0"
-                hide-footer
-                hide-header
-              >
-                <div
-                  class="block block-rounded block-themed block-transparent mb-0"
-                >
-                  <div class="block-header bg-primary-dark">
-                    <h3 class="block-title">Terms &amp; Conditions</h3>
-                    <div class="block-options">
-                      <button
-                        type="button"
-                        class="btn-block-option"
-                        @click="$bvModal.hide('one-signup-terms')"
-                      >
-                        <i class="fa fa-fw fa-times"></i>
-                      </button>
+  <div class="bg-primary-dark">
+    <b-row no-gutters class="bg-primary-dark-op">
+      <!-- Meta Info Section -->
+      <b-col lg="4" class="hero-static d-none d-lg-flex flex-column justify-content-center">
+        <div class="p-4 p-xl-5 flex-grow-1 d-flex align-items-center">
+          <div class="w-100">
+            <router-link to="/" class="link-fx font-w600 font-size-h2 text-white">
+              <i class="fab fa-buffer fa-2x text-success mr-1 align-middle" style="font-size: 1.5em"></i>
+              <span class="align-middle">Einfach</span>
+            </router-link>
+            <p class="text-white-75 mr-xl-8 mt-3">
+              Let's get started<br />
+              We are enrolling all new users to Einfach Premium plans.<br />
+              Feel free to contact support for details.
+            </p>
+          </div>
+        </div>
+        <div class="p-4 p-xl-5 d-xl-flex justify-content-between align-items-center font-size-sm">
+          <p class="font-w500 text-white-50 mb-0">
+            <strong>{{ $store.getters.appName + " " + $store.getters.appVersion }}</strong> &copy; {{ $store.getters.appCopyright }}
+          </p>
+          <ul class="list list-inline mb-0 py-2">
+            <li class="list-inline-item">
+              <a class="text-white-75 font-w500" href="javascript:void(0)">Legal</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-white-75 font-w500" target="_blank" href="mailto:support@einfach.in">Contact</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-white-75 font-w500" href="javascript:void(0)">Terms</a>
+            </li>
+          </ul>
+        </div>
+      </b-col>
+      <!-- END Meta Info Section -->
+
+      <!-- Main Section -->
+      <b-col lg="8" class="hero-static d-flex flex-column align-items-center bg-white">
+        <div class="p-3 w-100 d-lg-none text-center">
+          <router-link to="/" class="link-fx font-w600 font-size-h3 text-dark">
+            <i class="fab fa-buffer fa-2x text-success mr-1 align-middle" style="font-size: 1.5em"></i>
+            <span class="align-middle">Einfach</span>
+          </router-link>
+        </div>
+        <div class="p-4 w-100 flex-grow-1 d-flex align-items-center">
+          <div class="w-100">
+            <!-- Header -->
+            <div class="text-center mb-5 mt-4">
+              <h1 class="font-w700 mb-2">Create Account</h1>
+              <h2 class="font-size-base text-muted mb-3">Get your access today in one easy step</h2>
+            </div>
+            <!-- END Header -->
+
+            <!-- Sign Up Form -->
+            <b-row no-gutters class="justify-content-center">
+              <b-col sm="10" xl="6">
+                <b-row>
+                  <b-col cols="4">
+                    <div><vue-dropzone :options="dropzoneOptions" @vdropzone-complete="afterComplete"></vue-dropzone></div>
+                  </b-col>
+                  <b-col cols="8" class="">
+                    <div class="form-group">
+                      <b-form-input size="lg" class="form-control-alt" id="username" name="username" placeholder="Username" v-model="$v.form.username.$model" :state="!$v.form.username.$error && null" aria-describedby="username-feedback"></b-form-input>
+                      <b-form-invalid-feedback id="username-feedback"> Please enter a username </b-form-invalid-feedback>
                     </div>
-                  </div>
-                  <div class="block-content">
-                    <pre>
+                    <div class="form-group">
+                      <b-form-input type="email" size="lg" class="form-control-alt" id="email" name="email" placeholder="Email" v-model="$v.form.email.$model" :state="!$v.form.email.$error && null" aria-describedby="email-feedback"></b-form-input>
+                      <b-form-invalid-feedback id="email-feedback"> Please enter your email </b-form-invalid-feedback>
+                    </div>
+                    <div class="form-group">
+                      <b-form-input size="lg" class="form-control-alt" id="companyName" name="Company Name" placeholder="Company Name" v-model="$v.form.companyName.$model" aria-describedby="companyName-feedback"></b-form-input>
+                      <b-form-invalid-feedback id="companyName-feedback"> Please enter company name </b-form-invalid-feedback>
+                    </div>
+                  </b-col>
+                </b-row>
+
+                <!-- Sign Up Form -->
+                <b-form @submit.stop.prevent="onSubmit">
+                  <div class="pt-1">
+                    <div class="form-group">
+                      <b-form-input size="lg" class="form-control-alt" id="companyWebsite" name="Company Website" placeholder="Company Website" v-model="$v.form.companyWebsite.$model" aria-describedby="companyWebsite-feedback"></b-form-input>
+                      <b-form-invalid-feedback id="companyWebsite-feedback"> Please enter companyWebsite </b-form-invalid-feedback>
+                    </div>
+                    <div class="form-group">
+                      <b-form-input type="password" size="lg" class="form-control-alt" id="password" name="password" placeholder="Password" v-model="$v.form.password.$model" :state="!$v.form.password.$error && null" aria-describedby="password-feedback"></b-form-input>
+                      <b-form-invalid-feedback id="password-feedback"> Please provide a secure password </b-form-invalid-feedback>
+                    </div>
+                    <div class="form-group">
+                      <b-form-input type="password" size="lg" class="form-control-alt" id="password2" name="password2" placeholder="Confirm Password" v-model="$v.form.password2.$model" :state="!$v.form.password2.$error && null" aria-describedby="password2-feedback"></b-form-input>
+                      <b-form-invalid-feedback id="password2-feedback"> Please confirm your password </b-form-invalid-feedback>
+                    </div>
+                    <div class="form-group">
+                      <div class="d-md-flex align-items-md-center justify-content-md-between">
+                        <div>
+                          <b-form-checkbox id="terms" name="terms" v-model="$v.form.terms.$model" :state="!$v.form.terms.$error && null" aria-describedby="terms-feedback">I agree to Terms &amp; Conditions</b-form-checkbox>
+                        </div>
+                        <div class="py-2">
+                          <!-- Terms Modal -->
+                          <b-button variant="link" class="font-w500 font-size-sm p-0" v-b-modal.one-signup-terms>View Terms</b-button>
+                          <b-modal id="one-signup-terms" size="lg" body-class="p-0" hide-footer hide-header>
+                            <div class="block block-rounded block-themed block-transparent mb-0">
+                              <div class="block-header bg-primary-dark">
+                                <h3 class="block-title">Terms &amp; Conditions</h3>
+                                <div class="block-options">
+                                  <button type="button" class="btn-block-option" @click="$bvModal.hide('one-signup-terms')">
+                                    <i class="fa fa-fw fa-times"></i>
+                                  </button>
+                                </div>
+                              </div>
+                              <div class="block-content">
+                                <pre>
 Welcome! These Terms of Service (the “Terms”) govern Your access to and use of the Einfach.in website and online community for software developers (“Einfach.in”). These Terms also include the Einfach.in Privacy Policy. By accessing and using Einfach.in, You agree to comply with these Terms. You may not access and use Einfach.in if You do not agree to the version of the Terms posted at the time You access Einfach.in.
 
 The terms "We" and "Us" refer to Einfach Incorporation, a Delaware corporation doing business as Einfach.in.
@@ -174,223 +239,73 @@ These Terms shall be governed by and construed in accordance with the internal l
 
 12. Other
 Except as specifically stated in another agreement we have with You, these Terms constitute the entire agreement between You and Einfach.in regarding the use of Einfach.in Jobs and these Terms supersede all prior proposals, negotiations, agreements, and understandings concerning the subject matter of these Terms. You represent and warrant that no person has made any promise, representation, or warranty, whether express or implied, not contained herein to induce You to agree to these Terms. Einfach.in’s failure to exercise or enforce any right or provision of these Terms shall not operate as a waiver of such right or provision. If any provision of these Terms is found to be unenforceable or invalid, then only that provision shall be modified to reflect the parties' intention or eliminated to the minimum extent necessary so that these Terms shall otherwise remain in full force and effect and enforceable. These Terms, and any rights or obligations hereunder, are not assignable, transferable or sublicensable by You except with Einfach.in's prior written consent, but may be assigned or transferred by Einfach.in without restriction. Any attempted assignment by You shall violate these Terms and be void. The Section titles in these Terms are for convenience only and have no legal or contractual effect; as used in these Terms, the word "including" means "including but not limited to." Please contact Einfach.in with any questions regarding these Terms at support@Einfach.in.com.
-                    </pre>
+                    </pre
+                                >
+                              </div>
+                              <div class="block-content block-content-full text-right border-top">
+                                <b-button variant="alt-primary" class="mr-1" @click="$bvModal.hide('one-signup-terms')">Close</b-button>
+                                <b-button variant="primary" @click="$bvModal.hide('one-signup-terms')">I Agree</b-button>
+                              </div>
+                            </div>
+                          </b-modal>
+                          <!-- END Terms Modal -->
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                  <div
-                    class="block-content block-content-full text-right border-top"
-                  >
-                    <b-button
-                      variant="alt-primary"
-                      class="mr-1"
-                      @click="$bvModal.hide('one-signup-terms')"
-                      >Close</b-button
-                    >
-                    <b-button
-                      variant="primary"
-                      @click="$bvModal.hide('one-signup-terms')"
-                      >I Agree</b-button
-                    >
-                  </div>
-                </div>
-              </b-modal>
-              <!-- END Terms Modal -->
-
-              <router-link
-                to="/auth/signin"
-                class="btn-block-option"
-                v-b-tooltip.hover.nofade.left="'Sign In'"
-              >
-                <i class="fa fa-sign-in-alt"></i>
-              </router-link>
-            </template>
-            <div class="p-sm-3 px-lg-4 py-lg-5">
-              <h1 class="h2 mb-1">Einfach</h1>
-              <p class="text-muted mb-2">
-                Please fill the following details to create a new account.
-              </p>
-              <b-row>
-                <b-col cols="5" class="my-2 pr-2">
-            <vue-dropzone ref="imgDropZone" id="dropzone" :options="dropzoneOptions" @vdropzone-complete="afterComplete"></vue-dropzone>
-            </b-col>
-                <b-col cols="7" class="my-2">
-                  <div class="form-group">
-                    <b-form-input
-                      size="lg"
-                      class="form-control-alt"
-                      id="username"
-                      name="username"
-                      placeholder="Username"
-                      v-model="$v.form.username.$model"
-                      :state="!$v.form.username.$error && null"
-                      aria-describedby="username-feedback"
-                    ></b-form-input>
-                    <b-form-invalid-feedback id="username-feedback">
-                      Please enter a username
-                    </b-form-invalid-feedback>
-                  </div>
-                  <div class="form-group">
-                    <b-form-input
-                      type="email"
-                      size="lg"
-                      class="form-control-alt"
-                      id="email"
-                      name="email"
-                      placeholder="Email"
-                      v-model="$v.form.email.$model"
-                      :state="!$v.form.email.$error && null"
-                      aria-describedby="email-feedback"
-                    ></b-form-input>
-                    <b-form-invalid-feedback id="email-feedback">
-                      Please enter your email
-                    </b-form-invalid-feedback>
-                  </div>
-                  <div class="form-group">
-                    <b-form-input
-                      size="lg"
-                      class="form-control-alt"
-                      id="companyName"
-                      name="Company Name"
-                      placeholder="Company Name"
-                      v-model="$v.form.companyName.$model"
-                      aria-describedby="companyName-feedback"
-                    ></b-form-input>
-                    <b-form-invalid-feedback id="companyName-feedback">
-                      Please enter company name
-                    </b-form-invalid-feedback>
-                  </div>
-
-                </b-col>
-              </b-row>
-
-              <!-- Sign Up Form -->
-              <b-form @submit.stop.prevent="onSubmit">
-                <div class="py-3">
-                  <div class="form-group">
-                    <b-form-input
-                      size="lg"
-                      class="form-control-alt"
-                      id="companyWebsite"
-                      name="Company Website"
-                      placeholder="Company Website"
-                      v-model="$v.form.companyWebsite.$model"
-                      aria-describedby="companyWebsite-feedback"
-                    ></b-form-input>
-                    <b-form-invalid-feedback id="companyWebsite-feedback">
-                      Please enter companyWebsite
-                    </b-form-invalid-feedback>
-                  </div>
-                  <div class="form-group">
-                    <b-form-input
-                      type="password"
-                      size="lg"
-                      class="form-control-alt"
-                      id="password"
-                      name="password"
-                      placeholder="Password"
-                      v-model="$v.form.password.$model"
-                      :state="!$v.form.password.$error && null"
-                      aria-describedby="password-feedback"
-                    ></b-form-input>
-                    <b-form-invalid-feedback id="password-feedback">
-                      Please provide a secure password
-                    </b-form-invalid-feedback>
-                  </div>
-                  <div class="form-group">
-                    <b-form-input
-                      type="password"
-                      size="lg"
-                      class="form-control-alt"
-                      id="password2"
-                      name="password2"
-                      placeholder="Confirm Password"
-                      v-model="$v.form.password2.$model"
-                      :state="!$v.form.password2.$error && null"
-                      aria-describedby="password2-feedback"
-                    ></b-form-input>
-                    <b-form-invalid-feedback id="password2-feedback">
-                      Please confirm your password
-                    </b-form-invalid-feedback>
-                  </div>
-                  <div class="form-group">
-                    <b-form-checkbox
-                      id="terms"
-                      name="terms"
-                      v-model="$v.form.terms.$model"
-                      :state="!$v.form.terms.$error && null"
-                      aria-describedby="terms-feedback"
-                      >I agree to Terms &amp; Conditions</b-form-checkbox
-                    >
-                    <b-form-invalid-feedback
-                      id="terms-feedback"
-                      :state="
-                        $v.form.terms.$dirty ? !$v.form.terms.$error : null
-                      "
-                    >
-                      You must agree to the service terms!
-                    </b-form-invalid-feedback>
-                  </div>
-                </div>
-                <b-row class="form-group">
-                  <b-col md="6" xl="5">
-                    <b-button
-                      v-if="loading == false"
-                       
-                      variant="alt-success"
-                      block
-                    >
-                      <i class="fa fa-fw fa-plus mr-1"></i> Sign Up
-                    </b-button>
-                    <b-button
-                      v-if="loading == true"
-                       
-                      variant="alt-success"
-                      block
-                    >
-                      <b-spinner
-                        small
-                        variant="success"
-                        label="Loading..."
-                        class="mr-3"
-                      ></b-spinner>
-                      Signing Up
-                    </b-button>
-                  </b-col>
-                </b-row>
-              </b-form>
-              <!-- END Sign Up Form -->
-            </div>
-          </base-block>
-          <!-- END Sign Up Block -->
-        </b-col>
-      </b-row>
-    </div>
-    <div class="content content-full font-size-sm text-muted text-center">
-      <strong>{{
-        $store.getters.appName + " " + $store.getters.appVersion
-      }}</strong>
-      &copy; {{ $store.getters.appCopyright }}
-    </div>
+                  <b-row class="form-group d-flex flex-row-reverse">
+                    <b-col md="6" xl="5">
+                      <b-button @click="createUser()" v-if="loading == false" variant="alt-success" block> <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign Up </b-button>
+                      <b-button v-if="loading == true" variant="alt-success" block>
+                        <b-spinner small variant="success" label="Loading..." class="mr-3"></b-spinner>
+                        Signing Up
+                      </b-button>
+                    </b-col>
+                  </b-row>
+                </b-form>
+                <!-- END Sign Up Form -->
+              </b-col>
+            </b-row>
+            <!-- END Sign Up Form -->
+          </div>
+        </div>
+        <div class="px-4 py-3 w-100 d-lg-none d-flex flex-column flex-sm-row justify-content-between font-size-sm text-center text-sm-left">
+          <p class="font-w500 text-black-50 py-2 mb-0">
+            <strong>{{ $store.getters.appName + " " + $store.getters.appVersion }}</strong> &copy; {{ $store.getters.appCopyright }}
+          </p>
+          <ul class="list list-inline py-2 mb-0">
+            <li class="list-inline-item">
+              <a class="text-muted font-w500" href="javascript:void(0)">Legal</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted font-w500" target="_blank" href="mailto:support@einfach.in">Contact</a>
+            </li>
+            <li class="list-inline-item">
+              <a class="text-muted font-w500" href="javascript:void(0)">Terms</a>
+            </li>
+          </ul>
+        </div>
+      </b-col>
+      <!-- END Main Section -->
+    </b-row>
   </div>
-  <!-- END Page Content -->
 </template>
 
 <style lang="scss">
-
 // Vue2 Dropzone + Custom overrides
-@import '~vue2-dropzone/dist/vue2Dropzone.min.css';
-@import './src/assets/scss/vendor/dropzone';
+@import "~vue2-dropzone/dist/vue2Dropzone.min.css";
 </style>
 
 <script>
 // Vuelidate, for more info and examples you can check out https://github.com/vuelidate/vuelidate
-import firebase from "../../../firebase";
-import { validationMixin } from "vuelidate";
-import { required, minLength, email, sameAs } from "vuelidate/lib/validators";
-import vue2Dropzone from 'vue2-dropzone'
+import firebase from "../../../firebase"
+import { validationMixin } from "vuelidate"
+import { required, minLength, email, sameAs } from "vuelidate/lib/validators"
+import vue2Dropzone from "vue2-dropzone"
 
 export default {
   components: {
-    'vueDropzone': vue2Dropzone
+    vueDropzone: vue2Dropzone,
   },
   mixins: [validationMixin],
   data() {
@@ -407,13 +322,13 @@ export default {
       },
       dropzoneOptions: {
         url: "https://httpbin.org/post",
-        thumbnailWidth: 130,
-        thumbnailHeight: 150,
+        thumbnailWidth: 20,
+        thumbnailHeight: 80,
         addRemoveLinks: false,
-        dictDefaultMessage: "<i class='fa fa-fw fa-user mr-2'></i>UPLOAD LOGO"
+        dictDefaultMessage: "<i class='fa fa-fw fa-user mr-2'></i>UPLOAD LOGO",
       },
-      imagesUrl: ''
-    };
+      imagesUrl: "",
+    }
   },
   validations: {
     form: {
@@ -448,48 +363,64 @@ export default {
   },
   methods: {
     async afterComplete(upload) {
-      this.isLoading = true;
+      this.isLoading = true
       try {
         //save image
-        let file = upload;
+        let file = upload
         var metadata = {
-          contentType: "image/png"
-        };
-        var storageRef = await firebase.storage().ref();
-        var imageRef = await storageRef.child(`companyLogos/${this.form.username}.png`);
-        await imageRef.put(file, metadata);
-        var downloadURL = await imageRef.getDownloadURL();
-        this.imagesUrl= downloadURL;
+          contentType: "image/png",
+        }
+        var storageRef = await firebase.storage().ref()
+        var imageRef = await storageRef.child(`companyLogos/${this.form.username}.png`)
+        await imageRef.put(file, metadata)
+        var downloadURL = await imageRef.getDownloadURL()
+        this.imagesUrl = downloadURL
         console.log(downloadURL)
       } catch (error) {
-        console.log(error);
+        console.log(error)
       }
     },
-    createAccount (uid){
+    createAccount(uid) {
       const data = this.form
-      const user = {name: data.companyName, email: data.email, logo: this.imagesUrl, website: data.companyWebsite}
-      const emailTemplates = {invite: '<p>Dear <strong>[name]</strong></p><p>We are delighted to inform you that your application has been shortlisted for further rounds of evaluation.</p><p>Next round will of technical skills evaluation which can be accessible with link below</p><p><strong>[testLink]</strong></p><p>&nbsp;</p><p>Please follow given instructions</p><ul><li>Test is splitted in five sections</li><li>Time limit is 120 minutes</li><li>Test requires Audio and Video permissions</li></ul><p>&nbsp;</p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>', rejected: '<p>Dear <strong>[name]</strong><br><br>Thank you for your interest in this position. We have reviewed your application and resume and we regret to inform you that it has not been selected for further consideration.</p><p>&nbsp;</p><p>We wish you every success with your job search ans thank you for your interest in our company.</p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>', shortlisted: '<p>Dear <strong>[name]</strong></p><p>We are delighted to inform you that we would like to arrange an interview. Please let us know when you are available to come to our offices</p><p>Contact email: <strong>[companyEmail]</strong></p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>', subjects: {invite: 'Software Developer Role at [company]', rejected: 'Software Developer Role at [company]', shortlisted: 'Software Developer Role at [company]'}}
-      const candidates = {applied: [], invited: [], ongoing: [], shortlisted: [], completed: [], rejected: []}
-      const inbox = {invited: [{body: 'Welcome',email: 'am@einfach.tech',received: new Date(), title: 'New Account',user: "admin@einfach.tech"}]}
-      firebase.firestore().collection("accounts").doc()
-          .set({uid, user, emailTemplates, inbox, candidates, 
+      const user = { name: data.companyName, email: data.email, logo: this.imagesUrl, website: data.companyWebsite }
+      const emailTemplates = {
+        invite:
+          "<p>Dear <strong>[name]</strong></p><p>We are delighted to inform you that your application has been shortlisted for further rounds of evaluation.</p><p>Next round will of technical skills evaluation which can be accessible with link below</p><p><strong>[testLink]</strong></p><p>&nbsp;</p><p>Please follow given instructions</p><ul><li>Test is splitted in five sections</li><li>Time limit is 120 minutes</li><li>Test requires Audio and Video permissions</li></ul><p>&nbsp;</p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>",
+        rejected: "<p>Dear <strong>[name]</strong><br><br>Thank you for your interest in this position. We have reviewed your application and resume and we regret to inform you that it has not been selected for further consideration.</p><p>&nbsp;</p><p>We wish you every success with your job search ans thank you for your interest in our company.</p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>",
+        shortlisted: "<p>Dear <strong>[name]</strong></p><p>We are delighted to inform you that we would like to arrange an interview. Please let us know when you are available to come to our offices</p><p>Contact email: <strong>[companyEmail]</strong></p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>",
+        subjects: { invite: "Software Developer Role at [company]", rejected: "Software Developer Role at [company]", shortlisted: "Software Developer Role at [company]" },
+      }
+      const candidates = { applied: [], invited: [], ongoing: [], shortlisted: [], completed: [], rejected: [] }
+      const inbox = { invited: [{ body: "Welcome", email: "am@einfach.tech", received: new Date(), title: "New Account", user: "admin@einfach.tech" }] }
+      firebase
+        .firestore()
+        .collection("accounts")
+        .doc()
+        .set({
+          uid,
+          user,
+          emailTemplates,
+          inbox,
+          candidates,
           notifications: [
-        {
-          icon: 'fa fa-fw fa-check-circle text-success',
-          title: 'Your account has been created',
-          time: new Date()
-        }]})
-          .then(() => {
-              this.loading = false;
-              this.$store.commit('setAuth', uid)
-      this.$router.push('/backend/dashboard')
-          })
-          .catch((error) => {
-            console.error("Error writing document: ", error);
-          });
+            {
+              icon: "fa fa-fw fa-check-circle text-success",
+              title: "Your account has been created",
+              time: new Date(),
+            },
+          ],
+        })
+        .then(() => {
+          this.loading = false
+          this.$store.commit("setAuth", uid)
+          this.$router.push("/backend/dashboard")
+        })
+        .catch((error) => {
+          console.error("Error writing document: ", error)
+        })
     },
-    onSubmit() {
-      this.loading = true;
+    createUser() {
+      this.loading = true
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
@@ -499,13 +430,12 @@ export default {
             .updateProfile({
               displayName: this.form.name,
             })
-            .then(() => {
-            });
+            .then(() => {})
         })
         .catch((err) => {
-          this.error = err.message;
-        });
+          this.error = err.message
+        })
     },
   },
-};
+}
 </script>

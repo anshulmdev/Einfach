@@ -23,7 +23,7 @@
               <a class="text-white-75 font-w500" href="javascript:void(0)">Legal</a>
             </li>
             <li class="list-inline-item">
-              <a class="text-white-75 font-w500" href="javascript:void(0)">Contact</a>
+              <a class="text-white-75 font-w500" target="_blank" href="mailto:support@einfach.in">Contact</a>
             </li>
             <li class="list-inline-item">
               <a class="text-white-75 font-w500" href="javascript:void(0)">Terms</a>
@@ -94,7 +94,7 @@
               <a class="text-muted font-w500" href="javascript:void(0)">Legal</a>
             </li>
             <li class="list-inline-item">
-              <a class="text-muted font-w500" href="javascript:void(0)">Contact</a>
+              <a class="text-muted font-w500" target="_blank" href="mailto:support@einfach.in">Contact</a>
             </li>
             <li class="list-inline-item">
               <a class="text-muted font-w500" href="javascript:void(0)">Terms</a>
