@@ -1,109 +1,66 @@
 <template>
-  <base-background image="/img/photos/photo28@2x.jpg">
-    <b-row no-gutters class="bg-primary-dark-op">
-      <!-- Meta Info Section -->
-      <b-col lg="4" class="hero-static d-none d-lg-flex flex-column justify-content-center">
-        <div class="p-4 p-xl-5 flex-grow-1 d-flex align-items-center">
-          <div class="w-100">
-            <router-link to="/" class="link-fx font-w600 font-size-h2 text-white">
-              One<span class="font-w400">UI</span>
-            </router-link>
-            <p class="text-white-75 mr-xl-8 mt-2">
-              Welcome to your amazing app. Feel free to login and start managing your projects and clients.
-            </p>
-          </div>
-        </div>
-        <div class="p-4 p-xl-5 d-xl-flex justify-content-between align-items-center font-size-sm">
-          <p class="font-w500 text-white-50 mb-0">
-            <strong>{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</strong> &copy; {{ $store.getters.appCopyright }}
-          </p>
-          <ul class="list list-inline mb-0 py-2">
-            <li class="list-inline-item">
-              <a class="text-white-75 font-w500" href="javascript:void(0)">Legal</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-white-75 font-w500" href="javascript:void(0)">Contact</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-white-75 font-w500" href="javascript:void(0)">Terms</a>
-            </li>
-          </ul>
-        </div>
-      </b-col>
-      <!-- END Meta Info Section -->
-
-      <!-- Main Section -->
-      <b-col lg="8" class="hero-static d-flex flex-column align-items-center bg-white">
-        <div class="p-3 w-100 d-lg-none text-center">
-          <router-link to="/" class="link-fx font-w600 font-size-h3 text-dark">
-            One<span class="font-w400">UI</span>
-          </router-link>
-        </div>
-        <div class="p-4 w-100 flex-grow-1 d-flex align-items-center">
-          <div class="w-100">
-            <!-- Header -->
-            <div class="text-center mb-5">
-              <p class="mb-3">
-                <i class="fa fa-2x fa-circle-notch text-primary-light"></i>
+  <!-- Page Content -->
+  <div class="hero-static">
+    <div class="content">
+      <b-row class="justify-content-center">
+        <b-col md="8" lg="6" xl="4">
+          <!-- Sign In Block -->
+          <base-block rounded themed header-class="bg-primary-dark" class="mb-0" title="Sign In">
+            <template #options>
+              <router-link to="/auth/reminder" class="btn-block-option font-size-sm">Forgot Password?</router-link>
+              <router-link to="/auth/signup" class="btn-block-option" v-b-tooltip.hover.nofade.left="'New Account'">
+                <i class="fa fa-user-plus"></i>
+              </router-link>
+            </template>
+            <div class="p-sm-3 px-lg-4 py-lg-5">
+              <h1 class="h2 mb-1">Einfach</h1>
+              <p class="text-muted">
+                Welcome, please login.
               </p>
-              <h1 class="font-w700 mb-2">
-                Sign In
-              </h1>
-              <h2 class="font-size-base text-muted mb-3">
-                Welcome, please login or <router-link to="/auth/signup3">sign up</router-link> for a new account.
-              </h2>
-            </div>
-            <!-- END Header -->
 
-            <!-- Sign In Form -->
-            <b-row no-gutters class="justify-content-center">
-              <b-col sm="8" xl="4">
-                <b-form @submit.stop.prevent="onSubmit">
+              <!-- Sign In Form -->
+              <b-form @submit.stop.prevent="onSubmit">
+                <div class="py-3">
                   <div class="form-group">
-                    <b-form-input size="lg" class="form-control-alt py-4" id="username" name="username" placeholder="Username" v-model="$v.form.username.$model" :state="!$v.form.username.$error && null" aria-describedby="username-feedback"></b-form-input>
+                    <b-form-input size="lg" class="form-control-alt" id="username" name="username" placeholder="Username" v-model="$v.form.username.$model" :state="!$v.form.username.$error && null" aria-describedby="username-feedback"></b-form-input>
+                    <b-form-invalid-feedback id="username-feedback">
+                      Please enter your username
+                    </b-form-invalid-feedback>
                   </div>
                   <div class="form-group">
-                    <b-form-input type="password" size="lg" class="form-control-alt py-4" id="password" name="password" placeholder="Password" v-model="$v.form.password.$model" :state="!$v.form.password.$error && null" aria-describedby="password-feedback"></b-form-input>
+                    <b-form-input type="password" size="lg" class="form-control-alt" id="password" name="password" placeholder="Password" v-model="$v.form.password.$model" :state="!$v.form.password.$error && null" aria-describedby="password-feedback"></b-form-input>
+                    <b-form-invalid-feedback id="password-feedback">
+                      Please enter your password
+                    </b-form-invalid-feedback>
                   </div>
-                  <div class="form-group d-flex justify-content-between align-items-center">
-                    <div>
-                      <router-link to="/auth/reminder3" class="text-muted font-size-sm font-w500 d-block d-lg-inline-block mb-1">Forgot Password?</router-link>
-                    </div>
-                    <div>
-                      <button   class="btn btn-lg btn-alt-primary">
-                        <i class="fa fa-fw fa-sign-in-alt mr-1 opacity-50"></i> Sign In
-                      </button>
-                    </div>
+                  <div class="form-group">
+                    <b-form-checkbox id="remember" name="remember">Remember Me</b-form-checkbox>
                   </div>
-                </b-form>
-              </b-col>
-            </b-row>
-            <!-- END Sign In Form -->
-          </div>
-        </div>
-        <div class="px-4 py-3 w-100 d-lg-none d-flex flex-column flex-sm-row justify-content-between font-size-sm text-center text-sm-left">
-          <p class="font-w500 text-black-50 py-2 mb-0">
-            <strong>{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</strong> &copy; {{ $store.getters.appCopyright }}
-          </p>
-          <ul class="list list-inline py-2 mb-0">
-            <li class="list-inline-item">
-              <a class="text-muted font-w500" href="javascript:void(0)">Legal</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-muted font-w500" href="javascript:void(0)">Contact</a>
-            </li>
-            <li class="list-inline-item">
-              <a class="text-muted font-w500" href="javascript:void(0)">Terms</a>
-            </li>
-          </ul>
-        </div>
-      </b-col>
-      <!-- END Main Section -->
-    </b-row>
-  </base-background>
+                </div>
+                <b-row class="form-group">
+                  <b-col md="6" xl="5">
+                    <b-button type="submit" variant="alt-primary" block>
+                      <i class="fa fa-fw fa-sign-in-alt mr-1"></i> Sign In
+                    </b-button>
+                  </b-col>
+                </b-row>
+              </b-form>
+              <!-- END Sign In Form -->
+            </div>
+          </base-block>
+          <!-- END Sign In Block -->
+        </b-col>
+      </b-row>
+    </div>
+    <div class="content content-full font-size-sm text-muted text-center">
+      <strong>{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</strong> &copy; {{ $store.getters.appCopyright }}
+    </div>
+  </div>
+  <!-- END Page Content -->
 </template>
 
 <script>
+import firebase from "../../../firebase";
 // Vuelidate, for more info and examples you can check out https://github.com/vuelidate/vuelidate
 import { validationMixin } from 'vuelidate'
 import { required, minLength } from 'vuelidate/lib/validators'
@@ -137,9 +94,26 @@ export default {
       if (this.$v.form.$anyError) {
         return
       }
-
-      // Form submit logic
-      this.$router.push('/backend/pages/auth/all')
+firebase.auth().signInWithEmailAndPassword(this.form.username, this.form.password)
+  .then((userCredential) => {
+    // Signed in
+    var user = userCredential.user;
+    const query = firebase.firestore().collection('accounts').where('uid', '==', user.uid)
+        // eslint-disable-next-line no-unused-vars
+        const observer = query.onSnapshot(querySnapshot => {
+          querySnapshot.docChanges().forEach(change => {
+            this.$cookies.set('setDocId',change.doc.id);
+            this.$store.commit('setDocId', change.doc.id)
+          })}, err => {
+          console.log(`Encountered error: ${err}`);
+        })
+    this.$cookies.set('uid',user.uid);
+    this.$store.commit('setAuth',user.uid)
+    this.$router.push('/backend/dashboard')
+    // ...
+  })
+  .catch(() => {
+  });
     }
   }
 }
