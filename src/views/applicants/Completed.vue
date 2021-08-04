@@ -69,7 +69,15 @@
               <b-td class="text-center">
                 <b-btn-group>
                   <b-button
-                  @click="deleteEntry(user.name, user.email, index)"
+                    v-b-tooltip.hover.nofade.left="'Move to Applied'"
+                    @click="reverse(index)"
+                    size="sm"
+                    variant="primary"
+                  >
+                    <i class="si si-reload"></i>
+                  </b-button>
+                  <b-button
+                  @click="deleteEntry(index)"
                     v-b-tooltip.hover.nofade.left="'Delete Record'"
                     size="sm"
                     variant="danger"
@@ -174,8 +182,13 @@ export default {
     }
   },
   methods: {
-    // eslint-disable-next-line no-unused-vars
-    async deleteEntry(name, email, index){
+    async reverse (index){
+      let details = this.$store.state.firestoreData.candidates.completed[index + this.perPage * (this.currentPage - 1)];
+      const entry = await firebase.firestore().collection("accounts").doc(this.$store.state.firestoreData.docId);
+      await entry.update({"candidates.completed": firebase.firestore.FieldValue.arrayRemove(details),});
+      await entry.update({"candidates.applied": firebase.firestore.FieldValue.arrayUnion(details),});
+    },
+    async deleteEntry(index){
       const confirmation = await this.$swal({
         title: 'Are you sure?',
         text: 'You will not be able to recover this applicant',
