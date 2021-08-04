@@ -1,4 +1,4 @@
 User-Agent: *
 Disallow: 
 
-Sitemap: https://www.xml-sitemaps.com/download/www.einfach.in-eeb253978/sitemap.xml?view=1
+Sitemap: https://www.einfach.in/sitemap.xml
