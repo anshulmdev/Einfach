@@ -102,7 +102,9 @@
                     <a class="font-w600" href="javascript:void(0)"># {{ index }}</a>
                   </b-td>
                   <b-td class="d-none d-sm-table-cell">
+                    <router-link :to="`/backend/applicants/details/${order.email}`">
                     {{ order.name }}
+                    </router-link>
                   </b-td>
                   <b-td>
                     <b-row v-for="(value, index) in order.tags" :key="index">
@@ -182,22 +184,22 @@
                 </b-tr>
               </b-thead>
               <b-tbody v-if="$store.state.firestoreData.candidates.shortlisted.length">
-                <b-tr v-for="(completed, index) in $store.state.firestoreData.candidates.shortlisted.slice(0, 10)" :key="index">
+                <b-tr v-for="(shortlisted, index) in $store.state.firestoreData.candidates.shortlisted.slice(0, 10)" :key="index">
                   <b-td class="font-w600">
                     {{ index }}
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
-                    <a v-b-modal.modal-block-extra-large2 @click="url = completed.resume"> <img class="img-avatar img-avatar32" src="img/photos/user.png" alt="Avatar" /></a>
+                    <a v-b-modal.modal-block-extra-large2 @click="url = shortlisted.resume"> <img class="img-avatar img-avatar32" src="img/photos/user.png" alt="Avatar" /></a>
                   </b-td>
                   <b-td>
-                    <a class="link-fx font-w600" href="javascript:void(0)">{{ completed.name }}</a>
+                    <router-link :to="`/backend/applicants/details/${shortlisted.email}`">{{ shortlisted.name }}</router-link>
                   </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">{{ $store.state.applicantScores[completed.email] ? $store.state.applicantScores[completed.email] : 0 }} </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">{{ completed.time ? completed.time.slice(0, 15) : "Not Added" }} </b-td>
+                  <b-td class="d-none d-sm-table-cell text-center">{{ $store.state.applicantScores[shortlisted.email] ? $store.state.applicantScores[shortlisted.email] : 0 }} </b-td>
+                  <b-td class="d-none d-sm-table-cell text-center">{{ shortlisted.time ? shortlisted.time.slice(0, 15) : "Not Added" }} </b-td>
                   <b-td class="text-center">
-                    <a href="/backend/applicants/Invited" v-b-tooltip.hover.nofade.left="'Invite for Interview'">
+                    <router-link to="/backend/applicants/Invited" v-b-tooltip.hover.nofade.left="'Invite for Interview'">
                       <i class="fa fa-fw fa-envelope"></i>
-                    </a>
+                    </router-link>
                   </b-td>
                 </b-tr>
               </b-tbody>
