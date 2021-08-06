@@ -73,6 +73,14 @@
               <b-td class="text-center">
                 <b-btn-group>
                   <b-button
+                    v-b-tooltip.hover.nofade.left="'Move to Shortlisted'"
+                    @click="reverse(index)"
+                    size="sm"
+                    variant="warning"
+                  >
+                    <i class="si si-reload"></i>
+                  </b-button>
+                  <b-button
                   disabled
                   v-if="loading.includes(index)"
                     v-b-tooltip.hover.nofade.left="'Send Invitation'"
@@ -197,6 +205,12 @@ export default {
     }
   },
   methods: {
+    async reverse (index){
+      let details = this.$store.state.firestoreData.candidates.rejected[index + this.perPage * (this.currentPage - 1)];
+      const entry = await firebase.firestore().collection("accounts").doc(this.$store.state.firestoreData.docId);
+      await entry.update({"candidates.rejected": firebase.firestore.FieldValue.arrayRemove(details),});
+      await entry.update({"candidates.shortlisted": firebase.firestore.FieldValue.arrayUnion(details),});
+    },
     // eslint-disable-next-line no-unused-vars
     async deleteEntry(name, email, index){
       const confirmation = await this.$swal({
