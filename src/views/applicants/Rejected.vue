@@ -76,7 +76,7 @@
                     v-b-tooltip.hover.nofade.left="'Move to Shortlisted'"
                     @click="reverse(index)"
                     size="sm"
-                    variant="warning"
+                    variant="success"
                   >
                     <i class="si si-reload"></i>
                   </b-button>
