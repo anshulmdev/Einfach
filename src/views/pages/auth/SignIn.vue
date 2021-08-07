@@ -161,10 +161,10 @@ export default {
           this.$cookies.set("uid", user.uid)
           this.$store.commit("setAuth", user.uid)
           this.$router.push("/backend/dashboard")
-          this.loading = null
           // ...
         })
         .catch(() => {})
+          this.loading = null
     },
   },
 }
