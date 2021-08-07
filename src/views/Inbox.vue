@@ -55,8 +55,8 @@
             <b-nav class="font-size-sm push" pills vertical>
               <b-nav-item
                 @click="
-                  label = null;
-                  currentPage = 1;
+                  label = null
+                  currentPage = 1
                 "
                 class="my-1"
                 link-classes="d-flex justify-content-between align-items-center"
@@ -67,8 +67,8 @@
               </b-nav-item>
               <b-nav-item
                 @click="
-                  label = 'invited';
-                  currentPage = 1;
+                  label = 'invited'
+                  currentPage = 1
                 "
                 class="my-1"
                 link-classes="d-flex justify-content-between align-items-center"
@@ -79,20 +79,32 @@
               </b-nav-item>
               <b-nav-item
                 @click="
-                  label = 'completed';
-                  currentPage = 1;
+                  label = 'shortlisted'
+                  currentPage = 1
                 "
                 class="my-1"
                 link-classes="d-flex justify-content-between align-items-center"
-                :active="this.label == 'completed'"
+                :active="this.label == 'shortlisted'"
               >
-                <span> <i class="fa fa-fw fa-star mr-1"></i> Completed </span>
-                <b-badge pill variant="secondary">{{ $store.state.firestoreData.inbox.completed ? $store.state.firestoreData.inbox.completed.length : 0 }}</b-badge>
+                <span> <i class="fa fa-fw fa-check-circle mr-1"></i> shortlisted </span>
+                <b-badge pill variant="secondary">{{ $store.state.firestoreData.inbox.shortlisted ? $store.state.firestoreData.inbox.shortlisted.length : 0 }}</b-badge>
               </b-nav-item>
               <b-nav-item
                 @click="
-                  label = 'custom';
-                  currentPage = 1;
+                  label = 'rejected'
+                  currentPage = 1
+                "
+                class="my-1"
+                link-classes="d-flex justify-content-between align-items-center"
+                :active="this.label == 'rejected'"
+              >
+                <span> <i class="fa fa-fw fa-times mr-1"></i> rejected </span>
+                <b-badge pill variant="secondary">{{ $store.state.firestoreData.inbox.rejected ? $store.state.firestoreData.inbox.rejected.length : 0 }}</b-badge>
+              </b-nav-item>
+              <b-nav-item
+                @click="
+                  label = 'custom'
+                  currentPage = 1
                 "
                 class="my-1"
                 link-classes="d-flex justify-content-between align-items-center"
@@ -117,13 +129,13 @@
               <img class="img-avatar" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmcfkeiQFNQJd9qlaENd1yN60RHp_PtO16rQ&usqp=CAU" alt="Avatar" />
             </vue-easy-pie-chart>
             <router-link to="/backend/subscription/active">
-            <base-block tag="a" rounded bordered link-shadow content-full content-class="text-center">
-              <div class="push">
-                <i class="si si-like fa-2x text-success"></i>
-              </div>
-              <div class="font-size-h2 font-w700"><span class="text-muted">+</span> 30k Emails</div>
-              <div class="font-size-sm text-muted text-uppercase">Upgrade Now</div>
-            </base-block>
+              <base-block tag="a" rounded bordered link-shadow content-full content-class="text-center">
+                <div class="push">
+                  <i class="si si-like fa-2x text-success"></i>
+                </div>
+                <div class="font-size-h2 font-w700"><span class="text-muted">+</span> 30k Emails</div>
+                <div class="font-size-sm text-muted text-uppercase">Upgrade Now</div>
+              </base-block>
             </router-link>
           </base-block>
         </div>
@@ -229,8 +241,8 @@
 
 <script>
 // Vue Easy Pie Chart, for more info and examples you can check out https://github.com/DotNetAge/vue-easy-pie-chart
-import VueEasyPieChart from "vue-easy-pie-chart";
-import firebase from "../firebase";
+import VueEasyPieChart from "vue-easy-pie-chart"
+import firebase from "../firebase"
 
 export default {
   components: {
@@ -250,42 +262,42 @@ export default {
         message: "",
       },
       showMessage: 0,
-    };
+    }
   },
   computed: {
     // eslint-disable-next-line vue/return-in-computed-property
     inbox() {
-      const sliceValue = [(this.currentPage - 1) * this.perPage, this.currentPage * this.perPage];
+      const sliceValue = [(this.currentPage - 1) * this.perPage, this.currentPage * this.perPage]
       if (!this.label) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.currentMails = this.$store.state.firestoreData.inbox.invited.concat(this.$store.state.firestoreData.inbox.completed).sort((a, b) => b.received - a.received);
+        this.currentMails = this.$store.state.firestoreData.inbox.invited.concat(this.$store.state.firestoreData.inbox.completed).sort((a, b) => b.received - a.received)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.totalMails = this.currentMails.length;
-        return this.currentMails.slice(sliceValue[0], sliceValue[1]);
+        this.totalMails = this.currentMails.length
+        return this.currentMails.slice(sliceValue[0], sliceValue[1])
       } else {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.currentMails = this.$store.state.firestoreData.inbox[this.label].sort((a, b) => b.received - a.received);
-        return this.currentMails.slice(sliceValue[0], sliceValue[1]);
+        this.currentMails = this.$store.state.firestoreData.inbox[this.label].sort((a, b) => b.received - a.received)
+        return this.currentMails.slice(sliceValue[0], sliceValue[1])
       }
     },
   },
   mounted() {
     this.$root.$on("bv::modal::hidden", (bvEvent, modalId) => {
       if (modalId === "one-inbox-message") {
-        this.showMessage = 0;
+        this.showMessage = 0
       }
-    });
+    })
   },
   methods: {
     async submitMsg() {
-      this.loading = true;
+      this.loading = true
       const details = {
         body: this.form.message,
         email: this.form.email,
         received: new Date(),
         title: this.form.subject,
         user: "Custom Mail",
-      };
+      }
       // eslint-disable-next-line no-unused-vars
       const sendEmail = await fetch("https://einfach.api.stdlib.com/Application@dev/autoEmails/email/", {
         method: "POST", // *GET, POST, PUT, DELETE, etc.
@@ -304,30 +316,30 @@ export default {
           emailTemplate: this.form.message,
           name: "Custom Mail",
         }),
-      });
-      const entry = await firebase.firestore().collection("accounts").doc(this.$store.state.firestoreData.docId);
+      })
+      const entry = await firebase.firestore().collection("accounts").doc(this.$store.state.firestoreData.docId)
       // eslint-disable-next-line no-unused-vars
       const inboxInvited = await entry.update({
         "inbox.custom": firebase.firestore.FieldValue.arrayUnion(details),
-      });
+      })
       setTimeout(() => {
-        this.loading = "done";
-      }, 2000);
+        this.loading = "done"
+      }, 2000)
     },
     pagination(value) {
       if (value === "increase") {
-        if (this.currentPage < parseInt(this.currentMails.length / this.perPage) + 1) this.currentPage += 1;
+        if (this.currentPage < parseInt(this.currentMails.length / this.perPage) + 1) this.currentPage += 1
       }
-      if (value === "decrease" && this.currentPage > 1) this.currentPage -= 1;
+      if (value === "decrease" && this.currentPage > 1) this.currentPage -= 1
     },
     onReset(evt) {
-      evt.preventDefault();
+      evt.preventDefault()
 
       // Reset our form values
-      this.form.email = "";
-      this.form.subject = "";
-      this.form.message = "";
+      this.form.email = ""
+      this.form.subject = ""
+      this.form.message = ""
     },
   },
-};
+}
 </script>

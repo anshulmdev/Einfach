@@ -159,12 +159,12 @@ firebase.auth().signInWithEmailAndPassword(this.form.username, this.form.passwor
         })
     this.$cookies.set('uid',user.uid);
     this.$store.commit('setAuth',user.uid)
+    this.loading = null
     this.$router.push('/backend/dashboard')
     // ...
   })
   .catch(() => {
   });
-  this.loading = null
     }
   }
 }

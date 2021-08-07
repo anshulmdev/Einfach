@@ -30,7 +30,7 @@
         class="mb-2"
           id="sub1"
           name="sub1"
-          v-model="$store.state.firestoreData.emailTemplates.subjects.invite"
+          v-model="$store.state.firestoreData.emailTemplates.subjects.invited"
           placeholder="Email subject"
           aria-describedby="sub1-feedback"
         ></b-form-input>
@@ -38,7 +38,7 @@
         <div class="pb-4">
           <ckeditor
             :editor="ckeditor"
-            v-model="$store.state.firestoreData.emailTemplates.invite"
+            v-model="$store.state.firestoreData.emailTemplates.invited"
             :config="ckeditorConfig"
           ></ckeditor>
         </div>
@@ -148,11 +148,11 @@ export default {
   methods: {
     async update(){
       const email = {'emailTemplates': {
-      'invite':this.$store.state.firestoreData.emailTemplates.invite,
+      'invited':this.$store.state.firestoreData.emailTemplates.invited,
       'shortlisted':this.$store.state.firestoreData.emailTemplates.shortlisted,
       'rejected':this.$store.state.firestoreData.emailTemplates.rejected,
       'subjects': {
-      'invite':this.$store.state.firestoreData.emailTemplates.subjects.invite,
+      'invited':this.$store.state.firestoreData.emailTemplates.subjects.invited,
       'shortlisted':this.$store.state.firestoreData.emailTemplates.subjects.shortlisted,
       'rejected':this.$store.state.firestoreData.emailTemplates.subjects.rejected
       }

@@ -103,27 +103,27 @@ export default {
         {
           name: 'Applied',
           icon: 'si si-pin',
-          to: '/backend/applicants/Applied'
+          to: '/backend/applicants/users/applied'
         },
         {
           name: 'Invited',
           icon: 'si si-bell',
-          to: '/backend/applicants/Invited'
+          to: '/backend/applicants/users/invited'
         },
         {
           name: 'Shortlisted',
           icon: 'si si-check',
-          to: '/backend/applicants/Shortlisted'
+          to: '/backend/applicants/users/shortlisted'
         },
         {
           name: 'Rejected',
           icon: 'si si-ban',
-          to: '/backend/applicants/Rejected'
+          to: '/backend/applicants/users/rejected'
         },
         {
           name: 'Completed',
           icon: 'si si-feed',
-          to: '/backend/applicants/Completed'
+          to: '/backend/applicants/users/completed'
         },
       ]
     },

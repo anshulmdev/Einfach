@@ -384,11 +384,11 @@ export default {
       const data = this.form
       const user = { name: data.companyName, email: data.email, logo: this.imagesUrl, website: data.companyWebsite }
       const emailTemplates = {
-        invite:
+        invited:
           "<p>Dear <strong>[name]</strong></p><p>We are delighted to inform you that your application has been shortlisted for further rounds of evaluation.</p><p>Next round will of technical skills evaluation which can be accessible with link below</p><p><strong>[testLink]</strong></p><p>&nbsp;</p><p>Please follow given instructions</p><ul><li>Test is splitted in five sections</li><li>Time limit is 120 minutes</li><li>Test requires Audio and Video permissions</li></ul><p>&nbsp;</p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>",
         rejected: "<p>Dear <strong>[name]</strong><br><br>Thank you for your interest in this position. We have reviewed your application and resume and we regret to inform you that it has not been selected for further consideration.</p><p>&nbsp;</p><p>We wish you every success with your job search ans thank you for your interest in our company.</p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>",
         shortlisted: "<p>Dear <strong>[name]</strong></p><p>We are delighted to inform you that we would like to arrange an interview. Please let us know when you are available to come to our offices</p><p>Contact email: <strong>[companyEmail]</strong></p><p>Sincerely,</p><p><strong>[company]</strong> Team</p>",
-        subjects: { invite: "Software Developer Role at [company]", rejected: "Software Developer Role at [company]", shortlisted: "Software Developer Role at [company]" },
+        subjects: { invited: "Software Developer Role at [company]", rejected: "Software Developer Role at [company]", shortlisted: "Software Developer Role at [company]" },
       }
       const candidates = { applied: [], invited: [], ongoing: [], shortlisted: [], completed: [], rejected: [] }
       const inbox = { invited: [{ body: "Welcome", email: "am@einfach.tech", received: new Date(), title: "New Account", user: "admin@einfach.tech" }] }

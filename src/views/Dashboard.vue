@@ -21,7 +21,7 @@
       <!-- Statistic Cards -->
       <b-row>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <router-link to="/backend/applicants/Applied">
+          <router-link to="/backend/applicants/users/applied">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Applications</div>
@@ -36,7 +36,7 @@
           </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <router-link to="/backend/applicants/Invited">
+          <router-link to="/backend/applicants/users/invited">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Invited</div>
@@ -51,7 +51,7 @@
           </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <router-link to="/backend/applicants/Shortlisted">
+          <router-link to="/backend/applicants/users/shortlisted">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Shortlisted</div>
@@ -66,12 +66,12 @@
           </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <router-link to="/backend/applicants/Completed">
+          <router-link to="/backend/applicants/users/rejected">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
-              <div class="font-size-sm font-w600 text-uppercase text-muted">Test Conducted</div>
+              <div class="font-size-sm font-w600 text-uppercase text-muted">Auto Rejected</div>
               <div class="font-size-h3">
-                {{ $store.state.firestoreData.candidates.completed.length }}
+                {{ $store.state.firestoreData.candidates.rejected.length }}
               </div>
             </div>
             <div class="d-flex ml-2">
@@ -81,8 +81,68 @@
           </router-link>
         </b-col>
       </b-row>
-      <!-- Ongoing and Shortlisted -->
+      <!-- Invited and Ongoing -->
       <b-row class="row-deck">
+
+        <b-col xl="6">
+          <base-block rounded title="Recent Invited" header-bg content-full>
+            <template #options> </template>
+            <b-table-simple striped hover borderless class="table-vcenter font-size-sm mb-0">
+              <b-thead>
+                <b-tr>
+                  <b-th class="font-w700">ID</b-th>
+                  <b-th class="d-none d-lg-table-cell font-w700 text-center">CV</b-th>
+                  <b-th class="font-w700">Name</b-th>
+                  <b-th class="d-none d-sm-table-cell font-w700 text-center">Score</b-th>
+                  <b-th class="d-none d-sm-table-cell font-w700 text-center">Date</b-th>
+                </b-tr>
+              </b-thead>
+              <b-tbody v-if="$store.state.firestoreData.candidates.invited.length">
+                <b-tr v-for="(invited, index) in $store.state.firestoreData.candidates.invited.reverse().slice(0, 5)" :key="index">
+                  <b-td class="font-w600">
+                    {{ index }}
+                  </b-td>
+                  <b-td class="d-none d-sm-table-cell text-center">
+                    <a v-b-modal.modal-block-extra-large2 @click="url = invited.resume"> 
+                      <i class="fa fa-file-pdf text-primary mr-1 align-middle" color="primary" style="font-size: 1.5em;"></i>
+                    </a>
+                  </b-td>
+                  <b-td>
+                    <router-link :to="`/backend/applicants/details/${invited.email}`">{{ invited.name }}</router-link>
+                  </b-td>
+                  <b-td class="d-none d-sm-table-cell text-center">{{ $store.state.applicantScores[invited.email] ? $store.state.applicantScores[invited.email] : 0 }} </b-td>
+                  <b-td class="d-none d-sm-table-cell text-center">{{ invited.time ? invited.time.slice(0, 15) : "Not Added" }} </b-td>
+                </b-tr>
+              </b-tbody>
+
+              <b-tbody v-else>
+                <b-tr>
+                  <b-td>
+                    <a class="font-w600" href="javascript:void(0)"># 007</a>
+                  </b-td>
+                  <b-td class="d-none d-sm-table-cell">
+                    Dummy Entry
+                  </b-td>
+                  <b-td class="d-none d-sm-table-cell">
+                    James Bond
+                  </b-td>
+                  <b-td>
+                      <b-col class="col-lg-4">
+                        <b-badge variant="success">100</b-badge></b-col>
+                  </b-td>
+                  <b-td class="d-none d-sm-table-cell text-center">
+                    01 Aug 2021
+                  </b-td>
+                  <b-td class="text-center">
+                    <a v-b-tooltip.hover.nofade.left="'No shortlist Entry'">
+                      <i class="fa fa-fw fa-times text-danger"></i>
+                    </a>
+                  </b-td>
+                </b-tr>
+              </b-tbody>
+            </b-table-simple>
+          </base-block>
+        </b-col>
         <b-col xl="6">
           <base-block rounded title="Ongoing Assignments" header-bg content-full>
             <template #options> </template>
@@ -168,70 +228,6 @@
             </div>
           </div>
         </b-modal>
-
-        <b-col xl="6">
-          <base-block rounded title="Recent Shortlisted" header-bg content-full>
-            <template #options> </template>
-            <b-table-simple striped hover borderless class="table-vcenter font-size-sm mb-0">
-              <b-thead>
-                <b-tr>
-                  <b-th class="font-w700">ID</b-th>
-                  <b-th class="d-none d-lg-table-cell font-w700 text-center">Resume</b-th>
-                  <b-th class="font-w700">Name</b-th>
-                  <b-th class="d-none d-sm-table-cell font-w700 text-center">Score</b-th>
-                  <b-th class="d-none d-sm-table-cell font-w700 text-center">Date</b-th>
-                  <b-th class="font-w700 text-center"></b-th>
-                </b-tr>
-              </b-thead>
-              <b-tbody v-if="$store.state.firestoreData.candidates.shortlisted.length">
-                <b-tr v-for="(shortlisted, index) in $store.state.firestoreData.candidates.shortlisted.slice(0, 10)" :key="index">
-                  <b-td class="font-w600">
-                    {{ index }}
-                  </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">
-                    <a v-b-modal.modal-block-extra-large2 @click="url = shortlisted.resume"> <img class="img-avatar img-avatar32" src="img/photos/user.png" alt="Avatar" /></a>
-                  </b-td>
-                  <b-td>
-                    <router-link :to="`/backend/applicants/details/${shortlisted.email}`">{{ shortlisted.name }}</router-link>
-                  </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">{{ $store.state.applicantScores[shortlisted.email] ? $store.state.applicantScores[shortlisted.email] : 0 }} </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">{{ shortlisted.time ? shortlisted.time.slice(0, 15) : "Not Added" }} </b-td>
-                  <b-td class="text-center">
-                    <router-link to="/backend/applicants/Invited" v-b-tooltip.hover.nofade.left="'Invite for Interview'">
-                      <i class="fa fa-fw fa-envelope"></i>
-                    </router-link>
-                  </b-td>
-                </b-tr>
-              </b-tbody>
-
-              <b-tbody v-else>
-                <b-tr>
-                  <b-td>
-                    <a class="font-w600" href="javascript:void(0)"># 007</a>
-                  </b-td>
-                  <b-td class="d-none d-sm-table-cell">
-                    Dummy Entry
-                  </b-td>
-                  <b-td class="d-none d-sm-table-cell">
-                    James Bond
-                  </b-td>
-                  <b-td>
-                      <b-col class="col-lg-4">
-                        <b-badge variant="success">100</b-badge></b-col>
-                  </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">
-                    01 Aug 2021
-                  </b-td>
-                  <b-td class="text-center">
-                    <a v-b-tooltip.hover.nofade.left="'No shortlist Entry'">
-                      <i class="fa fa-fw fa-times text-danger"></i>
-                    </a>
-                  </b-td>
-                </b-tr>
-              </b-tbody>
-            </b-table-simple>
-          </base-block>
-        </b-col>
       </b-row>
 
       <b-modal id="modal-block-extra-large2" size="xl" body-class="p-0" hide-footer hide-header>

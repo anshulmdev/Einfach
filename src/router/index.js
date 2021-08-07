@@ -73,6 +73,7 @@ const ApplicantsRejected = () => import("@/views/applicants/Rejected.vue")
 const ApplicantsShortlisted = () => import("@/views/applicants/Shortlisted.vue")
 const ApplicantsCompleted = () => import("@/views/applicants/Completed.vue")
 const ApplicantDetails = () => import("@/views/applicants/Details.vue")
+const Applicant = () => import("@/views/applicants/Users.vue")
 
 // Backend: Library
 const LibraryRegex = () => import("@/views/library/Regex.vue")
@@ -696,6 +697,14 @@ const router = new Router({
               path: 'details/:id',
               name: 'Applicant Details',
               component: ApplicantDetails,
+          meta: {
+            authRequired: true,
+          }
+            },
+            {
+              path: 'users/:id',
+              name: 'Applicants',
+              component: Applicant,
           meta: {
             authRequired: true,
           }
