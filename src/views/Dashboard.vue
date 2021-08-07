@@ -3,9 +3,9 @@
   <div v-if="$store.state.firestoreData">
     <div class="bg-body-light">
       <div class="content content-full">
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center text-center text-sm-left">
           <div class="flex-sm-fill">
-            <h1 class="h3 font-w700 mb-2">Main Dashboard</h1>
+            <h1 class="h3 font-w700 mb-1">Main Dashboard</h1>
             <h2 class="h6 font-w500 text-muted mb-0">
               Welcome {{ $store.state.scoreData }} <a class="font-w600" href="javascript:void(0)">{{ $store.state.firestoreData.user.name.split(" ")[0] }}</a
               >, everything looks great.
@@ -21,7 +21,6 @@
       <!-- Statistic Cards -->
       <b-row>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <router-link to="/backend/applicants/users/applied">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Applications</div>
@@ -33,10 +32,8 @@
               <div class="flex-grow-1 px-1 bg-warning-light rounded-lg"></div>
             </div>
           </base-block>
-          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <router-link to="/backend/applicants/users/invited">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Invited</div>
@@ -48,10 +45,8 @@
               <div class="flex-grow-1 px-1 bg-info-light rounded-lg"></div>
             </div>
           </base-block>
-          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <router-link to="/backend/applicants/users/shortlisted">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Shortlisted</div>
@@ -63,10 +58,8 @@
               <div class="flex-grow-1 px-1 bg-success-light rounded-lg"></div>
             </div>
           </base-block>
-          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
-          <router-link to="/backend/applicants/users/rejected">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Auto Rejected</div>
@@ -78,7 +71,6 @@
               <div class="flex-grow-1 px-1 bg-danger-light rounded-lg"></div>
             </div>
           </base-block>
-          </router-link>
         </b-col>
       </b-row>
       <!-- Invited and Ongoing -->

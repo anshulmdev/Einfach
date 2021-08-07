@@ -67,11 +67,6 @@ const FormsEditors = () => import(/* webpackChunkName: "forms-editors" */"@/view
 const FormsValidation = () => import(/* webpackChunkName: "forms-validation" */"@/views/forms/Validation.vue")
 
 // Backend: Applicants
-const ApplicantsApplied = () => import("@/views/applicants/Applied.vue")
-const ApplicantsInvited = () => import("@/views/applicants/Invited.vue")
-const ApplicantsRejected = () => import("@/views/applicants/Rejected.vue")
-const ApplicantsShortlisted = () => import("@/views/applicants/Shortlisted.vue")
-const ApplicantsCompleted = () => import("@/views/applicants/Completed.vue")
 const ApplicantDetails = () => import("@/views/applicants/Details.vue")
 const Applicant = () => import("@/views/applicants/Users.vue")
 
@@ -648,52 +643,11 @@ const router = new Router({
         },
         {
           path: 'applicants',
-          redirect: '/applicants/applied',
+          redirect: '/applicants/users/applied',
           component: {
             render (c) { return c('router-view') }
           },
           children: [
-            {
-              path: 'applied',
-              name: 'Applicants Applied',
-              component: ApplicantsApplied,
-          meta: {
-            authRequired: true,
-          }
-            },
-            {
-              path: 'invited',
-              name: 'Applicants Invited',
-              component: ApplicantsInvited,
-          meta: {
-            authRequired: true,
-          }
-            },
-            {
-              path: 'rejected',
-              name: 'Applicants Rejected',
-              component: ApplicantsRejected,
-          meta: {
-            authRequired: true,
-          }
-            },
-            {
-              path: 'shortlisted',
-              name: 'Applicants Shortlisted',
-              component: ApplicantsShortlisted,
-          meta: {
-            authRequired: true,
-          }
-            },
-            {
-              path: 'Completed',
-              name: 'Applicants Completed',
-              component: ApplicantsCompleted,
-          meta: {
-            authRequired: true,
-          }
-            },
-
             {
               path: 'details/:id',
               name: 'Applicant Details',
