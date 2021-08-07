@@ -3,9 +3,9 @@
   <div v-if="$store.state.firestoreData">
     <div class="bg-body-light">
       <div class="content content-full">
-        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center py-2 text-center text-sm-left">
+        <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center text-center text-sm-left">
           <div class="flex-sm-fill">
-            <h1 class="h3 font-w700 mb-2">Main Dashboard</h1>
+            <h1 class="h3 font-w700 mb-1">Main Dashboard</h1>
             <h2 class="h6 font-w500 text-muted mb-0">
               Welcome {{ $store.state.scoreData }} <a class="font-w600" href="javascript:void(0)">{{ $store.state.firestoreData.user.name.split(" ")[0] }}</a
               >, everything looks great.

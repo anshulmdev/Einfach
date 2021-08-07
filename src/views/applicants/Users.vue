@@ -74,7 +74,7 @@
                   <b-button :disabled="disable[index]" @click="action(user.name, user.email, index, 'rejected')" v-if="$route.params.id != 'applied' && $route.params.id != 'invited'" v-b-tooltip.hover.nofade.bottom="'Send Rejected Mail'" size="sm" variant="danger">
                     <i class="fa fa-fw fa-paper-plane"></i>
                   </b-button>
-                  <b-button v-if="$route.params.id != 'applied'" v-b-tooltip.hover.nofade.bottom="'Move back to Applied'" size="sm" variant="info">
+                  <b-button @click="reverse(index)" v-if="$route.params.id != 'applied'" v-b-tooltip.hover.nofade.bottom="'Move back to Applied'" size="sm" variant="info">
                     <i class="si si-reload"></i>
                   </b-button>
                   <b-button :disabled="disable[index]" @click="archiveEntry(index)" v-if="$route.params.id != 'completed'" v-b-tooltip.hover.nofade.top="'Archive Entry'" size="sm">
@@ -196,7 +196,7 @@ export default {
       await entry.update({[`inbox.${action}`]: firebase.firestore.FieldValue.arrayUnion(emailLog),})
       this.loading = []
       this.disable[index] = false
-      await entry.update({[`candidates.${this.$route.params.id}`]: firebase.firestore.FieldValue.arrayRemove(details)})
+      if (this.$route.params.id != action) await entry.update({[`candidates.${this.$route.params.id}`]: firebase.firestore.FieldValue.arrayRemove(details)})
       this.$swal(`${action[0].toUpperCase() + action.slice(1)} Successfully`)
     },
     // eslint-disable-next-line no-unused-vars
@@ -236,7 +236,7 @@ export default {
       const confirmation = await this.$swal({
         title: "Are you sure?",
         text: "Applicants cannot be recovered",
-        icon: "danger",
+        icon: "warning",
         showCancelButton: true,
         customClass: {
           confirmButton: "btn btn-danger m-1",
@@ -256,9 +256,17 @@ export default {
         this.loading.push(index)
         let details = this.$store.state.firestoreData.candidates[this.$route.params.id][index + this.perPage * (this.currentPage - 1)]
         const entry = await firebase.firestore().collection("accounts").doc(this.$store.state.firestoreData.docId)
-        await entry.update({ "candidates.completed": firebase.firestore.FieldValue.arrayRemove(details)})
         this.loading = []
+        await entry.update({ "candidates.completed": firebase.firestore.FieldValue.arrayRemove(details)})
       }
+    },
+    async reverse (index){
+      this.loading.push(index)
+      let details = this.$store.state.firestoreData.candidates[this.$route.params.id][index + this.perPage * (this.currentPage - 1)]
+      const entry = await firebase.firestore().collection("accounts").doc(this.$store.state.firestoreData.docId)
+      await entry.update({"candidates.applied": firebase.firestore.FieldValue.arrayUnion(details),});
+      await entry.update({ [`candidates.${this.$route.params.id}`]: firebase.firestore.FieldValue.arrayRemove(details)})
+      this.loading = []
     },
   },
 }
