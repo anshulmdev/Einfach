@@ -21,6 +21,7 @@
       <!-- Statistic Cards -->
       <b-row>
         <b-col cols="6" md="3" lg="6" xl="3">
+          <router-link to="/backend/applicants/users/applied">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Applications</div>
@@ -32,8 +33,10 @@
               <div class="flex-grow-1 px-1 bg-warning-light rounded-lg"></div>
             </div>
           </base-block>
+          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
+          <router-link to="/backend/applicants/users/invited">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Invited</div>
@@ -45,8 +48,10 @@
               <div class="flex-grow-1 px-1 bg-info-light rounded-lg"></div>
             </div>
           </base-block>
+          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
+          <router-link to="/backend/applicants/users/shortlisted">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Shortlisted</div>
@@ -58,8 +63,10 @@
               <div class="flex-grow-1 px-1 bg-success-light rounded-lg"></div>
             </div>
           </base-block>
+          </router-link>
         </b-col>
         <b-col cols="6" md="3" lg="6" xl="3">
+          <router-link to="/backend/applicants/users/rejected">
           <base-block tag="a" rounded link-pop content-class="d-flex py-4">
             <div class="flex-grow-1">
               <div class="font-size-sm font-w600 text-uppercase text-muted">Auto Rejected</div>
@@ -71,6 +78,7 @@
               <div class="flex-grow-1 px-1 bg-danger-light rounded-lg"></div>
             </div>
           </base-block>
+          </router-link>
         </b-col>
       </b-row>
       <!-- Invited and Ongoing -->
@@ -90,7 +98,7 @@
                 </b-tr>
               </b-thead>
               <b-tbody v-if="$store.state.firestoreData.candidates.invited.length">
-                <b-tr v-for="(invited, index) in $store.state.firestoreData.candidates.invited.reverse().slice(0, 5)" :key="index">
+                <b-tr v-for="(invited, index) in $store.state.firestoreData.candidates.invited.slice(0, 5)" :key="index">
                   <b-td class="font-w600">
                     {{ index }}
                   </b-td>
@@ -169,7 +177,7 @@
                     {{ order.time ? order.time.slice(0, 11) : "Not Added" }}
                   </b-td>
                   <b-td class="text-center">
-                    <a @click="deleteEntry(order.name, order.email, index)" href="javascript:void(0)" v-b-tooltip.hover.nofade.left="'Delete Permanently'">
+                    <a @click="deleteEntry(order.name, order.email, index)" v-b-tooltip.hover.nofade.left="'Delete Permanently'">
                       <i class="fa fa-fw fa-times text-danger"></i>
                     </a>
                   </b-td>
