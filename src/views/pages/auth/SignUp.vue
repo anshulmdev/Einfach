@@ -57,7 +57,7 @@
               <b-col sm="10" xl="6">
                 <b-row>
                   <b-col cols="4">
-                    <div><vue-dropzone :options="dropzoneOptions" @vdropzone-complete="afterComplete"></vue-dropzone></div>
+                    <div><vue-dropzone ref="imgDropZone" id="dropzone" :options="dropzoneOptions" @vdropzone-complete="afterComplete"></vue-dropzone></div>
                   </b-col>
                   <b-col cols="8" class="">
                     <div class="form-group">
@@ -419,22 +419,57 @@ export default {
           console.error("Error writing document: ", error)
         })
     },
-    createUser() {
-      this.loading = true
-      firebase
-        .auth()
-        .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then((data) => {
-          this.createAccount(data.user.uid)
-          data.user
-            .updateProfile({
-              displayName: this.form.name,
-            })
-            .then(() => {})
+    async createUser() {
+      if (this.form.username && this.form.terms && this.form.email && this.form.password && this.form.password === this.form.password2 && this.form.companyName && this.form.companyWebsite) {
+        this.loading = true
+        const data = this.form
+        await fetch("https://einfach.api.stdlib.com/operations@dev/newUser/signupMail/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
         })
-        .catch((err) => {
-          this.error = err.message
-        })
+        await firebase
+          .auth()
+          .createUserWithEmailAndPassword(this.form.email, this.form.password)
+          .then((data) => {
+            this.createAccount(data.user.uid)
+            data.user
+              .updateProfile({
+                displayName: this.form.name,
+              })
+              .then(() => {})
+          })
+          .catch((err) => {
+            this.error = err.message
+          })
+      } else {
+        if (!this.form.username) {
+          this.$bvToast.toast("Username is Mandatory", { title: "Username not filled", toaster: "b-toaster-top-right", variant: "warning", autoHideDelay: 5000, appendToast: false,})
+        }
+        else if (!this.form.email) {
+          this.$bvToast.toast("Email is Mandatory", { title: "Email not filled", toaster: "b-toaster-top-right", variant: "warning", autoHideDelay: 5000, appendToast: false,})
+        }
+        else if (!this.form.companyName) {
+          this.$bvToast.toast("Company Name is Mandatory", { title: "Company Name is Missing", toaster: "b-toaster-top-right", variant: "warning", autoHideDelay: 5000, appendToast: false,})
+        }
+        else if (!this.form.companyWebsite) {
+          this.$bvToast.toast("Please provide website or page links", { title: "Website link is Missing", toaster: "b-toaster-top-right", variant: "warning", autoHideDelay: 5000, appendToast: false,})
+        }
+        else if (!this.form.password) {
+          this.$bvToast.toast("Password is Mandatory", { title: "Password not filled", toaster: "b-toaster-top-right", variant: "warning", autoHideDelay: 5000, appendToast: false,})
+        }
+        else if (this.form.password !== this.form.password2) {
+          this.$bvToast.toast("Password is Mandatory", { title: "Password not Matched", toaster: "b-toaster-top-right", variant: "warning", autoHideDelay: 5000, appendToast: false,})
+        }
+        else if (!this.form.terms) {
+          this.$bvToast.toast("Please accept terms and conditions", { title: "TnC not checked", toaster: "b-toaster-top-right", variant: "warning", autoHideDelay: 5000, appendToast: false,})
+        }
+        else {
+          this.$bvToast.toast("Please recheck all fields", { title: "Missing Info", toaster: "b-toaster-top-right", variant: "warning", autoHideDelay: 5000, appendToast: false,})
+        }
+      }
     },
   },
 }
