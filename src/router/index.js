@@ -1246,8 +1246,11 @@ router.beforeEach((to, from, next) => {
         router.push({ path: '/'})
     }
 
+  if (!to.matched.length) {
+    next('/errors/404');
+  } else {
     return next()
-
+  }
   })
 
 })

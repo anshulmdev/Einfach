@@ -66,7 +66,7 @@
                 Complete <span class="font-w400">Dashboard</span>
               </h2>
               <p class="font-size-lg font-w500 text-muted mb-0">
-                Get access to all the features of complete solution even on starter plan. Proceed with hiring on pay as you go basis
+                From hosted forms to live interview, automate all hiring activities easily with Einfach.
               </p>
             </b-col>
             <b-col md="6" class="d-none d-md-flex align-items-md-center justify-content-md-end">
@@ -107,7 +107,7 @@
                       Realtime Monitoring
                     </h4>
                     <p class="text-muted">
-                      Monitor application in realtime with full security access.
+                      Get access to realtime monitoring of all the live applicants and respective scores
                     </p>
                   </div>
                 </div>
@@ -120,7 +120,7 @@
                       Email Automation
                     </h4>
                     <p class="text-muted">
-                      Applicants get reported automatically according to test results
+                      Setup HR activities on automation by enabling Email automation workflow
                     </p>
                   </div>
                 </div>

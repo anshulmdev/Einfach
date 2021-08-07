@@ -34,11 +34,11 @@
         <p class="mb-1">
           Would you like to let us know about it?
         </p>
-        <a href="javascript:void(0)" class="link-fx">
+        <router-link to="/backend/support/ticket" class="link-fx">
           Report it
-        </a>
+        </router-link>
         or
-        <router-link to="/backend/pages/errors/all" class="link-fx">
+        <router-link to="/backend/dashboard" class="link-fx">
           Go Back to Dashboard
         </router-link>
         <!-- END Error Footer -->
