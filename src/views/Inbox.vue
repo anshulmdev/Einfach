@@ -270,7 +270,7 @@ export default {
       const sliceValue = [(this.currentPage - 1) * this.perPage, this.currentPage * this.perPage]
       if (!this.label) {
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-        this.currentMails = this.$store.state.firestoreData.inbox.invited.concat(this.$store.state.firestoreData.inbox.completed).sort((a, b) => b.received - a.received)
+        this.currentMails = this.$store.state.firestoreData.inbox.invited.concat(this.$store.state.firestoreData.inbox.shortlisted).concat(this.$store.state.firestoreData.inbox.rejected).sort((a, b) => b.received - a.received)
         // eslint-disable-next-line vue/no-side-effects-in-computed-properties
         this.totalMails = this.currentMails.length
         return this.currentMails.slice(sliceValue[0], sliceValue[1])
