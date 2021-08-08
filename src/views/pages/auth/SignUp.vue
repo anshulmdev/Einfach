@@ -412,7 +412,8 @@ export default {
         })
         .then(() => {
           this.loading = false
-          this.$store.commit("setAuth", uid)
+          this.$cookies.set("uid", user.uid)
+          this.$store.commit("setAuth", user.uid)
           this.$router.push("/backend/dashboard")
         })
         .catch((error) => {
