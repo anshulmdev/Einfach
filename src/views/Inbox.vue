@@ -1,6 +1,7 @@
 <template>
   <!-- Page Content -->
-  <div class="content">
+  <div>
+  <div v-if="$store.state.firestoreData" class="content">
     <b-row>
       <b-col md="5" xl="3">
         <!-- Toggle Inbox Side Navigation -->
@@ -230,6 +231,13 @@
         <!-- END Message List -->
       </b-col>
     </b-row>
+  </div>
+
+  <div v-else>
+    <div class="d-flex justify-content-center mt-10">
+            <i class="fa fa-3x fa-cog fa-spin text-success"></i>
+    </div>
+  </div>
   </div>
   <!-- END Page Content -->
 </template>

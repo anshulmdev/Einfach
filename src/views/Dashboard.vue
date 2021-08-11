@@ -152,7 +152,7 @@
                   <b-th class="font-w700">ID</b-th>
                   <b-th class="d-none d-sm-table-cell font-w700">Name</b-th>
                   <b-th class="font-w700">Tag</b-th>
-                  <b-th class="d-none d-sm-table-cell font-w700 text-center" style="width: 120px">Date</b-th>
+                  <b-th class="d-none d-sm-table-cell font-w700 text-center" style="width: 120px">Start Time</b-th>
                   <b-th class="font-w700 text-center" style="width: 60px"></b-th>
                 </b-tr>
               </b-thead>
@@ -174,7 +174,7 @@
                     </b-row>
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
-                    {{ order.time ? order.time.slice(0, 11) : "Not Added" }}
+                    {{ order.timeStamp ? new Date(order.timeStamp).toLocaleString("en-US") : "Not Added" }}
                   </b-td>
                   <b-td class="text-center">
                     <a @click="deleteEntry(order.name, order.email, index)" v-b-tooltip.hover.nofade.left="'Delete Permanently'">

@@ -1,5 +1,6 @@
 <template>
-  <div>
+<div>
+  <div v-if="$store.state.firestoreData">
     <!-- Hero -->
     <base-page-heading :title="`${$route.params.id[0].toUpperCase() + $route.params.id.slice(1)} Applicants`" :subtitle="`View all the ${$route.params.id} candidates`">
       <template #extra>
@@ -16,22 +17,22 @@
       <base-block rounded :title="`${$route.params.id} Applications`">
         <template #options>
           <b-dropdown :id="`dropdown-default-outline-${theme[$route.params.id]} btn-sm`" :variant="`outline-${theme[$route.params.id]} btn-sm`" text="Show Entries">
-            <b-dropdown-item @click="perPage = 5" class="font-size-sm">5 per page</b-dropdown-item>
             <b-dropdown-item @click="perPage = 10" class="font-size-sm">10 per page</b-dropdown-item>
-            <b-dropdown-item @click="perPage = 15" class="font-size-sm">15 per page</b-dropdown-item>
             <b-dropdown-item @click="perPage = 20" class="font-size-sm">20 per page</b-dropdown-item>
+            <b-dropdown-item @click="perPage = 50" class="font-size-sm">50 per page</b-dropdown-item>
+            <b-dropdown-item @click="perPage = 100" class="font-size-sm">100 per page</b-dropdown-item>
           </b-dropdown>
         </template>
         <b-table-simple responsive bordered striped table-class="table-vcenter">
           <b-thead>
             <b-tr>
               <b-th class="text-center" style="width: 10%"> Resume </b-th>
-              <b-th style="width: 14%">Name</b-th>
-              <b-th style="width: 20%">Email</b-th>
-              <b-th style="width: 15%">Tags</b-th>
-              <b-th style="width: 11%">Experience</b-th>
+              <b-th style="width: 15%">Name</b-th>
+              <b-th style="width: 15%">Email</b-th>
+              <b-th style="width: 10%">Tags</b-th>
               <b-th style="width: 10%">Score</b-th>
-              <b-th class="text-center" style="width: 30%">Actions</b-th>
+              <b-th style="width: 20%">Date</b-th>
+              <b-th class="text-center" style="width: 20%">Actions</b-th>
             </b-tr>
           </b-thead>
           <b-tbody>
@@ -56,10 +57,10 @@
                   >
                 </b-row>
               </b-td>
-              <b-td class="font-size-sm"> {{ user.experience }} Yrs </b-td>
               <b-td class="font-size-sm">
                 {{ $store.state.applicantScores[user.email] ? $store.state.applicantScores[user.email] : 0}}
               </b-td>
+              <b-td class="font-size-sm"> {{ new Date(user.time).toLocaleString() }} </b-td>
               <b-td class="text-center">
                 <b-btn-group>
                   <b-button v-if="loading.includes(index)" v-b-tooltip.hover.nofade.left="'Please Wait'" size="sm" variant="primary-light">
@@ -116,6 +117,12 @@
     </div>
     <!-- END Page Content -->
   </div>
+  <div v-else>
+    <div class="d-flex justify-content-center mt-10">
+            <i class="fa fa-3x fa-cog fa-spin text-success"></i>
+    </div>
+  </div>
+</div>
 </template>
 
 <style lang="scss">
@@ -152,7 +159,7 @@ export default {
         },
       loading: [],
       disable: {},
-      perPage: 5,
+      perPage: 20,
       currentPage: 1,
       url: "https://static.thenounproject.com/png/543772-200.png",
     }
