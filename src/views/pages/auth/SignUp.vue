@@ -267,7 +267,7 @@ export default {
           this.loading = false
           this.$cookies.set("uid", user.uid)
           this.$store.commit("setAuth", user.uid)
-          this.$router.push("/backend/dashboard")
+          this.$router.push("/auth/signin")
         })
         .catch((error) => {
           console.error("Error writing document: ", error)
