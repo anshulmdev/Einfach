@@ -204,7 +204,7 @@ export default {
       this.loading = []
       this.disable[index] = false
       if (this.$route.params.id != action) await entry.update({[`candidates.${this.$route.params.id}`]: firebase.firestore.FieldValue.arrayRemove(details)})
-      this.$swal(`${action[0].toUpperCase() + action.slice(1)} Successfully`)
+      this.$bvToast.toast(`${name} ${action[0].toUpperCase() + action.slice(1)} Successfully`, { title: `${action[0].toUpperCase() + action.slice(1)}`, toaster: 'b-toaster-top-right', variant: 'success', autoHideDelay: 5000, appendToast: false})
     },
     // eslint-disable-next-line no-unused-vars
     async archiveEntry(index) {

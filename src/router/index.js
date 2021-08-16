@@ -69,6 +69,7 @@ const FormsValidation = () => import(/* webpackChunkName: "forms-validation" */"
 // Backend: Applicants
 const ApplicantDetails = () => import("@/views/applicants/Details.vue")
 const Applicant = () => import("@/views/applicants/Users.vue")
+const Assignment = () => import("@/views/applicants/Assignment.vue")
 
 // Backend: Library
 const LibraryRegex = () => import("@/views/library/Regex.vue")
@@ -660,6 +661,14 @@ const router = new Router({
               path: 'users/:id',
               name: 'Applicants',
               component: Applicant,
+          meta: {
+            authRequired: true,
+          }
+            },
+            {
+              path: 'assignment',
+              name: 'Assignment',
+              component: Assignment,
           meta: {
             authRequired: true,
           }

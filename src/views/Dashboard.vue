@@ -12,6 +12,7 @@
             </h2>
           </div>
           <div class="mt-3 mt-sm-0 ml-sm-3">
+            <b-button v-if="$store.state.firestoreData.assignment" @click="$router.push('/backend/applicants/assignment')" variant="alt-success" class="mr-1" v-click-ripple > <i class="fa fa-eye mr-1"></i> View Assignment </b-button>
             <b-button variant="alt-primary" class="mr-1" v-click-ripple @click="$store.state.newAssignment.active = true"> <i class="fa fa-plus-square mr-1"></i> New Assignment </b-button>
           </div>
         </div>
@@ -149,11 +150,11 @@
             <b-table-simple striped hover borderless class="table-vcenter font-size-sm mb-0">
               <b-thead>
                 <b-tr>
-                  <b-th class="font-w700">ID</b-th>
-                  <b-th class="d-none d-sm-table-cell font-w700">Name</b-th>
-                  <b-th class="font-w700">Tag</b-th>
-                  <b-th class="d-none d-sm-table-cell font-w700 text-center" style="width: 120px">Start Time</b-th>
-                  <b-th class="font-w700 text-center" style="width: 60px"></b-th>
+                  <b-th class="font-w700" style="width: 10%">ID</b-th>
+                  <b-th class="d-none d-sm-table-cell font-w700" style="width: 30%">Name</b-th>
+                  <b-th class="font-w700" style="width: 10%">Tag</b-th>
+                  <b-th class="d-none d-sm-table-cell font-w700 text-center" style="width: 40%">Start Time</b-th>
+                  <b-th class="font-w700 text-center" style="width: 10%"></b-th>
                 </b-tr>
               </b-thead>
               <b-tbody v-if="$store.state.firestoreData.candidates.ongoing.length">
@@ -177,8 +178,8 @@
                     {{ order.timeStamp ? new Date(order.timeStamp).toLocaleString("en-US") : "Not Added" }}
                   </b-td>
                   <b-td class="text-center">
-                    <a @click="deleteEntry(order.name, order.email, index)" v-b-tooltip.hover.nofade.left="'Delete Permanently'">
-                      <i class="fa fa-fw fa-times text-danger"></i>
+                    <a @click="deleteEntry(order.name, order.email, index)" v-b-tooltip.hover.nofade.left="'Archive It'">
+                      <i class="fa fa-fw fa-archive text-warning"></i>
                     </a>
                   </b-td>
                 </b-tr>
@@ -186,10 +187,10 @@
               <b-tbody v-else>
                 <b-tr>
                   <b-td>
-                    <a class="font-w600" href="javascript:void(0)"># 007</a>
+                    <a class="font-w600" href="javascript:void(0)">#7</a>
                   </b-td>
                   <b-td class="d-none d-sm-table-cell">
-                    James Bond
+                    John Doe
                   </b-td>
                   <b-td>
                       <b-col class="col-lg-4">
@@ -199,7 +200,7 @@
                     01 Aug 2021
                   </b-td>
                   <b-td class="text-center">
-                    <a v-b-tooltip.hover.nofade.left="'No Ongoing Entry'">
+                    <a v-b-tooltip.hover.nofade.left="'No Ongoing Entry'" style="cursor:pointer">
                       <i class="fa fa-fw fa-times text-danger"></i>
                     </a>
                   </b-td>
@@ -339,7 +340,7 @@
               <!-- Header -->
               <div class="text-center">
                 <p>
-                  <i class="fa fa-3x fa-cog fa-spin text-primary"></i>
+                  <i class="fa fa-3x fa-cog fa-spin text-success"></i>
                 </p>
                 <h1 class="h4 mb-1">
                   Please wait while we set things up 🙂
@@ -354,7 +355,6 @@
         </div>
       </div>
       <!-- END Maintenance Section -->
-
       <!-- Footer -->
       <div class="font-size-sm text-center text-muted py-3">
         <strong>{{ $store.getters.appName + ' ' + $store.getters.appVersion }}</strong> &copy; {{ $store.getters.appCopyright }}
@@ -433,11 +433,12 @@ export default {
   },
   computed: {
     chartjsEarningsData() {
+      const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
       return {
         labels: ["Applied", "Invited", "Ongoing", "Shortlisted", "Rejected", "Completed"],
         datasets: [
           {
-            label: `Year - ${String(new Date()).slice(10, 15)}`,
+            label: `${monthNames[(new Date()).getMonth()]} - ${String(new Date()).slice(10, 15)}`,
             fill: true,
             backgroundColor: "rgba(132, 94, 247, .3)",
             borderColor: "transparent",
@@ -446,12 +447,12 @@ export default {
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderColor: "rgba(132, 94, 247, 1)",
             data: [
-              this.$store.state.firestoreData.candidates.applied.length ? this.$store.state.firestoreData.candidates.applied.length : 0,
-              this.$store.state.firestoreData.candidates.invited.length ? this.$store.state.firestoreData.candidates.invited.length : 0,
-              this.$store.state.firestoreData.candidates.ongoing.length ? this.$store.state.firestoreData.candidates.ongoing.length : 0,
-              this.$store.state.firestoreData.candidates.shortlisted.length ? this.$store.state.firestoreData.candidates.shortlisted.length : 0,
-              this.$store.state.firestoreData.candidates.rejected.length ? this.$store.state.firestoreData.candidates.rejected.length : 0,
-              this.$store.state.firestoreData.candidates.completed.length ? this.$store.state.firestoreData.candidates.completed.length : 0,
+              this.$store.state.firestoreData.candidates.applied.length ? this.$store.state.firestoreData.candidates.applied.filter((e) => (new Date(e.time)).getMonth() === (new Date()).getMonth()).length : 0,
+              this.$store.state.firestoreData.candidates.invited.length ? this.$store.state.firestoreData.candidates.invited.filter((e) => (new Date(e.time)).getMonth() === (new Date()).getMonth()).length : 0,
+              this.$store.state.firestoreData.candidates.ongoing.length ? this.$store.state.firestoreData.candidates.ongoing.filter((e) => (new Date(e.time)).getMonth() === (new Date()).getMonth()).length : 0,
+              this.$store.state.firestoreData.candidates.shortlisted.length ? this.$store.state.firestoreData.candidates.shortlisted.filter((e) => (new Date(e.time)).getMonth() === (new Date()).getMonth()).length : 0,
+              this.$store.state.firestoreData.candidates.rejected.length ? this.$store.state.firestoreData.candidates.rejected.filter((e) => (new Date(e.time)).getMonth() === (new Date()).getMonth()).length : 0,
+              this.$store.state.firestoreData.candidates.completed.length ? this.$store.state.firestoreData.candidates.completed.filter((e) => (new Date(e.time)).getMonth() === (new Date()).getMonth()).length : 0,
             ],
           },
         ],
@@ -505,14 +506,14 @@ export default {
     async deleteEntry(name, email, index) {
       const confirmation = await this.$swal({
         title: "Are you sure?",
-        text: "You will not be able to recover this applicant",
+        text: "Applicant will be moved to Completed",
         icon: "warning",
         showCancelButton: true,
         customClass: {
-          confirmButton: "btn btn-danger m-1",
+          confirmButton: "btn btn-warning m-1",
           cancelButton: "btn btn-secondary m-1",
         },
-        confirmButtonText: "Yes, delete it!",
+        confirmButtonText: "Yes, archive it!",
         html: false,
         preConfirm: () => {
           return new Promise((resolve) => {
