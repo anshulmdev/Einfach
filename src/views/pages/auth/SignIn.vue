@@ -11,8 +11,8 @@
             </router-link>
             <p class="text-white-75 mr-xl-8 mt-3">
               Access your admin panel.<br />
-              We are enrolling all new users to Einfach Premium plans.<br />
-              Feel free to contact support for details.
+              Subscribe Einfach Premium and enjoy 100+ Features
+              
             </p>
           </div>
         </div>
@@ -64,7 +64,7 @@
                   </div>
                   <div class="form-group d-flex justify-content-between align-items-center">
                     <div>
-                      <router-link to="/auth/reminder3" class="text-muted font-size-sm font-w500 d-block d-lg-inline-block mb-1">Forgot Password?</router-link>
+                      <router-link to="/auth/reminder" class="text-muted font-size-sm font-w500 d-block d-lg-inline-block mb-1">Forgot Password?</router-link>
                     </div>
                     <div>
                       <button v-if="loading == true" class="btn btn-lg btn-alt-primary disabled">

@@ -11,8 +11,7 @@
             </router-link>
             <p class="text-white-75 mr-xl-8 mt-3">
               Let's get started<br />
-              We are enrolling all new users to Einfach Premium plans.<br />
-              Feel free to contact support for details.
+              Subscribe Einfach Premium and enjoy 100+ Features
             </p>
           </div>
         </div>
