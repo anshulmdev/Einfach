@@ -16,13 +16,8 @@
       <!-- Block Tabs Default Style -->
       <b-tabs class="block" nav-class="nav-tabs-block" content-class="block-content">
         <b-tab title="Library" active>
-          <template #options>
-            <button type="button" class="btn-block-option">
-              <i class="si si-settings"></i>
-            </button>
-          </template>
           <!-- Search -->
-          <div v-if="firebaseData" class="content">
+          <div v-if="firebaseData" class="px-2">
             <!-- Projects -->
             <div class="font-size-h4 font-w600 p-2 mb-4 border-left border-4x border-primary bg-body-light">
               <b-form>
@@ -40,25 +35,20 @@
               <b-thead>
                 <b-tr>
                   <b-th style="width: 50%">Project</b-th>
-                  <b-th class="d-none d-lg-table-cell text-center" style="width: 12%">Marks</b-th>
-                  <b-th class="text-center" style="width: 12%">Select</b-th>
+                  <b-th class="d-none d-lg-table-cell text-center" style="width: 15%">Marks</b-th>
+                  <b-th class="text-center" style="width: 15%">Select</b-th>
                 </b-tr>
               </b-thead>
               <b-tbody>
                 <b-tr v-for="(ques, index) in filteredArray" :key="index">
                   <b-td>
                     <h4 class="h5 mt-3 mb-2">
-                      <a v-b-modal.modal-block-extra-large @click="question = perPage * (currentPage - 1) + index">{{
-                        ques.question.slice(0, 200)
-                      }}</a>
+                      <a v-b-modal.modal-block-extra-large @click="question = perPage * (currentPage - 1) + index">{{ ques.question.slice(0, 200) }}</a>
                     </h4>
-                    <p class="d-none d-sm-block text-muted">
-                      {{ ques.sentence.slice(0, 50) }}
-                    </p>
                   </b-td>
                   <b-td class="d-none d-lg-table-cell font-size-xl text-center font-w600">{{ ques.marks }}</b-td>
                   <b-td class="px-5">
-                    <b-button block variant="alt-primary" @click="check(perPage * (currentPage - 1) + index)">Add</b-button>
+                    <b-button block variant="alt-primary" @click="check(perPage * (currentPage - 1) + index)">Add Question</b-button>
                   </b-td>
                 </b-tr>
               </b-tbody>
@@ -71,7 +61,7 @@
           </div>
           <!-- END Search -->
         </b-tab>
-        <b-tab title="Custom">
+        <b-tab title="Custom Question">
           <b-form>
             <base-block rounded title="Create your own Question" header-bg>
               <b-row class="py-sm-1 py-md-1">
@@ -90,10 +80,7 @@
                       <base-block rounded title="Parameters" header-bg>
                         <template #options>
                           <b-row
-                            ><b-col> </b-col
-                            ><b-col> <b-form-input type="number" v-model="customQuestion.marks" placeholder="Marks"></b-form-input></b-col>
-                            <b-col> <b-button block @click="submitQuestion" variant="primary"> Submit </b-button></b-col
-                            ><b-col> <b-button block @click="reset" variant="alt-primary"> Reset </b-button></b-col>
+                            ><b-col> </b-col><b-col> <b-form-input type="number" v-model="customQuestion.marks" placeholder="Marks"></b-form-input></b-col> <b-col> <b-button block @click="submitQuestion" variant="primary"> Submit </b-button></b-col><b-col> <b-button block @click="reset" variant="alt-primary"> Reset </b-button></b-col>
                           </b-row></template
                         ></base-block
                       >
@@ -145,8 +132,8 @@
 
 <script>
 // Vue SweetAlert2, for more info and examples you can check out https://github.com/avil13/vue-sweetalert2
-import Vue from "vue";
-import VueSweetalert2 from "vue-sweetalert2";
+import Vue from "vue"
+import VueSweetalert2 from "vue-sweetalert2"
 
 const options = {
   buttonsStyling: false,
@@ -155,10 +142,10 @@ const options = {
     cancelButton: "btn btn-danger m-1",
     input: "form-control",
   },
-};
+}
 // Register Vue SweetAlert2 with custom options
-Vue.use(VueSweetalert2, options);
-import { DB } from "../../firebase";
+Vue.use(VueSweetalert2, options)
+import { DB } from "../../firebase"
 export default {
   data() {
     return {
@@ -171,7 +158,7 @@ export default {
       question: 0,
       currentPage: 1,
       rows: 10,
-      perPage: 5,
+      perPage: 10,
       firebaseData: [
         {
           heading: "Which type of JavaScript language is ___",
@@ -180,51 +167,51 @@ export default {
           type: ["GET", "warning"],
         },
       ],
-    };
+    }
   },
   mounted() {
-    this.fetch();
+    this.fetch()
   },
   computed: {
     filteredArray() {
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       this.rows = this.firebaseData.length
-			return this.firebaseData.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage);
+      return this.firebaseData.slice((this.currentPage - 1) * this.perPage, this.currentPage * this.perPage)
     },
   },
   methods: {
     check(value) {
-      this.$store.state.newAssignment.active = true;
+      this.$store.state.newAssignment.active = true
       this.$store.commit("addQuestions", {
         time: 5,
         marks: this.firebaseData[value].marks,
         questions: 1,
         tag: "regex",
         value: { index: value, marks: this.firebaseData[value].marks },
-      });
+      })
     },
     async fetch() {
-      const list = DB.ref("regex");
-      const snapshot = await list.once("value");
-      this.firebaseData = snapshot.val();
-      console.log(this.firebaseData);
+      const list = DB.ref("regex")
+      const snapshot = await list.once("value")
+      this.firebaseData = snapshot.val()
+      console.log(this.firebaseData)
     },
     async submitQuestion() {
       if (this.customQuestion.question != "Write your question" && this.customQuestion.sentence) {
         try {
-          const data = this.customQuestion;
-          const index = this.firebaseData ? this.firebaseData.length : 0;
-          const details = { question: data.question, marks: data.marks, sentence: data.sentence };
-          await DB.ref(`regex/${index}`).set(details);
-          await DB.ref(`regexAnswers/${index}`).set(data.answer);
+          const data = this.customQuestion
+          const index = this.firebaseData ? this.firebaseData.length : 0
+          const details = { question: data.question, marks: data.marks, sentence: data.sentence }
+          await DB.ref(`regex/${index}`).set(details)
+          await DB.ref(`regexAnswers/${index}`).set(data.answer)
           this.$swal("Successfully Added").then(() => {
-            this.fetch();
-          });
+            this.fetch()
+          })
         } catch (err) {
-          this.$swal(err.message);
+          this.$swal(err.message)
         }
       } else {
-        this.$swal("Missing Information");
+        this.$swal("Missing Information")
       }
     },
     reset() {
@@ -233,8 +220,8 @@ export default {
         marks: 10,
         sentence: null,
         answer: null,
-      };
+      }
     },
   },
-};
+}
 </script>
