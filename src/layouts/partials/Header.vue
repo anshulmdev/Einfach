@@ -314,7 +314,7 @@
 
           <!-- Toggle Side Overlay -->
           <base-layout-modifier variant="dual" size="sm" class="ml-2">
-            <router-link to="/backend/support/doc"><i class="fa fa-fw fa-list-ul fa-flip-horizontal"></i></router-link>
+            <router-link to="/backend/library/mcq"><i class="fa fa-fw fa-list-ul fa-flip-horizontal"></i></router-link>
           </base-layout-modifier>
           <!-- END Toggle Side Overlay -->
         </div>

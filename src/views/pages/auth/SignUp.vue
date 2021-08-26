@@ -257,8 +257,10 @@ export default {
           notifications: [
             {
               icon: "fa fa-fw fa-check-circle text-success",
-              title: "Your account has been created",
+              title: "New Account",
               time: new Date(),
+              email: "support@einfach.in",
+              desc: "Your account has been created"
             },
           ],
         })

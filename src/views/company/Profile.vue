@@ -26,7 +26,7 @@
           </b-col>
           <b-col cols="6" md="3">
             <div class="font-size-sm font-w600 text-muted text-uppercase">Issues Reported</div>
-            <a class="link-fx font-size-h3" href="javascript:void(0)">{{$store.state.firestoreData.notifications.length}}</a>
+            <a class="link-fx font-size-h3" href="javascript:void(0)">{{Object.values($store.state.firestoreData.notifications).filter((e) => e.title === 'Bug Reported').length}}</a>
           </b-col>
           <b-col cols="6" md="3">
             <div class="font-size-sm font-w600 text-muted text-uppercase mb-2">Ratings</div>
@@ -50,7 +50,7 @@
         <b-col md="7" xl="8">
           <!-- Updates -->
           <ul class="timeline timeline-alt py-0">
-            <li v-for="item in notificationsSorted" :key="item.title" class="timeline-event">
+            <li v-for="(item, index) in notificationsSorted" :key="index" class="timeline-event">
               <div class="timeline-event-icon bg-white">
                 <i :class="item.icon"></i>
               </div>
@@ -166,6 +166,8 @@ export default {
   },
   computed: {
     notificationsSorted () {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      console.log(this.$store.state.firestoreData.notifications)
       // eslint-disable-next-line vue/no-side-effects-in-computed-properties
       return this.$store.state.firestoreData.notifications.sort((a,b) => b.time - a.time).slice(0,20)
     }
