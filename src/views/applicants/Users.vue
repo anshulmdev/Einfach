@@ -22,10 +22,22 @@
             <b-dropdown-item @click="perPage = 50" class="font-size-sm">50 per page</b-dropdown-item>
             <b-dropdown-item @click="perPage = 100" class="font-size-sm">100 per page</b-dropdown-item>
           </b-dropdown>
+          <b-dropdown :id="`dropdown-default-outline-${theme[$route.params.id]} btn-sm`" :variant="`outline-${theme[$route.params.id]} btn-sm`" text="Actions">
+            <b-dropdown-item @click="executeAction('im')" class="font-size-sm"><i class="fa fa-fw fa-paper-plane mr-1" />Send invite mail</b-dropdown-item>
+            <b-dropdown-item @click="executeAction('sm')" class="font-size-sm"><i class="fa fa-fw fa-paper-plane mr-1" />Send shortlist mail</b-dropdown-item>
+            <b-dropdown-item @click="executeAction('rm')" class="font-size-sm"><i class="fa fa-fw fa-paper-plane mr-1" />Send Rejection mail</b-dropdown-item>
+            <b-dropdown-item @click="executeAction('ms')" class="font-size-sm"><i class="fa fa-fw fa-arrow-alt-circle-right mr-1" />Move to Shortlisted</b-dropdown-item>
+            <b-dropdown-item @click="executeAction('mr')" class="font-size-sm"><i class="fa fa-fw fa-arrow-alt-circle-right mr-1" />Move to Rejected</b-dropdown-item>
+            <b-dropdown-item @click="executeAction('ma')" class="font-size-sm"><i class="fa fa-fw fa-arrow-alt-circle-right mr-1" />Move to Applied</b-dropdown-item>
+            <b-dropdown-item @click="executeAction('as')" class="font-size-sm"><i class="fa fa-fw fa-archive mr-1" />Archive selected</b-dropdown-item>
+          </b-dropdown>
         </template>
         <b-table-simple responsive bordered striped table-class="table-vcenter">
           <b-thead>
             <b-tr>
+              <b-th class="text-center" style="width: 5%"> 
+                <i class="far fa-fw fa-dot-circle mr-1" />
+              </b-th>
               <b-th class="text-center" style="width: 10%"> Resume </b-th>
               <b-th style="width: 15%">Name</b-th>
               <b-th style="width: 15%">Email</b-th>
@@ -37,6 +49,11 @@
           </b-thead>
           <b-tbody>
             <b-tr v-for="(user, index) in filteredArray" :key="index">
+              <b-td class="font-w600 font-size-sm text-center" :class="`text-${theme[$route.params.id]}`">
+                <b-form-checkbox-group v-model="selected" stacked>
+                  <b-form-checkbox class="custom-control-lg ml-1" :value="index" />
+                </b-form-checkbox-group>
+              </b-td>
               <b-td class="text-center">
                 <a v-b-modal.modal-block-extra-large @click="url = user.resume">
                   <i class="fa fa-file-pdf mr-1 align-middle" :class="`text-${theme[$route.params.id]}`" :color="theme[$route.params.id]" style="font-size: 1.5em"></i>
@@ -158,6 +175,7 @@ export default {
             'completed': 'info'
         },
       loading: [],
+      selected: [],
       disable: {},
       perPage: 20,
       currentPage: 1,
@@ -173,6 +191,60 @@ export default {
     },
   },
   methods: {
+    async executeAction(value) {
+      const action = {
+        'im': 'Send invitation email to selected entries',
+        'sm': 'Send shortlist email to selected entries',
+        'rm': 'Send rejection mail to selected entries',
+        'ms': 'Move these entries to shortlist category',
+        'mr': 'Move these entries to rejected category',
+        'ma': 'Move these entries to applied category',
+        'as': 'Move these entries to completed category'
+      }
+      const confirmation = await this.$swal({
+        title: "Are you sure?",
+        text: action[value],
+        icon: "warning",
+        showCancelButton: true,
+        customClass: {
+          confirmButton: "btn btn-warning m-1",
+          cancelButton: "btn btn-secondary m-1",
+        },
+        confirmButtonText: "Yes, perform action!",
+        html: false,
+        preConfirm: () => {
+          return new Promise((resolve) => {
+            setTimeout(() => {
+              resolve()
+            }, 50)
+          })
+        },
+      })
+      if (confirmation.isConfirmed) {
+        const entries = this.selected
+        entries.forEach(async (e) => {
+          const details = this.$store.state.firestoreData.candidates[this.$route.params.id][e + this.perPage * (this.currentPage - 1)]
+          const entry = await firebase.firestore().collection("accounts").doc(this.$store.state.firestoreData.docId)
+          const {name, email} = details
+          //const entry = await firebase.firestore().collection("accounts").doc(this.$store.state.firestoreData.docId)
+          if (value === 'im') this.action(name, email, e, 'invited')
+          if (value === 'sm') this.action(name, email, e, 'shortlisted')
+          if (value === 'rm') this.action(name, email, e, 'rejected')
+          if (['ms', 'mr', 'ma', 'as'].includes(value)) {
+            const codeAction = {'ms': 'shortlisted','mr': 'rejected','ma': 'applied','as': 'completed'}
+            if(this.$route.params.id === codeAction[value]){
+              this.$bvToast.toast(`Already in same category`, { title: `Error in performing action`, toaster: 'b-toaster-top-right', variant: 'warning', autoHideDelay: 5000, appendToast: false})
+            } else {
+              this.loading.push(e)
+              await entry.update({[`candidates.${codeAction[value]}`]: firebase.firestore.FieldValue.arrayUnion(details),});
+              await entry.update({ [`candidates.${this.$route.params.id}`]: firebase.firestore.FieldValue.arrayRemove(details)})
+              this.loading = []
+            }
+          }
+        })
+        this.selected = []
+      }
+    },
     // eslint-disable-next-line no-unused-vars
     async action(name, email, index, action) {
         this.disable[index] = true
