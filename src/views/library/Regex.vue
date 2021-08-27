@@ -1,5 +1,6 @@
 <template>
-  <div>
+<div>
+  <div v-if="firebaseData.length">
     <!-- Hero -->
     <base-page-heading title="Regex" subtitle="Choose Regex questions to add">
       <template #extra>
@@ -123,6 +124,12 @@
       </div>
     </b-modal>
   </div>
+
+  <div v-else>
+    <div class="d-flex justify-content-center mt-10">
+            <i class="fa fa-3x fa-cog fa-spin text-success"></i>
+    </div>
+  </div></div>
 </template>
 
 <style lang="scss">
@@ -159,14 +166,7 @@ export default {
       currentPage: 1,
       rows: 10,
       perPage: 10,
-      firebaseData: [
-        {
-          heading: "Which type of JavaScript language is ___",
-          marks: 30,
-          options: ["Object-Oriented", "Object-Based", "Assembly-language", "High-level"],
-          type: ["GET", "warning"],
-        },
-      ],
+      firebaseData: [],
     }
   },
   mounted() {

@@ -4,7 +4,7 @@
         <slot>
           <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center" v-if="title || $slots.extra">
             <h1 class="flex-sm-fill h3 my-1" v-if="title">
-              {{ title }} <small class="d-block d-sm-inline-block mt-1 mt-sm-0 font-size-base font-w400 text-muted" v-if="subtitle">{{ subtitle }}</small>
+              {{ title }} <small class="d-block d-sm-inline-block mt-sm-0 font-size-base font-w400 text-muted" v-if="subtitle">{{ subtitle }}</small>
             </h1>
             <div class="flex-sm-00-auto ml-sm-3" v-if="$slots.extra">
               <slot name="extra"></slot>

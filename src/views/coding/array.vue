@@ -1,5 +1,6 @@
 <template>
-  <div>
+<div>
+  <div v-if="firebaseData.length">
     <!-- Hero -->
     <base-page-heading title="Arrays" subtitle="Data Structure and Algorithms">
       <template #extra>
@@ -226,6 +227,12 @@
         </div>
       </b-modal>
   </div>
+
+  <div v-else>
+    <div class="d-flex justify-content-center mt-10">
+            <i class="fa fa-3x fa-cog fa-spin text-success"></i>
+    </div>
+  </div></div>
 </template>
 
 <script>
@@ -262,12 +269,7 @@ export default {
       ckeditorConfig: {
         // The configuration of the editor
       },
-      firebaseData: [{
-  "heading" : "Which type of JavaScript language is ___",
-  "marks" : 30,
-  "options": ["Object-Oriented", "Object-Based", "Assembly-language", "High-level"],
-  "type" : [ "Javascript", "warning" ]
-}]
+      firebaseData: []
     }
   },
   mounted(){

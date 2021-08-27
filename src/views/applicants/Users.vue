@@ -77,7 +77,7 @@
               <b-td class="font-size-sm">
                 {{ $store.state.applicantScores[user.email] ? $store.state.applicantScores[user.email] : 0}}
               </b-td>
-              <b-td class="font-size-sm"> {{ new Date(user.time).toLocaleString() }} </b-td>
+              <b-td class="font-size-sm"> {{ `${new Date(user.time).toLocaleDateString("en-US", { day: 'numeric' })} ${new Date(user.time).toLocaleDateString("en-US", { month: 'short' })} - ${new Date(user.time).toLocaleString("en-US").slice(10,)}` }} </b-td>
               <b-td class="text-center">
                 <b-btn-group>
                   <b-button v-if="loading.includes(index)" v-b-tooltip.hover.nofade.left="'Please Wait'" size="sm" variant="primary-light">

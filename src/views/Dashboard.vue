@@ -91,36 +91,37 @@
             <b-table-simple striped hover borderless class="table-vcenter font-size-sm mb-0">
               <b-thead>
                 <b-tr>
-                  <b-th class="font-w700">ID</b-th>
-                  <b-th class="d-none d-lg-table-cell font-w700 text-center">CV</b-th>
+                  <b-th class="d-none d-lg-table-cell font-w700 text-center">Resume</b-th>
                   <b-th class="font-w700">Name</b-th>
-                  <b-th class="d-none d-sm-table-cell font-w700 text-center">Score</b-th>
-                  <b-th class="d-none d-sm-table-cell font-w700 text-center">Date</b-th>
+                  <b-th class="d-none d-sm-table-cell font-w700 text-center">Tags</b-th>
+                  <b-th class="d-none d-sm-table-cell font-w700 text-center">Applied</b-th>
                 </b-tr>
               </b-thead>
               <b-tbody v-if="$store.state.firestoreData.candidates.invited.length">
                 <b-tr v-for="(invited, index) in $store.state.firestoreData.candidates.invited.slice(0, 5)" :key="index">
-                  <b-td class="font-w600">
-                    {{ index }}
-                  </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
                     <a v-b-modal.modal-block-extra-large2 @click="url = invited.resume"> 
-                      <i class="fa fa-file-pdf text-primary mr-1 align-middle" color="primary" style="font-size: 1.5em;"></i>
+                      <i class="far fa-1x fa-address-card text-primary mr-1 align-middle" color="primary"></i>
                     </a>
                   </b-td>
-                  <b-td>
+                  <b-td class="text-center">
                     <router-link :to="`/backend/applicants/details/${invited.email}`">{{ invited.name }}</router-link>
                   </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">{{ $store.state.applicantScores[invited.email] ? $store.state.applicantScores[invited.email] : 0 }} </b-td>
-                  <b-td class="d-none d-sm-table-cell text-center">{{ invited.time ? invited.time.slice(0, 15) : "Not Added" }} </b-td>
+                  <b-td class="d-none d-sm-table-cell text-center">
+                    <b-row v-for="(value, index) in invited.tags" :key="index">
+                      <b-col class="col-lg-4">
+                        <b-badge :variant="index">{{ value }}</b-badge></b-col
+                      >
+                    </b-row>
+                  </b-td>
+                  <b-td class="d-none d-sm-table-cell text-center">
+                    {{ invited.time ? `${new Date(invited.time).toLocaleDateString("en-US", { day: 'numeric' })} ${new Date(invited.time).toLocaleDateString("en-US", { month: 'short' })} - ${new Date(invited.time).toLocaleString("en-US").slice(10,)}` : "Not Added" }}
+                  </b-td>
                 </b-tr>
               </b-tbody>
 
               <b-tbody v-else>
                 <b-tr>
-                  <b-td>
-                    <a class="font-w600" href="javascript:void(0)"># 007</a>
-                  </b-td>
                   <b-td class="d-none d-sm-table-cell">
                     Dummy Entry
                   </b-td>
@@ -150,18 +151,14 @@
             <b-table-simple striped hover borderless class="table-vcenter font-size-sm mb-0">
               <b-thead>
                 <b-tr>
-                  <b-th class="font-w700" style="width: 10%">ID</b-th>
                   <b-th class="d-none d-sm-table-cell font-w700" style="width: 30%">Name</b-th>
-                  <b-th class="font-w700" style="width: 10%">Tag</b-th>
+                  <b-th class="font-w700" style="width: 10%">Score</b-th>
                   <b-th class="d-none d-sm-table-cell font-w700 text-center" style="width: 40%">Start Time</b-th>
                   <b-th class="font-w700 text-center" style="width: 10%"></b-th>
                 </b-tr>
               </b-thead>
               <b-tbody v-if="$store.state.firestoreData.candidates.ongoing.length">
                 <b-tr v-for="(order, index) in $store.state.firestoreData.candidates.ongoing.slice(0, 10)" :key="index">
-                  <b-td>
-                    <a class="font-w600" href="javascript:void(0)"># {{ index }}</a>
-                  </b-td>
                   <b-td class="d-none d-sm-table-cell">
                     <router-link :to="`/backend/applicants/details/${order.email}`">
                     {{ order.name }}
@@ -170,12 +167,12 @@
                   <b-td>
                     <b-row v-for="(value, index) in order.tags" :key="index">
                       <b-col class="col-lg-4">
-                        <b-badge :variant="index">{{ value }}</b-badge></b-col
+                        {{ $store.state.applicantScores[order.email] ? $store.state.applicantScores[order.email] : 0 }}</b-col
                       >
                     </b-row>
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
-                    {{ order.timeStamp ? new Date(order.timeStamp).toLocaleString("en-US") : "Not Added" }}
+                    {{ order.timeStamp ? `${new Date(order.timeStamp).toLocaleDateString("en-US", { day: 'numeric' })} ${new Date(order.timeStamp).toLocaleDateString("en-US", { month: 'short' })} - ${new Date(order.timeStamp).toLocaleString("en-US").slice(10,)}` : "Not Added" }}
                   </b-td>
                   <b-td class="text-center">
                     <a @click="deleteEntry(order.name, order.email, index)" v-b-tooltip.hover.nofade.left="'Archive It'">
@@ -186,18 +183,14 @@
               </b-tbody>
               <b-tbody v-else>
                 <b-tr>
-                  <b-td>
-                    <a class="font-w600" href="javascript:void(0)">#7</a>
-                  </b-td>
                   <b-td class="d-none d-sm-table-cell">
                     John Doe
                   </b-td>
                   <b-td>
-                      <b-col class="col-lg-4">
-                        <b-badge variant="success">Demo Entry</b-badge></b-col>
+                      100
                   </b-td>
                   <b-td class="d-none d-sm-table-cell text-center">
-                    01 Aug 2021
+                    01 Aug 01:30 PM
                   </b-td>
                   <b-td class="text-center">
                     <a v-b-tooltip.hover.nofade.left="'No Ongoing Entry'" style="cursor:pointer">
