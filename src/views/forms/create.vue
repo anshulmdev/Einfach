@@ -14,7 +14,7 @@
     <!-- Page Content -->
     <div class="content">
 
-      <base-block rounded title="Assignment Title">
+      <base-block rounded title="Deploy your Hiring Form">
         <b-row class="push">
           <b-col lg="4">
             <p class="font-size-sm text-muted">
@@ -25,10 +25,6 @@
                 <b-form-input id="Assignment Title" v-model="title" placeholder="JavaScript Developer Test 2021"></b-form-input>
           </b-col>
         </b-row>
-        <!-- END Example -->
-      </base-block>
-      <!-- Vue Dropzone -->
-      <base-block rounded title="Company Logo">
         <b-row class="push">
           <b-col lg="4">
             <p class="font-size-sm text-muted">
@@ -39,59 +35,6 @@
             <vue-dropzone ref="imgDropZone" id="dropzone" :options="dropzoneOptions" @vdropzone-complete="afterComplete"></vue-dropzone>
           </b-col>
         </b-row>
-        <!-- END Example -->
-      </base-block>
-      <!-- END Vue Dropzone -->
-
-      <!-- 
-      <base-block rounded title="Add Fields">
-        <b-row>
-          <b-col lg="4">
-            <p class="font-size-sm text-muted mb-2">
-              You can see default fields in preview<br>
-              
-            <section v-for="field in form.fields" :key="field.name">
-                <section v-if="field.name !='Field Name'">{{field.name}} added</section>
-            </section>
-            </p>
-          </b-col>
-          <b-col>
-          <b-row>
-          <b-col lg="6">
-            <div >
-              <b-form @submit.prevent class="mb-4" inline>
-              <div class="form-group">
-                <b-input-group>
-                  <b-form-input v-model="form.name" :placeholder="form.fields[form.fields.length-1].name"></b-form-input>
-                  <b-input-group-append>
-                    <b-dropdown :text="form.type" variant="primary">
-                      <b-dropdown-item @click="form.type='Text'">
-                        <i class="far fa-fw fa-edit mr-1"></i> Text
-                      </b-dropdown-item>
-                      <b-dropdown-item  @click="form.type='Numeric'">
-                        <i class="far fa-fw fa-caret-square-up mr-1"></i> Numeric
-                      </b-dropdown-item>
-                      <b-dropdown-item  @click="form.type='Upload'">
-                        <i class="far fa-fw fa-arrow-alt-circle-up mr-1"></i> Upload
-                      </b-dropdown-item>
-                      <b-dropdown-divider></b-dropdown-divider>
-                    </b-dropdown>
-                  </b-input-group-append>
-                </b-input-group>
-              </div>
-            </b-form>
-              </div>
-          </b-col>
-          <b-col lg="6">
-              
-              <b-button class="ml-6"   variant="primary" @click="addField(form.name,form.type)">{{form.fields[form.fields.length-1].submit}}</b-button>
-              </b-col>
-          </b-row></b-col>
-        </b-row>
-      </base-block>
-      END Inline -->
-      <!-- Basic -->
-      <base-block rounded title="Other Fields" content-full>
         <b-form>
           <b-row class="push">
             <b-col lg="4">
@@ -110,12 +53,12 @@
               </p>
             </b-col>
             <b-col lg="8" xl="5">
-                <b-form-textarea id="example-textarea-input" v-model="desc" rows="4" placeholder="Textarea content.."></b-form-textarea>
+                <b-form-textarea id="example-textarea-input" v-model="desc" rows="4" placeholder="Write about company and job description"></b-form-textarea>
             </b-col>
           </b-row>
         </b-form>
+        <!-- END Example -->
       </base-block>
-
             <base-block rounded title="Submit final form" header-bg>
               <template #options>
                 <b-button @click="openLink" type="reset" class="px-4" size="md" variant="warning">
@@ -179,21 +122,6 @@ export default {
   data () {
     return {
       sliderValueNormal: 2,
-      tags: {
-        nodejs: { success: "Node Js" },
-        React: { info: "React" },
-        vuejs: { success: "Vue.js" },
-        python: { success: "Python" },
-        mysql: { info: "NoSQL" },
-      },
-      options2: [
-        { value: null, text: "Please select" },
-        { value: "nodejs", text: "Node Js" },
-        { value: "react", text: "React" },
-        { value: "vuejs", text: "Vue.js" },
-        { value: "python", text: "Python" },
-        { value: "nosql", text: "NoSQL" },
-      ],
       formDetails: null,
       form2: {
         email: null,
@@ -207,7 +135,8 @@ export default {
         { value: 1, text: 'JavaScript' },
         { value: 2, text: 'Node Js' },
         { value: 2, text: 'Frontend' },
-        { value: 2, text: 'Backend' }
+        { value: 2, text: 'Backend' },
+        { value: 2, text: 'Custom' }
       ],
       formDeployed: false,
       form:{
@@ -271,7 +200,7 @@ export default {
     openLink () {
       if (!this.formDeployed) this.$swal('Warning', 'Not deployed yet', 'warning')
       else this.$swal({
-        title: 'Form URL',
+        title: 'Job Description Form Link',
         text: `http://app.einfach.in/apply/${this.$store.state.firestoreData.docId}`})
     },
     addField (name,type){

@@ -164,7 +164,10 @@ export default {
           this.$router.push("/backend/dashboard")
           // ...
         })
-        .catch(() => {
+        .catch((err) => {
+          if(err.code === "auth/user-not-found") this.$bvToast.toast('Looks like provided email is wrong or not registered with us', { title: `User Missing`, toaster: 'b-toaster-top-right', variant: 'danger', autoHideDelay: 5000, appendToast: false})
+          else if (err.code === "auth/wrong-password") this.$bvToast.toast('Password provided is wrong for this email address', { title: `Wrong Password`, toaster: 'b-toaster-top-right', variant: 'danger', autoHideDelay: 5000, appendToast: false})
+          else this.$bvToast.toast(err.message, { title: err.code, toaster: 'b-toaster-top-right', variant: 'danger', autoHideDelay: 5000, appendToast: false})
           this.loading = null})
     },
   },

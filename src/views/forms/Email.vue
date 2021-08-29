@@ -159,7 +159,7 @@ export default {
       }}
 
       await firebase.firestore().collection('accounts').doc(this.$store.state.firestoreData.docId).set(email, { merge: true })
-      await this.$swal("Successfully Added")
+      await this.$bvToast.toast('All templates are updates successfully', { title: `Email Updates`, toaster: 'b-toaster-top-right', variant: 'success', autoHideDelay: 5000, appendToast: false})
 
     }
   }

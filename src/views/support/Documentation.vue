@@ -27,14 +27,14 @@
                 <a class="text-muted" href="javascript:void(0)" v-b-toggle.faq1-q1>Welcome to Einfach</a>
               </template>
               <template #content>
-                <b-collapse id="faq1-q1" accordion="faq1" role="tabpanel">
+                <b-collapse id="faq1-q1" visible accordion="faq1" role="tabpanel">
                   <div class="block-content">
                     <p>
-                      Einfach is a complete hiring package that helps you recruit tech teams with ease
+                      Einfach is a complete hiring platform that helps you recruit tech teams with ease. We help fast-growing companies in technical recruiting by structuring, automating, and scaling technical hiring.
                     </p>
                     <p>
-                      We help fast-growing companies in technical recruiting by structuring, automating, and scaling technical hiring
-                    </p>
+                      We cover all aspects of technical recruitment, from code evaluations to HR activities, everything on automation.
+                      </p>
                   </div>
                 </b-collapse>
               </template>
@@ -108,7 +108,7 @@
                 <a class="text-muted" href="javascript:void(0)" v-b-toggle.faq2-q2>Email Templates</a>
               </template>
               <template #content>
-                <b-collapse id="faq2-q3" accordion="faq1" role="tabpanel">
+                <b-collapse id="faq2-q2" accordion="faq1" role="tabpanel">
                   <div class="block-content">
                     <p>
                       <b>Path: </b>Applications => Forms => Email Template

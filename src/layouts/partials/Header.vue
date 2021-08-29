@@ -245,7 +245,7 @@
           <b-dropdown size="sm" variant="dual" class="d-inline-block ml-2" menu-class="p-0 border-0 dropdown-menu-md" right no-caret ref="oneDropdownDefaultUser">
             <template #button-content>
               <div class="d-flex align-items-center">
-                <img class="rounded-circle" :src="$store.state.firestoreData.user.logo" alt="Header Avatar" style="width: 21px;">
+                <img class="rounded-circle" :src="$store.state.firestoreData.user.logo ? $store.state.firestoreData.user.logo: 'https://firebasestorage.googleapis.com/v0/b/hire-298805.appspot.com/o/companyLogos%2Fte.png?alt=media&token=e547d8b1-c9b0-466a-8d09-2321e582e90f'" alt="Header Avatar" style="width: 21px;">
                 <span v-if="$store.state.firestoreData.user.premium === true" class="d-none d-sm-inline-block ml-2">Einfach Premium</span>
                 <span v-else class="d-none d-sm-inline-block ml-2">Basic Plan</span>
                 <i class="fa fa-fw fa-angle-down d-none d-sm-inline-block ml-1 mt-1"></i>
@@ -253,7 +253,7 @@
             </template>
             <li @click="$refs.oneDropdownDefaultUser.hide(true)">
               <div class="p-3 text-center bg-primary-dark rounded-top">
-                <img class="img-avatar img-avatar48 img-avatar-thumb" :src="$store.state.firestoreData.user.logo" alt="Avatar">
+                <img class="img-avatar img-avatar48 img-avatar-thumb" :src="$store.state.firestoreData.user.logo ? $store.state.firestoreData.user.logo: 'https://firebasestorage.googleapis.com/v0/b/hire-298805.appspot.com/o/companyLogos%2Fprofile.gif?alt=media&token=50f9f602-623c-4d61-912b-6b93f03b7ae5'" alt="Avatar">
                 <p class="mt-2 mb-0 text-white font-w500">{{$store.state.firestoreData.user.name}}</p>
                 <p class="mb-0 text-white-50 font-size-sm">{{$store.state.firestoreData.user.email}}</p>
               </div>
@@ -314,7 +314,7 @@
 
           <!-- Toggle Side Overlay -->
           <base-layout-modifier variant="dual" size="sm" class="ml-2">
-            <router-link to="/backend/library/mcq"><i class="fa fa-fw fa-swatchbook"></i></router-link>
+            <router-link to="/backend/library/mcq"><i class="fa fa-fw fa-swatchbook text-black"></i></router-link>
           </base-layout-modifier>
           <!-- END Toggle Side Overlay -->
         </div>

@@ -68,7 +68,7 @@ export default {
           to: '/backend/commit/pnp'
         },
         {
-          name: 'Live Changes',
+          name: 'Interviews',
           icon: 'si si-event',
           to: '/backend/commit/live'
         }
