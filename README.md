@@ -20,4 +20,12 @@ This tool can help in technical recruiting by structuring, automating, and scali
  - Access to dedicated dashboard and option to write custom emails directly from admin panel
  - Easy interview sessions with Live coding environment synced with applicant and admin panel
 
+## Graphics
+>Dashboard
+![Dashboard](https://admin.einfach.in/img/various/e1.png)
 
+>Mailbox
+![Mailbox](https://admin.einfach.in/img/various/e3.png)
+
+>Profile
+![Profile](https://app.einfach.in/img/p1.c341c4f2.png)
