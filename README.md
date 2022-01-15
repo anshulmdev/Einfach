@@ -1,5 +1,8 @@
 # Einfach | Easy Hiring
 
+[![Build Status](https://img.shields.io/website-up-down-green-red/http/monip.org.svg)](https://einfach.in/)
+
+
 ![Build Status](https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D) ![Build Status](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)  ![Tools](https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white)
 
 Einfach is an automated hiring platform that helps recruit tech teams with ease. 
